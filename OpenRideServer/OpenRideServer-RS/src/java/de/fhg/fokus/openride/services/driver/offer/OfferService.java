@@ -22,7 +22,6 @@
 */
 
 package de.fhg.fokus.openride.services.driver.offer;
-
 import com.thoughtworks.xstream.XStream;
 import de.fhg.fokus.openride.customerprofile.CustomerControllerLocal;
 import de.fhg.fokus.openride.customerprofile.CustomerEntity;
