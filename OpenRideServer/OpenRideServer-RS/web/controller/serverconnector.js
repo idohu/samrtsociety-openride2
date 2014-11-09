@@ -1,5 +1,5 @@
 fokus.openride.mobclient.controller.serverconnector = function(){
-    
+    //server connector
     /* ------ private variabeles and methods ------ */
 
     callbackWrapper = function(response, cbFunction) {
