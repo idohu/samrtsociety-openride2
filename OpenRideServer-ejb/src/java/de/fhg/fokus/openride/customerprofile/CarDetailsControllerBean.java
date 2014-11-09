@@ -39,7 +39,7 @@ public class CarDetailsControllerBean extends ControllerBean implements CarDetai
 
     @PersistenceContext
     private EntityManager em;
-    private UserTransaction u;
+    private UserTransaction u; 
 
     /**
      * This method adds a <code>CarDetailsEntity</code> to the database.
@@ -59,7 +59,6 @@ public class CarDetailsControllerBean extends ControllerBean implements CarDetai
         cd.setCardetPlateno(plateNo);
         cd.setCustId(customer);
         em.persist(cd);
-
         finish();
     }
 
