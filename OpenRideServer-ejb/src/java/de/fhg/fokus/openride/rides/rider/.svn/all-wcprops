@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/rider
+END
+RiderUndertakesRideEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 145
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/rider/RiderUndertakesRideEntity.java
+END
+RiderUndertakesRideControllerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/rider/RiderUndertakesRideControllerLocal.java
+END
+RiderUndertakesRideControllerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/rider/RiderUndertakesRideControllerBean.java
+END

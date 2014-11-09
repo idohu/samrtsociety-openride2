@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rider/search/helperclasses
+END
+PostSearchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 161
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rider/search/helperclasses/PostSearchResponse.java
+END
+Search.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rider/search/helperclasses/Search.java
+END
+MatchResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rider/search/helperclasses/MatchResponse.java
+END

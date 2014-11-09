@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver
+END
+DriverUndertakesRideControllerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriverUndertakesRideControllerBean.java
+END
+DriverTrackerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriverTrackerBean.java
+END
+DriveRoutePointEntityPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 144
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriveRoutePointEntityPK.java
+END
+DriverTrackerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriverTrackerLocal.java
+END
+DriverUndertakesRideControllerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriverUndertakesRideControllerLocal.java
+END
+RoutePointEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/RoutePointEntity.java
+END
+DriverUndertakesRideEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriverUndertakesRideEntity.java
+END
+RoutePointEntityPk.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/RoutePointEntityPk.java
+END
+DriveRoutepointEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/rides/driver/DriveRoutepointEntity.java
+END

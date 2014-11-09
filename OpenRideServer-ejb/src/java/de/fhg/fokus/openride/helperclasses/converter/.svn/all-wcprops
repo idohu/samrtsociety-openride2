@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/helperclasses/converter
+END
+PointConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/helperclasses/converter/PointConverter.java
+END
+ProjPointConverter.java
+K 25
+svn:wc:ra_dav:version-url
+V 150
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/helperclasses/converter/ProjPointConverter.java
+END

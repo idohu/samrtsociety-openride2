@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/osm
+END
+OsmRoute.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/osm/OsmRoute.java
+END
+HHRouter.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/osm/HHRouter.java
+END
+OsmRouter.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/osm/OsmRouter.java
+END

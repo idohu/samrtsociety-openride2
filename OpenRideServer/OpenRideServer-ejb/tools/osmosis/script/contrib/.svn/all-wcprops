@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/contrib
+END
+apidb_0.6.sql
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/contrib/apidb_0.6.sql
+END
+apidb_0.6_osmosis_xid_indexing.sql
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/contrib/apidb_0.6_osmosis_xid_indexing.sql
+END
+dump_apidb.sh
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/contrib/dump_apidb.sh
+END
+replicate_osm_file.sh
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/contrib/replicate_osm_file.sh
+END
+CreateGeometryForWays.sql
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/contrib/CreateGeometryForWays.sql
+END

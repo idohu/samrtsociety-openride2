@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/conf
+END
+public_OpenRideServer-ejb.dbschema
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/conf/public_OpenRideServer-ejb.dbschema
+END
+persistence.xml
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/conf/persistence.xml
+END
+MANIFEST.MF
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/conf/MANIFEST.MF
+END

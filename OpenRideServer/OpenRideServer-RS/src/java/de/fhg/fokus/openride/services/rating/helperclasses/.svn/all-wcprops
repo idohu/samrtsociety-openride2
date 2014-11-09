@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rating/helperclasses
+END
+ReceivedRatingResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rating/helperclasses/ReceivedRatingResponse.java
+END
+OpenRatingResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rating/helperclasses/OpenRatingResponse.java
+END
+GivenRatingRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rating/helperclasses/GivenRatingRequest.java
+END
+RatingsSummaryResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 159
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/rating/helperclasses/RatingsSummaryResponse.java
+END

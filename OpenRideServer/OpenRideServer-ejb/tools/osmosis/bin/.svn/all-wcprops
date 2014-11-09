@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/bin
+END
+osmosis-extract-apidb-0.6
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/bin/osmosis-extract-apidb-0.6
+END
+osmosis
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/bin/osmosis
+END
+osmosis-extract-mysql-0.6
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/bin/osmosis-extract-mysql-0.6
+END
+osmosis.bat
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/bin/osmosis.bat
+END

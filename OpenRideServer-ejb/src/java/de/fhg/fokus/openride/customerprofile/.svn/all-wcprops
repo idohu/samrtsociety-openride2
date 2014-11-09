@@ -1,0 +1,83 @@
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile
+END
+FavoritePointControllerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 151
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/FavoritePointControllerBean.java
+END
+FavoritePointsEntityPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/FavoritePointsEntityPK.java
+END
+RegistrationPassEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/RegistrationPassEntity.java
+END
+FavoritePointControllerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/FavoritePointControllerLocal.java
+END
+CarDetailsControllerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/CarDetailsControllerBean.java
+END
+CustomerControllerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/CustomerControllerBean.java
+END
+FavoritePointEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 143
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/FavoritePointEntity.java
+END
+RegistrationPassControllerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 154
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/RegistrationPassControllerBean.java
+END
+RegistrationPassControllerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/RegistrationPassControllerLocal.java
+END
+CustomerControllerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/CustomerControllerLocal.java
+END
+CarDetailsEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/CarDetailsEntity.java
+END
+CarDetailsControllerLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/CarDetailsControllerLocal.java
+END
+CustomerEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/CustomerEntity.java
+END

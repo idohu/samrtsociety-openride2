@@ -1,0 +1,17 @@
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/favoritepoint/helperclasses
+END
+FavoritePointRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 164
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/favoritepoint/helperclasses/FavoritePointRequest.java
+END
+FavoritePointResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 165
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/favoritepoint/helperclasses/FavoritePointResponse.java
+END

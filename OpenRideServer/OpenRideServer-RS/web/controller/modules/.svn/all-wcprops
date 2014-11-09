@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules
+END
+ratings.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/ratings.module.js
+END
+favorites.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/favorites.module.js
+END
+native.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/native.module.js
+END
+search.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/search.module.js
+END
+profile.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/profile.module.js
+END
+modulemanager.js
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/modulemanager.js
+END
+offer.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/offer.module.js
+END
+calendar.js
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/calendar.js
+END
+eventlistener.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/eventlistener.module.js
+END
+mapmanager.module.js
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/web/controller/modules/mapmanager.module.js
+END

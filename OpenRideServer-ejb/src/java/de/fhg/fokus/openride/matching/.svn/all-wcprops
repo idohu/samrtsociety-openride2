@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching
+END
+DriverSearchAlgorithm.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/DriverSearchAlgorithm.java
+END
+Constants.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/Constants.java
+END
+RiderSearchAlgorithm.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/RiderSearchAlgorithm.java
+END
+PriceCalculator.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/PriceCalculator.java
+END
+MatchEntity.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/MatchEntity.java
+END
+ScoringFunction.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/ScoringFunction.java
+END
+PotentialMatch.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/PotentialMatch.java
+END
+RouteMatchingBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/RouteMatchingBean.java
+END
+RouteMatchingBeanLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/RouteMatchingBeanLocal.java
+END
+MatchEntityPK.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/matching/MatchEntityPK.java
+END

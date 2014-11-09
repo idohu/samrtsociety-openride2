@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf
+END
+welcome_partners.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/welcome_partners.jsp
+END
+footer.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/footer.jsp
+END
+welcome_login.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/welcome_login.jsp
+END
+header.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/header.jsp
+END
+header_static.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/header_static.jsp
+END
+profile_info.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/profile_info.jsp
+END
+welcome_registration.jsp
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideWeb/web/WEB-INF/jspf/welcome_registration.jsp
+END

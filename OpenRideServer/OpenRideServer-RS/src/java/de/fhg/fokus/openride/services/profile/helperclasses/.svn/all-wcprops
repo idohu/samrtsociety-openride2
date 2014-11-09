@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/profile/helperclasses
+END
+ProfileResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/profile/helperclasses/ProfileResponse.java
+END
+PreferencesResponse.java
+K 25
+svn:wc:ra_dav:version-url
+V 157
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/profile/helperclasses/PreferencesResponse.java
+END
+PreferencesRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/profile/helperclasses/PreferencesRequest.java
+END
+ProfileRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 152
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/profile/helperclasses/ProfileRequest.java
+END
+PasswordRequest.java
+K 25
+svn:wc:ra_dav:version-url
+V 153
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-RS/src/java/de/fhg/fokus/openride/services/profile/helperclasses/PasswordRequest.java
+END

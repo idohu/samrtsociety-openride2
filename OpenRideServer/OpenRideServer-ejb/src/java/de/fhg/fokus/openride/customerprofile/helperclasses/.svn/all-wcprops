@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/helperclasses
+END
+DataGeneratorBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/helperclasses/DataGeneratorBean.java
+END
+DataGeneratorBeanLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 160
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/helperclasses/DataGeneratorBeanLocal.java
+END
+RandomInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 148
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/customerprofile/helperclasses/RandomInfo.java
+END

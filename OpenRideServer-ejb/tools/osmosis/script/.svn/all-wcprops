@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script
+END
+pgsql_simple_load_0.6.sql
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple_load_0.6.sql
+END
+pgsql_simple_schema_0.6_linestring.sql
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple_schema_0.6_linestring.sql
+END
+pgsql_simple_schema_0.6_action.sql
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple_schema_0.6_action.sql
+END
+fix_line_endings.sh
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/fix_line_endings.sh
+END
+pgsql_simple_schema_0.6_bbox.sql
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple_schema_0.6_bbox.sql
+END
+pgsql_simple_schema_0.6_upgrade_4-5.sql
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple_schema_0.6_upgrade_4-5.sql
+END
+pgsql_simple.txt
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple.txt
+END
+pgsql_simple_schema_0.6.sql
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/pgsql_simple_schema_0.6.sql
+END

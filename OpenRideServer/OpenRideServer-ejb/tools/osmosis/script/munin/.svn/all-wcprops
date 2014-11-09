@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/munin
+END
+osm-replication.conf
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/munin/osm-replication.conf
+END
+osm-replication-lag
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/munin/osm-replication-lag
+END
+README
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/tools/osmosis/script/munin/README
+END

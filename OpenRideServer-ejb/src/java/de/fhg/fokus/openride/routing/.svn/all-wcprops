@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing
+END
+Edge.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/Edge.java
+END
+RouterWrapper.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/RouterWrapper.java
+END
+Router.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/Router.java
+END
+RouterBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/RouterBean.java
+END
+Route.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/Route.java
+END
+Coordinate.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/Coordinate.java
+END
+RoutePoint.java
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/RoutePoint.java
+END
+RouterBeanLocal.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/p/openride/code/!svn/ver/3/trunk/src/OpenRideServer/OpenRideServer-ejb/src/java/de/fhg/fokus/openride/routing/RouterBeanLocal.java
+END
