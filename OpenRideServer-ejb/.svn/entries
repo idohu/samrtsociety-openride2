@@ -1,80 +1,0 @@
-10
-
-dir
-17
-http://svn.code.sf.net/p/openride/code/trunk/src/OpenRideServer/OpenRideServer-ejb
-http://svn.code.sf.net/p/openride/code
-
-
-
-2011-06-10T21:12:35.057723Z
-6
-annakress
-has-props
-has-prop-mods
-svn:special svn:externals svn:needs-lock
-
-
-
-
-
-
-
-
-
-
-
-d45be225-9fc7-4d5c-a1a3-5f936a3f094d
-
-build-routing.xml
-file
-
-
-
-
-2013-10-04T12:59:19.461000Z
-954356dfcbb0e98bcadb2e7159f302f2
-2011-05-30T17:59:54.013083Z
-3
-annakress
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-5665
-
-config
-dir
-
-libs
-dir
-
-res
-dir
-
-setup
-dir
-
-src
-dir
-
-tools
-dir
-
