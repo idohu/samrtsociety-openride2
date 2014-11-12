@@ -114,33 +114,29 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
         document.getElementById(dlabels[2]).innerHTML = calendarpicker.getYear();
 
-        var hours = calendarpicker.getHour();
-        if(hours < 10){
-            var hourstr = '0' + hours;
-            document.getElementById(tlabels[0]).innerHTML = hourstr;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[2]).innerHTML = (hours+1);
+        var hours,minutes;
+        if (tlabels[0].substr(tlabels[0].length-3)=="End"){
+            hours = calendarpicker.getHourEnd();
+            minutes= calendarpicker.getMinEnd();
         }
-        else {
-            document.getElementById(tlabels[0]).innerHTML = hours;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[2]).innerHTML = (hours+1);
+        else{
+            hours = calendarpicker.getHour();
+            minutes = calendarpicker.getMin();
         }
 
-        var minutes = calendarpicker.getMin();
+        if(hours < 10){
+            var hourstr = '0'+hours;
+            document.getElementById(tlabels[0]).innerHTML = hourstr;
+        }else {
+            document.getElementById(tlabels[0]).innerHTML = hours;
+        }
+
         if(minutes < 10){
             var minutestr = '0' + minutes;
             document.getElementById(tlabels[1]).innerHTML = minutestr;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[3]).innerHTML = minutestr;
-        }
-        else {
+        }else {
             document.getElementById(tlabels[1]).innerHTML = minutes;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[3]).innerHTML = minutes;
         }
-
-
     }
 
     function confirmMapAddr(dropdownid){
@@ -207,9 +203,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     picsrc=data.picture;
                 //fokus.openride.mobclient.controller.modules.uievents.parseInitData(profile);
                         },
-                        error:function(){
-                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, initial data could not be loaded.')
-                        }
+                        error:function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, initial data could not be loaded.')
+                }
             });
             //alert(JSON.stringify(profile));
             profilepic = initData.InitResponse.profilpic;
@@ -358,6 +354,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             var hourLbl = document.getElementById(hourlabel);
             var minuteLbl = document.getElementById(minutelabel);
 
+            var hourLblEnd = document.getElementById(hourlabelEnd);
+            var minuteLblEnd = document.getElementById(minutelabelEnd);
+
             dayLbl.onclick = function(){
                 setLabelFocus(dateLabels, daylabel);
             };
@@ -376,6 +375,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             minuteLbl.onclick = function(){
                 setLabelFocus(timeLabels, minutelabel);
+            };
+
+            hourLblEnd.onclick = function(){
+                setLabelFocus(timeLabelsEnd, hourlabelEnd);
+            };
+
+            minuteLblEnd.onclick = function(){
+                setLabelFocus(timeLabelsEnd, minutelabelEnd);
             };
 
             var dateuparrow = document.getElementById("dateuparrow");
@@ -438,6 +445,35 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
             };
 
+            //time end
+            var timeuparrowEnd = document.getElementById("timeuparrowEnd");
+
+            var timeuparrowlinkEnd = document.getElementById("timeuparrowlinkEnd");
+            timeuparrowlinkEnd.href = "javascript:void(0);";
+
+            timeuparrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == hourlabelEnd)
+                    calendarpicker.increaseHourEnd();
+                else if(focustimelabelid == minutelabelEnd)
+                    calendarpicker.increaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
+            };
+
+            var timedownarrowEnd = document.getElementById("timedownarrowEnd");
+
+            var timedownarrowlinkEnd = document.getElementById("timedownarrowlinkEnd");
+            timedownarrowlinkEnd.href = "javascript:void(0);";
+
+            timedownarrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == hourlabelEnd)
+                    calendarpicker.decreaseHourEnd();
+                else if(focustimelabelid == minutelabelEnd)
+                    calendarpicker.decreaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
+            };
+
             /* ------ configure Date picker layout elements SEARCH ------ */
             var searchdayLbl = document.getElementById(searchdaylabel);
             var searchmonthLbl = document.getElementById(searchmonthlabel);
@@ -445,6 +481,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             var searchhourLbl = document.getElementById(searchhourlabel);
             var searchminuteLbl = document.getElementById(searchminutelabel);
+
+            var searchhourLblEnd = document.getElementById(searchhourlabelEnd);
+            var searchminuteLblEnd = document.getElementById(searchminutelabelEnd);
 
             searchdayLbl.onclick = function(){
                 setLabelFocus(searchdateLabels, searchdaylabel);
@@ -464,6 +503,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             searchminuteLbl.onclick = function(){
                 setLabelFocus(searchtimeLabels, searchminutelabel);
+            };
+
+            searchhourLblEnd.onclick = function(){
+                setLabelFocus(searchtimeLabelsEnd, searchhourlabelEnd);
+            };
+
+            searchminuteLblEnd.onclick = function(){
+                setLabelFocus(searchtimeLabelsEnd, searchminutelabelEnd);
             };
 
             var searchdateuparrow = document.getElementById("searchdateuparrow");
@@ -524,6 +571,34 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 else if(focustimelabelid == searchminutelabel)
                     calendarpicker.decreaseMin(5);
                 refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabels);
+            };
+            //end time
+            var searchtimeuparrowEnd = document.getElementById("searchtimeuparrowEnd");
+
+            var searchtimeuparrowlinkEnd = document.getElementById("searchtimeuparrowlinkEnd");
+            searchtimeuparrowlinkEnd.href = "javascript:void(0);";
+
+            searchtimeuparrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == searchhourlabelEnd)
+                    calendarpicker.increaseHourEnd();
+                else if(focustimelabelid == searchminutelabelEnd)
+                    calendarpicker.increaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
+            };
+
+            var searchtimedownarrowEnd = document.getElementById("searchtimedownarrowEnd");
+
+            var searchtimedownarrowlinkEnd = document.getElementById("searchtimedownarrowlinkEnd");
+            searchtimedownarrowlinkEnd.href = "javascript:void(0);";
+
+            searchtimedownarrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == searchhourlabelEnd)
+                    calendarpicker.decreaseHourEnd();
+                else if(focustimelabelid == searchminutelabelEnd)
+                    calendarpicker.decreaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
             };
 
             setLabelFocus(dateLabels, daylabel);
@@ -717,6 +792,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 //set comment
                 //                offermod.setComment(document.getElementById('offercommentta').value);
                 offermod.setComment("No comment");
+                offermod.setPrice(document.getElementById('priceselect').selectedIndex);
 
                 //(validate and) commit new offer to server
                 //                var eventlistenerTHIS = this;
@@ -774,9 +850,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
                     if (profilemod.getPrefIsSmoker() == 'y') newRideRequest.smoking              = "Yes";
                     else                                     newRideRequest.smoking              = "No";
-                    newRideRequest.rideQualityThreshold = "5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
+                    newRideRequest.rideQualityThreshold = "0";//5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
                     //newRideRequest.capacity          = defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_CAPACITY($('#dropDownCapacityList').find(':selected').text());
-                    newRideRequest.capacity             = offermod.getOfferedSeatsNo();
+                    newRideRequest.capacity             = document.getElementById('nrseatsselect').selectedIndex + 1;//offermod.getOfferedSeatsNo();
 
                     /*
 	 * Now deal with the rest
@@ -825,6 +901,8 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     //alert(newRideRequest.desDateTimeWindow.desDateTimeHigh);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeLow);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeHigh);
+                    newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
+                    newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
 
 
                     // Figure out route and price
@@ -897,6 +975,8 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+
                         }
 
                     })
@@ -1345,6 +1425,8 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+
                         }
 
                     })

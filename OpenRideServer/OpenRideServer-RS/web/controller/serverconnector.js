@@ -7,7 +7,7 @@ fokus.openride.mobclient.controller.serverconnector = function(){
         if (typeof response == "string" && response.indexOf("loginForm") != -1) {
             // Need to reload -> require the user to login again
             
-            location.href="./";       
+            location.href="./";
         } else if (typeof cbFunction == 'function'){
             if (response.InitResponse != 'undefined' && response.InitResponse != null)
             {

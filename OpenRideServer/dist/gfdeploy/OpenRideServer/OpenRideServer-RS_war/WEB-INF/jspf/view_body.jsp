@@ -81,7 +81,7 @@
         <div id="newfavoriteAddrInputUI" style="display:none;">
             <a id="newfavoriteconfirm" class="favoriteconfirm" href="#"><img id="newfavoriteconfirmimg" src="../img/confirmAddr.png" width="131" height="30" alt="addresse_suchen" /></a><input id="newfavoriteaddrinput" name="newfavoriteAdrr" type="text" size="9" maxlength="30" />
         </div>
-        ddddddd
+        Add FAQ Page Here!!
     </div>
     <div id="showofferrouteUI">
         <div class="mapRouteDiv">

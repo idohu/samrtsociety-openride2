@@ -19,7 +19,7 @@ fokus.openride.mobclient.controller.modules.offer = function(){
             'rideendPtLat'              : 52.5225,
             'rideendPtLon'              : 13.4123,
             'ridestartTime'             : new Date().getMilliseconds(),
-            'rideprice'                 : 8.2,
+            'rideprice'                 : 20,//8.2,
             'rideComment'               :'Das Fahrtkommentar.',
             'acceptableDetourInMin'     : 10,
             'acceptableDetourInKm'      : 10,

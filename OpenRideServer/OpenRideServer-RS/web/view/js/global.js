@@ -583,7 +583,8 @@
                         delete e[b];
                         c.isEmptyObject(e)&&c.removeData(a)
                     }
-                }else{
+                }
+                else{
                     if(c.support.deleteExpando)delete a[c.expando];
                     else a.removeAttribute&&a.removeAttribute(c.expando);
                     delete f[d]
@@ -3229,81 +3230,81 @@
             if(f!==w)return this.each(function(){
                 if(j=wa(this))j.scrollTo(!a?f:c(j).scrollLeft(),a?f:c(j).scrollTop());else this[d]=f
             });else return(j=wa(e))?"pageXOffset"in j?j[a?"pageYOffset":
-                "pageXOffset"]:c.support.boxModel&&j.document.documentElement[d]||j.document.body[d]:e[d]
-        }
-    });
-    c.each(["Height","Width"],function(a,b){
-        var d=b.toLowerCase();
-        c.fn["inner"+b]=function(){
+            "pageXOffset"]:c.support.boxModel&&j.document.documentElement[d]||j.document.body[d]:e[d]
+            }
+            });
+        c.each(["Height","Width"],function(a,b){
+            var d=b.toLowerCase();
+            c.fn["inner"+b]=function(){
             return this[0]?c.css(this[0],d,false,"padding"):null
-        };
+            };
 
-        c.fn["outer"+b]=function(f){
+            c.fn["outer"+b]=function(f){
             return this[0]?c.css(this[0],d,false,f?"margin":"border"):null
-        };
+            };
 
-        c.fn[d]=function(f){
+            c.fn[d]=function(f){
             var e=this[0];
             if(!e)return f==null?null:this;
             if(c.isFunction(f))return this.each(function(j){
                 var i=c(this);
                 i[d](f.call(this,j,i[d]()))
-            });
+                });
             return"scrollTo"in
             e&&e.document?e.document.compatMode==="CSS1Compat"&&e.document.documentElement["client"+b]||e.document.body["client"+b]:e.nodeType===9?Math.max(e.documentElement["client"+b],e.body["scroll"+b],e.documentElement["scroll"+b],e.body["offset"+b],e.documentElement["offset"+b]):f===w?c.css(e,d):this.css(d,typeof f==="string"?f:f+"px")
-        }
-    });
-    A.jQuery=A.$=c
-})(window);
-// Copyright 2007, Google Inc.
-//
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are met:
-//
-//  1. Redistributions of source code must retain the above copyright notice,
-//     this list of conditions and the following disclaimer.
-//  2. Redistributions in binary form must reproduce the above copyright notice,
-//     this list of conditions and the following disclaimer in the documentation
-//     and/or other materials provided with the distribution.
-//  3. Neither the name of Google Inc. nor the names of its contributors may be
-//     used to endorse or promote products derived from this software without
-//     specific prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
-// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-// EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-// OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-// WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-// OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-// Sets up google.gears.*, which is *the only* supported way to access Gears.
-//
-// Circumvent this file at your own risk!
-//
-// In the future, Gears may automatically define google.gears.* without this
-// file. Gears may use these objects to transparently fix bugs and compatibility
-// issues. Applications that use the code below will continue to work seamlessly
-// when that happens.
+            }
+            });
+        A.jQuery=A.$=c
+        })(window);
+        // Copyright 2007, Google Inc.
+        //
+        // Redistribution and use in source and binary forms, with or without
+        // modification, are permitted provided that the following conditions are met:
+        //
+        //  1. Redistributions of source code must retain the above copyright notice,
+        //     this list of conditions and the following disclaimer.
+        //  2. Redistributions in binary form must reproduce the above copyright notice,
+        //     this list of conditions and the following disclaimer in the documentation
+        //     and/or other materials provided with the distribution.
+        //  3. Neither the name of Google Inc. nor the names of its contributors may be
+        //     used to endorse or promote products derived from this software without
+        //     specific prior written permission.
+        //
+        // THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+        // WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+        // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+        // EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+        // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+        // PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+        // OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+        // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+        // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+        // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+        //
+        // Sets up google.gears.*, which is *the only* supported way to access Gears.
+        //
+        // Circumvent this file at your own risk!
+        //
+        // In the future, Gears may automatically define google.gears.* without this
+        // file. Gears may use these objects to transparently fix bugs and compatibility
+        // issues. Applications that use the code below will continue to work seamlessly
+        // when that happens.
 
-(function() {
-    // We are already defined. Hooray!
-    if (window.google && google.gears) {
-        return;
-    }
+        (function() {
+            // We are already defined. Hooray!
+            if (window.google && google.gears) {
+            return;
+            }
 
-    var factory = null;
+            var factory = null;
 
-    // Firefox
-    if (typeof GearsFactory != 'undefined') {
-        factory = new GearsFactory();
-    } else {
-        // IE
-        try {
-        /*
+            // Firefox
+            if (typeof GearsFactory != 'undefined') {
+            factory = new GearsFactory();
+            } else {
+    // IE
+    try {
+    /*
 		 * commented out to avoid firebug error, as we don't support IE currently anyway
 		if(ActiveXObject){
 			factory = new ActiveXObject('Gears.Factory');
@@ -3314,40 +3315,40 @@
       	}
 		}*/
 
-        }catch (e) {
-            // Safari
-            if ((typeof navigator.mimeTypes != 'undefined')
-                && navigator.mimeTypes["application/x-googlegears"]) {
-                factory = document.createElement("object");
-                factory.style.display = "none";
-                factory.width = 0;
-                factory.height = 0;
-                factory.type = "application/x-googlegears";
-                document.documentElement.appendChild(factory);
-            }
+    }catch (e) {
+        // Safari
+        if ((typeof navigator.mimeTypes != 'undefined')
+            && navigator.mimeTypes["application/x-googlegears"]) {
+            factory = document.createElement("object");
+            factory.style.display = "none";
+            factory.width = 0;
+            factory.height = 0;
+            factory.type = "application/x-googlegears";
+            document.documentElement.appendChild(factory);
         }
     }
+}
 
-    // *Do not* define any objects if Gears is not installed. This mimics the
-    // behavior of Gears defining the objects in the future.
-    if (!factory) {
-        return;
-    }
+// *Do not* define any objects if Gears is not installed. This mimics the
+// behavior of Gears defining the objects in the future.
+if (!factory) {
+    return;
+}
 
-    // Now set up the objects, being careful not to overwrite anything.
-    //
-    // Note: In Internet Explorer for Windows Mobile, you can't add properties to
-    // the window object. However, global objects are automatically added as
-    // properties of the window object in all browsers.
-    if (!window.google) {
-        google = {};
-    }
+// Now set up the objects, being careful not to overwrite anything.
+//
+// Note: In Internet Explorer for Windows Mobile, you can't add properties to
+// the window object. However, global objects are automatically added as
+// properties of the window object in all browsers.
+if (!window.google) {
+    google = {};
+}
 
-    if (!google.gears) {
-        google.gears = {
-            factory: factory
-        };
-    }
+if (!google.gears) {
+    google.gears = {
+        factory: factory
+    };
+}
 })();
 /*
     OpenRide -- Car Sharing 2.0
@@ -5073,90 +5074,90 @@ if (!this.JSON) {
                 if ($.data(this, 'destroy.tabs'))
                     $(this).remove();
                 else
-                    $(this).removeClass([o.selectedClass, o.deselectableClass,
-                        o.disabledClass, o.panelClass, o.hideClass].join(' '));
-            });
+                $(this).removeClass([o.selectedClass, o.deselectableClass,
+                    o.disabledClass, o.panelClass, o.hideClass].join(' '));
+                });
             if (o.cookie)
                 this._cookie(null, o.cookie);
-        }
-    });
+                }
+                });
 
-    $.extend($.ui.tabs, {
-        version: '@VERSION',
-        getter: 'length',
-        defaults: {
-            // basic setup
-            deselectable: false,
-            event: 'click',
-            disabled: [],
-            cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
-            // Ajax
-            spinner: 'Loading&#8230;',
-            cache: false,
-            idPrefix: 'ui-tabs-',
-            ajaxOptions: null,
-            // animations
-            fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
-            // templates
-            tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
-            panelTemplate: '<div></div>',
-            // CSS class names
-            navClass: 'ui-tabs-nav',
-            selectedClass: 'ui-tabs-selected',
-            deselectableClass: 'ui-tabs-deselectable',
-            disabledClass: 'ui-tabs-disabled',
-            panelClass: 'ui-tabs-panel',
-            hideClass: 'ui-tabs-hide',
-            loadingClass: 'ui-tabs-loading'
-        }
-    });
+            $.extend($.ui.tabs, {
+                version: '@VERSION',
+                getter: 'length',
+                defaults: {
+                // basic setup
+                deselectable: false,
+                event: 'click',
+                disabled: [],
+                cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
+                // Ajax
+                spinner: 'Loading&#8230;',
+                cache: false,
+                idPrefix: 'ui-tabs-',
+                ajaxOptions: null,
+                // animations
+                fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
+                // templates
+                tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
+                panelTemplate: '<div></div>',
+                // CSS class names
+                navClass: 'ui-tabs-nav',
+                selectedClass: 'ui-tabs-selected',
+                deselectableClass: 'ui-tabs-deselectable',
+                disabledClass: 'ui-tabs-disabled',
+                panelClass: 'ui-tabs-panel',
+                hideClass: 'ui-tabs-hide',
+                loadingClass: 'ui-tabs-loading'
+                }
+                });
 
-    /*
+            /*
  * Tabs Extensions
  */
 
-    /*
+            /*
  * Rotate
  */
-    $.extend($.ui.tabs.prototype, {
-        rotation: null,
-        rotate: function(ms, continuing) {
+            $.extend($.ui.tabs.prototype, {
+                rotation: null,
+                rotate: function(ms, continuing) {
 		
-            continuing = continuing || false;
+                continuing = continuing || false;
 		
-            var self = this, t = this.options.selected;
+                var self = this, t = this.options.selected;
 		
-            function start() {
+                function start() {
                 self.rotation = setInterval(function() {
                     t = ++t < self.$tabs.length ? t : 0;
                     self.select(t);
-                }, ms);
-            }
-		
-            function stop(e) {
-                if (!e || e.clientX) { // only in case of a true click
-                    clearInterval(self.rotation);
+                    }, ms);
                 }
-            }
 		
-            // start interval
-            if (ms) {
+                function stop(e) {
+                if (!e || e.clientX) { // only in case of a true click
+                clearInterval(self.rotation);
+                }
+                }
+		
+                // start interval
+                if (ms) {
                 start();
                 if (!continuing)
-                    this.$tabs.bind(this.options.event + '.tabs', stop);
+                this.$tabs.bind(this.options.event + '.tabs', stop);
                 else
-                    this.$tabs.bind(this.options.event + '.tabs', function() {
-                        stop();
-                        t = self.options.selected;
-                        start();
-                    });
-            }
-            // stop interval
-            else {
-                stop();
-                this.$tabs.unbind(this.options.event + '.tabs', stop);
-            }
+        this.$tabs.bind(this.options.event + '.tabs', function() {
+            stop();
+            t = self.options.selected;
+            start();
+            });
         }
+        // stop interval
+        else {
+        stop();
+        this.$tabs.unbind(this.options.event + '.tabs', stop);
+    }
+    }
     });
 
 })(jQuery);
@@ -6354,7 +6355,7 @@ fokus.openride.mobclient.controller.modules.offer = function(){
             'rideendPtLat'              : 52.5225,
             'rideendPtLon'              : 13.4123,
             'ridestartTime'             : new Date().getMilliseconds(),
-            'rideprice'                 : 8.2,
+            'rideprice'                 : 20,//8.2,
             'rideComment'               :'Das Fahrtkommentar.',
             'acceptableDetourInMin'     : 10,
             'acceptableDetourInKm'      : 10,
@@ -7110,32 +7111,26 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
 
         increaseYear : function(){
             this.date.setFullYear(this.date.getFullYear()+1);
-            this.endDate.setFullYear(this.endDate.getFullYear()+1);
         },
 
         decreaseYear : function(){
             this.date.setFullYear(this.date.getFullYear()-1);
-            this.endDate.setFullYear(this.endDate.getFullYear()-1);
         },
 
         increaseMonth : function(){
             this.date.setMonth(this.date.getMonth()+1);
-            this.endDate.setMonth(this.endDate.getMonth()+1);
         },
 
         decreaseMonth : function(){
             this.date.setMonth(this.date.getMonth()-1);
-            this.endDate.setMonth(this.endDate.getMonth()-1);
         },
 
         increaseDay : function(){
             this.date.setDate(this.date.getDate()+1);
-            this.endDate.setTime(this.endDate.getTime()+86400000);
         },
 
         decreaseDay : function(){
             this.date.setDate(this.date.getDate()-1);
-            this.endDate.setTime(this.endDate.getTime()-86400000);
         },
 
         increaseHour : function(){
@@ -7227,7 +7222,9 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
             this.endDate.setHours(endDate.getHours()+1);
         }
     };
-}();/*
+}();
+
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -8174,7 +8171,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         },
 
         parsecompletedtriplist : function(){
-            //alert('I am Here');
+            //alert('completed');
             var sb = new StringBuilder();
             var RideShareSB = new StringBuilder();
             var updatecount = 0;
@@ -8297,6 +8294,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var prp = JSON.parse(rides[i]);
                 //alert(rides[i]);
                 var color = '';
+
                 //if (prp.agreedDriver == "" && prp.agreedCommuters.length == 0) color = 'solid orange'; //negotiation not initiated yet
                 if (prp.agreedDriver != "" && prp.potentiallyAgreedCommuters.length == 0 && prp.agreedCommuters.length != 0) color = 'solid green';  //ride booked
                 if (prp.agreedDriver != "" && prp.potentiallyAgreedCommuters.length != 0) color = 'dotted green'; //negotiation started
@@ -8309,9 +8307,41 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
+                var day="";
+                //alert(d.getDay())
+                switch (d.getDay()){
+                    case 0:
+                        day="Sunday";
+                        break;
+                    case 1:
+                        day="Monday";
+                        break;
+                    case 2:
+                        day="Tuesday";
+                        break;
+                    case 3:
+                        day="Wendesday";
+                        break;
+                    case 4:
+                        day="Thursday";
+                        break;
+                    case 5:
+                        day="Friday";
+                        break;
+                    case 6:
+                        day="Saturday";
+                        break;
+                }
+                var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append(d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour<br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                    '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
+                    prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
+                    '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
+                //                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                //                    ' <br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+
+                //                    prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -8321,6 +8351,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var prp = JSON.parse(rideRequests[i]);
                 if (prp.mode=='driver' && usermode==RIDERMODE)
                     continue;
+                if (prp.potentiallyAgreedRidePlans.length!=0 || prp.driverAgreedRidePlans.length!=0 || prp.potentialRidePlans.length!=0 || prp.agreedRidePlan!="" || prp.mode=="driver"){
+                    //alert('nothing is wrong');
+                    continue;
+                }
                 //alert('1halala ' + rideRequests.length + ' ' + rideRequests[i] + ' ' + i);
                 var color = 'orange';
                 var d = new Date();
@@ -8333,9 +8367,34 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
                 var id = rides.length+i;
+                var day="";
+                //alert(d.getDay())
+                switch (d.getDay()){
+                    case 0:
+                        day="Sunday";
+                        break;
+                    case 1:
+                        day="Monday";
+                        break;
+                    case 2:
+                        day="Tuesday";
+                        break;
+                    case 3:
+                        day="Wendesday";
+                        break;
+                    case 4:
+                        day="Thursday";
+                        break;
+                    case 5:
+                        day="Friday";
+                        break;
+                    case 6:
+                        day="Saturday";
+                        break;
+                }
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -8391,7 +8450,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     }
                     mapmod.setViaStartPoints(viastartptarr);
 
-                }else{//no route
+                }
+                else{//no route
                 //return false;
                 }
                 
@@ -8818,7 +8878,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     },
                     error:function(jq,textStatus,errorThrown){
                     //alert('fail1');
-
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     }
                 });
             }
@@ -9850,63 +9911,63 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //alert(result);
             
             //if(typeof (result.ProfileResponse) != 'undefined'){
-//                var personalData = result;//result.ProfileResponse;
-//                personalDetails = result;//result.ProfileResponse;
-                var personalData = userProfile.getProfileRequest();
-                personalDetails = userProfile;
-                document.getElementById('profilepersonaldatafirstname').innerHTML = personalData.firstName;
-                document.getElementById('profilepersonaldatalastname').innerHTML = personalData.lastName;
-                if (personalData.gender == 'm') {
-                    genderString = 'male';
-                }
-                else {
-                    genderString = 'female';
-                }
-                document.getElementById('profilepersonaldatagender').innerHTML = genderString;
-                var dateOfBirth;
-                var dateOfBirthString ="";
-                if (typeof (personalData.dateOfBirth) != 'undefined' && personalData.dateOfBirth.indexOf('.')!=-1) {
-                    dateOfBirth = new Date(personalData.dateOfBirth);
-                    dateOfBirthString = dateOfBirth.getDate() + '.' + (dateOfBirth.getMonth() + 1) + '.' + dateOfBirth.getFullYear()
-                }
-                else {
-                    dateOfBirthString = ''; //<em>nicht angegeben</em>';
-                }
-                document.getElementById('profilepersonaldatadateofbirth').value = dateOfBirthString;
-                document.getElementById('profilepersonaldataemail').value = $("<div />").html(personalData.email).text();
-                document.getElementById('profilepersonaldatamobilephonenumber').value = personalData.mobilePhoneNumber || '';
-                //document.getElementById('profilepersonaldatafixedphonenumber').value = personalData.fixedPhoneNumber || '';
-                if (personalData.streetAddress) {
-                    document.getElementById('profilepersonaldatastreetaddress').value = $("<div />").html(personalData.streetAddress).text() || '';
-                }
-                document.getElementById('profilepersonaldatazipcode').value = personalData.zipCode || '';
-                if (personalData.city) {
-                    document.getElementById('profilepersonaldatacity').value = $("<div />").html(personalData.city).text() || '';
-                }
-                if (personalData.isSmoker == 'n') {
-                    isSmokerOption = 'profilepersonaldataissmoker-no';
-                }
-                else if (personalData.isSmoker == 'y') {
-                    isSmokerOption = 'profilepersonaldataissmoker-yes';
-                }
-                else {
-                    isSmokerOption = 'profilepersonaldataissmoker-null';
-                }
-                document.getElementById(isSmokerOption).checked = 'checked';
+            //                var personalData = result;//result.ProfileResponse;
+            //                personalDetails = result;//result.ProfileResponse;
+            var personalData = userProfile.getProfileRequest();
+            personalDetails = userProfile;
+            document.getElementById('profilepersonaldatafirstname').innerHTML = personalData.firstName;
+            document.getElementById('profilepersonaldatalastname').innerHTML = personalData.lastName;
+            if (personalData.gender == 'm') {
+                genderString = 'male';
+            }
+            else {
+                genderString = 'female';
+            }
+            document.getElementById('profilepersonaldatagender').innerHTML = genderString;
+            var dateOfBirth;
+            var dateOfBirthString ="";
+            if (typeof (personalData.dateOfBirth) != 'undefined' && personalData.dateOfBirth.indexOf('.')!=-1) {
+                dateOfBirth = new Date(personalData.dateOfBirth);
+                dateOfBirthString = dateOfBirth.getDate() + '.' + (dateOfBirth.getMonth() + 1) + '.' + dateOfBirth.getFullYear()
+            }
+            else {
+                dateOfBirthString = ''; //<em>nicht angegeben</em>';
+            }
+            document.getElementById('profilepersonaldatadateofbirth').value = dateOfBirthString;
+            document.getElementById('profilepersonaldataemail').value = $("<div />").html(personalData.email).text();
+            document.getElementById('profilepersonaldatamobilephonenumber').value = personalData.mobilePhoneNumber || '';
+            //document.getElementById('profilepersonaldatafixedphonenumber').value = personalData.fixedPhoneNumber || '';
+            if (personalData.streetAddress) {
+                document.getElementById('profilepersonaldatastreetaddress').value = $("<div />").html(personalData.streetAddress).text() || '';
+            }
+            document.getElementById('profilepersonaldatazipcode').value = personalData.zipCode || '';
+            if (personalData.city) {
+                document.getElementById('profilepersonaldatacity').value = $("<div />").html(personalData.city).text() || '';
+            }
+            if (personalData.isSmoker == 'n') {
+                isSmokerOption = 'profilepersonaldataissmoker-no';
+            }
+            else if (personalData.isSmoker == 'y') {
+                isSmokerOption = 'profilepersonaldataissmoker-yes';
+            }
+            else {
+                isSmokerOption = 'profilepersonaldataissmoker-null';
+            }
+            document.getElementById(isSmokerOption).checked = 'checked';
                 
-                //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
-                if (personalData.carColour) {
-                    document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
-                }
-                if (personalData.carBrand) {
-                    document.getElementById('profilepersonaldatacarbrand').value = $("<div />").html(personalData.carBrand).text() || '';
-                }
-                //document.getElementById('profilepersonaldatacarbuildyear').value = personalData.carBuildYear || '';
-                if (personalData.carPlateNo) {
-                    document.getElementById('profilepersonaldatacarplateno').value = $("<div />").html(personalData.carPlateNo).text() || '';
-                }
+            //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
+            if (personalData.carColour) {
+                document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
+            }
+            if (personalData.carBrand) {
+                document.getElementById('profilepersonaldatacarbrand').value = $("<div />").html(personalData.carBrand).text() || '';
+            }
+            //document.getElementById('profilepersonaldatacarbuildyear').value = personalData.carBuildYear || '';
+            if (personalData.carPlateNo) {
+                document.getElementById('profilepersonaldatacarplateno').value = $("<div />").html(personalData.carPlateNo).text() || '';
+            }
 
-           // }
+        // }
         },
 
         validateDate : function(inputDateString) {
@@ -10056,35 +10117,35 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             var emptyvar;
             var profilemod = fokus.openride.mobclient.controller.modules.profile;
-//
-//            profilemod.setDateOfBirth(dateOfBirthValue);
-//            profilemod.setEmail(document.getElementById('profilepersonaldataemail').value);
-//            profilemod.setMobilePhoneNumber(document.getElementById('profilepersonaldatamobilephonenumber').value);
-//            //profilemod.setFixedPhoneNumber(document.getElementById('profilepersonaldatafixedphonenumber').value);
-//            profilemod.setStreetAddress(document.getElementById('profilepersonaldatastreetaddress').value);
-//            profilemod.setZipCode(document.getElementById('profilepersonaldatazipcode').value || 0);
-//            profilemod.setCity(document.getElementById('profilepersonaldatacity').value);
-//            if (document.getElementById('profilepersonaldataissmoker-yes').checked) {
-//                isSmokerValue = 'y';
-//            }
-//            else if (document.getElementById('profilepersonaldataissmoker-no').checked) {
-//                isSmokerValue = 'n';
-//            }
-//            else {
-//                isSmokerValue = '-';
-//            }
-//            profilemod.setIsSmoker(isSmokerValue);
-//            //if (licenseDateValue == "") {
-//            profilemod.setLicenseDate(emptyvar);
-//            /*} else {
-//                profilemod.setLicenseDate(licenseDateValue);
-//            }*/
-//            profilemod.setCarColour(document.getElementById('profilepersonaldatacarcolour').value || emptyvar);
-//            profilemod.setCarBrand(document.getElementById('profilepersonaldatacarbrand').value || emptyvar);
-//            //profilemod.setCarBuildYear(document.getElementById('profilepersonaldatacarbuildyear').value || emptyvar);
-//            profilemod.setCarBuildYear(emptyvar);
-//            // profilemod.setCarPlateNo(document.getElementById('profilepersonaldatacarplateno').value || emptyvar);
-//            profilemod._revision = profilemod._revision+1;
+            //
+            //            profilemod.setDateOfBirth(dateOfBirthValue);
+            //            profilemod.setEmail(document.getElementById('profilepersonaldataemail').value);
+            //            profilemod.setMobilePhoneNumber(document.getElementById('profilepersonaldatamobilephonenumber').value);
+            //            //profilemod.setFixedPhoneNumber(document.getElementById('profilepersonaldatafixedphonenumber').value);
+            //            profilemod.setStreetAddress(document.getElementById('profilepersonaldatastreetaddress').value);
+            //            profilemod.setZipCode(document.getElementById('profilepersonaldatazipcode').value || 0);
+            //            profilemod.setCity(document.getElementById('profilepersonaldatacity').value);
+            //            if (document.getElementById('profilepersonaldataissmoker-yes').checked) {
+            //                isSmokerValue = 'y';
+            //            }
+            //            else if (document.getElementById('profilepersonaldataissmoker-no').checked) {
+            //                isSmokerValue = 'n';
+            //            }
+            //            else {
+            //                isSmokerValue = '-';
+            //            }
+            //            profilemod.setIsSmoker(isSmokerValue);
+            //            //if (licenseDateValue == "") {
+            //            profilemod.setLicenseDate(emptyvar);
+            //            /*} else {
+            //                profilemod.setLicenseDate(licenseDateValue);
+            //            }*/
+            //            profilemod.setCarColour(document.getElementById('profilepersonaldatacarcolour').value || emptyvar);
+            //            profilemod.setCarBrand(document.getElementById('profilepersonaldatacarbrand').value || emptyvar);
+            //            //profilemod.setCarBuildYear(document.getElementById('profilepersonaldatacarbuildyear').value || emptyvar);
+            //            profilemod.setCarBuildYear(emptyvar);
+            //            // profilemod.setCarPlateNo(document.getElementById('profilepersonaldatacarplateno').value || emptyvar);
+            //            profilemod._revision = profilemod._revision+1;
             //alert(dateOfBirthValue);
             userProfile.setDateOfBirth(dateOfBirthValue);
             userProfile.setEmail(document.getElementById('profilepersonaldataemail').value);
@@ -10123,31 +10184,31 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //            } );
 
             $.ajax({
-                                    type: "PUT",
-                                    url: 'https://' + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
-                                    data: JSON.stringify(userProfile.getProfileRequest()),//"{username="+user+"&password="+pass+"}",
-                                    crossDomain: true,
-                                    contentType:  "application/json; charset=UTF-8",
-                                    accepts: "application/json",
-                                    dataType: "json",
-                                    username: username,
-                                    password: password,
-                                    beforeSend: function (xhr)
-                                    {
-                                        xhr.withCredentials = true,
-                                        xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
-                                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                                    },
-                                    async: false,
-                                    //accepts: "application/json",
-                                    success: function(data, textStatus, jqXHR){
-                                        showOverlayDialog('Personal data was saved successfully!', '', 'OK', '', '', '')
-                                    },
-                                    error: function(jq , textStatus , errorThrown){
-                                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
-                                    }
-                                });
+                type: "PUT",
+                url: 'https://' + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
+                data: JSON.stringify(userProfile.getProfileRequest()),//"{username="+user+"&password="+pass+"}",
+                crossDomain: true,
+                contentType:  "application/json; charset=UTF-8",
+                accepts: "application/json",
+                dataType: "json",
+                username: username,
+                password: password,
+                beforeSend: function (xhr)
+                {
+                    xhr.withCredentials = true,
+                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                },
+                async: false,
+                //accepts: "application/json",
+                success: function(data, textStatus, jqXHR){
+                    showOverlayDialog('Personal data was saved successfully!', '', 'OK', '', '', '')
+                },
+                error: function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
+                }
+            });
         //alert('save finished');
 
         },
@@ -10336,15 +10397,19 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     var obj = JSON.parse(data);
                     var subjectId=obj.subject_id;
                     var events = obj["authored_reports"];
+                    
                     var ratedRides = [];
-                    for (var report in events)
-                    {
-                        var object = events[report];
-                        var event = object["event"];
-                        //alert(event);
-                        var index = event.indexOf("/");
-                        var id = event.substring(index+1);
-                        ratedRides.push(parseInt(id));
+                    if (events!='undefined'){
+                        //alert('here');
+                        for (var report in events)
+                        {
+                            var object = events[report];
+                            var event = object["event"];
+                            //alert(event);
+                            var index = event.indexOf("/");
+                            var id = event.substring(index+1);
+                            ratedRides.push(parseInt(id));
+                        }
                     }
                     for (var i=0; i<rides.length; i++)
                     {
@@ -10354,7 +10419,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
 
                         obj = JSON.parse(rides[i]);
-                        if (ratedRides.indexOf(obj["index"])==-1)
+                        if (ratedRides.indexOf(obj["index"])!=-1)
                             continue;
                         //alert(JSON.stringify(obj) + ' ' + obj["potentiallyAgreedCommuters"].length == 1 + ' ' + obj["potentiallyAgreedCommuters"].length == 0);
                         if (obj["potentiallyAgreedCommuters"].length != 0 && obj["potentiallyAgreedCommuters"] != [""]&& obj["potentiallyAgreedCommuters"] != [])
@@ -10535,48 +10600,47 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
-var pass = readCookie('password');
-                    $.ajax({
-                        type: "GET",
-                        url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
-                        data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
-                        crossDomain: true,
-                        contentType:  "application/json; charset=UTF-8",
-                        accepts: "application/json",
-                        dataType: "json",
-                        username: this.username,
-                        password: this.password,
-                        beforeSend: function (xhr)
-                        {
-                            xhr.withCredentials = true,
-                            xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
-                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                        },
-                        async: false,
-                        success: function(data, textStatus, jqXHR){
-                            userProfile.setAllData(data);
-
-                         if (!userProfile.getCarColour || !userProfile.getCarBrand ) { //|| !userProfile.carPlateNo
-                                showOverlayDialog('Please complete your car description in your profile before you can set ride offers.', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
-                            }
-                        },
-                        error: function(jq , textStatus , errorThrown){
-                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                var pass = readCookie('password');
+                $.ajax({
+                    type: "GET",
+                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                    crossDomain: true,
+                    contentType:  "application/json; charset=UTF-8",
+                    accepts: "application/json",
+                    dataType: "json",
+                    username: this.username,
+                    password: this.password,
+                    beforeSend: function (xhr)
+                    {
+                        xhr.withCredentials = true,
+                        xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
+                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    async: false,
+                    success: function(data, textStatus, jqXHR){
+                        userProfile.setAllData(data);
+                        if (!userProfile.getCarColour() || !userProfile.getCarBrand() ) { //|| !userProfile.carPlateNo
+                            showOverlayDialog('Please complete your car description in your profile before you can set ride offers.', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
                         }
-                    });
+                    },
+                    error: function(jq , textStatus , errorThrown){
+                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                    }
+                });
 
                 // Car details
-//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
-//                    if(typeof (result.ProfileResponse) != 'undefined'){
-//                        var personalData = result.ProfileResponse;
-//                        if (!personalData.carColour || !personalData.carBrand || !personalData.carPlateNo) {
-//                            showOverlayDialog('Please complete your car details in the profile, before you can submit rides!', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
-//                        }
-//                    }
-//                }, function(x,s,e) {
-//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Failed to load profile data (car color, model).')
-//                });
+                //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
+                //                    if(typeof (result.ProfileResponse) != 'undefined'){
+                //                        var personalData = result.ProfileResponse;
+                //                        if (!personalData.carColour || !personalData.carBrand || !personalData.carPlateNo) {
+                //                            showOverlayDialog('Please complete your car details in the profile, before you can submit rides!', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
+                //                        }
+                //                    }
+                //                }, function(x,s,e) {
+                //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Failed to load profile data (car color, model).')
+                //                });
 
                 if(serviceType == 'modify'){
                     document.getElementById('tabimg11').src = "../img/tab1AngebotAendernActive_wide.png";
@@ -10675,7 +10739,6 @@ var pass = readCookie('password');
                                     favoption11.innerHTML = favname0 + ': ' +  favaddress0;
                                     favoption11.latln = favptGeoCoords0;
 
-                                    offerstartsel.add(favoption1,null);
                                     offerdestsel.add(favoption11,null);
                                 }
                             }
@@ -10817,12 +10880,12 @@ var pass = readCookie('password');
             }
 
             else if(viewId == 'newfavoritepickerUI'){
-                /*mapmod.setMapMode(0);
+            /*mapmod.setMapMode(0);
                 mapmod.initialize('newfavoritepickermap', 'newfavoriteaddrinput', position);*/
 
-                //set view to fullscreen favorite picker map as temporary approach
-                //TODO: connect fullscreen map view to tab tree
-               // this.setFullScreenMapView('favoritesgmapscreencontainer');
+            //set view to fullscreen favorite picker map as temporary approach
+            //TODO: connect fullscreen map view to tab tree
+            // this.setFullScreenMapView('favoritesgmapscreencontainer');
             }
 
             else if(viewId == 'showofferrouteUI'){
@@ -10855,40 +10918,40 @@ var pass = readCookie('password');
 
             else if(viewId == 'activeofferUI'){
                 //provenance changeView
-                                var datetime = new Date();
-                                var timeZone = datetime.getTimezoneOffset()/60;
-                                if (timeZone>0)
-                                timeZone="-"+timeZone;
-                                else
-                                timeZone="+"+(-timeZone);
-                                var datetimestr = datetime.getFullYear()+'-'+datetime.getMonth()+'-'+datetime.getDate()+'T'+datetime.getHours()+':'+datetime.getMinutes()+':'+datetime.getSeconds()+timeZone;
-                                $.ajax({
-                                    type: "POST",
-                                    url: "https://provenance.ecs.soton.ac.uk/smartsociety/provbindings/binding/",
-                                    data: '{"prov":"@prefix prov: <http://www.w3.org/ns/prov#> .@prefix xsd: <http://www.w3.org/2001/XMLSchema#/> .@prefix tmpl: <http://openprovenance.org/tmpl#> .@prefix var: <http://openprovenance.org/var#> '+
-                                        '.@prefix view: <168.144.152.202/OpenRideServer-RS/view/> .@prefix rideservice: <168.144.152.202/OpenRideServer-RS/> .@prefix rideserver: <168.144.152.202/> .@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> '+
-                                        '.@prefix  usr: <http://168.144.202.152:3000/subject/byURI/> '+
-                                        '.var:view a prov:Entity; tmpl:value_0 rideservice:view . '+
-                                        'var:client a prov:Entity; tmpl:value_0 rideserver:OpenRideServer-RS . '+
-                                        'var:change_view a prov:Entity; tmpl:value_0 view:activeOffersView . '+
-                                        'var:username a prov:Entity; tmpl:2dvalue_0_0 usr:'+user+' . '+
-                                        'var:change_view_start_time a prov:Entity; tmpl:2dvalue_0_0 \\"'+datetimestr+'\\"^^xsd:dateTime . '+
-                                        'var:change_view_start_end_time a prov:Entity; tmpl:2dvalue_0_0 \\"'+datetimestr+'\\"^^xsd:dateTime .",'+
-                                        ' "binding_name":"ss_change_view_binding_223", "template_name":"ss_change_view"}',
-                                    crossDomain: true,
-                                    headers: {
-                                        "Content-Type" : "text/turtle"
-                                    },
-                                    contentType: "text/turtle",
-                                    async: "true",
+                var datetime = new Date();
+                var timeZone = datetime.getTimezoneOffset()/60;
+                if (timeZone>0)
+                    timeZone="-"+timeZone;
+                else
+                    timeZone="+"+(-timeZone);
+                var datetimestr = datetime.getFullYear()+'-'+datetime.getMonth()+'-'+datetime.getDate()+'T'+datetime.getHours()+':'+datetime.getMinutes()+':'+datetime.getSeconds()+timeZone;
+                $.ajax({
+                    type: "POST",
+                    url: "https://provenance.ecs.soton.ac.uk/smartsociety/provbindings/binding/",
+                    data: '{"prov":"@prefix prov: <http://www.w3.org/ns/prov#> .@prefix xsd: <http://www.w3.org/2001/XMLSchema#/> .@prefix tmpl: <http://openprovenance.org/tmpl#> .@prefix var: <http://openprovenance.org/var#> '+
+                    '.@prefix view: <168.144.152.202/OpenRideServer-RS/view/> .@prefix rideservice: <168.144.152.202/OpenRideServer-RS/> .@prefix rideserver: <168.144.152.202/> .@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> '+
+                    '.@prefix  usr: <http://168.144.202.152:3000/subject/byURI/> '+
+                    '.var:view a prov:Entity; tmpl:value_0 rideservice:view . '+
+                    'var:client a prov:Entity; tmpl:value_0 rideserver:OpenRideServer-RS . '+
+                    'var:change_view a prov:Entity; tmpl:value_0 view:activeOffersView . '+
+                    'var:username a prov:Entity; tmpl:2dvalue_0_0 usr:'+user+' . '+
+                    'var:change_view_start_time a prov:Entity; tmpl:2dvalue_0_0 \\"'+datetimestr+'\\"^^xsd:dateTime . '+
+                    'var:change_view_start_end_time a prov:Entity; tmpl:2dvalue_0_0 \\"'+datetimestr+'\\"^^xsd:dateTime .",'+
+                    ' "binding_name":"ss_change_view_binding_223", "template_name":"ss_change_view"}',
+                    crossDomain: true,
+                    headers: {
+                        "Content-Type" : "text/turtle"
+                    },
+                    contentType: "text/turtle",
+                    async: "true",
                 
-                                    success: function(data , textStatus) {
-                                        //alert('success '+data);
-                                    },
-                                    error: function(jq , textStatus , errorThrown){
-                                        //alert('failed');
-                                    }
-                                });
+                    success: function(data , textStatus) {
+                    //alert('success '+data);
+                    },
+                    error: function(jq , textStatus , errorThrown){
+                    //alert('failed');
+                    }
+                });
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
@@ -11010,7 +11073,7 @@ var pass = readCookie('password');
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0 ){
                                         flag=true;
                                         //alert('parp '+JSON.stringify(rideSet.data[g].doc.potentiallyAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.potentiallyAgreedRidePlans.length;i++){
@@ -11021,7 +11084,7 @@ var pass = readCookie('password');
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0 &&!flag){
+                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0 ){
                                         flag=true;
                                         //alert('darp '+JSON.stringify(rideSet.data[g].doc.driverAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.driverAgreedRidePlans.length;i++){
@@ -11032,7 +11095,7 @@ var pass = readCookie('password');
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0 ){
                                         flag=true;
                                         //alert('arp '+JSON.stringify(rideSet.data[g].doc.agreedRidePlan));
                                         documentToFill.data.push({
@@ -11078,6 +11141,7 @@ var pass = readCookie('password');
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText);
                                         alert('this error is: ' + errorThrown );
+                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                             //alert(rideRequests.length);
@@ -11088,6 +11152,7 @@ var pass = readCookie('password');
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText);
                                 alert('this error is: ' + errorThrown );
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         });
                         parseOffer();
@@ -11098,6 +11163,7 @@ var pass = readCookie('password');
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText);
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -11310,6 +11376,7 @@ var pass = readCookie('password');
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText)
                                         alert('this error is: ' + errorThrown );
+                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                                 //alert(rideRequests.length);
@@ -11320,6 +11387,7 @@ var pass = readCookie('password');
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText)
                                 alert('this error is: ' + errorThrown );
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
 
@@ -11329,6 +11397,7 @@ var pass = readCookie('password');
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -11340,10 +11409,10 @@ var pass = readCookie('password');
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
 
-//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, this.setFavoriteList, function(x,s,e) {
-//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
-//                });
-//                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
+            //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, this.setFavoriteList, function(x,s,e) {
+            //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
+            //                });
+            //                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
             }
             else if(viewId == 'ratingsUI'){
                 
@@ -11352,43 +11421,43 @@ var pass = readCookie('password');
                 //            srvconn.GET('OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
                 //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
                 //            });
-//                srvconn.GET(PeerMenager+'/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
-//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
-//                });
-//                //            srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile/preferences', false, this.parseprofilepreferences, function(x,s,e) {
-//                //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your settings could not be loaded.')
-//                //            });
-//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/ratings/summary', false, this.setRatingsSummary, function(x,s,e) {
-//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
-//                });
-                    var pass = readCookie('password');
-                    $.ajax({
-                        type: "GET",
-                        url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
-                        data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
-                        crossDomain: true,
-                        contentType:  "application/json; charset=UTF-8",
-                        accepts: "application/json",
-                        dataType: "json",
-                        username: this.username,
-                        password: this.password,
-                        beforeSend: function (xhr)
-                        {
-                            xhr.withCredentials = true,
-                            xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
-                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                        },
-                        async: false,
-                        accepts: "application/json",
-                        success: function(data, textStatus, jqXHR){
-                            userProfile.setAllData(data);
-                            fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
-                        },
-                        error: function(jq , textStatus , errorThrown){
-                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
-                        }
-                    });
+                //                srvconn.GET(PeerMenager+'/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
+                //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
+                //                });
+                //                //            srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile/preferences', false, this.parseprofilepreferences, function(x,s,e) {
+                //                //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your settings could not be loaded.')
+                //                //            });
+                //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/ratings/summary', false, this.setRatingsSummary, function(x,s,e) {
+                //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
+                //                });
+                var pass = readCookie('password');
+                $.ajax({
+                    type: "GET",
+                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                    crossDomain: true,
+                    contentType:  "application/json; charset=UTF-8",
+                    accepts: "application/json",
+                    dataType: "json",
+                    username: this.username,
+                    password: this.password,
+                    beforeSend: function (xhr)
+                    {
+                        xhr.withCredentials = true,
+                        xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
+                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    async: false,
+                    accepts: "application/json",
+                    success: function(data, textStatus, jqXHR){
+                        userProfile.setAllData(data);
+                        fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
+                    },
+                    error: function(jq , textStatus , errorThrown){
+                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                    }
+                });
                 /************** START CHANGE *************/
                 var ans;
                 /********* IDENTITY ********/
@@ -11432,17 +11501,16 @@ var pass = readCookie('password');
                     headers:
                     {
                         "X-Requested-With": "XMLHttpRequest"
-                    //"Origin" : "http://localhost:8080"
+                        //"Origin" : "http://localhost:8080"
                     },
                     //dataType : "json" ,
                     async: false,
                     accepts:  //"application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
                     "application/json;",
                     success: function(data , textStatus) {
-
                         //alert(data);
                         var obj = JSON.parse(data);
-                        if (obj["versionInfo"]["previousVersion"]=="none" || typeOf(obj["currentReputationReport"])=='undefined'){//no rating
+                        if (obj["versionInfo"]["previousVersion"]=="none" || typeof(obj["currentReputationReport"])=='undefined'){//no rating
                             dummyparseratingssummary(dummydiv, /*ratingssummary*/ null);
                         }
                         else{
@@ -11486,6 +11554,7 @@ var pass = readCookie('password');
                                     alert('status: ' + jq.status);
                                     alert('response ' + jq.responseText)
                                     alert('this error is: ' + errorThrown );
+                                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                 }
 
                             });
@@ -11496,6 +11565,7 @@ var pass = readCookie('password');
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 });
@@ -11613,7 +11683,7 @@ var pass = readCookie('password');
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0){
                                         flag=true;
                                         //alert('parp '+JSON.stringify(rideSet.data[g].doc.potentiallyAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.potentiallyAgreedRidePlans.length;i++){
@@ -11624,7 +11694,7 @@ var pass = readCookie('password');
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0 &&!flag){
+                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0){
                                         flag=true;
                                         //alert('darp '+JSON.stringify(rideSet.data[g].doc.driverAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.driverAgreedRidePlans.length;i++){
@@ -11635,7 +11705,7 @@ var pass = readCookie('password');
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0){
                                         flag=true;
                                         //alert('arp '+JSON.stringify(rideSet.data[g].doc.agreedRidePlan));
                                         documentToFill.data.push({
@@ -11651,48 +11721,50 @@ var pass = readCookie('password');
                                 }//end plans for
                                 // alert(JSON.stringify(documentToFill));
                                 if (documentToFill.length!=0){
-                                $.ajax({
-                                    type: "POST",
-                                    url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
-                                    data:JSON.stringify(documentToFill),
-                                    crossDomain: true,
-                                    username: user,
-                                    password: pass,
-                                    beforeSend: function (xhr)
-                                    {
-                                        xhr.setRequestHeader('Authorization' , 'Basic ' + user+ ':' +pass);
-                                        xhr.withCredentials = true;
-                                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                                    },
-                                    contentType : "application/json" ,
-                                    async: false,
-                                    success: function(data, textStatus, jqXHR) {
-                                        rides=[];
-                                        var rideSet = JSON.parse(data);
-                                        //alert("result is "+data);
-                                        for (var g=0; g<rideSet.data.length;g++){
-                                            //alert(JSON.stringify(rideSet.data[g].doc));
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                        data:JSON.stringify(documentToFill),
+                                        crossDomain: true,
+                                        username: user,
+                                        password: pass,
+                                        beforeSend: function (xhr)
+                                        {
+                                            xhr.setRequestHeader('Authorization' , 'Basic ' + user+ ':' +pass);
+                                            xhr.withCredentials = true;
+                                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                                        },
+                                        contentType : "application/json" ,
+                                        async: false,
+                                        success: function(data, textStatus, jqXHR) {
+                                            rides=[];
+                                            var rideSet = JSON.parse(data);
+                                            //alert("result is "+data);
+                                            for (var g=0; g<rideSet.data.length;g++){
+                                                //alert(JSON.stringify(rideSet.data[g].doc));
 
-                                            rides.push(JSON.stringify(rideSet.data[g].doc));
+                                                rides.push(JSON.stringify(rideSet.data[g].doc));
+                                            }
+                                        },
+                                        error: function (jq, textStatus, errorThrown) {
+                                            alert('state: ' + jq.readyState);
+                                            alert('status: ' + jq.status);
+                                            alert('response ' + jq.responseText);
+                                            alert('this error is: ' + errorThrown );
+                                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                         }
-                                    },
-                                    error: function (jq, textStatus, errorThrown) {
-                                        alert('state: ' + jq.readyState);
-                                        alert('status: ' + jq.status);
-                                        alert('response ' + jq.responseText);
-                                        alert('this error is: ' + errorThrown );
-                                    }
-                                })
+                                    })
                                 }
                                 //alert(rideRequests.length);
                                 parseOpenRatings(dummyTHIS.openratingslistdiv , null);
-                                },
+                            },
                             error: function(jq , textStatus , errorThrown){
                                 alert('state: ' + jq.readyState);
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText);
                                 alert('this error is: ' + errorThrown );
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
 
@@ -11805,6 +11877,7 @@ var pass = readCookie('password');
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -11828,37 +11901,37 @@ var pass = readCookie('password');
                 //            srvconn.GET('OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
                 //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
                 //            });
-               var pass = readCookie('password');
+                var pass = readCookie('password');
                 $.ajax({
-                                type: "GET",
-                                url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
-                                data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
-                                crossDomain: true,
-                                contentType:  "application/json; charset=UTF-8",
-                                accepts: "application/json",
-                                dataType: "json",
-                                username: this.username,
-                                password: this.password,
-                                beforeSend: function (xhr)
-                                {
-                                    xhr.withCredentials = true,
-                                    xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
-                                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                                },
-                            async: false,
-                            success: function(data, textStatus, jqXHR){
-                                userProfile.setAllData(data);
+                    type: "GET",
+                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                    crossDomain: true,
+                    contentType:  "application/json; charset=UTF-8",
+                    accepts: "application/json",
+                    dataType: "json",
+                    username: this.username,
+                    password: this.password,
+                    beforeSend: function (xhr)
+                    {
+                        xhr.withCredentials = true,
+                        xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
+                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    async: false,
+                    success: function(data, textStatus, jqXHR){
+                        userProfile.setAllData(data);
 
-                                fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
-                            },
-                            error: function(jq , textStatus , errorThrown){
-                                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
-                            }
-                        });
-//                srvconn.GET(PeerMenager+'/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
-//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
-//                });
+                        fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
+                    },
+                    error: function(jq , textStatus , errorThrown){
+                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                    }
+                });
+                //                srvconn.GET(PeerMenager+'/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
+                //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
+                //                });
                 srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile/preferences', false, this.parseprofilepreferences, function(x,s,e) {
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your settings could not be loaded.')
                 });
@@ -12113,7 +12186,6 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
     var searchstartselectcurrpos = 'searchstartselectcurrpos';
     var searchdestselectcurrpos = 'searchdestselectcurrpos';
 
-
     var minutelabelEnd = 'minuteLabelEnd';
     var hourlabelEnd = 'hourLabelEnd';
 
@@ -12270,13 +12342,13 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 },
                 async: false,
                 success: function(data, textStatus, jqXHR){
-                     //alert(data);
+                    //alert(data);
                     //profilemod.setAllData(data);
                     picsrc=data.picture;
                 //fokus.openride.mobclient.controller.modules.uievents.parseInitData(profile);
                 },
-                error:function(){
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, initial data could not be loaded.')
+                error:function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, initial data could not be loaded.')
                 }
             });
             //            alert(JSON.stringify(profile));
@@ -12294,7 +12366,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             var profileimg = document.getElementById('profilepicimg');
             var now = new Date();
             var lMessages =
-                ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
+            ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
             ,'נסיעות קבוצתיות יפחיתו את ההוצאות החודשיות שלך' ,'נסיעות קבוצתיות תורמות לטיפוח החברה' ,'המערכת מיועדת לסטודנטים באוניברסיטת בן-גוריון בלבד'];
             //                ['Patience is something you admire in the driver behind you and scorn in the one ahead. ~Mac McCleary'
             //            ,'For every "Drive Safely" sign, shouldn\'t there be a "Resume Normal Driving" sign? ~Robert Brault'
@@ -12665,6 +12737,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             searchtimeuparrowlinkEnd.href = "javascript:void(0);";
 
             searchtimeuparrowEnd.onclick = function(){
+                //alert('down end');
                 fokus.openride.mobclient.controller.modules.uievents.timerStop();
                 if(focustimelabelid == searchhourlabelEnd)
                     calendarpicker.increaseHourEnd();
@@ -12679,6 +12752,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             searchtimedownarrowlinkEnd.href = "javascript:void(0);";
 
             searchtimedownarrowEnd.onclick = function(){
+                //alert('down end');
                 fokus.openride.mobclient.controller.modules.uievents.timerStop();
                 if(focustimelabelid == searchhourlabelEnd)
                     calendarpicker.decreaseHourEnd();
@@ -12932,7 +13006,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     else                                     newRideRequest.smoking              = "No";
                     newRideRequest.rideQualityThreshold = "0";//"5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
                     //newRideRequest.capacity          = defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_CAPACITY($('#dropDownCapacityList').find(':selected').text());
-                    newRideRequest.capacity             = offermod.getOfferedSeatsNo();
+                    newRideRequest.capacity             = document.getElementById('nrseatsselect').selectedIndex + 1;//offermod.getOfferedSeatsNo();
 
                     /*
 	 * Now deal with the rest
@@ -13057,6 +13131,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                         }
 
                     })
@@ -13516,6 +13591,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                         }
 
                     })
@@ -14324,35 +14400,39 @@ function submit (rate_array , riderId )
             var mode = 'driver';
             if (usermode == RIDERMODE) mode = 'commuter';
             //alert(participants);
-            var subjects='[';
+            var subjects='{';
             var index = participants.indexOf("commuters");
+            var ind=0;
             var subparticipants = participants.substring(index+10);
             if (mode == 'commuter')
                 subjects = subjects +
-                '{"subject_uri" : "smartshare/' + participants.substring(7,index) + '",'
+                '"subject_'+ind+'":{"subject_uri" : "smartshare/' + participants.substring(7,index) + '",'
                 +'"quantifier_uri" : "driver"}';
             var array = subparticipants.split(",");
+            
             for (var i=0; i<array.length;i++)
             {
-                if (subjects != '[' && user != array[i]) subjects = subjects + ',';
-                if (user != array[i])
+                if (subjects != '{' && user != array[i]) subjects = subjects + ',';
+                if (user != array[i]){
                     subjects = subjects +
-                    '{"subject_uri" : "smartshare/' + array[i] + '",'
-                    +'"quantifier_uri" : "commuter"}'
+                    '"subject_'+ind+'":{"subject_uri" : "smartshare/' + array[i] + '",'
+                    +'"quantifier_uri" : "commuter"}';
+                    ind++;
+                }
             }
             //alert(JSON.stringify(rate_array));
-            subjects = subjects + '],';
+            subjects = subjects + '},';
             var json2 = '{'
             +'"application_uri" : "smartshare",'
-            +'"event_id" : "ride/' + rideIdInt + '",'
+            +'"event_uri" : "ride/' + rideIdInt + '",'
             +'"subjects": '
             + subjects
-            +'"authors": [{'
+            +'"authors": {"author_0":{'
             +'"author_uri" : "' + user + '",'
             +'"quantifier_uri" : "'+ mode + '"'
             //+'"author_uri" : "' + user + '",'
             //+'"quantifier_uri" : "' + mode +'"'
-            +'}],'
+            +'}},'
             +'"feedback": {'
             +'"StarRating": ' + rate_array[0] + ','//overall
             //+'"ride_Price": '+ rate_array[1] + ','//price
@@ -14402,6 +14482,7 @@ function submit (rate_array , riderId )
                     alert('status: ' + jq.status);
                     alert('response ' + jq.responseText)
                     alert('this error is: ' + errorThrown );
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                 }
             });
         },
@@ -14410,6 +14491,7 @@ function submit (rate_array , riderId )
             alert('status: ' + jq.status);
             alert('response ' + jq.responseText)
             alert('this error is: ' + errorThrown );
+            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
         }
 
     })
@@ -14454,8 +14536,9 @@ function myaccept(num)
         prp.potentiallyAgreedDriver = "";
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,"false", user , pass);
+        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false, user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
+        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
     }
     else if (usermode == RIDERMODE && prp.agreedDriver != "")
     {
@@ -14464,8 +14547,9 @@ function myaccept(num)
         (prp.agreedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,"false" ,user, pass );
+        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false ,user, pass );
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
+        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
     }
 //alert( prp);
                     
@@ -14486,6 +14570,7 @@ function myreject(num)
         prp._revision = revision + 1;
         ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
+        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
 
     }
     else if (usermode == RIDERMODE)
@@ -14498,6 +14583,7 @@ function myreject(num)
         ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
 
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
+        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
     }
 }
 
@@ -14507,6 +14593,7 @@ function fail(jq , status ,errorThrown)
     alert('status: ' + jq.status);
     alert('response ' + jq.responseText)
     alert('this error is: ' + errorThrown );
+    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 }
 
 function ajaxcall(op , add , info , asynch ,usr , pass)
