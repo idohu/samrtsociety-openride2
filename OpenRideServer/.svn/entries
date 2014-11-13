@@ -1,0 +1,40 @@
+10
+
+dir
+17
+http://svn.code.sf.net/p/openride/code/trunk/src/OpenRideServer
+http://svn.code.sf.net/p/openride/code
+
+
+
+2012-01-15T10:36:30.871730Z
+17
+kussatz
+has-props
+has-prop-mods
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+d45be225-9fc7-4d5c-a1a3-5f936a3f094d
+
+OpenRideAdmin
+dir
+
+OpenRideServer-RS
+dir
+
+OpenRideServer-ejb
+dir
+
+OpenRideWeb
+dir
+
