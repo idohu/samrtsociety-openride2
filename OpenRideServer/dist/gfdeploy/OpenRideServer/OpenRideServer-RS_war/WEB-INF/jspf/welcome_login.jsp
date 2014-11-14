@@ -72,7 +72,7 @@
 </script>
 
 <script type="text/javascript"
-        src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'>
+        src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'>
 </script>
 
     <script>
@@ -94,6 +94,7 @@
                                         url: 'https://'+ DimitrisRemote +'/authentications',//'/api/authenticate/' + user ,
                                        // data: "{username="+user+"&password="+pass+"}",
                                         crossDomain: true,
+                                        timeout: 0, //Set your timeout value in milliseconds or 0 for unlimited
                                         contentType: "application/json; charset=UTF-8",// "application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
                                         beforeSend: function (xhr)
                                         {
@@ -107,7 +108,7 @@
                                         //dataType : "jsonp" ,
                                         async: false,
                                         success: function(data, textStatus, jqXHR){
-                                        alert(data);
+                                        //alert(data);
                                         var parsed = data;//JSON.parse(data);
                                         //alert('data-' + data);
                                         if (parsed.status == 'NOK') alert('NOK ' + parsed.message);

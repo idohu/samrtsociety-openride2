@@ -99,7 +99,6 @@
       On the mobile phone application on the mobile web browser directly www.open-ride.mobi is achievable.
 
     For the full functional use of open ride we recommend mobile phones with a newer browser. These include the IPhone 3G, Android phones with Android 2.1. and Windows Mobile Version 6.5. On Nokia smartphones, you can use open ride, if you installed the Opera Mobile browser.
-
     Who has no modern smartphone, Open Ride can use a normal computer in the open ride Smartphone Simulator. You go to the Firefox web browser www.open-ride.mobi/OpenRideWeb, you log in and use the Link smartphone simulator.
         </p>
 

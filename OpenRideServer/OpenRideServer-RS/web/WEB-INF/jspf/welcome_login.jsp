@@ -108,7 +108,7 @@
                                         //dataType : "jsonp" ,
                                         async: false,
                                         success: function(data, textStatus, jqXHR){
-                                        alert(data);
+                                        //alert(data);
                                         var parsed = data;//JSON.parse(data);
                                         //alert('data-' + data);
                                         if (parsed.status == 'NOK') alert('NOK ' + parsed.message);

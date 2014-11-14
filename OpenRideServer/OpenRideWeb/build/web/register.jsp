@@ -158,7 +158,7 @@
     <jsp:include page="/WEB-INF/jspf/footer.jsp"></jsp:include>
 </f:view>
 <script type="text/javascript"
-        src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
+        src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
 </script>
 
 <script>

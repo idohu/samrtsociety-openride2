@@ -81,8 +81,8 @@
         <web-resource-collection>
             <web-resource-name>OpenRideWeb-private</web-resource-name>
             <description/>
-            <url-pattern>/OpenRideServer_RS/view</url-pattern>
-            <url-pattern>/profile.jsp</url-pattern>
+            <!--url-pattern>/OpenRideServer_RS/view</url-pattern-->
+            <url-pattern>/profile.jsf</url-pattern>
             <url-pattern>/mobile-demo.jsf</url-pattern>
             <http-method>GET</http-method>
             <http-method>PUT</http-method>
@@ -101,7 +101,8 @@
         <auth-method>FORM</auth-method>
         <realm-name>jdbc_realm</realm-name>
         <form-login-config>
-            <form-login-page>/OpenRideServer-RS/view</form-login-page>
+            <!--form-login-page>/OpenRideServer-RS/view</form-login-page-->
+            <form-login-page>/welcome.jsf</form-login-page>
             <form-error-page>/login_error.jsf</form-error-page>
         </form-login-config>
     </login-config>
