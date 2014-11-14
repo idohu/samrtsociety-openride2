@@ -147,10 +147,7 @@
                         <h:commandButton id="shown" type="button" value="Register" onclick="register(); " />
                     </h:panelGroup>
                 </h:panelGrid>
-
-
             </h:form>
-
         </div>
 
     </fieldset>
@@ -158,10 +155,20 @@
     <jsp:include page="/WEB-INF/jspf/footer.jsp"></jsp:include>
 </f:view>
 <script type="text/javascript"
-        src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
+        src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'>
 </script>
-
+<script type="text/javascript">
+    function openPage(pageURL)
+    {
+        window.location.href = pageURL;
+    }
+</script>
 <script>
+    function endAjax(){
+        if($.active==0){
+        openPage('/OpenRideServer-RS/view');//move to mobile app login screen.
+        };
+        }
     function register()
     {
         var DimitrisLocal = "localhost:3000";
@@ -270,9 +277,11 @@
                                     async: false,
                                     //accepts: "application/json",
                                     success: function(data, textStatus, jqXHR){
-                                        //alert('success in update' +data);
+                                        
                                         $("#registrationForm\\:hidden").click();
-                                        //window.location.href = '/OpenRideServer-RS/view';//move to mobile app login screen.
+                                        setTimeout(function () {
+                                            openPage('/OpenRideServer-RS/view');//move to mobile app login screen.
+                                        }, 3000);
                                     },
                                     error: function(jq , textStatus , errorThrown){
                                         alert('state: ' + jq.readyState);
@@ -305,10 +314,10 @@
                     }
                 });
             });
+        setInterval(endAjax, 500);
         }
         else alert('Not all field are filled!');
-        else alert('Not all field are filled!');
+        else alert('Not all field are filled!');       
     }
-    
 
 </script>
