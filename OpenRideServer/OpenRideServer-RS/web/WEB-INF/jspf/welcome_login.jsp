@@ -108,9 +108,7 @@
                                         //dataType : "jsonp" ,
                                         async: false,
                                         success: function(data, textStatus, jqXHR){
-                                        alert(data);
                                         var parsed = data;//JSON.parse(data);
-                                        //alert('data-' + data);
                                         if (parsed.status == 'NOK') alert('NOK ' + parsed.message);
                                         else
                                             {
@@ -142,34 +140,6 @@
 <script>
     function stats()
     {
-        <%--new Ajax.Request( 'http://localhost:3000/serverStatus', {
-        method:  'GET',
-        onSuccess:  function(response){
-        alert('what is it?');
-    },
-        onFailure:  function(){
-        alert('ERROR');
-    }
-
-    });--%>
-
-          <%--jQuery.getJSON(
-    "http://localhost:3000/serverStatus/",
-    function(data,response) {
-       alert('page content: ');
-    }
-)
-    .done(function() {
-    alert( "second success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "finished" );
-  });--%>
-
-        alert('hey there!');
    $.getJSON( "http://localhost:3000/serverStatus2", function(data)
    {    var obj = JSON.parse(JSON.stringify(data));
        alert('total connections: ' + obj.data["totalConnections"] + '\n' +
