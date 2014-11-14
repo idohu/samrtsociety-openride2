@@ -639,7 +639,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                     mapmod.setRoutePath(routearr);
                     return true;
-                }else{//no route                    
+                }else{//no route
                     showOverlayDialog('No route found!', '', 'OK', '', '', '');
                     return false;
                 }
@@ -707,9 +707,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
                 if (d<=(new Date())){
-                    //alert('date '+rides[i]);
                     continue;
                 }
+                //alert('2');
                 var months = d.getMonth() + 1;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
@@ -742,10 +742,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         day="Saturday";
                         break;
                 }
+                var commuters = prp.commuters.toString().replace(",",", ");
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
-                    '<br /><small style="display: block;"><span >Start:</span> '+
-                    prp.departureCity+'<br /><span >End:</span> '+prp.destinationCity+'</small>'+
-                    '<small style="display: block;" ><span >Commuters:</span> '+prp.commuters+'</h3>');
+                    '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
+                    prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
+                    '<span style="margin-left: -50px;">Commuters: <strong style="color:black;">'+prp.commuters+'</strong></span> </small></h3>');
                 //                RideShareSB.append(d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
                 //                    ' Hour<br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+
                 //                    prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
@@ -801,7 +802,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         break;
                 }
                 RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
-                //RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                //                RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -883,8 +884,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
-                RideShareSB.append('<li><a name="r'+i+'"></a>');
-                RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
                 var day="";
                 //alert(d.getDay())
                 switch (d.getDay()){
@@ -910,10 +909,16 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         day="Saturday";
                         break;
                 }
+                var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' <br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
-                //RideShareSB.append(d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour<br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                    '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
+                    prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
+                    '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
+                //                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                //                    ' <br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+
+                //                    prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -966,9 +971,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
                 RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
-                //                RideShareSB.append('<li><a name="u'+id+'"></a>');
-                //                RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
-                //                RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -981,19 +983,25 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         },
 
         parsecompletedtriplist : function(){
-            //alert('I am Here');
-            /* var completedrides;
-            var completeddrives
-            try {
+            //alert('completed');
+            var sb = new StringBuilder();
+            var RideShareSB = new StringBuilder();
+            var updatecount = 0;
+            /* try {
+                alert(activesearchlist);
                 if(usermode==RIDERMODE)
-                    completedrides = JSON.parse(activesearchlist);
+                    var completedrides = JSON.parse(activesearchlist);
+
             } catch (e) {
+                alert('rider unable to parse JSON');
             }
 
             try {
+                alert(activeofferlist);
                 if(usermode==DRIVERMODE)
-                    completeddrives = JSON.parse(activeofferlist);
+                    var completeddrives = JSON.parse(activeofferlist);
             } catch (e) {
+                alert('driver unable to parse JSON');
             }
 
             var completedtriplist = new Array();
@@ -1007,7 +1015,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             if(usermode == RIDERMODE){
 
                 sb.append('<h3>Old Searches</h3>');
-
+                alert(completedrides.list.toString() +' - '+ completedrides.list[0].Search);
                 //add completed rides to completedtriplist
                 if(typeof (completedrides.list) != 'undefined' && typeof (completedrides.list[0].Search) != 'undefined'){
                     if(typeof (completedrides.list[0].Search.length) == 'undefined'){
@@ -1038,7 +1046,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         sb.append('<td valign="top">'+entry.startptAddress+'</td>');
                         sb.append('</tr>');
                         sb.append('<tr>');
-                        sb.append('<td valign="top" align="right" style="color:#666666;">End point:</td>');
+                        sb.append('<td valign="top" align="right" style="color:#666666;">End time:</td>');
                         sb.append('<td valign="top">'+entry.endptAddress+'</td>');
                         sb.append('</tr>');
                         sb.append('</table></small></h3>');
@@ -1049,11 +1057,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     }
                 }else{
                     sb.clear();
-                    sb.append('<h3>No old requests available.</h3>');
+                    sb.append('<h3>No active searches available.</h3>');
                 }
             }
             else if(usermode == DRIVERMODE){
-                sb.append('<h3>Old offers</h3>');
+                sb.append('<h3>Old Offers</h3>');
 
                 //add completed drives to completedtriplist
                 if(typeof (completeddrives.list) != 'undefined' && typeof (completeddrives.list[0].Offer) != 'undefined'){
@@ -1077,7 +1085,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                         sb.append('<li><a name="r'+entry.rideId+'"></a>');
                         sb.append('<h3 class="linkslide_0" id="r'+entry.rideId+'">');
-                        sb.append(oday +"."+omonth+"."+oyear+", "+ohours+":"+omin+' Uhr<br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+entry.startptAddress+'<br /><span style="margin-left: -34px;">Ziel:</span> '+entry.endptAddress+'</small></h3>');
+                        sb.append(oday +"."+omonth+"."+oyear+", "+ohours+":"+omin+' Hour<br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+entry.startptAddress+'<br /><span style="margin-left: -34px;">End:</span> '+entry.endptAddress+'</small></h3>');
                         sb.append('<div class="slide_0"></div>');
                         sb.append('</li>');
                     }
@@ -1085,36 +1093,67 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     sb.clear();
                     sb.append('<h3>No old offers available.</h3>');
                 }
+
             }
             document.getElementById(this.completedtrips).innerHTML = sb.toString();
 
-            setupCompletedTripUITabList();
-             */
-            var RideShareSB = new StringBuilder();
-            var updatecount = 0;
-            //alert(rides.length +' - '+rideRequests.length);
+            setupCompletedTripUITabList(); */
+            //RIDESHARE
+
             for (var i=0; i<rides.length; i++)
             {
                 if (!rides.hasOwnProperty(i)) continue;
                 var prp = JSON.parse(rides[i]);
+                //alert(rides[i]);
                 var color = '';
+
                 //if (prp.agreedDriver == "" && prp.agreedCommuters.length == 0) color = 'solid orange'; //negotiation not initiated yet
                 if (prp.agreedDriver != "" && prp.potentiallyAgreedCommuters.length == 0 && prp.agreedCommuters.length != 0) color = 'solid green';  //ride booked
                 if (prp.agreedDriver != "" && prp.potentiallyAgreedCommuters.length != 0) color = 'dotted green'; //negotiation started
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
-
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d>(new Date))
-                    continue;
+                if (d>(new Date())) continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
+                var day="";
+                //alert(d.getDay())
+                switch (d.getDay()){
+                    case 0:
+                        day="Sunday";
+                        break;
+                    case 1:
+                        day="Monday";
+                        break;
+                    case 2:
+                        day="Tuesday";
+                        break;
+                    case 3:
+                        day="Wendesday";
+                        break;
+                    case 4:
+                        day="Thursday";
+                        break;
+                    case 5:
+                        day="Friday";
+                        break;
+                    case 6:
+                        day="Saturday";
+                        break;
+                }
+                var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append(d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour<br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                    '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
+                    prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
+                    '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
+                //                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                //                    ' <br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+
+                //                    prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -1122,11 +1161,16 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             {
                 if (!rideRequests.hasOwnProperty(i)) continue;
                 var prp = JSON.parse(rideRequests[i]);
-                // alert('halala ' + rideRequests.length + ' ' + rideRequests[i] + ' ' + i);
+                if (prp.mode=='driver' && usermode==RIDERMODE)
+                    continue;
+                if (prp.potentiallyAgreedRidePlans.length!=0 || prp.driverAgreedRidePlans.length!=0 || prp.potentialRidePlans.length!=0 || prp.agreedRidePlan!="" || prp.mode=="driver"){
+                    //alert('nothing is wrong');
+                    continue;
+                }
+                //alert('1halala ' + rideRequests.length + ' ' + rideRequests[i] + ' ' + i);
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                //alert(d+' - '+new Date());
                 if (d>(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
@@ -1135,17 +1179,43 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
                 var id = rides.length+i;
+                var day="";
+                //alert(d.getDay())
+                switch (d.getDay()){
+                    case 0:
+                        day="Sunday";
+                        break;
+                    case 1:
+                        day="Monday";
+                        break;
+                    case 2:
+                        day="Tuesday";
+                        break;
+                    case 3:
+                        day="Wendesday";
+                        break;
+                    case 4:
+                        day="Thursday";
+                        break;
+                    case 5:
+                        day="Friday";
+                        break;
+                    case 6:
+                        day="Saturday";
+                        break;
+                }
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
+            //RIDESHARE
+
             dummyTHIS.setriderupdatecount(updatecount);
 
             document.getElementById(dummyTHIS.completedtrips).innerHTML = RideShareSB.toString();
 
-            //setupUITabList();
             setupCompletedTripUITabList();
         },
 
@@ -1195,7 +1265,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }else{//no route
                 //return false;
                 }
-                
+
                 //parse viapoint destination coords
                 var viadestptarr = new Array();
                 if(routeResult.list[0].list[2]){
@@ -1205,7 +1275,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                         for(var i=0;i< routeResult.list[0].list[2].Coordinate.length; i++){
                             var entry = routeResult.list[0].list[2].Coordinate[i];
-	
+
                             var coordLat1 = entry.latititude;
                             var coordLon1 = entry.longitude;
 
@@ -1619,7 +1689,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     },
                     error:function(jq,textStatus,errorThrown){
                     //alert('fail1');
-
+                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     }
                 });
             }
@@ -2236,7 +2306,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
             }
         },
-       
+
 
         modifyRide : function (rideid) {
             var ride = this.tmpRide;
@@ -2705,7 +2775,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 isSmokerOption = 'profilepersonaldataissmoker-null';
             }
             document.getElementById(isSmokerOption).checked = 'checked';
-                
+
             //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
             if (personalData.carColour) {
                 document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
@@ -3112,7 +3182,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             document.getElementById("ratingssummarymediocre").innerHTML = friend;//entry.ratingsLatestMediocre;
         //document.getElementById("numofratings").innerHTML = numofraters;
         },
- 
+
         parseopenratingslist : function(openratingslistdiv, resultlist){
             //var result = JSON.parse(resultlist);
             var listhtml = '<h3>Write reviews</h3>';
@@ -3211,6 +3281,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     alert('status: ' + jq.status);
                     alert('response ' + jq.responseText)
                     alert('this error is: ' + errorThrown );
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+
                 }
 
             });
@@ -3232,7 +3304,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
         },
 
-       
+
         parsereceivedratingslist : function(receivedratingslistdiv, resultlist){
             var result = JSON.parse(resultlist);
             var listhtml = '<h3>Ratings received</h3>';
@@ -3371,8 +3443,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     async: false,
                     success: function(data, textStatus, jqXHR){
                         userProfile.setAllData(data);
-
-                        if (!userProfile.getCarColour || !userProfile.getCarBrand ) { //|| !userProfile.carPlateNo
+                        if (!userProfile.getCarColour() || !userProfile.getCarBrand() ) {//|| !userProfile.carPlateNo
                             showOverlayDialog('Please complete your car description in your profile before you can set ride offers.', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
                         }
                     },
@@ -3380,7 +3451,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                     }
                 });
-                
+
                 // Car details
                 //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
                 //                    if(typeof (result.ProfileResponse) != 'undefined'){
@@ -3824,7 +3895,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0){
                                         flag=true;
                                         //alert('parp '+JSON.stringify(rideSet.data[g].doc.potentiallyAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.potentiallyAgreedRidePlans.length;i++){
@@ -3835,7 +3906,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0 &&!flag){
+                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0){
                                         flag=true;
                                         //alert('darp '+JSON.stringify(rideSet.data[g].doc.driverAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.driverAgreedRidePlans.length;i++){
@@ -3846,7 +3917,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0){
                                         flag=true;
                                         //alert('arp '+JSON.stringify(rideSet.data[g].doc.agreedRidePlan));
                                         documentToFill.data.push({
@@ -3892,6 +3963,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText);
                                         alert('this error is: ' + errorThrown );
+                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                             //alert(rideRequests.length);
@@ -3902,6 +3974,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText);
                                 alert('this error is: ' + errorThrown );
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
                         parseOffer();
@@ -3911,6 +3984,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText);
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -4116,6 +4190,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText)
                                         alert('this error is: ' + errorThrown );
+                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                                 //alert(rideRequests.length);
@@ -4126,6 +4201,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText)
                                 alert('this error is: ' + errorThrown );
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
 
@@ -4135,6 +4211,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -4152,7 +4229,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
             }
             else if(viewId == 'ratingsUI'){
-                
+
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
                 //                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
@@ -4218,7 +4295,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var agentID = user.substring(5, user.length);
                 user = readCookie('username');
                 pass = readCookie('password');
-                
+
                 /********* IDENTITY ********/
                 var dummyparseratingssummary = this.parseratingssummary;
                 var dummydiv = this.parseratingssummarydiv;
@@ -4248,7 +4325,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     success: function(data , textStatus) {
                         //alert(data);
                         var obj = JSON.parse(data);
-                        if (obj["versionInfo"]["previousVersion"]=="none" || typeOf(obj["currentReputationReport"])=='undefined'){//no rating
+                        if (obj["versionInfo"]["previousVersion"]=="none" || typeof(obj["currentReputationReport"])=='undefined'){//no rating
                             dummyparseratingssummary(dummydiv, /*ratingssummary*/ null);
                         }
                         else{
@@ -4292,6 +4369,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     alert('status: ' + jq.status);
                                     alert('response ' + jq.responseText)
                                     alert('this error is: ' + errorThrown );
+                                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                 }
 
                             });
@@ -4302,6 +4380,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 });
@@ -4309,7 +4388,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             //alert(JSON.stringify(obj));
             /************** END CHANGE ***************/
-                
+
             }
             else if(viewId == 'openratingsUI'){
                 //alert('viewID == \'openratingsUI\'');
@@ -4423,7 +4502,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0){
                                         flag=true;
                                         //alert('parp '+JSON.stringify(rideSet.data[g].doc.potentiallyAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.potentiallyAgreedRidePlans.length;i++){
@@ -4434,7 +4513,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0 &&!flag){
+                                    if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0){
                                         flag=true;
                                         //alert('darp '+JSON.stringify(rideSet.data[g].doc.driverAgreedRidePlans));
                                         for (i=0;i<rideSet.data[g].doc.driverAgreedRidePlans.length;i++){
@@ -4445,7 +4524,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             })
                                         }
                                     }
-                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0 && !flag){
+                                    if (rideSet.data[g].doc.agreedRidePlan.length!=0){
                                         flag=true;
                                         //alert('arp '+JSON.stringify(rideSet.data[g].doc.agreedRidePlan));
                                         documentToFill.data.push({
@@ -4491,6 +4570,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText);
                                         alert('this error is: ' + errorThrown );
+                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                                 //alert(rideRequests.length);
@@ -4501,6 +4581,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText);
                                 alert('this error is: ' + errorThrown );
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
 
@@ -4511,6 +4592,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -4574,7 +4656,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
-				
+
                 // Get initialization data
                 srvconn.GET('/OpenRideServer-RS/resources/configuration/init', false, fokus.openride.mobclient.controller.modules.uievents.parseInitData, function(x,s,e){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, the initial data could not be loaded.')
@@ -4826,7 +4908,7 @@ function fix(id1)
 //        submit(submitted_rides[riderId] , riderId);
 //        submitted_rides[riderId]= [-1,-1,-1,-1,-1];
 //    }
-            
+
 }
 function submit (rate_array , riderId )
 {
@@ -4869,25 +4951,29 @@ function submit (rate_array , riderId )
             //alert(participants);
             var subjects='[';
             var index = participants.indexOf("commuters");
+            var ind=0;
             var subparticipants = participants.substring(index+10);
             if (mode == 'commuter')
                 subjects = subjects +
-                '{"subject_uri" : "smartshare/' + participants.substring(7,index) + '",'
+                '"subject_'+ind+'":{"subject_uri" : "smartshare/' + participants.substring(7,index) + '",'
                 +'"quantifier_uri" : "driver"}';
             var array = subparticipants.split(",");
+
             for (var i=0; i<array.length;i++)
             {
-                if (subjects != '[' && user != array[i]) subjects = subjects + ',';
-                if (user != array[i])
+                if (subjects != '{' && user != array[i]) subjects = subjects + ',';
+                if (user != array[i]){
                     subjects = subjects +
-                    '{"subject_uri" : "smartshare/' + array[i] + '",'
-                    +'"quantifier_uri" : "commuter"}'
+                    '"subject_'+ind+'":{"subject_uri" : "smartshare/' + array[i] + '",'
+                    +'"quantifier_uri" : "commuter"}';
+                    ind++;
+                }
             }
             //alert(JSON.stringify(rate_array));
             subjects = subjects + '],';
             var json2 = '{'
             +'"application_uri" : "smartshare",'
-            +'"event_id" : "ride/' + rideIdInt + '",'
+            +'"event_uri" : "ride/' + rideIdInt + '",'
             +'"subjects": '
             + subjects
             +'"authors": [{'
@@ -4945,6 +5031,7 @@ function submit (rate_array , riderId )
                     alert('status: ' + jq.status);
                     alert('response ' + jq.responseText)
                     alert('this error is: ' + errorThrown );
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                 }
             });
         },
@@ -4953,6 +5040,7 @@ function submit (rate_array , riderId )
             alert('status: ' + jq.status);
             alert('response ' + jq.responseText)
             alert('this error is: ' + errorThrown );
+            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
         }
 
     })
@@ -5054,6 +5142,7 @@ function fail(jq , status ,errorThrown)
     alert('status: ' + jq.status);
     alert('response ' + jq.responseText)
     alert('this error is: ' + errorThrown );
+    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 }
 
 function ajaxcall(op , addr , info ,asynch , usr , pass )
@@ -5085,8 +5174,8 @@ function ajaxcall(op , addr , info ,asynch , usr , pass )
             return jgXHR.status;
         },
         error: function(jq , textStatus , errorThrown){
-            // fail(jq , textStatus , errorThrown);
-            return jq.status;
+             fail(jq , textStatus , errorThrown);
+            //return jq.status;
         }
     })
 }

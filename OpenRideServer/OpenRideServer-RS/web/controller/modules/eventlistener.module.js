@@ -1,4 +1,4 @@
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -22,12 +22,12 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
     var favmod              = fokus.openride.mobclient.controller.modules.favorites;
     var profilemod          = fokus.openride.mobclient.controller.modules.profile;
     var profile = {};
-    
+
     var profilepic = '';
     var user = '';
     var pass = '';
     var timer = true;
-	
+
     var showofferrouteUI = 'showofferrouteUI';
 
     var offerstartdropdownid = 'offerstartdropd';
@@ -90,7 +90,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
         if(labels.length>2){
             focusdatelabelid = id;
         }else focustimelabelid = id;
-        
+
         for(var i=0; i< labels.length; i++){
             if(labels[i] == id){
                 document.getElementById(id).className = 'labelStyleOnFocus';
@@ -114,33 +114,29 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
         document.getElementById(dlabels[2]).innerHTML = calendarpicker.getYear();
 
-        var hours = calendarpicker.getHour();
-        if(hours < 10){
-            var hourstr = '0' + hours;
-            document.getElementById(tlabels[0]).innerHTML = hourstr;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[2]).innerHTML = (hours+1);
+        var hours,minutes;
+        if (tlabels[0].substr(tlabels[0].length-3)=="End"){
+            hours = calendarpicker.getHourEnd();
+            minutes= calendarpicker.getMinEnd();
         }
-        else {
-            document.getElementById(tlabels[0]).innerHTML = hours;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[2]).innerHTML = (hours+1);
+        else{
+            hours = calendarpicker.getHour();
+            minutes = calendarpicker.getMin();
         }
 
-        var minutes = calendarpicker.getMin();
+        if(hours < 10){
+            var hourstr = '0'+hours;
+            document.getElementById(tlabels[0]).innerHTML = hourstr;
+        }else {
+            document.getElementById(tlabels[0]).innerHTML = hours;
+        }
+
         if(minutes < 10){
             var minutestr = '0' + minutes;
             document.getElementById(tlabels[1]).innerHTML = minutestr;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[3]).innerHTML = minutestr;
-        }
-        else {
+        }else {
             document.getElementById(tlabels[1]).innerHTML = minutes;
-            if (tlabels.length>2)
-                document.getElementById(tlabels[3]).innerHTML = minutes;
         }
-
-
     }
 
     function confirmMapAddr(dropdownid){
@@ -149,7 +145,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
         var newoption = document.createElement('option');
         newoption.innerHTML = mapmod.currentFormattedAddress;
         //newoption.innerHTML = mapmod.currentFormattedAddress.substring(0, 24);
-        
+
         newoption.latln = mapmod.getCenterPosition().lat()+','+mapmod.getCenterPosition().lng();
         newoption.mod = true;
 
@@ -169,10 +165,10 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
         }
     /*document.getElementById(dropdownid).options[0].innerHTML = mapmod.currentFormattedAddress.substring(0, 24); */
     }
-    
+
     /* ------ public variabeles and methods ------ */
     return {
-		
+
         ajaxsuccess : false,
 
         validationerror : false,
@@ -207,9 +203,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     picsrc=data.picture;
                 //fokus.openride.mobclient.controller.modules.uievents.parseInitData(profile);
                         },
-                        error:function(){
-                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, initial data could not be loaded.')
-                        }
+                        error:function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, initial data could not be loaded.')
+                }
             });
             //alert(JSON.stringify(profile));
             profilepic = initData.InitResponse.profilpic;
@@ -269,7 +265,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             // Update notifications
             modulemanagermod.setriderupdatecount(initData.InitResponse.updatedsearches);
-            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);            
+            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);
 
             // Profile data - upload form action
             document.getElementById("profilepictureform").action = "../resources/users/"+username+"/profile/picture";
@@ -310,7 +306,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
         timerStop : function() {
             timer = false;
         },
-        
+
         //init setup
         start: function(){
             modulemanagermod.setupTabs();
@@ -320,7 +316,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             // Restore previous mode from cookie
             if (readCookie('usermode') == 1) // Rider mode -> need to switch from default
                 modulemanagermod.changemode();
-            
+
             // Enable homeUI
             document.getElementById("homeUI_loading").style.display = "none";
             document.getElementById("homeUI_live").style.display = "block";
@@ -358,6 +354,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             var hourLbl = document.getElementById(hourlabel);
             var minuteLbl = document.getElementById(minutelabel);
 
+            var hourLblEnd = document.getElementById(hourlabelEnd);
+            var minuteLblEnd = document.getElementById(minutelabelEnd);
+
             dayLbl.onclick = function(){
                 setLabelFocus(dateLabels, daylabel);
             };
@@ -376,6 +375,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             minuteLbl.onclick = function(){
                 setLabelFocus(timeLabels, minutelabel);
+            };
+
+            hourLblEnd.onclick = function(){
+                setLabelFocus(timeLabelsEnd, hourlabelEnd);
+            };
+
+            minuteLblEnd.onclick = function(){
+                setLabelFocus(timeLabelsEnd, minutelabelEnd);
             };
 
             var dateuparrow = document.getElementById("dateuparrow");
@@ -409,7 +416,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     calendarpicker.decreaseYear();
                 refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
             };
-            
+
             var timeuparrow = document.getElementById("timeuparrow");
 
             var timeuparrowlink = document.getElementById("timeuparrowlink");
@@ -423,7 +430,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     calendarpicker.increaseMin(5);
                 refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
             };
-            
+
             var timedownarrow = document.getElementById("timedownarrow");
 
             var timedownarrowlink = document.getElementById("timedownarrowlink");
@@ -438,6 +445,35 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
             };
 
+            //time end
+            var timeuparrowEnd = document.getElementById("timeuparrowEnd");
+
+            var timeuparrowlinkEnd = document.getElementById("timeuparrowlinkEnd");
+            timeuparrowlinkEnd.href = "javascript:void(0);";
+
+            timeuparrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == hourlabelEnd)
+                    calendarpicker.increaseHourEnd();
+                else if(focustimelabelid == minutelabelEnd)
+                    calendarpicker.increaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
+            };
+
+            var timedownarrowEnd = document.getElementById("timedownarrowEnd");
+
+            var timedownarrowlinkEnd = document.getElementById("timedownarrowlinkEnd");
+            timedownarrowlinkEnd.href = "javascript:void(0);";
+
+            timedownarrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == hourlabelEnd)
+                    calendarpicker.decreaseHourEnd();
+                else if(focustimelabelid == minutelabelEnd)
+                    calendarpicker.decreaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
+            };
+
             /* ------ configure Date picker layout elements SEARCH ------ */
             var searchdayLbl = document.getElementById(searchdaylabel);
             var searchmonthLbl = document.getElementById(searchmonthlabel);
@@ -445,6 +481,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             var searchhourLbl = document.getElementById(searchhourlabel);
             var searchminuteLbl = document.getElementById(searchminutelabel);
+
+            var searchhourLblEnd = document.getElementById(searchhourlabelEnd);
+            var searchminuteLblEnd = document.getElementById(searchminutelabelEnd);
 
             searchdayLbl.onclick = function(){
                 setLabelFocus(searchdateLabels, searchdaylabel);
@@ -464,6 +503,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             searchminuteLbl.onclick = function(){
                 setLabelFocus(searchtimeLabels, searchminutelabel);
+            };
+
+            searchhourLblEnd.onclick = function(){
+                setLabelFocus(searchtimeLabelsEnd, searchhourlabelEnd);
+            };
+
+            searchminuteLblEnd.onclick = function(){
+                setLabelFocus(searchtimeLabelsEnd, searchminutelabelEnd);
             };
 
             var searchdateuparrow = document.getElementById("searchdateuparrow");
@@ -525,6 +572,34 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     calendarpicker.decreaseMin(5);
                 refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabels);
             };
+            //end time
+            var searchtimeuparrowEnd = document.getElementById("searchtimeuparrowEnd");
+
+            var searchtimeuparrowlinkEnd = document.getElementById("searchtimeuparrowlinkEnd");
+            searchtimeuparrowlinkEnd.href = "javascript:void(0);";
+
+            searchtimeuparrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == searchhourlabelEnd)
+                    calendarpicker.increaseHourEnd();
+                else if(focustimelabelid == searchminutelabelEnd)
+                    calendarpicker.increaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
+            };
+
+            var searchtimedownarrowEnd = document.getElementById("searchtimedownarrowEnd");
+
+            var searchtimedownarrowlinkEnd = document.getElementById("searchtimedownarrowlinkEnd");
+            searchtimedownarrowlinkEnd.href = "javascript:void(0);";
+
+            searchtimedownarrowEnd.onclick = function(){
+                fokus.openride.mobclient.controller.modules.uievents.timerStop();
+                if(focustimelabelid == searchhourlabelEnd)
+                    calendarpicker.decreaseHourEnd();
+                else if(focustimelabelid == searchminutelabelEnd)
+                    calendarpicker.decreaseMinEnd(5);
+                refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
+            };
 
             setLabelFocus(dateLabels, daylabel);
             setLabelFocus(timeLabels, minutelabel);
@@ -536,7 +611,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             /* ------ new offer related elements ------ */
 
             var newOfferDdArrow = document.getElementById('newOfferDdArrow');
-            
+
             if(newOfferDdArrow) {
                 newOfferDdArrow.onclick = function() {
                     var adrInput = document.getElementById('newOfferFrom');
@@ -566,9 +641,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             newoffersubmit.onclick = function(){
                 //set start time
-          
 
-        
+
+
                 /* $.ajax({
         type: "GET",
         data: "hi there",
@@ -633,7 +708,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 alert('Startadresse: ' + startAdressStr + 'Zieladresse: ' + destAdressStr);
 
                  */
-                
+
                 //                var determiningLocation = 'Location...';
                 //
                 //                if ((document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text == determiningLocation) ||
@@ -672,7 +747,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 offermod.setDetour(30);
                 //set offered seats number
                 offermod.setOfferedSeatsNo(document.getElementById('offerseatsselect').selectedIndex + 1);
-                
+
                 //                switch(document.getElementById('offerdetourselect').selectedIndex){
                 //                    case 0:
                 //                        offermod.setDetour(1);
@@ -708,7 +783,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     case 3:
                         offermod.setCurrency("Pound");
                         break;
-                  
+
                     default:
                         offermod.setCurrency("Euro");
                 }*/
@@ -717,6 +792,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 //set comment
                 //                offermod.setComment(document.getElementById('offercommentta').value);
                 offermod.setComment("No comment");
+                offermod.setPrice(document.getElementById('priceselect').selectedIndex);
 
                 //(validate and) commit new offer to server
                 //                var eventlistenerTHIS = this;
@@ -774,9 +850,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
                     if (profilemod.getPrefIsSmoker() == 'y') newRideRequest.smoking              = "Yes";
                     else                                     newRideRequest.smoking              = "No";
-                    newRideRequest.rideQualityThreshold = "5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
+                    newRideRequest.rideQualityThreshold = "0";//5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
                     //newRideRequest.capacity          = defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_CAPACITY($('#dropDownCapacityList').find(':selected').text());
-                    newRideRequest.capacity             = offermod.getOfferedSeatsNo();
+                    newRideRequest.capacity             = document.getElementById('nrseatsselect').selectedIndex + 1;//offermod.getOfferedSeatsNo();
 
                     /*
 	 * Now deal with the rest
@@ -801,7 +877,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     //                    else if (tempdesCity.length > 1)
                     //                        newRideRequest.departureCity = tempdesCity[tempdesCity.length-2] + " " +tempdesCity[tempdesCity.length-1];
                     //                    else newRideRequest.destinationCity = tempdesCity[tempdesCity.length-1];
-       
+
 
                     // Figure out datetime for departure based on the input
                     var tempDateLow1                      = offermod.getStartTime();//'1/11/2013';
@@ -825,6 +901,8 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     //alert(newRideRequest.desDateTimeWindow.desDateTimeHigh);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeLow);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeHigh);
+                    newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
+                    newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
 
 
                     // Figure out route and price
@@ -842,7 +920,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 var parsedData;
                 /********* IDENTITY ********/
 
-                
+
                 if (username == 'AviB') {
                     user = 'agent1';
                     pass = 'agent1';
@@ -897,6 +975,8 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+
                         }
 
                     })
@@ -909,29 +989,29 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
             var offershowroutepickerlink = document.getElementById('offershowroutepickerlink');
             offershowroutepickerlink.href = "javascript:void(0);";
-			
+
             offershowroutepickerlink.onclick = function(){
-				
+
                 var startlatlnstr = document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].latln;
-				
+
                 var startseparatorindex = startlatlnstr.indexOf(',');
                 var startlatstr = startlatlnstr.substr(0, startseparatorindex);
                 var startlnstr = startlatlnstr.substr(startseparatorindex+1, startlatlnstr.length-startseparatorindex+1);
-				
+
                 var startlat = parseFloat(startlatstr);
                 var startln = parseFloat(startlnstr);
-				
+
                 var dstlatlnstr = document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].latln;
-				
+
                 var dstseparatorindex = dstlatlnstr.indexOf(',');
                 var dstlatstr = dstlatlnstr.substr(0, dstseparatorindex);
                 var dstlnstr = dstlatlnstr.substr(dstseparatorindex+1, dstlatlnstr.length-dstseparatorindex+1);
-				
+
                 var dstlat = parseFloat(dstlatstr);
                 var dstln = parseFloat(dstlnstr);
-				
+
                 //stop changing screens and give user info, if start equals destination
-                if(startlat==dstlat && startln==dstln){				                   
+                if(startlat==dstlat && startln==dstln){
                     showOverlayDialog('Start und Ziel d' +  unescape("%FC") + 'rfen nicht identisch sein, bitte neu ausw' +  unescape("%E4") + 'hlen!', '', 'OK', '', '', '');
                     return false;
                 }
@@ -946,36 +1026,36 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     showOverlayDialog('Die Route konnte nicht geladen werden! Bitte versuche es sp' +  unescape("%E4") + 'ter erneut.', '', 'OK', '', '', '');
                 });
             }
-			
+
             var searchroutepickerlink = document.getElementById('searchroutepickerlink');
             searchroutepickerlink.href = "javascript:void(0);";
-			
+
             searchroutepickerlink.onclick = function(){
-				
+
                 var startlatlnstr = document.getElementById(searchstartdropdownid)[document.getElementById(searchstartdropdownid).selectedIndex].latln;
-				
+
                 var startseparatorindex = startlatlnstr.indexOf(',');
                 var startlatstr = startlatlnstr.substr(0, startseparatorindex);
                 var startlnstr = startlatlnstr.substr(startseparatorindex+1, startlatlnstr.length-startseparatorindex+1);
-				
+
                 var startlat = parseFloat(startlatstr);
                 var startln = parseFloat(startlnstr);
-				
+
                 var dstlatlnstr = document.getElementById(searchdestdropdownid)[document.getElementById(searchdestdropdownid).selectedIndex].latln;
-				
+
                 var dstseparatorindex = dstlatlnstr.indexOf(',');
                 var dstlatstr = dstlatlnstr.substr(0, dstseparatorindex);
                 var dstlnstr = dstlatlnstr.substr(dstseparatorindex+1, dstlatlnstr.length-dstseparatorindex+1);
-				
+
                 var dstlat = parseFloat(dstlatstr);
                 var dstln = parseFloat(dstlnstr);
-				
+
                 //stop changing screens and give user info, if start equals destination
                 if(startlat==dstlat && startln==dstln){
-                    showOverlayDialog('Start und Ziel d' +  unescape("%FC") + 'rfen nicht identisch sein, bitte neu ausw' +  unescape("%E4") + 'hlen!', '', 'OK', '', '', '');                    
+                    showOverlayDialog('Start und Ziel d' +  unescape("%FC") + 'rfen nicht identisch sein, bitte neu ausw' +  unescape("%E4") + 'hlen!', '', 'OK', '', '', '');
                     return false;
                 }
-					
+
 
                 srvconn.GET('/OpenRideServer-RS/resources/users/'+username+'/routes/new,'+startlat+','+startln+','+dstlat+','+dstln, false, function(routexml){
                     var routeFound = modulemanagermod.parsesimpleroute(routexml);
@@ -984,20 +1064,20 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     }
                 //modulemanagermod.setView('showsearchrouteUI');
                 }, function(){
-                    showOverlayDialog('Die Route konnte nicht geladen werden! Bitte versuche es sp' +  unescape("%E4") + 'ter erneut.', '', 'OK', '', '', '');                   
+                    showOverlayDialog('Die Route konnte nicht geladen werden! Bitte versuche es sp' +  unescape("%E4") + 'ter erneut.', '', 'OK', '', '', '');
                 });
             }
-			
+
             var offerroutebackbtnlink = document.getElementById('offerroutebackbtnlink');
             offerroutebackbtnlink.href = "javascript:void(0);";
-			
+
             offerroutebackbtnlink.onclick = function(){
                 modulemanagermod.setView('newofferUI');
             }
-			
+
             var searchroutebackbtnlink = document.getElementById('searchroutebackbtnlink');
             searchroutebackbtnlink.href = "javascript:void(0);";
-			
+
             searchroutebackbtnlink.onclick = function(){
                 modulemanagermod.setView('newsearchUI');
             }
@@ -1095,7 +1175,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             newsearchsubmit.href = "javascript:void(0);";
 
             newsearchsubmit.onclick = function(){
-           
+
                 var minute = 1000*60;
 
                 if ((calendarpicker.getDate().getTime() + minute - new Date().getTime()) < 0) {
@@ -1240,7 +1320,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     //                    else newRideRequest.departureCity = tempdepCity[tempdepCity.length-1];
 
 
-        
+
                     newRideRequest.destinationCity = document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text;
 
                     //                    var desCity = offermod.getDestAddr().split(", ");
@@ -1250,7 +1330,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     //                    else if (tempdesCity.length > 1)
                     //                        newRideRequest.departureCity = tempdesCity[tempdesCity.length-2] + " " +tempdesCity[tempdesCity.length-1];
                     //                    else newRideRequest.destinationCity = tempdesCity[tempdesCity.length-1];
-        
+
 
                     // Figure out datetime for departure based on the input
                     //alert(searchmod.getStartTime());
@@ -1345,6 +1425,8 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+
                         }
 
                     })
@@ -1354,7 +1436,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 var urlInParsedJson = postRide1();
             // alert("returned from post!! " + urlInParsedJson);
             }
-            
+
 
             /*var offersavetempllink = document.getElementById('offersavetempllink');
             var offersavetemplimg = document.getElementById('offersavetemplimg');
@@ -1432,7 +1514,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             offerstartselectlink.href = "javascript:void(0);";
 
             var offerstartdropd = document.getElementById('offerstartdropd');
-            
+
             offerstartselectlink.onclick = function(){
                 var clickevent=document.createEvent("MouseEvents");
                 clickevent.initEvent("select", true, true);
@@ -1441,7 +1523,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             }*/
 
             /* ------ configure full-screen gmap-related layout elements start ------ */
-            
+
             //offer start
             var offerstartgmapaddressinput = document.getElementById('offerstartgmapaddressinput');
             offerstartgmapaddressinput.onchange = function(){
@@ -1473,7 +1555,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             offerstartgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-			
+
             //offer destintation
             var offerdestgmapaddressinput = document.getElementById('offerdestgmapaddressinput');
             offerdestgmapaddressinput.onchange = function(){
@@ -1505,7 +1587,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             offerdestgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //search start
             var searchstartgmapaddressinput = document.getElementById('searchstartgmapaddressinput');
             searchstartgmapaddressinput.onchange = function(){
@@ -1569,7 +1651,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             searchdestgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //favorites
             var favoritesgmapaddressinput = document.getElementById('favoritesgmapaddressinput');
             favoritesgmapaddressinput.onchange = function(){
@@ -1600,7 +1682,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             favoritesgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //simple offer route view
             var offerroutegmapbackbtn = document.getElementById('offerroutegmapbackbtn');
             offerroutegmapbackbtn.onclick = function(){
@@ -1618,7 +1700,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             offerroutegmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //simple search route view
             var searchroutegmapbackbtn = document.getElementById('searchroutegmapbackbtn');
             searchroutegmapbackbtn.onclick = function(){
@@ -1632,7 +1714,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             searchroutegmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //route with viapoints view
             var viaptroutegmapbackbtn = document.getElementById('viaptroutegmapbackbtn');
             viaptroutegmapbackbtn.onclick = function(){
@@ -1647,10 +1729,10 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             viaptroutegmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             /* ------ configure full-screen gmap-related layout elements end ------ */
-            
-            
+
+
             //old - to be removed after testing new fullscreen version
             /* ------ configure map-related layout elements ------ */
 
@@ -1947,7 +2029,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Ein Ort mit diesem Namen existiert bereits.')
             } );
         },
-        
+
         addFavFromFullscreenMap : function(){
             var inputaddr = document.getElementById('favoritesgmapaddressinput').value;
             favmod.setAddress(inputaddr);
@@ -2078,5 +2160,4 @@ adjustContentDimensions = function() {
 //document.getElementById("newfavoritepickerUI").style.height = document.getElementById("content").offsetHeight - 30 + "px";
 
 }
-
 
