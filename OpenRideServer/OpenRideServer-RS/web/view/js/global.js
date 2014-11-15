@@ -3230,81 +3230,81 @@
             if(f!==w)return this.each(function(){
                 if(j=wa(this))j.scrollTo(!a?f:c(j).scrollLeft(),a?f:c(j).scrollTop());else this[d]=f
             });else return(j=wa(e))?"pageXOffset"in j?j[a?"pageYOffset":
-            "pageXOffset"]:c.support.boxModel&&j.document.documentElement[d]||j.document.body[d]:e[d]
-            }
-            });
-        c.each(["Height","Width"],function(a,b){
-            var d=b.toLowerCase();
-            c.fn["inner"+b]=function(){
+                "pageXOffset"]:c.support.boxModel&&j.document.documentElement[d]||j.document.body[d]:e[d]
+        }
+    });
+    c.each(["Height","Width"],function(a,b){
+        var d=b.toLowerCase();
+        c.fn["inner"+b]=function(){
             return this[0]?c.css(this[0],d,false,"padding"):null
-            };
+        };
 
-            c.fn["outer"+b]=function(f){
+        c.fn["outer"+b]=function(f){
             return this[0]?c.css(this[0],d,false,f?"margin":"border"):null
-            };
+        };
 
-            c.fn[d]=function(f){
+        c.fn[d]=function(f){
             var e=this[0];
             if(!e)return f==null?null:this;
             if(c.isFunction(f))return this.each(function(j){
                 var i=c(this);
                 i[d](f.call(this,j,i[d]()))
-                });
+            });
             return"scrollTo"in
             e&&e.document?e.document.compatMode==="CSS1Compat"&&e.document.documentElement["client"+b]||e.document.body["client"+b]:e.nodeType===9?Math.max(e.documentElement["client"+b],e.body["scroll"+b],e.documentElement["scroll"+b],e.body["offset"+b],e.documentElement["offset"+b]):f===w?c.css(e,d):this.css(d,typeof f==="string"?f:f+"px")
-            }
-            });
-        A.jQuery=A.$=c
-        })(window);
-        // Copyright 2007, Google Inc.
-        //
-        // Redistribution and use in source and binary forms, with or without
-        // modification, are permitted provided that the following conditions are met:
-        //
-        //  1. Redistributions of source code must retain the above copyright notice,
-        //     this list of conditions and the following disclaimer.
-        //  2. Redistributions in binary form must reproduce the above copyright notice,
-        //     this list of conditions and the following disclaimer in the documentation
-        //     and/or other materials provided with the distribution.
-        //  3. Neither the name of Google Inc. nor the names of its contributors may be
-        //     used to endorse or promote products derived from this software without
-        //     specific prior written permission.
-        //
-        // THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
-        // WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-        // MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-        // EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-        // SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
-        // PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
-        // OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-        // WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
-        // OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
-        // ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-        //
-        // Sets up google.gears.*, which is *the only* supported way to access Gears.
-        //
-        // Circumvent this file at your own risk!
-        //
-        // In the future, Gears may automatically define google.gears.* without this
-        // file. Gears may use these objects to transparently fix bugs and compatibility
-        // issues. Applications that use the code below will continue to work seamlessly
-        // when that happens.
+        }
+    });
+    A.jQuery=A.$=c
+})(window);
+// Copyright 2007, Google Inc.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are met:
+//
+//  1. Redistributions of source code must retain the above copyright notice,
+//     this list of conditions and the following disclaimer.
+//  2. Redistributions in binary form must reproduce the above copyright notice,
+//     this list of conditions and the following disclaimer in the documentation
+//     and/or other materials provided with the distribution.
+//  3. Neither the name of Google Inc. nor the names of its contributors may be
+//     used to endorse or promote products derived from this software without
+//     specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR IMPLIED
+// WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
+// MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
+// EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+// PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS;
+// OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+// WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+// OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
+// ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+//
+// Sets up google.gears.*, which is *the only* supported way to access Gears.
+//
+// Circumvent this file at your own risk!
+//
+// In the future, Gears may automatically define google.gears.* without this
+// file. Gears may use these objects to transparently fix bugs and compatibility
+// issues. Applications that use the code below will continue to work seamlessly
+// when that happens.
 
-        (function() {
-            // We are already defined. Hooray!
-            if (window.google && google.gears) {
-            return;
-            }
+(function() {
+    // We are already defined. Hooray!
+    if (window.google && google.gears) {
+        return;
+    }
 
-            var factory = null;
+    var factory = null;
 
-            // Firefox
-            if (typeof GearsFactory != 'undefined') {
-            factory = new GearsFactory();
-            } else {
-    // IE
-    try {
-    /*
+    // Firefox
+    if (typeof GearsFactory != 'undefined') {
+        factory = new GearsFactory();
+    } else {
+        // IE
+        try {
+        /*
 		 * commented out to avoid firebug error, as we don't support IE currently anyway
 		if(ActiveXObject){
 			factory = new ActiveXObject('Gears.Factory');
@@ -3315,40 +3315,40 @@
       	}
 		}*/
 
-    }catch (e) {
-        // Safari
-        if ((typeof navigator.mimeTypes != 'undefined')
-            && navigator.mimeTypes["application/x-googlegears"]) {
-            factory = document.createElement("object");
-            factory.style.display = "none";
-            factory.width = 0;
-            factory.height = 0;
-            factory.type = "application/x-googlegears";
-            document.documentElement.appendChild(factory);
+        }catch (e) {
+            // Safari
+            if ((typeof navigator.mimeTypes != 'undefined')
+                && navigator.mimeTypes["application/x-googlegears"]) {
+                factory = document.createElement("object");
+                factory.style.display = "none";
+                factory.width = 0;
+                factory.height = 0;
+                factory.type = "application/x-googlegears";
+                document.documentElement.appendChild(factory);
+            }
         }
     }
-}
 
-// *Do not* define any objects if Gears is not installed. This mimics the
-// behavior of Gears defining the objects in the future.
-if (!factory) {
-    return;
-}
+    // *Do not* define any objects if Gears is not installed. This mimics the
+    // behavior of Gears defining the objects in the future.
+    if (!factory) {
+        return;
+    }
 
-// Now set up the objects, being careful not to overwrite anything.
-//
-// Note: In Internet Explorer for Windows Mobile, you can't add properties to
-// the window object. However, global objects are automatically added as
-// properties of the window object in all browsers.
-if (!window.google) {
-    google = {};
-}
+    // Now set up the objects, being careful not to overwrite anything.
+    //
+    // Note: In Internet Explorer for Windows Mobile, you can't add properties to
+    // the window object. However, global objects are automatically added as
+    // properties of the window object in all browsers.
+    if (!window.google) {
+        google = {};
+    }
 
-if (!google.gears) {
-    google.gears = {
-        factory: factory
-    };
-}
+    if (!google.gears) {
+        google.gears = {
+            factory: factory
+        };
+    }
 })();
 /*
     OpenRide -- Car Sharing 2.0
@@ -3390,7 +3390,9 @@ var user;
 var pass;
 var DimitrisLocal = "localhost:3000";
 var DimitrisRemote = "168.144.202.152:3000";
+var DimitrisRemotePrefix = "http://";
 var PeerMenager = "168.144.202.152:3002";
+var PeerManagerPrefix = "https://";
 var usermode = 0;
 var username = '';
 var password = '';
@@ -5074,90 +5076,90 @@ if (!this.JSON) {
                 if ($.data(this, 'destroy.tabs'))
                     $(this).remove();
                 else
-                $(this).removeClass([o.selectedClass, o.deselectableClass,
-                    o.disabledClass, o.panelClass, o.hideClass].join(' '));
-                });
+                    $(this).removeClass([o.selectedClass, o.deselectableClass,
+                        o.disabledClass, o.panelClass, o.hideClass].join(' '));
+            });
             if (o.cookie)
                 this._cookie(null, o.cookie);
-                }
-                });
+        }
+    });
 
-            $.extend($.ui.tabs, {
-                version: '@VERSION',
-                getter: 'length',
-                defaults: {
-                // basic setup
-                deselectable: false,
-                event: 'click',
-                disabled: [],
-                cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
-                // Ajax
-                spinner: 'Loading&#8230;',
-                cache: false,
-                idPrefix: 'ui-tabs-',
-                ajaxOptions: null,
-                // animations
-                fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
-                // templates
-                tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
-                panelTemplate: '<div></div>',
-                // CSS class names
-                navClass: 'ui-tabs-nav',
-                selectedClass: 'ui-tabs-selected',
-                deselectableClass: 'ui-tabs-deselectable',
-                disabledClass: 'ui-tabs-disabled',
-                panelClass: 'ui-tabs-panel',
-                hideClass: 'ui-tabs-hide',
-                loadingClass: 'ui-tabs-loading'
-                }
-                });
+    $.extend($.ui.tabs, {
+        version: '@VERSION',
+        getter: 'length',
+        defaults: {
+            // basic setup
+            deselectable: false,
+            event: 'click',
+            disabled: [],
+            cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
+            // Ajax
+            spinner: 'Loading&#8230;',
+            cache: false,
+            idPrefix: 'ui-tabs-',
+            ajaxOptions: null,
+            // animations
+            fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
+            // templates
+            tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
+            panelTemplate: '<div></div>',
+            // CSS class names
+            navClass: 'ui-tabs-nav',
+            selectedClass: 'ui-tabs-selected',
+            deselectableClass: 'ui-tabs-deselectable',
+            disabledClass: 'ui-tabs-disabled',
+            panelClass: 'ui-tabs-panel',
+            hideClass: 'ui-tabs-hide',
+            loadingClass: 'ui-tabs-loading'
+        }
+    });
 
-            /*
+    /*
  * Tabs Extensions
  */
 
-            /*
+    /*
  * Rotate
  */
-            $.extend($.ui.tabs.prototype, {
-                rotation: null,
-                rotate: function(ms, continuing) {
+    $.extend($.ui.tabs.prototype, {
+        rotation: null,
+        rotate: function(ms, continuing) {
 
-                continuing = continuing || false;
+            continuing = continuing || false;
 
-                var self = this, t = this.options.selected;
+            var self = this, t = this.options.selected;
 
-                function start() {
+            function start() {
                 self.rotation = setInterval(function() {
                     t = ++t < self.$tabs.length ? t : 0;
                     self.select(t);
-                    }, ms);
-                }
+                }, ms);
+            }
 
-                function stop(e) {
+            function stop(e) {
                 if (!e || e.clientX) { // only in case of a true click
-                clearInterval(self.rotation);
+                    clearInterval(self.rotation);
                 }
-                }
+            }
 
-                // start interval
-                if (ms) {
+            // start interval
+            if (ms) {
                 start();
                 if (!continuing)
-                this.$tabs.bind(this.options.event + '.tabs', stop);
+                    this.$tabs.bind(this.options.event + '.tabs', stop);
                 else
-        this.$tabs.bind(this.options.event + '.tabs', function() {
-            stop();
-            t = self.options.selected;
-            start();
-            });
+                    this.$tabs.bind(this.options.event + '.tabs', function() {
+                        stop();
+                        t = self.options.selected;
+                        start();
+                    });
+            }
+            // stop interval
+            else {
+                stop();
+                this.$tabs.unbind(this.options.event + '.tabs', stop);
+            }
         }
-        // stop interval
-        else {
-        stop();
-        this.$tabs.unbind(this.options.event + '.tabs', stop);
-    }
-    }
     });
 
 })(jQuery);
@@ -6815,7 +6817,7 @@ fokus.openride.mobclient.controller.modules.profile = function(){
             'favouritesList'    : '',
             'firstName'         : "",
             'lastName'          : "",
-            'dateOfBirth'       : '',
+            'dateOfBirth'       : "",
             'email'             : '',
             'mobilePhoneNumber' : '',
             'fixedPhoneNumber'  : '',
@@ -7847,7 +7849,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<=(new Date())) continue;
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<=(new Date())) continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
@@ -7933,8 +7937,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (prp.agreedDriver != "" && prp.potentiallyAgreedCommuters.length != 0) color = 'dotted green'; //negotiation started
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
                 var d = new Date();
+                var d1 = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<=(new Date())){
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<=(new Date())){
                     continue;
                 }
                 //alert('2');
@@ -7995,7 +8001,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<=(new Date())) continue;
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<=(new Date()))
+                    continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
@@ -8065,7 +8074,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<(new Date()))
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
@@ -8123,7 +8134,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<(new Date()))
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
@@ -8301,7 +8314,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d>(new Date())) continue;
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1>(new Date())) continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
@@ -8359,7 +8374,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d>(new Date()))
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1>(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
@@ -8782,7 +8799,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 //alert(id);
                 prp = JSON.parse(rideRequests[id - rides.length]);
                 //alert(rideRequests[id-rides.length]);
-                RideShareSB.append('<small>No matches found for this ride! </small>');
+                RideShareSB.append('<small>No matches found for this ride! </small><br>');
+                RideShareSB.append('<input type="button" class="rounded compact" value="Delete Ride" onclick="rideDelete('+id+')" />');
             }
             //alert(JSON.stringify(prp));
             RideShareSB.append('    </form>');
@@ -8813,7 +8831,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 $.ajax({//get subject id
                     type:"GET",
-                    url:"http://"+DimitrisRemote+"/subject/byURI/"+counterpart,
+                    url:DimitrisRemotePrefix+DimitrisRemote+"/subject/byURI/"+counterpart,
                     async:false,
                     crossDomain:true,
                     username:user,
@@ -8843,7 +8861,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             });
                             $.ajax({//get subject reputation
                                 type:"GET",
-                                url:"http://"+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
+                                url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
                                 async:false,
                                 crossDomain:true,
                                 username:user,
@@ -8855,14 +8873,24 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 accepts: "application/json",
                                 dataType: "json",
                                 success:function(data, textStatus, jqXHR){
-                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                        +data.json.average_StarRating+","
-                                        +(data.json.total_StarRating/data.json.average_StarRating)+","
-                                        +data.json.average_OnTime+","
-                                        +data.json.average_Friendly+","
-                                        +personal.ProfileResponse.mobilePhoneNumber+",'"
-                                        +personal.ProfileResponse.carColour+ " " + personal.ProfileResponse.carBrand
-                                        +"');\" value=\""+counterpart+"\" />");
+                                    if (usermode == RIDERMODE)
+                                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                            +data.json.average_StarRating+","
+                                            +(data.json.total_StarRating/data.json.average_StarRating)+","
+                                            +data.json.average_OnTime+","
+                                            +data.json.average_Friendly+","
+                                            +personal.ProfileResponse.mobilePhoneNumber+",'"
+                                            +personal.ProfileResponse.carColour+ " " + personal.ProfileResponse.carBrand
+                                            +"');\" value=\""+counterpart+"\" />");
+                                    else
+                                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                            +data.json.average_StarRating+","
+                                            +(data.json.total_StarRating/data.json.average_StarRating)+","
+                                            +data.json.average_OnTime+","
+                                            +data.json.average_Friendly+","
+                                            +personal.ProfileResponse.mobilePhoneNumber+",'"
+                                            +"undefined undefined"
+                                            +"');\" value=\""+counterpart+"\" />");
                                 //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
                                 //                                        +ratingsPopUp
                                 //                                        +"', 'X', '', '', '');\" value=\""+counterpart+"\" />");
@@ -8877,9 +8905,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                     },
                     error:function(jq,textStatus,errorThrown){
-                    //alert('fail1');
-                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
-                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                        //alert('fail1');
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     }
                 });
             }
@@ -9926,13 +9954,15 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             document.getElementById('profilepersonaldatagender').innerHTML = genderString;
             var dateOfBirth;
             var dateOfBirthString ="";
-            if (typeof (personalData.dateOfBirth) != 'undefined' && personalData.dateOfBirth.indexOf('.')!=-1) {
+            if (typeof (personalData.dateOfBirth) != 'undefined' && personalData.dateOfBirth.indexOf('/')!=-1) {
                 dateOfBirth = new Date(personalData.dateOfBirth);
-                dateOfBirthString = dateOfBirth.getDate() + '.' + (dateOfBirth.getMonth() + 1) + '.' + dateOfBirth.getFullYear()
+                dateOfBirthString = dateOfBirth.toLocaleDateString();//getDate() + '.' + (dateOfBirth.getMonth() + 1) + '.' + dateOfBirth.getFullYear()
             }
             else {
                 dateOfBirthString = ''; //<em>nicht angegeben</em>';
             }
+            //alert(dateOfBirth);
+
             document.getElementById('profilepersonaldatadateofbirth').value = dateOfBirthString;
             document.getElementById('profilepersonaldataemail').value = $("<div />").html(personalData.email).text();
             document.getElementById('profilepersonaldatamobilephonenumber').value = personalData.mobilePhoneNumber || '';
@@ -9944,6 +9974,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             if (personalData.city) {
                 document.getElementById('profilepersonaldatacity').value = $("<div />").html(personalData.city).text() || '';
             }
+            //alert(personalData.isSmoker);
             if (personalData.isSmoker == 'n') {
                 isSmokerOption = 'profilepersonaldataissmoker-no';
             }
@@ -10011,7 +10042,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             // date of birth: not required, but if provided needs valid format
             var dateOfBirthValue;
             if (document.getElementById('profilepersonaldatadateofbirth').value != '') {
-                dateOfBirthValue = this.validateDate(document.getElementById('profilepersonaldatadateofbirth').value);
+                dateOfBirthValue = new Date(this.validateDate(document.getElementById('profilepersonaldatadateofbirth').value)).toLocaleDateString();
 
                 if (!dateOfBirthValue | !isValidDate(document.getElementById('profilepersonaldatadateofbirth').value, "DMY")) {
                     showOverlayDialog('Please specify a valid date of birth in the format "dd.mm.yyyy". The date must not be in the future.', '', 'OK', '', '', '');
@@ -10185,7 +10216,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             $.ajax({
                 type: "PUT",
-                url: 'https://' + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
                 data: JSON.stringify(userProfile.getProfileRequest()),//"{username="+user+"&password="+pass+"}",
                 crossDomain: true,
                 contentType:  "application/json; charset=UTF-8",
@@ -10251,21 +10282,73 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         putprofilepreferences : function(){
 
             /* Build the request */
+            $.ajax({
+                type: "GET",
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
+                data: "",
+                crossDomain: true,
+                contentType:  "application/json; charset=UTF-8",
+                accepts: "application/json",
+                dataType: "json",
+                username: username,
+                password: password,
+                beforeSend: function (xhr)
+                {
+                    xhr.withCredentials = true,
+                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                },
+                async: false,
+                //accepts: "application/json",
+                success: function(data, textStatus, jqXHR){
+                    data._revision = data._revision+1;
+                    var isSmokerValue ='';
+                    if (document.getElementById('profileprefissmoker-yes').checked) {
+                        isSmokerValue = 'y';
+                    }
+                    else if (document.getElementById('profileprefissmoker-no').checked) {
+                        isSmokerValue = 'n';
+                    }
+                    else {
+                        isSmokerValue = '-';
+                    }
+                    data.isSmoker = isSmokerValue;
+                    //alert(JSON.stringify(data));
+                    $.ajax({
+                        type: "PUT",
+                        url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
+                        data: JSON.stringify(data),
+                        crossDomain: true,
+                        contentType:  "application/json; charset=UTF-8",
+                        accepts: "application/json",
+                        dataType: "json",
+                        username: username,
+                        password: password,
+                        beforeSend: function (xhr)
+                        {
+                            xhr.withCredentials = true,
+                            xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                        },
+                        async: false,
+                        //accepts: "application/json",
+                        success: function(data, textStatus, jqXHR){
+                            showOverlayDialog('Preferences were saved successfully!', '', 'OK', '', '', '');
 
-            var profilemod = fokus.openride.mobclient.controller.modules.profile;
+                        },
+                        error: function(jq , textStatus , errorThrown){
+                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your preferences could not be saved.');
+                        }
+                    });
+                },
+                error: function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your preferences could not be saved.');
+                }
+            });
 
-            if (document.getElementById('profileprefissmoker-yes').checked) {
-                isSmokerValue = 'y';
-            }
-            else if (document.getElementById('profileprefissmoker-no').checked) {
-                isSmokerValue = 'n';
-            }
-            else {
-                isSmokerValue = '-';
-            }
-            profilemod.setPrefIsSmoker(isSmokerValue);
-
-            /*if (document.getElementById('profileprefgender-f').checked) {
+        /*if (document.getElementById('profileprefgender-f').checked) {
                 genderValue = 'f';
             }
             else {
@@ -10273,12 +10356,12 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             }
             profilemod.setPrefGender(genderValue);*/
 
-            // Submit PUT request
-            srvconn.PUT('/OpenRideServer-RS/resources/users/'+this.username+'/profile/preferences', true, profilemod.getPreferencesRequest(), function() {
-                showOverlayDialog('Preferences were saved successfully!', '', 'OK', '', '', '')
-            }, function(x,s,e) {
-                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your preferences could not be saved.')
-            });
+        // Submit PUT request
+        //            srvconn.PUT('/OpenRideServer-RS/resources/users/'+this.username+'/profile/preferences', true, profilemod.getPreferencesRequest(), function() {
+        //                showOverlayDialog('Preferences were saved successfully!', '', 'OK', '', '', '')
+        //            }, function(x,s,e) {
+        //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your preferences could not be saved.')
+        //            });
 
         },
 
@@ -10302,12 +10385,71 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             profilemod.setPasswordOld(document.getElementById('profilepasswordold').value);
             profilemod.setPassword(document.getElementById('profilepassword').value);
-
+            userProfile.setPassword(document.getElementById('profilepassword').value);
             // Submit PUT request
             srvconn.PUT('/OpenRideServer-RS/resources/users/'+this.username+'/profile/password', true, profilemod.getPasswordRequest(), function() {
                 showOverlayDialog('Password successfully changed!', '', 'OK', '', '', '')
             }, function(x,s,e) {
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Sorry, your password could not be changed.')
+            });
+            $.ajax({
+                type: "Get",
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username,//'/api/register/' + user,
+                data: "",
+                crossDomain: true,
+                contentType:  "application/json; charset=UTF-8",
+                accepts: "application/json",
+                dataType: "json",
+                username: username,
+                password: password,
+                beforeSend: function (xhr)
+                {
+                    xhr.withCredentials = true,
+                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                },
+                async: false,
+                //accepts: "application/json",
+                success: function(data, textStatus, jqXHR){
+                   // alert(JSON.stringify(data));
+                    data.password = document.getElementById('profilepassword').value;
+                    data._revision = data._revision+1;
+                    //alert(JSON.stringify(data));
+                    $.ajax({
+                        type: "PUT",
+                        url: PeerManagerPrefix + PeerMenager + '/users/'+username,//'/api/register/' + user,
+                        data: JSON.stringify(data),//"{username="+user+"&password="+pass+"}",
+                        crossDomain: true,
+                        contentType:  "application/json; charset=UTF-8",
+                        accepts: "application/json",
+                        dataType: "json",
+                        username: username,
+                        password: password,
+                        beforeSend: function (xhr)
+                        {
+                            xhr.withCredentials = true,
+                            xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                        },
+                        async: false,
+                        //accepts: "application/json",
+                        success: function(data, textStatus, jqXHR){
+                            showOverlayDialog('Password successfully changed!', '', 'OK', '', '', '');
+                            password=document.getElementById('profilepassword').value;
+                            eraseCookie('password');
+                            createCookie('password',password,365);
+
+                        },
+                        error: function(jq , textStatus , errorThrown){
+                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Sorry, your password could not be changed.');
+                        }
+                    });
+                },
+                error: function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Sorry, your password could not be changed.');
+                }
             });
 
         },
@@ -10373,7 +10515,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             $.ajax
             ({
                 type: "GET",
-                url: "http://"+DimitrisRemote+"/subject/byURI/" + user ,
+                url: DimitrisRemotePrefix+DimitrisRemote+"/subject/byURI/" + user ,
                 data: "",
                 crossDomain: true,
                 username : user,
@@ -10464,6 +10606,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     alert('status: ' + jq.status);
                     alert('response ' + jq.responseText)
                     alert('this error is: ' + errorThrown );
+                                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                 }
 
             });
@@ -10603,7 +10746,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var pass = readCookie('password');
                 $.ajax({
                     type: "GET",
-                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
                     data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -10996,7 +11139,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: 'http://'+DimitrisRemote+'/rideRequests',
+                    url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                     data: "user="+user,
                     crossDomain: true,
                     username : user,
@@ -11032,7 +11175,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert(JSON.stringify(allRequests));
                         $.ajax({
                             type: "POST",
-                            url: "http://"+DimitrisRemote+"/rideRequests/?action=getSet",
+                            url: DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/?action=getSet",
                             data:JSON.stringify(allRequests),
                             crossDomain: true,
                             username: user,
@@ -11113,7 +11256,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                                 $.ajax({
                                     type: "POST",
-                                    url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                    url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
                                     data:JSON.stringify(documentToFill),
                                     crossDomain: true,
                                     username: user,
@@ -11141,7 +11284,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText);
                                         alert('this error is: ' + errorThrown );
-                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                             //alert(rideRequests.length);
@@ -11152,7 +11295,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText);
                                 alert('this error is: ' + errorThrown );
-                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         });
                         parseOffer();
@@ -11163,7 +11306,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText);
                         alert('this error is: ' + errorThrown );
-                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -11230,7 +11373,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: 'http://'+DimitrisRemote+'/rideRequests',
+                    url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                     data:"user="+ user,
                     crossDomain: true,
                     username : user,
@@ -11267,7 +11410,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert(JSON.stringify(allRequests));
                         $.ajax({
                             type: "POST",
-                            url: "http://"+DimitrisRemote+"/rideRequests/?action=getSet",
+                            url: DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/?action=getSet",
                             data:JSON.stringify(allRequests),
                             crossDomain: true,
                             username: user,
@@ -11348,7 +11491,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                                 $.ajax({
                                     type: "POST",
-                                    url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                    url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
                                     data:JSON.stringify(documentToFill),
                                     crossDomain: true,
                                     username: user,
@@ -11371,12 +11514,12 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         }
 
                                     },
-                                    error: function (data, textStatus, errorThrown) {
+                                    error: function (jq, textStatus, errorThrown) {
                                         alert('state: ' + jq.readyState);
                                         alert('status: ' + jq.status);
                                         alert('response ' + jq.responseText)
                                         alert('this error is: ' + errorThrown );
-                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
                                 })
                                 //alert(rideRequests.length);
@@ -11387,7 +11530,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText)
                                 alert('this error is: ' + errorThrown );
-                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
 
@@ -11397,7 +11540,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
-                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -11433,7 +11576,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var pass = readCookie('password');
                 $.ajax({
                     type: "GET",
-                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
                     data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -11488,7 +11631,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: "http://"+DimitrisRemote+"/subject/byURI/" + user ,
+                    url: DimitrisRemotePrefix+DimitrisRemote+"/subject/byURI/" + user ,
                     data: "",
                     crossDomain: true,
                     username : user,
@@ -11501,14 +11644,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     headers:
                     {
                         "X-Requested-With": "XMLHttpRequest"
-                        //"Origin" : "http://localhost:8080"
+                    //"Origin" : "http://localhost:8080"
                     },
                     //dataType : "json" ,
                     async: false,
                     accepts:  //"application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
                     "application/json;",
                     success: function(data , textStatus) {
-                        //alert(data);
+                        //alert("summery " +data);
                         var obj = JSON.parse(data);
                         if (obj["versionInfo"]["previousVersion"]=="none" || typeof(obj["currentReputationReport"])=='undefined'){//no rating
                             dummyparseratingssummary(dummydiv, /*ratingssummary*/ null);
@@ -11520,7 +11663,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             $.ajax
                             ({
                                 type: "GET",
-                                url: "http://"+DimitrisRemote+"/" + url,
+                                url: DimitrisRemotePrefix+DimitrisRemote+"/" + url,
                                 data: "",
                                 crossDomain: true,
                                 username : user,
@@ -11554,7 +11697,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     alert('status: ' + jq.status);
                                     alert('response ' + jq.responseText)
                                     alert('this error is: ' + errorThrown );
-                                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                 }
 
                             });
@@ -11565,7 +11708,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
-                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 });
@@ -11610,7 +11753,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: 'http://'+DimitrisRemote+'/rideRequests',
+                    url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                     data: "user="+user,
                     crossDomain: true,
                     username : user,
@@ -11642,7 +11785,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                         $.ajax({
                             type: "POST",
-                            url: "http://"+DimitrisRemote+"/rideRequests/?action=getSet",
+                            url:DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/?action=getSet",
                             data:JSON.stringify(allRequests),
                             crossDomain: true,
                             username: user,
@@ -11723,7 +11866,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 if (documentToFill.length!=0){
                                     $.ajax({
                                         type: "POST",
-                                        url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                        url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
                                         data:JSON.stringify(documentToFill),
                                         crossDomain: true,
                                         username: user,
@@ -11752,7 +11895,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             alert('status: ' + jq.status);
                                             alert('response ' + jq.responseText);
                                             alert('this error is: ' + errorThrown );
-                                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                         }
                                     })
                                 }
@@ -11764,7 +11907,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 alert('status: ' + jq.status);
                                 alert('response ' + jq.responseText);
                                 alert('this error is: ' + errorThrown );
-                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
                         })
 
@@ -11877,7 +12020,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('status: ' + jq.status);
                         alert('response ' + jq.responseText)
                         alert('this error is: ' + errorThrown );
-                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
                 })
@@ -11904,7 +12047,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var pass = readCookie('password');
                 $.ajax({
                     type: "GET",
-                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
                     data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -11921,6 +12064,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     },
                     async: false,
                     success: function(data, textStatus, jqXHR){
+                        //alert(JSON.stringify(data));
                         userProfile.setAllData(data);
 
                         fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
@@ -11940,7 +12084,34 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
-
+                var pass = readCookie('password');
+                var user = readCookie('username');
+                $.ajax({
+                    type: "GET",
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+user+'/profile',//'/api/register/' + user,
+                    data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                    crossDomain: true,
+                    contentType:  "application/json; charset=UTF-8",
+                    accepts: "application/json",
+                    dataType: "json",
+                    username: user,
+                    password: pass,
+                    beforeSend: function (xhr)
+                    {
+                        xhr.withCredentials = true,
+                        xhr.setRequestHeader('Authorization' , 'Basic ' + user+':'+pass);
+                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    async: false,
+                    success: function(data, textStatus, jqXHR){
+                        //alert(JSON.stringify(data));
+                        userProfile.setAllData(data);
+                    },
+                    error: function(jq , textStatus , errorThrown){
+                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                    }
+                });
                 // Get initialization data
                 srvconn.GET('/OpenRideServer-RS/resources/configuration/init', false, fokus.openride.mobclient.controller.modules.uievents.parseInitData, function(x,s,e){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, initial data could not be loaded.')
@@ -12325,7 +12496,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             var picsrc="";
             $.ajax({
                 type: "GET",
-                url: 'https://' + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
                 data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                 crossDomain: true,
                 //contentType:  "application/json; charset=UTF-8",
@@ -12977,6 +13148,33 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 //                } else {
                 //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Please enter different addresses for start and finish.');
                 //                }
+                var smoker = '';
+                $.ajax({
+                type: "GET",
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
+                data: "",
+                crossDomain: true,
+                contentType:  "application/json; charset=UTF-8",
+                accepts: "application/json",
+                dataType: "json",
+                username: username,
+                password: password,
+                beforeSend: function (xhr)
+                {
+                    xhr.withCredentials = true,
+                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                },
+                async: false,
+                //accepts: "application/json",
+                success: function(data, textStatus, jqXHR){
+                    smoker = data.isSmoker;
+                },error:function(xhr,textStatus,errorThrown){
+                    smoker="n";
+                }
+                });
+
                 var newRideRequest = {};
 
                 function getRideDetails()
@@ -13002,8 +13200,10 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
                     newRideRequest.pets                 = "No"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_PETS     (myData.values.ridePreferences.pets);
 
-                    if (profilemod.getPrefIsSmoker() == 'y') newRideRequest.smoking              = "Yes";
-                    else                                     newRideRequest.smoking              = "No";
+                    if (smoker == "y")//if (profilemod.getPrefIsSmoker() == 'y')
+                        newRideRequest.smoking              = "Yes";
+                    else
+                        newRideRequest.smoking              = "No";
                     newRideRequest.rideQualityThreshold = "0";//"5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
                     //newRideRequest.capacity          = defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_CAPACITY($('#dropDownCapacityList').find(':selected').text());
                     newRideRequest.capacity             = document.getElementById('nrseatsselect').selectedIndex + 1;//offermod.getOfferedSeatsNo();
@@ -13100,7 +13300,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
                     ({
                         type: "POST",
-                        url: 'http://'+DimitrisRemote+'/rideRequests',
+                        url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                         data: JSON.stringify(newRideRequest),
                         crossDomain: true,
                         beforeSend: function (xhr)
@@ -13131,7 +13331,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
-                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                         }
 
                     })
@@ -13561,7 +13761,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
                     ({
                         type: "POST",
-                        url: 'http://'+DimitrisRemote+'/rideRequests',
+                        url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                         data: JSON.stringify(newRideRequest),
                         crossDomain: true,
                         beforeSend: function (xhr)
@@ -13591,7 +13791,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                             alert('status: ' + jq.status);
                             alert('response ' + jq.responseText)
                             alert('this error is: ' + errorThrown );
-                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                         }
 
                     })
@@ -14372,7 +14572,7 @@ function submit (rate_array , riderId )
     $.ajax
     ({
         type: "GET",
-        url: "http://"+DimitrisRemote+ "/ridePlans/"+rideIdInt,
+        url: DimitrisRemotePrefix+DimitrisRemote+ "/ridePlans/"+rideIdInt,
         data: "",
         crossDomain: true,
         username : user,
@@ -14455,7 +14655,7 @@ function submit (rate_array , riderId )
             $.ajax
             ({
                 type: "POST",
-                url: "http://"+DimitrisRemote+"/application/1/feedback", //"http://"+DimitrisRemote+"/application/1/feedback" ,
+                url:DimitrisRemotePrefix+DimitrisRemote+"/application/1/feedback", //"http://"+DimitrisRemote+"/application/1/feedback" ,
                 data: json2,
                 crossDomain: true,
                 username : user,
@@ -14482,7 +14682,7 @@ function submit (rate_array , riderId )
                     alert('status: ' + jq.status);
                     alert('response ' + jq.responseText)
                     alert('this error is: ' + errorThrown );
-                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                 }
             });
         },
@@ -14491,7 +14691,7 @@ function submit (rate_array , riderId )
             alert('status: ' + jq.status);
             alert('response ' + jq.responseText)
             alert('this error is: ' + errorThrown );
-            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
         }
 
     })
@@ -14523,6 +14723,40 @@ function comment(id1)
     }
 //alert('finish comment');
 }
+function rideDelete(num)
+{
+    user = readCookie('username');
+    pass = readCookie('password');
+    var revision = 0;
+    var prp = JSON.parse(rideRequests[num-rides.length]);
+    //alert( prp);
+    $.ajax({//get subject reputation
+        type:"DELETE",
+        url:DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/"+prp.index,
+        async:false,
+        crossDomain:true,
+        username:user,
+        password:pass,
+        beforeSend : function(xhr) {
+            xhr.withCredentials = true;
+            xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
+            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+        },
+        accepts: "application/json",
+        //dataType: "json",
+        success:function(data, textStatus, jqXHR){
+            //                                    alert(data);
+            if (usermode==DRIVERMODE)
+                showOverlayDialog('Your ride has been successfully deleted.', '', 'OK', fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI'), '', '');
+            else
+                showOverlayDialog('Your ride has been successfully deleted.', '', 'OK', fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI'), '', '');
+        },
+        error:function(jq,textStatus,errorThrown){
+        //                                    alert('fail');
+        }
+    });
+}
 function myaccept(num)
 {
     user = readCookie('username');
@@ -14536,7 +14770,7 @@ function myaccept(num)
         prp.potentiallyAgreedDriver = "";
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false, user , pass);
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false, user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
     }
@@ -14547,7 +14781,7 @@ function myaccept(num)
         (prp.agreedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false ,user, pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false ,user, pass );
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
     }
@@ -14568,7 +14802,7 @@ function myreject(num)
         prp.rejectedDriver = me;
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
 
@@ -14580,7 +14814,7 @@ function myreject(num)
         (prp.rejectedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
 
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
@@ -14593,7 +14827,7 @@ function fail(jq , status ,errorThrown)
     alert('status: ' + jq.status);
     alert('response ' + jq.responseText)
     alert('this error is: ' + errorThrown );
-    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+//fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 }
 
 function ajaxcall(op , add , info , asynch ,usr , pass)
