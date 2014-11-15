@@ -74,7 +74,7 @@
         </div>
     </div>
     <div id="newfavoritepickerUI">
-        <div class="mapTestDiv">
+        <div class="mapTestDiv" style ="display:none">
             <div id="newfavoritepickermap" style="display:none;">
             </div>
         </div>

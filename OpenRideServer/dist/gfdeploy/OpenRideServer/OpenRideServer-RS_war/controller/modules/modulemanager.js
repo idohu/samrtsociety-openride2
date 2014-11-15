@@ -706,7 +706,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<=(new Date())){
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<=(new Date())){
                     continue;
                 }
                 //alert('2');
@@ -767,7 +769,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<=(new Date())) continue;
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<=(new Date())) continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
@@ -829,6 +833,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<=(new Date())) continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
@@ -877,7 +884,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<(new Date()))
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
@@ -935,7 +944,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d<(new Date()))
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1<(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
@@ -1113,7 +1124,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (prp.rejectedDriver != "" || prp.rejectedCommuters != "") color = 'solid red'; //ride rejected
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d>(new Date())) continue;
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1>(new Date())) continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
@@ -1171,7 +1184,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var color = 'orange';
                 var d = new Date();
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
-                if (d>(new Date()))
+                var d1 = new Date();
+                d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                if (d1>(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
                 var mins = d.getMinutes();
@@ -3821,7 +3836,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                 //set view to fullscreen favorite picker map as temporary approach
                 //TODO: connect fullscreen map view to tab tree
-                this.setFullScreenMapView('favoritesgmapscreencontainer');
+                //this.setFullScreenMapView('favoritesgmapscreencontainer');
             }
 
             else if(viewId == 'showofferrouteUI'){
@@ -4335,10 +4350,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
 
-                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, this.setFavoriteList, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, we could not load your favorites.')
-                });
-                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
+//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, this.setFavoriteList, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, we could not load your favorites.')
+//                });
+//                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
             }
             else if(viewId == 'ratingsUI'){
                 

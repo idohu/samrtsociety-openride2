@@ -80,7 +80,8 @@
     {
         console.log('login function started');
         var DimitrisLocal = "localhost:3000";
-        var DimitrisRemote = "168.144.202.152:3002";
+        var PeerManager = "168.144.202.152:3002";
+        var PeerManagerPrefix = "https://";
         var user =
             document.forms[0].elements[0].value;
         var pass =
@@ -91,7 +92,7 @@
         $.ajax
                                         ({
                                         type: "GET",
-                                        url: 'https://'+ DimitrisRemote +'/authentications',//'/api/authenticate/' + user ,
+                                        url: PeerManagerPrefix+ PeerManager +'/authentications',//'/api/authenticate/' + user ,
                                        // data: "{username="+user+"&password="+pass+"}",
                                         crossDomain: true,
                                         timeout: 0, //Set your timeout value in milliseconds or 0 for unlimited
@@ -108,9 +109,7 @@
                                         //dataType : "jsonp" ,
                                         async: false,
                                         success: function(data, textStatus, jqXHR){
-                                        //alert(data);
                                         var parsed = data;//JSON.parse(data);
-                                        //alert('data-' + data);
                                         if (parsed.status == 'NOK') alert('NOK ' + parsed.message);
                                         else
                                             {
@@ -142,34 +141,6 @@
 <script>
     function stats()
     {
-        <%--new Ajax.Request( 'http://localhost:3000/serverStatus', {
-        method:  'GET',
-        onSuccess:  function(response){
-        alert('what is it?');
-    },
-        onFailure:  function(){
-        alert('ERROR');
-    }
-
-    });--%>
-
-          <%--jQuery.getJSON(
-    "http://localhost:3000/serverStatus/",
-    function(data,response) {
-       alert('page content: ');
-    }
-)
-    .done(function() {
-    alert( "second success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
-  .always(function() {
-    alert( "finished" );
-  });--%>
-
-        alert('hey there!');
    $.getJSON( "http://localhost:3000/serverStatus2", function(data)
    {    var obj = JSON.parse(JSON.stringify(data));
        alert('total connections: ' + obj.data["totalConnections"] + '\n' +

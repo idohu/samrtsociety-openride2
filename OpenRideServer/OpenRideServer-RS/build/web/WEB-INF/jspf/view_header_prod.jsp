@@ -29,7 +29,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta content="width=device-width; initial-scale=1.0; user-scalable=false;" name="viewport"/>
         <title>SmartSociety Rideshare</title>
-        <script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=true&amp;" type="text/javascript">
+        <script src="https://maps.google.com/maps/api/js?v=3&amp;sensor=true&amp;" type="text/javascript">
         </script>
         <!-- key=ABQIAAAAoSWXXJZugJPtUdFu909RAxTD2GVBSqiZP_F5qZEDROiHhhxT8xSZpnmbzCsuDrWT8KbVZVMddEMz8A -->
         <script src="js/global-min.js" type="text/javascript">
@@ -54,4 +54,3 @@
             }
         </script>
     </head>
-    <body>
