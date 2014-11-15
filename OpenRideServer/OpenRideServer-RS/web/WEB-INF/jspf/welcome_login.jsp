@@ -35,7 +35,7 @@
 
 <form id="loginForm" action="/OpenRideServer-RS/j_security_check" method="post" class="login">
     <h3>Login now and start:</h3>
-    
+
     <c:if test="${param.login_error=='true'}"><p><span class="error">Invalid credentials.</span></p></c:if>
 
     <div>
@@ -58,8 +58,8 @@
     <input type="button" name="submit" id="shown" align="center" value="Login" onclick="login()" />
     <input type="submit" name="submit" id="loginbutton" align="center" value="Login" onclick="createCookie('usermode', usermode, 365); createCookie('username',j_username.value,365); createCookie('password',j_password.value,365);" style="display:none"/>
 </form>
-   
-     
+
+
 <script type="text/javascript">
     document.getElementById('loginForm').style.display = 'block';
 </script>
@@ -80,7 +80,8 @@
     {
         console.log('login function started');
         var DimitrisLocal = "localhost:3000";
-        var DimitrisRemote = "168.144.202.152:3002";
+        var PeerManager = "168.144.202.152:3002";
+        var PeerManagerPrefix = "https://";
         var user =
             document.forms[0].elements[0].value;
         var pass =
@@ -91,7 +92,7 @@
         $.ajax
                                         ({
                                         type: "GET",
-                                        url: 'https://'+ DimitrisRemote +'/authentications',//'/api/authenticate/' + user ,
+                                        url: PeerManagerPrefix+ PeerManager +'/authentications',//'/api/authenticate/' + user ,
                                        // data: "{username="+user+"&password="+pass+"}",
                                         crossDomain: true,
                                         timeout: 0, //Set your timeout value in milliseconds or 0 for unlimited
@@ -166,5 +167,5 @@
 <noscript>
     <h3>Please activate Javascript in your Browser, before you can login to OpenRide.</h3>
     <meta http-equiv="refresh" content="3" />
-   
+
 </noscript>
