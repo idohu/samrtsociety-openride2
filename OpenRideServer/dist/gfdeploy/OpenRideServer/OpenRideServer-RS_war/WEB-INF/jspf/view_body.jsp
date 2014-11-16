@@ -1014,7 +1014,7 @@
             </div>
         </form>
         <h3 class="separated">My Picture</h3>
-        <form id="profilepictureform" action="" method="POST" enctype="multipart/form-data" class="profile">
+        <form id="profilepictureform" action="" method="PUT" enctype="multipart/form-data" class="profile"><!--<form id="profilepictureform" action="" method="POST" enctype="multipart/form-data" class="profile">-->
             <p>
                 Save my photo as profile picture:
             </p>

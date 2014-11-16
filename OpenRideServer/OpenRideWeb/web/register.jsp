@@ -204,7 +204,7 @@
                 $.ajax
                 ({
                     type: "POST",
-                    url: 'https://' + DimitrisRemote + '/users',//'/api/register/' + user,
+                    url: 'http://' + DimitrisRemote + '/users',//'/api/register/' + user,
                     data: JSON.stringify(mem.register),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -228,7 +228,7 @@
                         else
                             $.ajax({
                                 type: "GET",
-                                url: 'https://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
+                                url: 'http://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
                                 data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                                 crossDomain: true,
                                 contentType:  "application/json; charset=UTF-8",
@@ -259,7 +259,7 @@
                                 parsed["_revision"]=parsed["_revision"]+1;
                                 $.ajax({
                                     type: "PUT",
-                                    url: 'https://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
+                                    url: 'http://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
                                     data: JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                                     crossDomain: true,
                                     contentType:  "application/json; charset=UTF-8",

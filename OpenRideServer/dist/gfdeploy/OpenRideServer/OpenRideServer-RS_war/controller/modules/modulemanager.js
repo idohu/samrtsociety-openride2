@@ -15,7 +15,10 @@ var FixedStars = [];
 var user;
 var pass;
 var DimitrisLocal = "localhost:3000";
-var DimitrisRemote= "168.144.202.152:3000";
+var DimitrisRemote = "168.144.202.152:3000";
+var DimitrisRemotePrefix = "http://";
+var PeerMenager = "168.144.202.152:3002";
+var PeerManagerPrefix = "http://";
 var usermode = 0;
 var DRIVERMODE = 0;
 var RIDERMODE = 1;
@@ -1640,7 +1643,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 $.ajax({//get subject id
                     type:"GET",
-                    url:"http://"+DimitrisRemote+"/subject/byURI/"+counterpart,
+                    url:DimitrisRemotePrefix+DimitrisRemote+"/subject/byURI/"+counterpart,
                     async:false,
                     crossDomain:true,
                     username:user,
@@ -1661,7 +1664,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             //alert(JSON.stringify(data.subject_id));
                             //get profile
                             var personal;
-                            srvconn.GET('https://'+PeerMenager+'/users/'+ counterpart +'/profile', false,function(data){
+                            srvconn.GET(PeerManagerPrefix+PeerMenager+'/users/'+ counterpart +'/profile', false,function(data){
                                 //alert(JSON.stringify(data));
                                 personal = data;
                             //alert(personal.ProfileResponse.mobilePhoneNumber);
@@ -1670,7 +1673,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             });
                             $.ajax({//get subject reputation
                                 type:"GET",
-                                url:"http://"+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
+                                url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
                                 async:false,
                                 crossDomain:true,
                                 username:user,
@@ -3020,7 +3023,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //alert(JSON.stringify(userProfile.getProfileRequest()));
             $.ajax({
                 type: "PUT",
-                url: 'https://' + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
                 data: JSON.stringify(userProfile.getProfileRequest()),//"{username="+user+"&password="+pass+"}",
                 crossDomain: true,
                 contentType:  "application/json; charset=UTF-8",
@@ -3095,7 +3098,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             /* Build the request */
             $.ajax({
                 type: "GET",
-                url: 'https://' + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
                 data: "",
                 crossDomain: true,
                 contentType:  "application/json; charset=UTF-8",
@@ -3128,7 +3131,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     //alert(JSON.stringify(data));
                     $.ajax({
                         type: "PUT",
-                        url: 'https://' + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
+                        url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
                         data: JSON.stringify(data),
                         crossDomain: true,
                         contentType:  "application/json; charset=UTF-8",
@@ -3204,8 +3207,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Sorry, your password could not be changed.')
             });
             $.ajax({
-                type: "Get",
-                url: 'https://' + PeerMenager + '/users/'+username,//'/api/register/' + user,
+                type: "GET",
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username,//'/api/register/' + user,
                 data: "",
                 crossDomain: true,
                 contentType:  "application/json; charset=UTF-8",
@@ -3229,7 +3232,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     //alert(JSON.stringify(data));
                     $.ajax({
                         type: "PUT",
-                        url: 'https://' + PeerMenager + '/users/'+username,//'/api/register/' + user,
+                        url: PeerManagerPrefix + PeerMenager + '/users/'+username,//'/api/register/' + user,
                         data: JSON.stringify(data),//"{username="+user+"&password="+pass+"}",
                         crossDomain: true,
                         contentType:  "application/json; charset=UTF-8",
@@ -3324,7 +3327,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             $.ajax
             ({
                 type: "GET",
-                url: "http://"+DimitrisRemote+"/subject/byURI/" + user ,
+                url: DimitrisRemotePrefix+DimitrisRemote+"/subject/byURI/" + user ,
                 data: "",
                 crossDomain: true,
                 username : user,
@@ -3552,7 +3555,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var pass = readCookie('password');
                 $.ajax({
                     type: "GET",
-                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
                     data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -3945,7 +3948,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: 'http://'+DimitrisRemote+'/rideRequests',
+                    url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                     data: "user="+user,
                     crossDomain: true,
                     username : user,
@@ -3981,7 +3984,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert(JSON.stringify(allRequests));
                         $.ajax({
                             type: "POST",
-                            url: "http://"+DimitrisRemote+"/rideRequests/?action=getSet",
+                            url: DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/?action=getSet",
                             data:JSON.stringify(allRequests),
                             crossDomain: true,
                             username: user,
@@ -4062,7 +4065,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                                 $.ajax({
                                     type: "POST",
-                                    url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                    url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
                                     data:JSON.stringify(documentToFill),
                                     crossDomain: true,
                                     username: user,
@@ -4175,7 +4178,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: 'http://'+DimitrisRemote+'/rideRequests',
+                    url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                     data: "user="+ user,
                     crossDomain: true,
                     username : user,
@@ -4209,7 +4212,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert(JSON.stringify(allRequests));
                         $.ajax({
                             type: "POST",
-                            url: "http://"+DimitrisRemote+"/rideRequests/?action=getSet",
+                            url: DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/?action=getSet",
                             data:JSON.stringify(allRequests),
                             crossDomain: true,
                             username: user,
@@ -4289,7 +4292,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                                 $.ajax({
                                     type: "POST",
-                                    url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                    url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
                                     data:JSON.stringify(documentToFill),
                                     crossDomain: true,
                                     username: user,
@@ -4368,7 +4371,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var pass = readCookie('password');
                 $.ajax({
                     type: "GET",
-                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
                     data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -4430,7 +4433,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: "http://"+DimitrisRemote+"/subject/byURI/" + user ,
+                    url: DimitrisRemotePrefix+DimitrisRemote+"/subject/byURI/" + user ,
                     data: "",
                     crossDomain: true,
                     username : user,
@@ -4462,7 +4465,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             $.ajax
                             ({
                                 type: "GET",
-                                url: "http://"+DimitrisRemote+"/" + url,
+                                url: DimitrisRemotePrefix+DimitrisRemote+"/" + url,
                                 data: "",
                                 crossDomain: true,
                                 username : user,
@@ -4556,7 +4559,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 $.ajax
                 ({
                     type: "GET",
-                    url: 'http://'+DimitrisRemote+'/rideRequests',
+                    url: DimitrisRemotePrefix+DimitrisRemote+'/rideRequests',
                     data: "user="+user,
                     crossDomain: true,
                     username : user,
@@ -4588,7 +4591,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                         $.ajax({
                             type: "POST",
-                            url: "http://"+DimitrisRemote+"/rideRequests/?action=getSet",
+                            url: DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/?action=getSet",
                             data:JSON.stringify(allRequests),
                             crossDomain: true,
                             username: user,
@@ -4669,7 +4672,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                                 $.ajax({
                                     type: "POST",
-                                    url: "http://"+DimitrisRemote+"/ridePlans/?action=getSet",
+                                    url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
                                     data:JSON.stringify(documentToFill),
                                     crossDomain: true,
                                     username: user,
@@ -4747,7 +4750,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var pass = readCookie('password');
                 $.ajax({
                     type: "GET",
-                    url: 'https://' + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
                     data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -5048,7 +5051,7 @@ function submit (rate_array , riderId )
     $.ajax
     ({
         type: "GET",
-        url: "http://"+DimitrisRemote+ "/ridePlans/"+rideIdInt,
+        url: DimitrisRemotePrefix+DimitrisRemote+ "/ridePlans/"+rideIdInt,
         data: "",
         crossDomain: true,
         username : user,
@@ -5131,7 +5134,7 @@ function submit (rate_array , riderId )
             $.ajax
             ({
                 type: "POST",
-                url: "http://"+DimitrisRemote+"/application/1/feedback", //"http://"+DimitrisRemote+"/application/1/feedback" ,
+                url: DimitrisRemotePrefix+DimitrisRemote+"/application/1/feedback", //"http://"+DimitrisRemote+"/application/1/feedback" ,
                 data: json2,
                 crossDomain: true,
                 username : user,
@@ -5208,7 +5211,7 @@ function rideDelete(num)
     //alert( prp);
     $.ajax({//get subject reputation
         type:"DELETE",
-        url:"http://"+DimitrisRemote+"/rideRequests/"+prp.index,
+        url:DimitrisRemotePrefix+DimitrisRemote+"/rideRequests/"+prp.index,
         async:false,
         crossDomain:true,
         username:user,
@@ -5248,7 +5251,7 @@ function myaccept(num)
         prp.potentiallyAgreedDriver = "";
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,"false", user , pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,"false", user , pass );
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
     }
     else if (usermode == RIDERMODE && prp.agreedDriver != "")
@@ -5258,7 +5261,7 @@ function myaccept(num)
         (prp.agreedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp ,"false" ,user, pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,"false" ,user, pass );
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
     }
 //alert( prp);
@@ -5278,7 +5281,7 @@ function myreject(num)
         prp.rejectedDriver = me;
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
 
     }
@@ -5289,7 +5292,7 @@ function myreject(num)
         (prp.rejectedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , "http://"+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
         //i = i + 1;
         //}
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');

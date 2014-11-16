@@ -80,7 +80,8 @@
     {
         console.log('login function started');
         var DimitrisLocal = "localhost:3000";
-        var DimitrisRemote = "168.144.202.152:3002";
+        var PeerManager = "168.144.202.152:3002";
+        var PeerManagerPrefix = "http://";
         var user =
             document.forms[0].elements[0].value;
         var pass =
@@ -91,7 +92,7 @@
         $.ajax
                                         ({
                                         type: "GET",
-                                        url: 'https://'+ DimitrisRemote +'/authentications',//'/api/authenticate/' + user ,
+                                        url: PeerManagerPrefix+ PeerManager +'/authentications',//'/api/authenticate/' + user ,
                                        // data: "{username="+user+"&password="+pass+"}",
                                         crossDomain: true,
                                         timeout: 0, //Set your timeout value in milliseconds or 0 for unlimited

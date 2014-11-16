@@ -2266,33 +2266,34 @@
                         d=d.innerHTML
                     }
                     return c.clean([d.replace(Ja,"").replace(/=([^="'>\s]+\/)>/g,'="$1">').replace(V,"")],f)[0]
-                }else return this.cloneNode(true)
-            });
+                }
+                else return this.cloneNode(true)
+                });
             if(a===true){
                 ra(this,b);
                 ra(this.find("*"),b.find("*"))
-            }
-            return b
-        },
-        html:function(a){
-            if(a===w)return this[0]&&this[0].nodeType===1?this[0].innerHTML.replace(Ja,
-                ""):null;
-            else if(typeof a==="string"&&!ta.test(a)&&(c.support.leadingWhitespace||!V.test(a))&&!F[(La.exec(a)||["",""])[1].toLowerCase()]){
-                a=a.replace(Ka,Ma);
-                try{
-                    for(var b=0,d=this.length;b<d;b++)if(this[b].nodeType===1){
-                        c.cleanData(this[b].getElementsByTagName("*"));
-                        this[b].innerHTML=a
-                    }
-                }catch(f){
-                    this.empty().append(a)
                 }
-            }else c.isFunction(a)?this.each(function(e){
-                var j=c(this),i=j.html();
-                j.empty().append(function(){
-                    return a.call(this,e,i)
-                })
-            }):this.empty().append(a);
+                return b
+                },
+                html:function(a){
+                if(a===w)return this[0]&&this[0].nodeType===1?this[0].innerHTML.replace(Ja,
+                    ""):null;
+                else if(typeof a==="string"&&!ta.test(a)&&(c.support.leadingWhitespace||!V.test(a))&&!F[(La.exec(a)||["",""])[1].toLowerCase()]){
+            a=a.replace(Ka,Ma);
+            try{
+                for(var b=0,d=this.length;b<d;b++)if(this[b].nodeType===1){
+                    c.cleanData(this[b].getElementsByTagName("*"));
+                    this[b].innerHTML=a
+                }
+            }catch(f){
+                this.empty().append(a)
+            }
+        }else c.isFunction(a)?this.each(function(e){
+            var j=c(this),i=j.html();
+            j.empty().append(function(){
+                return a.call(this,e,i)
+            })
+        }):this.empty().append(a);
             return this
         },
         replaceWith:function(a){
@@ -3392,7 +3393,7 @@ var DimitrisLocal = "localhost:3000";
 var DimitrisRemote = "168.144.202.152:3000";
 var DimitrisRemotePrefix = "http://";
 var PeerMenager = "168.144.202.152:3002";
-var PeerManagerPrefix = "https://";
+var PeerManagerPrefix = "http://";
 var usermode = 0;
 var username = '';
 var password = '';
@@ -9934,7 +9935,64 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, the favorite could not be deleted.')
             });
         },
-
+        putprofileicture : function(){
+            //alert(document.getElementById('profilepicturefile').value);
+            $.ajax({
+                type: "GET",
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
+                data: JSON.stringify(userProfile.getProfileRequest()),//"{username="+user+"&password="+pass+"}",
+                crossDomain: true,
+                contentType:  "application/json; charset=UTF-8",
+                accepts: "application/json",
+                dataType: "json",
+                username: username,
+                password: password,
+                beforeSend: function (xhr)
+                {
+                    xhr.withCredentials = true,
+                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                },
+                async: false,
+                //accepts: "application/json",
+                success: function(data, textStatus, jqXHR){
+                    alert(JSON.stringify(data));
+                    data._revision=data._revision+1;
+                    data.picture=document.getElementById('profilepicturefile').value
+                    alert(JSON.stringify(data));
+                    $.ajax({
+                        type: "PUT",
+                        url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
+                        data: JSON.stringify(data),//"{username="+user+"&password="+pass+"}",
+                        crossDomain: true,
+                        contentType:  "application/json; charset=UTF-8",
+                        accepts: "application/json",
+                        dataType: "json",
+                        username: username,
+                        password: password,
+                        beforeSend: function (xhr)
+                        {
+                            xhr.withCredentials = true,
+                            xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                        },
+                        async: false,
+                        //accepts: "application/json",
+                        success: function(data, textStatus, jqXHR){
+                            showOverlayDialog('Profile picture was saved successfully!', '', 'OK', '', '', '')
+                        },
+                        error: function(jq , textStatus , errorThrown){
+                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
+                        }
+                    });
+                },
+                error: function(jq , textStatus , errorThrown){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
+                }
+            });
+        },
         parseprofilepersonaldata : function(result){
             //alert(result);
             
@@ -10412,7 +10470,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 async: false,
                 //accepts: "application/json",
                 success: function(data, textStatus, jqXHR){
-                   // alert(JSON.stringify(data));
+                    // alert(JSON.stringify(data));
                     data.password = document.getElementById('profilepassword').value;
                     data._revision = data._revision+1;
                     //alert(JSON.stringify(data));
@@ -10606,7 +10664,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     alert('status: ' + jq.status);
                     alert('response ' + jq.responseText)
                     alert('this error is: ' + errorThrown );
-                                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                 }
 
             });
@@ -13150,29 +13208,30 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 //                }
                 var smoker = '';
                 $.ajax({
-                type: "GET",
-                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
-                data: "",
-                crossDomain: true,
-                contentType:  "application/json; charset=UTF-8",
-                accepts: "application/json",
-                dataType: "json",
-                username: username,
-                password: password,
-                beforeSend: function (xhr)
-                {
-                    xhr.withCredentials = true,
-                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
-                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                },
-                async: false,
-                //accepts: "application/json",
-                success: function(data, textStatus, jqXHR){
-                    smoker = data.isSmoker;
-                },error:function(xhr,textStatus,errorThrown){
-                    smoker="n";
-                }
+                    type: "GET",
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile/preferences',//'/api/register/' + user,
+                    data: "",
+                    crossDomain: true,
+                    contentType:  "application/json; charset=UTF-8",
+                    accepts: "application/json",
+                    dataType: "json",
+                    username: username,
+                    password: password,
+                    beforeSend: function (xhr)
+                    {
+                        xhr.withCredentials = true,
+                        xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    async: false,
+                    //accepts: "application/json",
+                    success: function(data, textStatus, jqXHR){
+                        smoker = data.isSmoker;
+                    },
+                    error:function(xhr,textStatus,errorThrown){
+                        smoker="n";
+                    }
                 });
 
                 var newRideRequest = {};
