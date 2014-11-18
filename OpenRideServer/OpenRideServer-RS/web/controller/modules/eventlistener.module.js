@@ -973,11 +973,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
                         },
                         error: function(jq , textStatus , errorThrown){
-                            alert('state: ' + jq.readyState);
-                            alert('status: ' + jq.status);
-                            alert('response ' + jq.responseText)
-                            alert('this error is: ' + errorThrown );
-                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+//                            alert('state: ' + jq.readyState);
+//                            alert('status: ' + jq.status);
+//                            alert('response ' + jq.responseText)
+//                            alert('this error is: ' + errorThrown );
+                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 
                         }
 
@@ -1423,11 +1423,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
                         },
                         error: function(jq , textStatus , errorThrown){
-                            alert('state: ' + jq.readyState);
-                            alert('status: ' + jq.status);
-                            alert('response ' + jq.responseText)
-                            alert('this error is: ' + errorThrown );
-                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+//                            alert('state: ' + jq.readyState);
+//                            alert('status: ' + jq.status);
+//                            alert('response ' + jq.responseText)
+//                            alert('this error is: ' + errorThrown );
+                           fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 
                         }
 
