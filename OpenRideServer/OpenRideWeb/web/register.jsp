@@ -117,7 +117,7 @@
                     </h:panelGroup>
                     <h:panelGroup>
                         <h:inputText id="email" binding="#{Register_Backing.email}" required="true" validator="#{Register_Backing.validateEmail}" styleClass="wide">
-                            <t:validateEmail summaryMessage="Invalid E-Mail Address."/>                            
+                            <t:validateEmail summaryMessage="Invalid E-Mail Address."/>
                         </h:inputText>
                         <h:message for="email" styleClass="error" />
                     </h:panelGroup>
@@ -155,7 +155,7 @@
     <jsp:include page="/WEB-INF/jspf/footer.jsp"></jsp:include>
 </f:view>
 <script type="text/javascript"
-        src='https://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'>
+        src='http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js'>
 </script>
 <script type="text/javascript">
     function openPage(pageURL)
@@ -171,11 +171,12 @@
         }
     function register()
     {
+        var ajaxStatus = 0;
         var DimitrisLocal = "localhost:3000";
         var DimitrisRemote = "168.144.202.152:3002";
-        var user = 
+        var user =
             document.forms[0].elements[1].value;
-        var pass = 
+        var pass =
             document.forms[0].elements[2].value;
         if ( ($("#registrationForm\\:firstName").val() != ""))
             $("#registrationForm\\:firstName").val = " ";
@@ -204,7 +205,7 @@
                 $.ajax
                 ({
                     type: "POST",
-                    url: 'https://' + DimitrisRemote + '/users',//'/api/register/' + user,
+                    url: 'http://' + DimitrisRemote + '/users',//'/api/register/' + user,
                     data: JSON.stringify(mem.register),//"{username="+user+"&password="+pass+"}",
                     crossDomain: true,
                     contentType:  "application/json; charset=UTF-8",
@@ -228,7 +229,7 @@
                         else
                             $.ajax({
                                 type: "GET",
-                                url: 'https://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
+                                url: 'http://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
                                 data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                                 crossDomain: true,
                                 contentType:  "application/json; charset=UTF-8",
@@ -259,7 +260,7 @@
                                 parsed["_revision"]=parsed["_revision"]+1;
                                 $.ajax({
                                     type: "PUT",
-                                    url: 'https://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
+                                    url: 'http://' + DimitrisRemote + '/users/'+mem.register.username+'/profile',//'/api/register/' + user,
                                     data: JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
                                     crossDomain: true,
                                     contentType:  "application/json; charset=UTF-8",
@@ -277,47 +278,40 @@
                                     async: false,
                                     //accepts: "application/json",
                                     success: function(data, textStatus, jqXHR){
-                                        
+                                        ajaxStatus = 1;
                                         $("#registrationForm\\:hidden").click();
                                         setTimeout(function () {
                                             openPage('/OpenRideServer-RS/view');//move to mobile app login screen.
                                         }, 3000);
                                     },
                                     error: function(jq , textStatus , errorThrown){
-                                        alert('state: ' + jq.readyState);
-                                        alert('status: ' + jq.status);
-                                        alert('response ' + jq.responseText)
-                                        alert('this error is: ' + errorThrown);
+                                        alert('error from server: ' + errorThrown);
                                     }
                                 });
                             },
                             error: function(jq , textStatus , errorThrown){
-                                alert('state: ' + jq.readyState);
-                                alert('status: ' + jq.status);
-                                alert('response ' + jq.responseText)
-                                alert('this error is: ' + errorThrown);
+                                alert('error from server: ' + errorThrown);
                             }
                         });
                     document.cookie = "username=" + user +";path=/";
                     document.cookie = "password=" + pass +";path=/";
-                        
+
                     },
                     error: function(jq , textStatus , errorThrown){
                         if (jq.status == 403)
                             alert(JSON.parse(jq.responseText).message);
                         else{
-                            alert('state: ' + jq.readyState);
-                            alert('status: ' + jq.status);
-                            alert('response ' + jq.responseText)
-                            alert('this error is: ' + errorThrown);
+                            alert('error from server: ' + errorThrown);
                         }
                     }
                 });
             });
-        setInterval(endAjax, 500);
+        var func = endAjax;
+        func.param = ajaxStatus;
+        setInterval(function(){if (ajaxStatus == 1) endAjax();}, 500);
         }
         else alert('Not all field are filled!');
-        else alert('Not all field are filled!');       
+        else alert('Not all field are filled!');
     }
 
 </script>
