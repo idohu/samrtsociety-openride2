@@ -14,6 +14,7 @@ fokus.openride.mobclient.controller.modules.profile = function(){
             'dateOfBirth'       : "",
             'email'             : '',
             'mobilePhoneNumber' : '',
+            'motivation'        : '',
             'fixedPhoneNumber'  : '',
             'streetAddress'     : '',
             'zipCode'           : '',
@@ -51,7 +52,7 @@ fokus.openride.mobclient.controller.modules.profile = function(){
 
     /* ------ public variabeles and methods ------ */
     return {
-        
+
         setAllData : function (profile){
             reqProfile.ProfileRequest[0]._id = profile._id;
             reqProfile.ProfileRequest[0].preferences = profile.preferences;
@@ -62,6 +63,7 @@ fokus.openride.mobclient.controller.modules.profile = function(){
             reqProfile.ProfileRequest[0].dateOfBirth = profile.dateOfBirth;
             reqProfile.ProfileRequest[0].email = profile.email;
             reqProfile.ProfileRequest[0].mobilePhoneNumber = profile.mobilePhoneNumber;
+            reqProfile.ProfileRequest[0].motivation = profile.motivation;
             reqProfile.ProfileRequest[0].fixedPhoneNumber = profile.fixedPhoneNumber;
             reqProfile.ProfileRequest[0].streetAddress = profile.streetAddress;
             reqProfile.ProfileRequest[0].zipCode = profile.zipCode;
@@ -227,4 +229,3 @@ fokus.openride.mobclient.controller.modules.profile = function(){
 
     };
 }();
-

@@ -6,7 +6,7 @@ var DimitrisLocal = "localhost:3000";
 var DimitrisRemote = "168.144.202.152:3000";
 var DimitrisRemotePrefix = "http://";
 var PeerMenager = "168.144.202.152:3002";
-var PeerManagerPrefix = "https://";
+var PeerManagerPrefix = "http://";
 var username = '';
 var password = '';
 fokus.openride.mobclient.controller.modules.uievents = function(){
@@ -209,6 +209,35 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, initial data could not be loaded.')
                 }
             });
+            var motivation = null;
+            $.ajax({
+                type: "GET",
+                url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
+                data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                crossDomain: true,
+                //contentType:  "application/json; charset=UTF-8",
+                accepts: "application/json",
+                dataType: "json",
+                username: username,
+                password: password,
+                beforeSend: function (xhr)
+                {
+                    xhr.withCredentials = true,
+                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                },
+                async: false,
+                success: function(data, textStatus, jqXHR){
+                    //alert(data);
+                    //profilemod.setAllData(data);
+                    motivation=data.motivation;
+                //fokus.openride.mobclient.controller.modules.uievents.parseInitData(profile);
+                },
+                error:function(jq , textStatus , errorThrown){
+                // fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, initial data could not be loaded.')
+                }
+            });
             //alert(JSON.stringify(profile));
             profilepic = initData.InitResponse.profilpic;
 
@@ -229,11 +258,13 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             profileimg.src = picsrc;//"../.." + profilepic + "?" + now.getTime(); // time in search string forces reload
 
             //Motivation Message
-            if(true)//TODO create selection from server
-            {
-                var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
-                document.getElementById("motivationmessage").innerHTML = randMessage+'<hr>';
-            }
+            if(motivation!=null)
+                if (motivation=="1")
+                {
+                    var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
+                    //alert(randMessage);
+                    document.getElementById("motivationmessage").innerHTML = randMessage+'<hr>';
+                }
 
 
             // Home tab statistics
@@ -973,11 +1004,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
                         },
                         error: function(jq , textStatus , errorThrown){
-                            alert('state: ' + jq.readyState);
-                            alert('status: ' + jq.status);
-                            alert('response ' + jq.responseText)
-                            alert('this error is: ' + errorThrown );
-                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+//                            alert('state: ' + jq.readyState);
+//                            alert('status: ' + jq.status);
+//                            alert('response ' + jq.responseText)
+//                            alert('this error is: ' + errorThrown );
+                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 
                         }
 
@@ -1423,11 +1454,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                             fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
                         },
                         error: function(jq , textStatus , errorThrown){
-                            alert('state: ' + jq.readyState);
-                            alert('status: ' + jq.status);
-                            alert('response ' + jq.responseText)
-                            alert('this error is: ' + errorThrown );
-                            //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+//                            alert('state: ' + jq.readyState);
+//                            alert('status: ' + jq.status);
+//                            alert('response ' + jq.responseText)
+//                            alert('this error is: ' + errorThrown );
+                           fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 
                         }
 
