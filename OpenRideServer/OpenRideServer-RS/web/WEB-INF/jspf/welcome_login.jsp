@@ -81,7 +81,7 @@
         console.log('login function started');
         var DimitrisLocal = "localhost:3000";
         var PeerManager = "168.144.202.152:3002";
-        var PeerManagerPrefix = "https://";
+        var PeerManagerPrefix = "http://";
         var user =
             document.forms[0].elements[0].value;
         var pass =
@@ -127,10 +127,7 @@
                                             }
                                         },
                                         error: function(jq , textStatus , errorThrown){
-                                        alert('state: ' + jq.readyState);
-                                        alert('status: ' + jq.status);
-                                        alert('response ' + jq.responseText)
-                                        alert('this error is: ' +errorThrown);
+                                        alert('error from server: ' +errorThrown);
                                         }
                                         });
     });
