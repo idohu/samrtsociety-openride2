@@ -30,16 +30,19 @@
 <h1>Welcome to SmartSociety RideSharing Website!</h1>
     <h3>Powered by <a href="http://www.open-ride.com">Openride</a></h3>
     <t:div rendered="#{Welcome_Backing.renderRegistrationSuccessMessage}" style="border: 1px solid #c7db86; padding: 0 8px; margin: 0 0 10px 0;">
-        <p><strong>Thank you very much for your registration!</strong><br />Your account has been created successfully. </p><p style="color: red;">You can login as &ldquo;<h:outputText value="#{Welcome_Backing.registeredUsername}" />&ldquo;  with the password &ldquo<h:outputText value="#{Welcome_Backing.registeredPassword}" />&ldquo; Login.</p>
-        <script type="text/javascript">            
-                    window.onload = function()
-                        {
-                        document.getElementById("j_password").focus();
-                        }
-
-        </script>
+        <p><strong>Thank you very much for your registration!</strong><br />Your account has been created successfully. </p><p style="color: red;">You can login as &ldquo;<h:outputText value="#{Welcome_Backing.registeredUsername}" />&ldquo;  with the password <h:outputText value="#{Welcome_Backing.registeredPassword}" />&ldquo; Login.</p>
+     <script type="text/javascript">
+    function openPage(pageURL)
+    {
+        //alert(document.readyState);
+        if (document.readyState == 'uninitialized' || document.readyState == 'loading' || document.readyState == 'loaded') {}
+        window.location.href = pageURL;
+    }
+</script>
+<script type="text/javascript">
+    openPage("/OpenRideServer-RS/view");
+</script>
     </t:div>
-
     <fieldset style="float: left; margin: 10px 18px 0 0; width: 325px; min-height: 50px;">
         <legend>Do you have an account?</legend>
 
@@ -67,5 +70,5 @@
 
     </fieldset>
 <script type="text/javascript"
-        src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
+        src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
 </script>

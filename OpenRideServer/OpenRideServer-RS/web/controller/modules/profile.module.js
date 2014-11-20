@@ -52,7 +52,7 @@ fokus.openride.mobclient.controller.modules.profile = function(){
 
     /* ------ public variabeles and methods ------ */
     return {
-        
+
         setAllData : function (profile){
             reqProfile.ProfileRequest[0]._id = profile._id;
             reqProfile.ProfileRequest[0].preferences = profile.preferences;
@@ -229,4 +229,3 @@ fokus.openride.mobclient.controller.modules.profile = function(){
 
     };
 }();
-

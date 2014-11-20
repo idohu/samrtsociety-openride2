@@ -3390,6 +3390,7 @@ var parseUnmatchedOffer;
 var parseUnmatchedSearch;
 var user;
 var pass;
+var regStatus = 0;
 var DimitrisLocal = "localhost:3000";
 var DimitrisRemote = "168.144.202.152:3000";
 var DimitrisRemotePrefix = "http://";
@@ -3474,7 +3475,7 @@ function slidingUITabListClick(objClicked) {
     }
 
     return false;
-     
+
 }
 
 function slidingUIComplTripsTabListClick(objClicked) {
@@ -3541,7 +3542,7 @@ function slidingUIComplTripsTabListClick(objClicked) {
     else {
         contentdiv.slideToggle("slow");
     }
-    return false;    
+    return false;
 }
 
 function setupUITabList(){
@@ -3554,7 +3555,7 @@ function setupCompletedTripUITabList(){
     $(".linkslide_0").click( function() {
         slidingUIComplTripsTabListClick(this);
     } );
-}/* 
+}/*
  * Helperclass to build strings.
  */
 function StringBuilder(value)
@@ -3634,9 +3635,9 @@ StringBuilder.prototype.toString = function ()
 
     //Helper functions and ui object
     $.ui = {
-	
+
         version: "@VERSION",
-	
+
         // $.ui.plugin is deprecated.  Use the proxy pattern instead.
         plugin: {
             add: function(module, option, set) {
@@ -3651,7 +3652,7 @@ StringBuilder.prototype.toString = function ()
                 if(!set) {
                     return;
                 }
-			
+
                 for (var i = 0; i < set.length; i++) {
                     if (instance.options[set[i][0]]) {
                         set[i][1].apply(instance.element, args);
@@ -3659,7 +3660,7 @@ StringBuilder.prototype.toString = function ()
                 }
             }
         },
-	
+
         cssCache: {},
         css: function(name) {
             if ($.ui.cssCache[name]) {
@@ -3671,10 +3672,10 @@ StringBuilder.prototype.toString = function ()
                 left:'-5000px',
                 display:'block'
             }).appendTo('body');
-		
+
             //if (!$.browser.safari)
             //tmp.appendTo('body');
-		
+
             //Opera and Safari set width and height to 0px instead of auto
             //Safari returns rgba(0,0,0,0) when bgcolor is not set
             $.ui.cssCache[name] = !!(
@@ -3688,19 +3689,19 @@ StringBuilder.prototype.toString = function ()
         },
 
         hasScroll: function(e, a) {
-		
+
             //If overflow is hidden, the element might have extra content, but the user wants to hide it
             if ($(e).css('overflow') == 'hidden') {
                 return false;
             }
-		
+
             var scroll = (a && a == 'left') ? 'scrollLeft' : 'scrollTop',
             has = false;
-		
+
             if (e[scroll] > 0) {
                 return true;
             }
-		
+
             // TODO: determine which cases actually cause this to happen
             // if the element doesn't have the scroll set, see if it's possible to
             // set the scroll
@@ -3714,7 +3715,7 @@ StringBuilder.prototype.toString = function ()
 
     //jQuery plugins
     $.fn.extend({
-	
+
         remove: function() {
             // Safari has a native remove event which actually removes DOM elements,
             // so we have to use triggerHandler instead of trigger (#3037).
@@ -3723,14 +3724,14 @@ StringBuilder.prototype.toString = function ()
             });
             return _remove.apply(this, arguments );
         },
-	
+
         enableSelection: function() {
             return this
             .attr('unselectable', 'off')
             .css('MozUserSelect', '')
             .unbind('selectstart.ui');
         },
-	
+
         disableSelection: function() {
             return this
             .attr('unselectable', 'on')
@@ -3739,21 +3740,21 @@ StringBuilder.prototype.toString = function ()
                 return false;
             });
         },
-	
+
         // WAI-ARIA Semantics
         ariaRole: function(role) {
             return (role !== undefined
-			
+
                 // setter
                 ? this.attr("role", isFF2 ? "wairole:" + role : role)
-			
+
                 // getter
                 : (this.attr("role") || "").replace(/^wairole:/, ""));
         },
-	
+
         ariaState: function(state, value) {
             return (value !== undefined
-			
+
                 // setter
                 ? this.each(function(i, el) {
                     (isFF2
@@ -3761,21 +3762,21 @@ StringBuilder.prototype.toString = function ()
                             "aaa:" + state, value)
                         : $(el).attr("aria-" + state, value));
                 })
-			
+
                 // getter
                 : this.attr(isFF2 ? "aaa:" + state : "aria-" + state));
         }
-	
+
     });
 
 
     //Additional selectors
     $.extend($.expr[':'], {
-	
+
         data: function(a, i, m) {
             return $.data(a, m[3]);
         },
-	
+
         // TODO: add support for object, area
         tabbable: function(a, i, m) {
 
@@ -3785,36 +3786,36 @@ StringBuilder.prototype.toString = function ()
                     var style = element.style;
                     return (style.display != 'none' && style.visibility != 'hidden');
                 }
-			
+
                 var visible = checkStyles(element);
-			
+
                 (visible && $.each($.dir(element, 'parentNode'), function() {
                     return (visible = checkStyles(this));
                 }));
-			
+
                 return visible;
             };
-		
+
             return (
                 // in tab order
                 a.tabIndex >= 0 &&
-			
+
                 ( // filter node types that participate in the tab order
-				
+
                     // anchor tag
                     ('a' == nodeName && a.href) ||
-				
+
                     // enabled form element
                     (/input|select|textarea|button/.test(nodeName) &&
                         'hidden' != a.type && !a.disabled)
                     ) &&
-			
+
                 // visible on page
                 isVisible(a)
                 );
-		
+
         }
-	
+
     });
 
 
@@ -3826,7 +3827,7 @@ StringBuilder.prototype.toString = function ()
             var methods = $[namespace][plugin][type] || [];
             return (typeof methods == 'string' ? methods.split(/,?\s+/) : methods);
         }
-	
+
         var methods = getMethods('getter');
         if (args.length == 1 && typeof args[0] == 'string') {
             methods = methods.concat(getMethods('getterSetter'));
@@ -3837,53 +3838,53 @@ StringBuilder.prototype.toString = function ()
     $.widget = function(name, prototype) {
         var namespace = name.split(".")[0];
         name = name.split(".")[1];
-	
+
         // create plugin method
         $.fn[name] = function(options) {
             var isMethodCall = (typeof options == 'string'),
             args = Array.prototype.slice.call(arguments, 1);
-		
+
             // prevent calls to internal methods
             if (isMethodCall && options.substring(0, 1) == '_') {
                 return this;
             }
-		
+
             // handle getter methods
             if (isMethodCall && getter(namespace, name, options, args)) {
                 var instance = $.data(this[0], name);
                 return (instance ? instance[options].apply(instance, args)
                     : undefined);
             }
-		
+
             // handle initialization and non-getter methods
             return this.each(function() {
                 var instance = $.data(this, name);
-			
+
                 // constructor
                 (!instance && !isMethodCall &&
                     $.data(this, name, new $[namespace][name](this, options)));
-			
+
                 // method call
                 (instance && isMethodCall && $.isFunction(instance[options]) &&
                     instance[options].apply(instance, args));
             });
         };
-	
+
         // create widget constructor
         $[namespace] = $[namespace] || {};
         $[namespace][name] = function(element, options) {
             var self = this;
-		
+
             this.widgetName = name;
             this.widgetEventPrefix = $[namespace][name].eventPrefix || name;
             this.widgetBaseClass = namespace + '-' + name;
-		
+
             this.options = $.extend({},
                 $.widget.defaults,
                 $[namespace][name].defaults,
                 $.metadata && $.metadata.get(element)[name],
                 options);
-		
+
             this.element = $(element)
             .bind('setData.' + name, function(e, key, value) {
                 return self._setData(key, value);
@@ -3894,13 +3895,13 @@ StringBuilder.prototype.toString = function ()
             .bind('remove', function() {
                 return self.destroy();
             });
-		
+
             this._init();
         };
-	
+
         // add widget prototype
         $[namespace][name].prototype = $.extend({}, $.widget.prototype, prototype);
-	
+
         // TODO: merge getter and getterSetter properties from widget prototype
         // and plugin prototype
         $[namespace][name].getterSetter = 'option';
@@ -3911,11 +3912,11 @@ StringBuilder.prototype.toString = function ()
         destroy: function() {
             this.element.removeData(this.widgetName);
         },
-	
+
         option: function(key, value) {
             var options = key,
             self = this;
-		
+
             if (typeof key == "string") {
                 if (value === undefined) {
                     return this._getData(key);
@@ -3923,7 +3924,7 @@ StringBuilder.prototype.toString = function ()
                 options = {};
                 options[key] = value;
             }
-		
+
             $.each(options, function(key, value) {
                 self._setData(key, value);
             });
@@ -3933,20 +3934,20 @@ StringBuilder.prototype.toString = function ()
         },
         _setData: function(key, value) {
             this.options[key] = value;
-		
+
             if (key == 'disabled') {
                 this.element[value ? 'addClass' : 'removeClass'](
                     this.widgetBaseClass + '-disabled');
             }
         },
-	
+
         enable: function() {
             this._setData('disabled', false);
         },
         disable: function() {
             this._setData('disabled', true);
         },
-	
+
         _trigger: function(type, e, data) {
             var eventName = (type == this.widgetEventPrefix
                 ? type : this.widgetEventPrefix + type);
@@ -3968,7 +3969,7 @@ StringBuilder.prototype.toString = function ()
     $.ui.mouse = {
         _mouseInit: function() {
             var self = this;
-	
+
             this.element
             .bind('mousedown.'+this.widgetName, function(e) {
                 return self._mouseDown(e);
@@ -3979,46 +3980,46 @@ StringBuilder.prototype.toString = function ()
                     return false;
                 }
             });
-		
+
             // Prevent text selection in IE
             if ($.browser.msie) {
                 this._mouseUnselectable = this.element.attr('unselectable');
                 this.element.attr('unselectable', 'on');
             }
-		
+
             this.started = false;
         },
-	
+
         // TODO: make sure destroying one instance of mouse doesn't mess with
         // other instances of mouse
         _mouseDestroy: function() {
             this.element.unbind('.'+this.widgetName);
-		
+
             // Restore text selection in IE
             ($.browser.msie
                 && this.element.attr('unselectable', this._mouseUnselectable));
         },
-	
+
         _mouseDown: function(e) {
             // we may have missed mouseup (out of window)
             (this._mouseStarted && this._mouseUp(e));
-		
+
             this._mouseDownEvent = e;
-		
+
             var self = this,
             btnIsLeft = (e.which == 1),
             elIsCancel = (typeof this.options.cancel == "string" ? $(e.target).parents().add(e.target).filter(this.options.cancel).length : false);
             if (!btnIsLeft || elIsCancel || !this._mouseCapture(e)) {
                 return true;
             }
-		
+
             this.mouseDelayMet = !this.options.delay;
             if (!this.mouseDelayMet) {
                 this._mouseDelayTimer = setTimeout(function() {
                     self.mouseDelayMet = true;
                 }, this.options.delay);
             }
-		
+
             if (this._mouseDistanceMet(e) && this._mouseDelayMet(e)) {
                 this._mouseStarted = (this._mouseStart(e) !== false);
                 if (!this._mouseStarted) {
@@ -4026,7 +4027,7 @@ StringBuilder.prototype.toString = function ()
                     return true;
                 }
             }
-		
+
             // these delegates are required to keep context
             this._mouseMoveDelegate = function(e) {
                 return self._mouseMove(e);
@@ -4037,44 +4038,44 @@ StringBuilder.prototype.toString = function ()
             $(document)
             .bind('mousemove.'+this.widgetName, this._mouseMoveDelegate)
             .bind('mouseup.'+this.widgetName, this._mouseUpDelegate);
-		
+
             return false;
         },
-	
+
         _mouseMove: function(e) {
             // IE mouseup check - mouseup happened when mouse was out of window
             if ($.browser.msie && !e.button) {
                 return this._mouseUp(e);
             }
-		
+
             if (this._mouseStarted) {
                 this._mouseDrag(e);
                 return false;
             }
-		
+
             if (this._mouseDistanceMet(e) && this._mouseDelayMet(e)) {
                 this._mouseStarted =
                 (this._mouseStart(this._mouseDownEvent, e) !== false);
                 (this._mouseStarted ? this._mouseDrag(e) : this._mouseUp(e));
             }
-		
+
             return !this._mouseStarted;
         },
-	
+
         _mouseUp: function(e) {
             $(document)
             .unbind('mousemove.'+this.widgetName, this._mouseMoveDelegate)
             .unbind('mouseup.'+this.widgetName, this._mouseUpDelegate);
-		
+
             if (this._mouseStarted) {
                 this._mouseStarted = false;
                 this._preventClickEvent = true;
                 this._mouseStop(e);
             }
-		
+
             return false;
         },
-	
+
         _mouseDistanceMet: function(e) {
             return (Math.max(
                 Math.abs(this._mouseDownEvent.pageX - e.pageX),
@@ -4082,11 +4083,11 @@ StringBuilder.prototype.toString = function ()
                 ) >= this.options.distance
             );
         },
-	
+
         _mouseDelayMet: function(e) {
             return this.mouseDelayMet;
         },
-	
+
         // These are placeholder methods, to be overriden by extending plugin
         _mouseStart: function(e) {},
         _mouseDrag: function(e) {},
@@ -4639,15 +4640,15 @@ if (!this.JSON) {
             return $.cookie.apply(null, [cookie].concat($.makeArray(arguments)));
         },
         _tabify: function(init) {
-		
+
             this.$lis = $('li:has(a[href])', this.element);
             this.$tabs = this.$lis.map(function() {
                 return $('a', this)[0];
             });
             this.$panels = $([]);
-		
+
             var self = this, o = this.options;
-		
+
             this.$tabs.each(function(i, a) {
                 // inline tab
                 if (a.hash && a.hash.replace('#', '')) // Safari 2 reports '#' for an empty hash
@@ -4670,14 +4671,14 @@ if (!this.JSON) {
                 else
                     o.disabled.push(i + 1);
             });
-		
+
             // initialization from scratch
             if (init) {
-			
+
                 // attach necessary classes for styling if not present
                 this.element.addClass(o.navClass);
                 this.$panels.addClass(o.panelClass);
-			
+
                 // Selected tab
                 // use "selected" option or try to retrieve:
                 // 1. from fragment identifier in url
@@ -4700,7 +4701,7 @@ if (!this.JSON) {
                         o.selected = self.$lis.index( self.$lis.filter('.' + o.selectedClass)[0] );
                 }
                 o.selected = o.selected === null || o.selected !== undefined ? o.selected : 0; // first tab selected by default
-			
+
                 // Take disabling tabs via class attribute from HTML
                 // into account and update option properly.
                 // A selected tab cannot become disabled.
@@ -4712,7 +4713,7 @@ if (!this.JSON) {
                     )).sort();
                 if ($.inArray(o.selected, o.disabled) != -1)
                     o.disabled.splice($.inArray(o.selected, o.disabled), 1);
-			
+
                 // highlight selected tab
                 this.$panels.addClass(o.hideClass);
                 this.$lis.removeClass(o.selectedClass);
@@ -4721,41 +4722,41 @@ if (!this.JSON) {
                     var classes = [o.selectedClass];
                     if (o.deselectable) classes.push(o.deselectableClass);
                     this.$lis.eq(o.selected).addClass(classes.join(' '));
-				
+
                     // seems to be expected behavior that the show callback is fired
                     var onShow = function() {
                         self._trigger('show', null,
                             self.ui(self.$tabs[o.selected], self.$panels[o.selected]));
                     };
-				
+
                     // load if remote tab
                     if ($.data(this.$tabs[o.selected], 'load.tabs'))
                         this.load(o.selected, onShow);
                     // just trigger show event
                     else onShow();
                 }
-			
+
                 // clean up to avoid memory leaks in certain versions of IE 6
                 $(window).bind('unload', function() {
                     self.$tabs.unbind('.tabs');
                     self.$lis = self.$tabs = self.$panels = null;
                 });
-			
+
             }
             // update selected after add/remove
             else
                 o.selected = this.$lis.index( this.$lis.filter('.' + o.selectedClass)[0] );
-		
+
             // set or update cookie after init and add/remove respectively
             if (o.cookie) this._cookie(o.selected, o.cookie);
-		
+
             // disable tabs
             for (var i = 0, li; li = this.$lis[i]; i++)
                 $(li)[$.inArray(i, o.disabled) != -1 && !$(li).hasClass(o.selectedClass) ? 'addClass' : 'removeClass'](o.disabledClass);
-		
+
             // reset cache if switching from cached to not cached
             if (o.cache === false) this.$tabs.removeData('cache.tabs');
-		
+
             // set up animations
             var hideFx, showFx;
             if (o.fx) {
@@ -4765,7 +4766,7 @@ if (!this.JSON) {
                 }
                 else hideFx = showFx = o.fx;
             }
-		
+
             // Reset certain styles left over from animation
             // and prevent IE's ClearType bug...
             function resetStyle($el, fx) {
@@ -4788,7 +4789,7 @@ if (!this.JSON) {
                 $show.removeClass(o.hideClass);
                 self._trigger('show', null, self.ui(clicked, $show[0]));
             };
-		
+
             // Hide a tab, $show is optional...
             var hideTab = hideFx ?
             function(clicked, $hide, $show) {
@@ -4802,7 +4803,7 @@ if (!this.JSON) {
                 $hide.addClass(o.hideClass);
                 if ($show) showTab(clicked, $show);
             };
-		
+
             // Switch a tab...
             function switchTab(clicked, $li, $hide, $show) {
                 var classes = [o.selectedClass];
@@ -4810,15 +4811,15 @@ if (!this.JSON) {
                 $li.addClass(classes.join(' ')).siblings().removeClass(classes.join(' '));
                 hideTab(clicked, $hide, $show);
             }
-		
+
             // attach tab event handler, unbind to avoid duplicates from former tabifying...
             this.$tabs.unbind('.tabs').bind(o.event + '.tabs', function() {
-			
+
                 //var trueClick = e.clientX; // add to history only if true click occured, not a triggered click
                 var $li = $(this).parents('li:eq(0)'),
                 $hide = self.$panels.filter(':visible'),
                 $show = $(self._sanitizeSelector(this.hash));
-			
+
                 // If tab is already selected and not deselectable or tab disabled or
                 // or is already loading or click callback returns false stop here.
                 // Check if click handler returns false last so that it is not executed
@@ -4831,9 +4832,9 @@ if (!this.JSON) {
                     this.blur();
                     return false;
                 }
-			
+
                 o.selected = self.$tabs.index(this);
-			
+
                 // if tab may be closed
                 if (o.deselectable) {
                     if ($li.hasClass(o.selectedClass)) {
@@ -4854,12 +4855,12 @@ if (!this.JSON) {
                         return false;
                     }
                 }
-			
+
                 if (o.cookie) self._cookie(o.selected, o.cookie);
-			
+
                 // stop possibly running animations
                 self.$panels.stop();
-			
+
                 // show new tab
                 if ($show.length) {
                     var a = this;
@@ -4874,33 +4875,33 @@ if (!this.JSON) {
                         );
                 } else
                     throw 'jQuery UI Tabs: Mismatching fragment identifier.';
-				
+
                 // Prevent IE from keeping other link focussed when using the back button
                 // and remove dotted border from clicked link. This is controlled via CSS
                 // in modern browsers; blur() removes focus from address bar in Firefox
                 // which can become a usability and annoying problem with tabs('rotate').
                 if ($.browser.msie) this.blur();
-			
+
                 return false;
-			
+
             });
-		
+
             // disable click if event is configured to something else
             if (o.event != 'click') this.$tabs.bind('click.tabs', function(){
                 return false;
             });
-		
+
         },
         add: function(url, label, index) {
             if (index == undefined)
                 index = this.$tabs.length; // append by default
-		
+
             var o = this.options;
             var $li = $(o.tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
             $li.data('destroy.tabs', true);
-		
+
             var id = url.indexOf('#') == 0 ? url.replace('#', '') : this._tabId( $('a:first-child', $li)[0] );
-		
+
             // try to find an existing element before creating a new one
             var $panel = $('#' + id);
             if (!$panel.length) {
@@ -4916,14 +4917,14 @@ if (!this.JSON) {
                 $li.insertBefore(this.$lis[index]);
                 $panel.insertBefore(this.$panels[index]);
             }
-		
+
             o.disabled = $.map(o.disabled,
                 function(n, i) {
                     return n >= index ? ++n : n
                 });
-		
+
             this._tabify();
-		
+
             if (this.$tabs.length == 1) {
                 $li.addClass(o.selectedClass);
                 $panel.removeClass(o.hideClass);
@@ -4931,28 +4932,28 @@ if (!this.JSON) {
                 if (href)
                     this.load(index, href);
             }
-		
+
             // callback
             this._trigger('add', null, this.ui(this.$tabs[index], this.$panels[index]));
         },
         remove: function(index) {
             var o = this.options, $li = this.$lis.eq(index).remove(),
             $panel = this.$panels.eq(index).remove();
-		
+
             // If selected tab was removed focus tab to the right or
             // in case the last tab was removed the tab to the left.
             if ($li.hasClass(o.selectedClass) && this.$tabs.length > 1)
                 this.select(index + (index + 1 < this.$tabs.length ? 1 : -1));
-		
+
             o.disabled = $.map($.grep(o.disabled, function(n, i) {
                 return n != index;
             }),
             function(n, i) {
                 return n >= index ? --n : n
             });
-		
+
             this._tabify();
-		
+
             // callback
             this._trigger('remove', null, this.ui($li.find('a')[0], $panel[0]));
         },
@@ -4960,7 +4961,7 @@ if (!this.JSON) {
             var o = this.options;
             if ($.inArray(index, o.disabled) == -1)
                 return;
-		
+
             var $li = this.$lis.eq(index).removeClass(o.disabledClass);
             if ($.browser.safari) { // fix disappearing tab (that used opacity indicating disabling) after enabling in Safari 2...
                 $li.css('display', 'inline-block');
@@ -4968,11 +4969,11 @@ if (!this.JSON) {
                     $li.css('display', 'block');
                 }, 0);
             }
-		
+
             o.disabled = $.grep(o.disabled, function(n, i) {
                 return n != index;
             });
-		
+
             // callback
             this._trigger('enable', null, this.ui(this.$tabs[index], this.$panels[index]));
         },
@@ -4980,10 +4981,10 @@ if (!this.JSON) {
             var self = this, o = this.options;
             if (index != o.selected) { // cannot disable already selected tab
                 this.$lis.eq(index).addClass(o.disabledClass);
-			
+
                 o.disabled.push(index);
                 o.disabled.sort();
-			
+
                 // callback
                 this._trigger('disable', null, this.ui(this.$tabs[index], this.$panels[index]));
             }
@@ -4995,20 +4996,20 @@ if (!this.JSON) {
             this.$tabs.eq(index).trigger(this.options.event + '.tabs');
         },
         load: function(index, callback) { // callback is for internal usage only
-		
+
             var self = this, o = this.options, $a = this.$tabs.eq(index), a = $a[0],
             bypassCache = callback == undefined || callback === false, url = $a.data('load.tabs');
-		
+
             callback = callback || function() {};
-		
+
             // no remote or from cache - just finish with callback
             if (!url || !bypassCache && $.data(a, 'cache.tabs')) {
                 callback();
                 return;
             }
-		
+
             // load remote from here on
-		
+
             var inner = function(parent) {
                 var $parent = $(parent), $inner = $parent.find('*:last');
                 return $inner.length && $inner.is(':not(img)') && $inner || $parent;
@@ -5021,29 +5022,29 @@ if (!this.JSON) {
                 });
                 self.xhr = null;
             };
-		
+
             if (o.spinner) {
                 var label = inner(a).html();
                 inner(a).wrapInner('<em></em>')
                 .find('em').data('label.tabs', label).html(o.spinner);
             }
-		
+
             var ajaxOptions = $.extend({}, o.ajaxOptions, {
                 url: url,
                 success: function(r, s) {
                     $(self._sanitizeSelector(a.hash)).html(r);
                     cleanup();
-				
+
                     if (o.cache)
                         $.data(a, 'cache.tabs', true); // if loaded once do not load them again
-				
+
                     // callbacks
                     self._trigger('load', null, self.ui(self.$tabs[index], self.$panels[index]));
                     try {
                         o.ajaxOptions.success(r, s);
                     }
                     catch (e) {}
-				
+
                     // This callback is required because the switch has to take
                     // place after loading has completed. Call last in order to
                     // fire load before show callback...
@@ -5126,24 +5127,24 @@ if (!this.JSON) {
     $.extend($.ui.tabs.prototype, {
         rotation: null,
         rotate: function(ms, continuing) {
-		
+
             continuing = continuing || false;
-		
+
             var self = this, t = this.options.selected;
-		
+
             function start() {
                 self.rotation = setInterval(function() {
                     t = ++t < self.$tabs.length ? t : 0;
                     self.select(t);
                 }, ms);
             }
-		
+
             function stop(e) {
                 if (!e || e.clientX) { // only in case of a true click
                     clearInterval(self.rotation);
                 }
             }
-		
+
             // start interval
             if (ms) {
                 start();
@@ -5165,7 +5166,7 @@ if (!this.JSON) {
     });
 
 })(jQuery);
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -5197,14 +5198,14 @@ Namespace.Manager.Register("fokus.openride.mobclient.controller");
 Namespace.Manager.Register("fokus.openride.mobclient.controller.modules");
 
 fokus.openride.mobclient.controller.serverconnector = function(){
-    
+
     /* ------ private variabeles and methods ------ */
 
     callbackWrapper = function(response, cbFunction) {
         // Check whether the session has expired, i.e. if the reponse contains an HTML #loginForm element:
         if (typeof response == "string" && response.indexOf("loginForm") != -1) {
             // Need to reload -> require the user to login again
-            location.href="./";       
+            location.href="./";
         }else if (typeof cbFunction == 'function'){
 
             // Coninue with actual callback function
@@ -5213,7 +5214,7 @@ fokus.openride.mobclient.controller.serverconnector = function(){
     }
 
     /* ------ public variabeles and methods ------ */
-    
+
     return {
         // Base URI - Leave empty for clients runnning on the same host:
         baseURI : '',
@@ -5326,7 +5327,7 @@ fokus.openride.mobclient.controller.serverconnector = function(){
 }();
 
 
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -5376,16 +5377,16 @@ fokus.openride.mobclient.controller.modules.nativemodule = function(){
         }
     };
 }();
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
 fokus.openride.mobclient.controller.modules.mapmanager = function(){
-    
+
     // --- --- private variables
     var srvconn = fokus.openride.mobclient.controller.serverconnector;
-	
+
     // --- main map entities
     var map;
     var geocoder;
@@ -5395,64 +5396,64 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
     var mapCenter;
     var usedAdressInput;
     var maximalZoom = 17;
-    
+
     // --- icon resources
-	
+
     //default icon vars
     var defIconPath = "../img/defaultpinicon.png";
     var defIconSizeX = 40;
     var defIconSizeY = 40;
     var defShadowPath = "../img/thumbshadow.png";
-	
+
     //route-start icon var
     var mainstartIconPath = "../img/startred.png";
     var mainstartIconSizeX = 40;
     var mainstartIconSizeY = 40;
-    
+
     //route destination point vars
     var maindstIconPath = "../img/zielred.png";
     var maindstIconSizeX = 40;
     var maindstIconSizeY = 40;
-    
+
     //viapt start point vars
     var mainviaptstartIconPath = "../img/mapicon2.png";
     var mainviaptstartIconSizeX = 21;
     var mainviaptstartIconSizeY = 30;
-    
+
     //via destination point vars
     var mainviaptdstIconPath = "../img/flagrdicon.png";
     var mainviaptdstIconSizeX = 20;
     var mainviaptdstIconSizeY = 15;
-	
+
     //via destination point vars
     var wayPtIconPath = "../img/waypoint.png";
     var wayPtIconSizeX = 28;
     var wayPtIconSizeY = 40;
-	
+
     var riderStartIconSizeX = 21;
     var riderStartIconSizeY = 30;
-	
+
     var riderDestIconSizeX = 23;
     var riderDestIconSizeY = 17;
-    
+
     var thumbiconpaths = ["../img/thumbcol1.png", "../img/thumbcol2.png", "../img/thumbcol3.png", "../img/thumbcol4.png", "../img/thumbcol5.png", "../img/thumbcol6.png"];
     var flagiconpaths = ["../img/flagcol1.png", "../img/flagcol2.png", "../img/flagcol3.png", "../img/flagcol4.png", "../img/flagcol5.png", "../img/flagcol6.png"];
-	
+
     var ridermarkers = new Array();
-	
+
     // --- state vars
-	
+
     var mapMode = 0;//default
     var PICK_LOC_MODE = 0;
     var SIMPLE_ROUTE_MODE = 1;
     var VIAPT_ROUTE_MODE = 2;
-	
+
     var routepathlatlns;
     var route;//PolyLine
     var routeopts//PolylineOptions
     var viastartptlatlns;
     var viadestptlatlns;
-	
+
     var combinedlatlns;
     var mappolyline = '';
     var routecorrectionptlatlns = '';
@@ -5461,10 +5462,10 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
     var markerposindex = 1;
 
     var DUMMYPOSITION = new google.maps.LatLng(47.66029,9.432982);
-	
+
     /*** define inner class DivMarker, which extends google.maps.OverlayView()
 	 * and allows adding text-or image based markers as overlay onto our map*/
-	
+
     /*function DivMarker(divPosLatLng, overlayMap){
 
     	google.maps.OverlayView.call(this);
@@ -5478,12 +5479,12 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 
   	DivMarker.prototype = new google.maps.OverlayView();
 
-  	DivMarker.prototype.draw = function() { 
+  	DivMarker.prototype.draw = function() {
 
     	var me = this;
 
 	    // Check if the div has been created.
-	
+
 	    var div = this.div_;
 
 	    if (!div) {
@@ -5505,7 +5506,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 			panes.overlayLayer.appendChild(div);
     	}
 
-	    // Position the overlay 
+	    // Position the overlay
     	var point = this.get_projection().fromLatLngToDivPixel(this.latlng_);
 
     	if(point){
@@ -5523,9 +5524,9 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 			this.div_ = null;
 	    }
 	};
-		
+
 	DivMarker.setText = function(text){
-		
+
 		// Check if the div has been created.
 	    var div = this.div_;
 	    if (!div) {
@@ -5534,8 +5535,8 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 		}
 		div.innerHTML = this.text_ = text;
 	}
-		
-	DivMarker.setImage = function(imgPath){		
+
+	DivMarker.setImage = function(imgPath){
 		// Check if the div has been created.
 	    var div = this.div_;
 	    if (!div) {
@@ -5546,13 +5547,13 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 		img.src = imgPath;
 		div.appendChild(img);
 	}*/
-	
+
     /** end of DivMarker code*/
 
     // --- --- public variables / methods
 
     return {
-		
+
         username : 'user',
 
         currentFormattedAddress: "1",
@@ -5585,10 +5586,10 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 });
             }
         },
-    
+
         //initialize map with draggable icon etc.
         initialize: function (mapdivid, addressinputid, userlocation){
-			
+
             usedAdressInput = addressinputid;
 
             //avoid collision with "this" from google maps namespace"
@@ -5615,7 +5616,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 
             //create map
             map = new google.maps.Map(document.getElementById(mapdivid), mapOptions);
-			
+
             //configure map ui corresponding to current state
             if(mapMode==PICK_LOC_MODE){
                 mapmanagerTHIS.updateAddressInfo(addressinputid);
@@ -5631,7 +5632,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 
                 google.maps.event.addListener(marker, "click", function() {
                     map.setZoom(15);
-					
+
                 });
 
                 google.maps.event.addListener(map, "click", function(event) {
@@ -5639,14 +5640,14 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                     mapmanagerTHIS.updateAddressInfo(addressinputid);
                 });
             }
-			
+
             if(mapMode==SIMPLE_ROUTE_MODE){
                 this.drawSimpleRoute();
             }else if(mapMode==VIAPT_ROUTE_MODE){
                 this.drawRouteWithViaPts();
             }
         },
-		
+
         setMapMode : function(mode){
             if(mode>=0)//caller takes care of upper bound, to allow adding more states
                 mapMode = mode;
@@ -5654,43 +5655,43 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         //handle error
         }
         },
-		
+
         setRoutePath : function(routeArray){
             routepathlatlns = routeArray;
         },
-		
+
         setViaStartPoints : function(viaptArray){
             viastartptlatlns = viaptArray;
         },
-		
+
         resetViaStartPoints : function(){
             viastartptlatlns = '';
         },
-		
+
         setViaDestPoints : function(viaptArray){
             viadestptlatlns = viaptArray;
         },
-		
+
         resetViaDestPoints : function(){
             viadestptlatlns = '';
         },
-		
+
         getRoutePath : function(){
             return routepathlatlns;
         },
-		
+
         getViaStartPoints : function(){
             return viaptstartlatlns;
         },
-		
+
         getViaDestPoints : function(){
             return viadestptlatlns;
         },
-		
+
         fitToBounds : function(bounds){
             map.fitBounds(bounds);
         },
-		
+
         parsesimpleroutecoords : function(routexml){
             var routearr = new Array();
             var routeExists = $(routexml).find('hasroute').text();
@@ -5705,10 +5706,10 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                             var separatorindex = coordstr.indexOf(',');
                             var latstr = coordstr.substr(0, separatorindex);
                             var lnstr = coordstr.substr(separatorindex+1, coordstr.length-separatorindex+1);
-	
+
                             var lat = parseFloat(latstr);
                             var ln = parseFloat(lnstr);
-	
+
                             var latlnObj = new google.maps.LatLng(lat, ln);
                             routearr.push(latlnObj);
                         }
@@ -5720,13 +5721,13 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 }
             }
         },
-		
+
         getPartialRoutes : function(){
 
             partialroutes = new Array();
 
             partialroutesloaded = true;
-	
+
             if(routecorrectionptlatlns.length && routecorrectionptlatlns.length>0){
                 for(var i= 0; i<routecorrectionptlatlns.length; i++ ){
                     var startlat = '';
@@ -5734,7 +5735,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                     var dstlat = '';
                     var dstln = '';
                     var corrpt	= '';
-	
+
                     if(i==0){
                         corrpt = routecorrectionptlatlns[i].getPosition();
                         startlat = routepathlatlns[0].lat();
@@ -5756,7 +5757,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                         dstlat = corrpt.lat();
                         dstln = corrpt.lng();
                     }
-					
+
 
                     var mapmanagerTHIS = this;
                     srvconn.GET('/OpenRideServer-RS/resources/users/'+this.username+'/routes/new,'+startlat+','+startln+','+dstlat+','+dstln, false, function(routexml){
@@ -5769,7 +5770,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                     });
                 }
 
-				
+
                 if(routecorrectionptlatlns.length==1){
                     corrpt = routecorrectionptlatlns[0].getPosition();
                     startlat = corrpt.lat();
@@ -5777,7 +5778,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                     dstlat = routepathlatlns[routepathlatlns.length-1].lat();
                     dstln = routepathlatlns[routepathlatlns.length-1].lng();
                 }
-				
+
                 var mapmanagerTHIS = this;
                 srvconn.GET('/OpenRideServer-RS/resources/users/'+this.username+'/routes/new,'+startlat+','+startln+','+dstlat+','+dstln, false, function(routexml){
                     var route = mapmanagerTHIS.parsesimpleroutecoords(routexml);
@@ -5792,13 +5793,13 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
 
 
         drawPartialRoutes : function(partialroutearr){
-			
+
             if(partialroutesloaded){
                 combinedlatlns = new Array();
-				
+
                 for(var j=0;j<partialroutearr.length;j++){
                     var partialroute = partialroutearr[j];
-					
+
                     for(var k=0; k<partialroute.length; k++){
 
                         combinedlatlns.push(partialroute[k]);
@@ -5806,13 +5807,13 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                     //	                    }
                     }
                 }
-				
+
                 //configure and draw polyline from route points
                 mappolyline.setMap(null);
                 mappolyline.setPath(combinedlatlns);
                 //draw polyline onto map
                 mappolyline.setMap(map);
-					
+
                 //create bounds object
                 var latlngbounds = new google.maps.LatLngBounds();
                 //add all route points to the bounds, to allow zooming to route span
@@ -5820,7 +5821,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 for(var l=0; l<len;l++){
                     latlngbounds.extend(combinedlatlns[l]);
                 }
-					
+
                 //adjust map zoom and center
                 map.fitBounds(latlngbounds);
             //map.setCenter(latlngbounds.getCenter());
@@ -5829,30 +5830,30 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         //draw something, if partial routes cannot be loaded - currently route stays unchanged + infomsg
         }
         },
-		
+
         addCorrectionPoint : function(){
-	
+
             var pos = '';
-			
+
             /*if(routecorrectionptlatlns!='' && routecorrectionptlatlns.length > 0)
-			
+
 			if(routecorrectionptlatlns.length && routecorrectionptlatlns.length>2){
 				markerposindex+=1;
 				if(markerposindex<routepathlatlns.length-1);
 					pos = routepathlatlns[1];
 			}*/
             pos = routepathlatlns[routepathlatlns.length-2];
-	            
+
             var ptimage = new google.maps.MarkerImage(wayPtIconPath,
                 new google.maps.Size(wayPtIconSizeX, wayPtIconSizeY),
                 new google.maps.Point(0,0),
                 new google.maps.Point(wayPtIconSizeX/2+2, (wayPtIconSizeY)));
-            
+
             var ptshadow = new google.maps.MarkerImage(defShadowPath,
                 new google.maps.Size(29, 34),
                 new google.maps.Point(0,0),
                 new google.maps.Point(-6, 35));
-            
+
             var ptmarker = new google.maps.Marker({
                 position: pos,
                 map: map,
@@ -5862,13 +5863,13 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 draggable: true,
                 clickable: false
             });
-            
+
             var lastpos = ptmarker.getPosition();
 
             google.maps.event.addListener(ptmarker, "dragstart", function() {
                 lastpos = ptmarker.getPosition();
             });
-			
+
             var mapmanagerTHIS = this;
             google.maps.event.addListener(ptmarker, "dragend", function() {
                 mapmanagerTHIS.getPartialRoutes();
@@ -5888,12 +5889,12 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         //            mapmanagerTHIS.getPartialRoutes();
         //            mapmanagerTHIS.drawPartialRoutes(partialroutes);
         },
-		
+
         drawSimpleRoute : function(){
             //check, if route has been fetched from OR-Server
             if(routepathlatlns != 'undefined' && typeof routepathlatlns != 'undefined'){
                 if(routepathlatlns.length>=2){
-					
+
                     //configure and draw polyline from route points
                     mappolyline = new google.maps.Polyline({
                         path : routepathlatlns,
@@ -5901,55 +5902,55 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                         strokeOpacity: 1.0,
                         strokeWeight: 2
                     });
-					
+
                     //create and add start and destination marker
                     createMarker('mainstart', routepathlatlns[0]);
                     createMarker('maindst', routepathlatlns[routepathlatlns.length-1]);
-					
+
                     //create bounds object
                     var bounds = new google.maps.LatLngBounds();
-					
+
                     //add all route points to the bounds, to allow zooming to route span
                     var len = routepathlatlns.length;
                     for(var i=0; i<len;i++)
                     {
                         bounds.extend(routepathlatlns[i]);
                     }
-					
+
                     //adjust map zoom and center
                     map.fitBounds(bounds);
                     //map.setCenter(bounds.getCenter());
-					
+
                     //draw polyline onto map
                     mappolyline.setMap(map);
                 }
             }else{// no route
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'no route (in draw)');
             }
-			
+
         //overlay debug test
         /*var textMarker = DivMarker(map.getCenter(), map);
 			textMarker.setText("test");*/
         },
-		
+
         drawRouteWithViaPts : function(){
             //draw route of drive
             this.drawSimpleRoute();
-			
+
             //add marker at rider fetch positions
             if (viastartptlatlns != 'undefined' && typeof viastartptlatlns != 'undefined') {
                 for(var index=0;index<viastartptlatlns.length;index++){
-                    
+
                     var mystartimage = new google.maps.MarkerImage(thumbiconpaths[(index%thumbiconpaths.length)],
                         new google.maps.Size(riderStartIconSizeX, riderStartIconSizeY),
                         new google.maps.Point(0,0),
                         new google.maps.Point(5, riderStartIconSizeY));
-                        
+
                     var mystartshadow = new google.maps.MarkerImage(defShadowPath,
                         new google.maps.Size(29, 34),
                         new google.maps.Point(0,0),
                         new google.maps.Point(-6, 35));
-                        
+
                     var mystartmarker = new google.maps.Marker({
                         position: viastartptlatlns[index],
                         map: map,
@@ -5968,17 +5969,17 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
             }
             if (viadestptlatlns != 'undefined' && typeof viadestptlatlns != 'undefined') {
                 for(var index=0;index<viadestptlatlns.length;index++){
-					
+
                     var mydestimage = new google.maps.MarkerImage(flagiconpaths[(index%flagiconpaths.length)],
                         new google.maps.Size(riderDestIconSizeX, riderDestIconSizeY),
                         new google.maps.Point(0,0),
                         new google.maps.Point(5, riderDestIconSizeY));
-                        
+
                     var mydestshadow = new google.maps.MarkerImage(defShadowPath,
                         new google.maps.Size(29, 34),
                         new google.maps.Point(0,0),
                         new google.maps.Point(-6, 35));
-                        
+
                     var mydestmarker = new google.maps.Marker({
                         position: viadestptlatlns[index],
                         map: map,
@@ -5989,7 +5990,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                         clickable: false,
                         zIndex: index
                     });
-                        
+
                     ridermarkers.push(mydestmarker);
                 }
             }
@@ -5997,7 +5998,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         //no via dest points
         }
         },
-		
+
         resetRiderMarkers : function(){
             for(var i=0;i<ridermarkers.length;i++){
                 ridermarkers[i].setMap(null);
@@ -6030,7 +6031,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         },
 
         insertRevGeocodedAddr : function(latLn, htmlelemid){
-        	
+
             //var latLng = correctPosition(new google.maps.LatLng(latLn.coords.latitude, latLn.coords.longitude));
             var latLng = new google.maps.LatLng(latLn.coords.latitude, latLn.coords.longitude);
             geocoder = new google.maps.Geocoder();
@@ -6104,18 +6105,18 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         getLocationLonFromString : function(locationAsString){
             this.getLocationFromString(locationAsString).lng();
         },
-		
+
         setMapToLocation : function(centerLatLon){
             setCenter(centerLatLon);
             this.updateAddressInfo(usedAdressInput);
         },
-		
+
         zoomIn : function(){
             var currentZoom = map.getZoom();
             if(currentZoom < maximalZoom)
                 map.setZoom(currentZoom + 1);
         },
-		
+
         zoomOut : function(){
             var currentZoom = map.getZoom();
             if(currentZoom > 0)
@@ -6147,7 +6148,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'The coordinates were able to validate unfortunately not be delivered. Error: '+s)
             });
         }catch(e){
-	
+
         }
         finally{
             var lat = //coords.split(",")[0];
@@ -6202,19 +6203,19 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 zIndex: 5
             });
         }
-        
+
         else if(type == 'mainstart'){
-            
+
             var image = new google.maps.MarkerImage(mainstartIconPath,
                 new google.maps.Size(mainstartIconSizeX, mainstartIconSizeY),
                 new google.maps.Point(0,0),
                 new google.maps.Point(mainstartIconSizeX/2, mainstartIconSizeY));
-			
+
             var shadow = new google.maps.MarkerImage(defShadowPath,
                 new google.maps.Size(29, 34),
                 new google.maps.Point(0,0),
                 new google.maps.Point(5, 35));
-            
+
             startmarker = new google.maps.Marker({
                 position: position,
                 map: map,
@@ -6227,19 +6228,19 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
             });
             marker = startmarker;
         }
-        
+
         else if(type == 'maindst'){
-            
+
             var image = new google.maps.MarkerImage(maindstIconPath,
                 new google.maps.Size(maindstIconSizeX, maindstIconSizeY),
                 new google.maps.Point(0,0),
                 new google.maps.Point((maindstIconSizeX/2), maindstIconSizeY));
-            
+
             var shadow = new google.maps.MarkerImage(defShadowPath,
                 new google.maps.Size(29, 34),
                 new google.maps.Point(0,0),
                 new google.maps.Point(-6, 35));
-            
+
             destmarker = new google.maps.Marker({
                 position: position,
                 map: map,
@@ -6251,19 +6252,19 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 zIndex: 100
             });
         }
-        
+
         else if(type == 'viastart'){
-            
+
             var image = new google.maps.MarkerImage(mainviaptstartIconPath,
                 new google.maps.Size(mainviaptstartIconSizeX, mainviaptstartIconSizeY),
                 new google.maps.Point(0,0),
                 new google.maps.Point(0, (mainviaptstartIconSizeY)));
-            
+
             var shadow = new google.maps.MarkerImage(defShadowPath,
                 new google.maps.Size(29, 34),
                 new google.maps.Point(0,0),
                 new google.maps.Point(-6, 35));
-            
+
             startmarker = new google.maps.Marker({
                 position: position,
                 map: map,
@@ -6275,22 +6276,22 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
                 clickable: false,
                 zIndex: 10
             });
-            
+
             marker = startmarker;
         }
-        
+
         else if(type == 'viadst'){
-            
+
             var image = new google.maps.MarkerImage(mainviaptdstIconPath,
                 new google.maps.Size(mainviaptdstIconSizeX, mainviaptdstIconSizeY),
                 new google.maps.Point(0,0),
                 new google.maps.Point(0, (mainviaptdstIconSizeY)));
-            
+
             var shadow = new google.maps.MarkerImage(defShadowPath,
                 new google.maps.Size(29, 34),
                 new google.maps.Point(0,0),
                 new google.maps.Point(-6, 35));
-            
+
             destmarker = new google.maps.Marker({
                 position: position,
                 map: map,
@@ -6303,21 +6304,21 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
             });
         }
     }
-    
+
     function createViaPt(position){
-    	
+
         var newMarker;
-    	
+
         var image = new google.maps.MarkerImage(mainviaptstartIconPath,
             new google.maps.Size(mainviaptstartIconSizeX, mainviaptstartIconSizeY),
             new google.maps.Point(0,0),
             new google.maps.Point(0, (mainviaptstartIconSizeY)));
-            
+
         var shadow = new google.maps.MarkerImage(defShadowPath,
             new google.maps.Size(29, 34),
             new google.maps.Point(0,0),
             new google.maps.Point(-6, 35));
-            
+
         newMarker = new google.maps.Marker({
             position: position,
             map: map,
@@ -6329,7 +6330,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
         });
         return newMarker;
     }
-	
+
     function setCenter (centerLatLon){
         //mapCenter = correctPosition(centerLatLon);
         mapCenter = centerLatLon;
@@ -6338,7 +6339,7 @@ fokus.openride.mobclient.controller.modules.mapmanager = function(){
     }
 
 }();
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -6502,7 +6503,7 @@ fokus.openride.mobclient.controller.modules.offer = function(){
         }
 
     };
-}();/* 
+}();/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -6530,7 +6531,7 @@ fokus.openride.mobclient.controller.modules.search = function(){
         }
         ]
     }
-                
+
     return {
         validateSearchRequest : function(){
             return newsearch;
@@ -6569,7 +6570,7 @@ fokus.openride.mobclient.controller.modules.search = function(){
         getStartLon : function(){
             return newsearch.Search[0].ridestartPtLon;
         },
-		
+
         setStartAddr : function(startaddr){
             newsearch.Search[0].startptAddress = startaddr;
         },
@@ -6603,7 +6604,7 @@ fokus.openride.mobclient.controller.modules.search = function(){
         getDestLon : function(){
             return newsearch.Search[0].rideendPtLon;
         },
-		
+
         setDestAddr : function(destaddr){
             newsearch.Search[0].endptAddress = destaddr;
         },
@@ -6662,7 +6663,7 @@ fokus.openride.mobclient.controller.modules.search = function(){
             return newsearch.Search[0].savetemplate;
         }
     };
-}();/* 
+}();/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -6684,7 +6685,7 @@ fokus.openride.mobclient.controller.modules.favorites = function(){
     /*{"list":[{"FavoritePointResponse":[{"favptId":9652,"favptAddress":"Brandenburg Gate, Pariser Platz 7, 10117 Berlin, Germany","favptDisplayName":"Brandenburg Gate"},
 						{"favptId":9653,"favptAddress":"Kaiserin-Augusta-Allee 31, 10589 Berlin, Germany","favptDisplayName":"Kaiserin-Augusta-Allee 31"},
 						{"favptId":9654,"favptAddress":"Technical University of Berlin","favptDisplayName":"Technical University of Berlin"}]}]}*/
-                
+
     return {
 
         setAddress : function(addrstr){
@@ -6735,7 +6736,7 @@ fokus.openride.mobclient.controller.modules.ratings = function(){
         }
         ]
     }
-    
+
     var respReceivedRating = {
         'ReceivedRatingResponse':[
         {
@@ -7037,7 +7038,7 @@ fokus.openride.mobclient.controller.modules.profile = function(){
     };
 }();
 
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -7246,7 +7247,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
     var calendar = fokus.openride.mobclient.controller.modules.calendar;
     var userProfile =fokus.openride.mobclient.controller.modules.profile;
 
-    
+
     usermode = DRIVERMODE;
 
     var offerstartdropdownid = 'offerstartdropd';
@@ -7906,7 +7907,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     var omin = startDate.getMinutes();
                     if(omin < 10)omin = '0'+omin;
 
-                    sb.append('<li><a name="r'+entry.rideId+'"></a>');                    
+                    sb.append('<li><a name="r'+entry.rideId+'"></a>');
                     if (entry.updated == true) {
                         sb.append('<h3 class="linkslide_0 updated" id="r'+entry.rideId+'">');
                         sb.append('<span class="update" style="float: right; background: red; color: #fff; border: 0px solid #fff; -moz-border-radius: 8px; border-radius: 8px; font-size: 12px; line-height: 18px; text-align: center; font-weight: bold; width: auto; padding: 0 6px; margin-right: 10px;">Update!</span>');
@@ -8196,7 +8197,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 alert(activesearchlist);
                 if(usermode==RIDERMODE)
                     var completedrides = JSON.parse(activesearchlist);
-                
+
             } catch (e) {
                 alert('rider unable to parse JSON');
             }
@@ -8298,13 +8299,13 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     sb.clear();
                     sb.append('<h3>No old offers available.</h3>');
                 }
-            
+
             }
             document.getElementById(this.completedtrips).innerHTML = sb.toString();
 
             setupCompletedTripUITabList(); */
             //RIDESHARE
-            
+
             for (var i=0; i<rides.length; i++)
             {
                 if (!rides.hasOwnProperty(i)) continue;
@@ -8475,7 +8476,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 else{//no route
                 //return false;
                 }
-                
+
                 //parse viapoint destination coords
                 var viadestptarr = new Array();
                 if(routeResult.list[0].list[2]){
@@ -8485,7 +8486,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                         for(var i=0;i< routeResult.list[0].list[2].Coordinate.length; i++){
                             var entry = routeResult.list[0].list[2].Coordinate[i];
-	
+
                             var coordLat1 = entry.latititude;
                             var coordLon1 = entry.longitude;
 
@@ -8504,7 +8505,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             }, function(){
                 //implemet error callback here
                 showOverlayDialog('Route could not be determined. Please check your internet connection!', '', 'OK', '', '', '');
-                return false; 
+                return false;
             });
         },
 
@@ -8546,7 +8547,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                         });
                     }
-                   
+
                     for(var i=0;i< result.list[0].MatchResponse.length; i++){
                         var entry = result.list[0].MatchResponse[i];
                         this.tmpRide = entry;
@@ -8577,8 +8578,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         else if (isrejected)
                             stateHighlightColor = '#ffe4e1'; // red
 
-                    
-                    
+
+
                         // Beginning of matching row:
                         sb.append('<div class="matching-row" style="padding: 5px; border-top: 1px solid #e2e2e2;">');
 
@@ -8702,10 +8703,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         sb.append('  <a href="http://www.efa-bw.de/nvbw/XSLT_TRIP_REQUEST2?language=de">Alternativ &uuml;ber die &Ouml;PNV-Fahrplanauskunft Ba-W&uuml; search</a><br /><br />');
                         sb.append('    <input type="button" class="rounded compact" value="&Auml;ndern" onclick="'+modRide+'" style="width: 141px;" />');
                         sb.append('    <input type="button" class="rounded compact" value="L&ouml;schen" onclick="'+deleteRideInvocation+'" style="width: 141px;" />');
-                
+
                         var searchExternalLink = "javascript:window.location.href='http://www.efa-bw.de/nvbw/XSLT_TRIP_REQUEST2?language=de'";
                         sb.append('    <br /><br /><input type="button" class="rounded compact" value="Im &Ouml;PNV suchen" onclick="'+searchExternalLink+'" style="width: 290px;" />');
-                	
+
                         /*Here the rider route (centered on the fetch point) wlil be linked to the button*/
                         var showFetchPtInvocation = "fokus.openride.mobclient.controller.modules.modulemanager.setFullScreenMapView('searchroutegmapscreencontainer');"
                         sb.append('  <div style="padding: 5px 0; text-align: center;">');
@@ -8757,7 +8758,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //alert(id + ' hello from us ' + rides[id]);
             if (rideId.charAt(0) == 'u') unmatched = true;
             else prp = JSON.parse(rides[id]);
-            
+
             //alert('id '+id+' '+rides[id]);
             var stateHighlightColor = '#fffacd';
             var acc = "myaccept('"+id+"')";
@@ -8796,7 +8797,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     else
                         RideShareSB.append('<small>Waiting for confirmation of driver! </small>');
                 }
-                    
+
             }
             else
             {
@@ -8810,7 +8811,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             RideShareSB.append('    </form>');
             RideShareSB.append('  </div>');
             var counterparts = '';
-            
+
             if (usermode == DRIVERMODE) counterparts = prp.commuters;
             else    counterparts = prp.driver;
             if (typeof counterparts === "undefined") counterparts = 'none';
@@ -9044,10 +9045,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 activeMatchContentDiv = contentDiv;
             }
             activeMatchContentDiv[0].innerHTML = RideShareSB.toString();
-                
-                
+
+
         },
-      
+
         parseinactivematcheslist : function(rideId, contentDiv){
 
             var sb = new StringBuilder();
@@ -9379,7 +9380,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             else {
                 // We're still awaiting a response => candidate match view
                 if (usermode == DRIVERMODE) {
-                    
+
                     acceptOnClickAction = 'fokus.openride.mobclient.controller.serverconnector.PUTaction(\'/OpenRideServer-RS/resources/users/'+ this.username +'/rides/offers/'+ rideId +'/matches/'+ riderRouteId +'/accept\', false, function() {fokus.openride.mobclient.controller.modules.modulemanager.receiveMatches(\'r'+rideId+'\', false)}, function(x,s,e) { fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,\'This inquiry is sadly no longer available.\')})';
                     rejectOnClickAction = 'fokus.openride.mobclient.controller.serverconnector.PUTaction(\'/OpenRideServer-RS/resources/users/'+ this.username +'/rides/offers/'+ rideId +'/matches/'+ riderRouteId +'/reject\', false, function() {fokus.openride.mobclient.controller.modules.modulemanager.receiveMatches(\'r'+rideId+'\', false)}, function(x,s,e) { fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,\'This inquiry is sadly no longer available.\')})';
 
@@ -9462,7 +9463,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             // Create dynamic list depending on usermode
             if (usermode == DRIVERMODE) {
             // Get all matches for ride.
-                
+
             /*srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/rides/offers/'+rideId.replace('r','')+'/matches',
                     false, this.setMatches, function(x,s,e) {
                         clearInterval(tabListActiveRefreshTimer);
@@ -9998,7 +9999,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         },
         parseprofilepersonaldata : function(result){
             //alert(result);
-            
+
             //if(typeof (result.ProfileResponse) != 'undefined'){
             //                var personalData = result;//result.ProfileResponse;
             //                personalDetails = result;//result.ProfileResponse;
@@ -10023,6 +10024,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 dateOfBirthString = ''; //<em>nicht angegeben</em>';
             }
             //alert(dateOfBirth);
+<<<<<<< HEAD
 
             document.getElementById('profilepersonaldatadateofbirth').value = dateOfBirthString;
             document.getElementById('profilepersonaldataemail').value = $("<div />").html(personalData.email).text();
@@ -10059,6 +10061,44 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 document.getElementById('profilepersonaldatacarplateno').value = $("<div />").html(personalData.carPlateNo).text() || '';
             }
 
+=======
+
+            document.getElementById('profilepersonaldatadateofbirth').value = dateOfBirthString;
+            document.getElementById('profilepersonaldataemail').value = $("<div />").html(personalData.email).text();
+            document.getElementById('profilepersonaldatamobilephonenumber').value = personalData.mobilePhoneNumber || '';
+            //document.getElementById('profilepersonaldatafixedphonenumber').value = personalData.fixedPhoneNumber || '';
+            if (personalData.streetAddress) {
+                document.getElementById('profilepersonaldatastreetaddress').value = $("<div />").html(personalData.streetAddress).text() || '';
+            }
+            document.getElementById('profilepersonaldatazipcode').value = personalData.zipCode || '';
+            if (personalData.city) {
+                document.getElementById('profilepersonaldatacity').value = $("<div />").html(personalData.city).text() || '';
+            }
+            //alert(personalData.isSmoker);
+            if (personalData.isSmoker == 'n') {
+                isSmokerOption = 'profilepersonaldataissmoker-no';
+            }
+            else if (personalData.isSmoker == 'y') {
+                isSmokerOption = 'profilepersonaldataissmoker-yes';
+            }
+            else {
+                isSmokerOption = 'profilepersonaldataissmoker-null';
+            }
+            document.getElementById(isSmokerOption).checked = 'checked';
+
+            //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
+            if (personalData.carColour) {
+                document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
+            }
+            if (personalData.carBrand) {
+                document.getElementById('profilepersonaldatacarbrand').value = $("<div />").html(personalData.carBrand).text() || '';
+            }
+            //document.getElementById('profilepersonaldatacarbuildyear').value = personalData.carBuildYear || '';
+            if (personalData.carPlateNo) {
+                document.getElementById('profilepersonaldatacarplateno').value = $("<div />").html(personalData.carPlateNo).text() || '';
+            }
+
+>>>>>>> a13191b391e1a40922ac0279d302204115c4467e
         // }
         },
 
@@ -10560,7 +10600,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             document.getElementById("ratingssummarymediocre").innerHTML = friend;//entry.ratingsLatestMediocre;
         //document.getElementById("numofratings").innerHTML = numofraters;
         //Add Badges
-            
+
         },
 
         parseopenratingslist : function(openratingslistdiv, resultlist){
@@ -10601,7 +10641,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     var obj = JSON.parse(data);
                     var subjectId=obj.subject_id;
                     var events = obj["authored_reports"];
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> a13191b391e1a40922ac0279d302204115c4467e
                     var ratedRides = [];
                     if (events!='undefined'){
                         //alert('here');
@@ -10674,7 +10718,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             });
         },
 
-       
+
 
 
         postrating : function(riderRouteId, rating, ratingComment){
@@ -11149,7 +11193,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     },
                     contentType: "text/turtle",
                     async: "true",
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> a13191b391e1a40922ac0279d302204115c4467e
                     success: function(data , textStatus) {
                     //alert('success '+data);
                     },
@@ -11169,7 +11217,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 parseOffer  = this.parseactiveofferlist;
                 var parseUnmatchedOffer = this.parseUnmatchedRideRequest;
                 dummyTHIS = this;
-               
+
                 var t = fokus.openride.mobclient.controller.modules.modulemanager.username;
                 /********* IDENTITY ********/
                 if (usermode == DRIVERMODE)
@@ -11197,7 +11245,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var sum = 0;
                 var counttime=0;
                 /********* IDENTITY ********/
-                
+
                 $.ajax
                 ({
                     type: "GET",
@@ -11223,7 +11271,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert('success in ajax call!! ' + data.data);
                         //alert(data.data[0])
                         //alert("start ajax call");
-                        
+
                         var allRequests={};
 
                         allRequests.data=[];
@@ -11315,7 +11363,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 // rideRequests.pop();                                    }
                                 }//end plans for
                                 //alert(JSON.stringify(documentToFill));
-                               
+
                                 $.ajax({
                                     type: "POST",
                                     url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/?action=getSet",
@@ -11350,7 +11398,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     }
                                 })
                             //alert(rideRequests.length);
-                                
+
                             },
                             error: function(jq , textStatus , errorThrown){
                                 //                                alert('state: ' + jq.readyState);
@@ -11374,10 +11422,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 })
                 //alert('this is url after function '+ parsedUrl + 'stringified ' + JSON.stringify(parsedUrl))
                 this.parseactiveofferlist();
-                
+
             //alert('avg = ' + sum+'/'+counttime);
             }
-            
+
             else if(viewId == 'completedtripsUI'){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
@@ -11620,7 +11668,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
             }
             else if(viewId == 'ratingsUI'){
-                
+
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
                 //            srvconn.GET('OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
@@ -11686,7 +11734,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 user = readCookie('username');
                 pass = readCookie('password');
-                
+
                 /********* IDENTITY ********/
                 var dummyparseratingssummary = this.parseratingssummary;
                 var dummydiv = this.parseratingssummarydiv;
@@ -12182,7 +12230,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             this.currentdisplayedview = viewId;
             this.detailsClicked = false;
-            
+
         },
 
         dummy : function() {
@@ -12380,7 +12428,7 @@ function dumpProps(obj, parent) {
         }
     }
 }
-/* 
+/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -12405,7 +12453,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
     var profilepic = '';
 
     var timer = true;
-	
+
     var showofferrouteUI = 'showofferrouteUI';
 
     var offerstartdropdownid = 'offerstartdropd';
@@ -12467,7 +12515,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
         if(labels.length>2){
             focusdatelabelid = id;
         }else focustimelabelid = id;
-        
+
         for(var i=0; i< labels.length; i++){
             if(labels[i] == id){
                 document.getElementById(id).className = 'labelStyleOnFocus';
@@ -12522,7 +12570,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
         var newoption = document.createElement('option');
         newoption.innerHTML = mapmod.currentFormattedAddress;
         //newoption.innerHTML = mapmod.currentFormattedAddress.substring(0, 24);
-        
+
         newoption.latln = mapmod.getCenterPosition().lat()+','+mapmod.getCenterPosition().lng();
         newoption.mod = true;
 
@@ -12542,10 +12590,10 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
         }
     /*document.getElementById(dropdownid).options[0].innerHTML = mapmod.currentFormattedAddress.substring(0, 24); */
     }
-    
+
     /* ------ public variabeles and methods ------ */
     return {
-		
+
         ajaxsuccess : false,
 
         validationerror : false,
@@ -12615,7 +12663,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             });
             //            alert(JSON.stringify(profile));
             profilepic = initData.InitResponse.profilpic;
-            
+
             modulemanagermod.username = username;
             mapmod.username = username;
             //username and password are identical!!!!!
@@ -12676,15 +12724,15 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 document.getElementById("homeinfoopenratings-plural").style.display = 'inline';
             }
 
-            
+
 
             // Update notifications
             modulemanagermod.setriderupdatecount(initData.InitResponse.updatedsearches);
-            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);            
+            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);
 
             // Profile data - upload form action
             document.getElementById("profilepictureform").action = "../resources/users/"+username+"/profile/picture";
-            
+
             return true;
         },
 
@@ -12723,7 +12771,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
         timerStop : function() {
             timer = false;
         },
-        
+
         //init setup
         start: function(){
             modulemanagermod.setupTabs();
@@ -12734,7 +12782,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             // Restore previous mode from cookie
             if (readCookie('usermode') == 1) // Rider mode -> need to switch from default
                 modulemanagermod.changemode();
-            
+
             // Enable homeUI
             document.getElementById("homeUI_loading").style.display = "none";
             document.getElementById("homeUI_live").style.display = "block";
@@ -12747,7 +12795,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             var homeActiveOffers = document.getElementById("homeActiveOffers");
 
             homeActiveOffers.onclick = function () {
-                
+
                 modulemanagermod.changeViewAndUserMode('offers');
             };
 
@@ -13035,7 +13083,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             /* ------ new offer related elements ------ */
 
             var newOfferDdArrow = document.getElementById('newOfferDdArrow');
-            
+
             if(newOfferDdArrow) {
                 newOfferDdArrow.onclick = function() {
                     var adrInput = document.getElementById('newOfferFrom');
@@ -13122,7 +13170,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 alert('Startadresse: ' + startAdressStr + 'Zieladresse: ' + destAdressStr);
 
                  */
-                
+
                 var determiningLocation = 'Location...';
 
                 if ((document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text == determiningLocation) ||
@@ -13314,7 +13362,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //                    else newRideRequest.departureCity = tempdepCity[tempdepCity.length-1];
 
 
-        
+
                     newRideRequest.destinationCity = document.getElementById('offerendcombo')[document.getElementById('offerendcombo').selectedIndex].text;
 
                     //                    var desCity = offermod.getDestAddr().split(", ");
@@ -13324,7 +13372,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //                    else if (tempdesCity.length > 1)
                     //                        newRideRequest.departureCity = tempdesCity[tempdesCity.length-2] + " " +tempdesCity[tempdesCity.length-1];
                     //                    else newRideRequest.destinationCity = tempdesCity[tempdesCity.length-1];
-        
+
                     // Figure out datetime for departure based on the input
                     var tempDateLow1                      = offermod.getStartTime();//'1/11/2013';
                     var tempTimeLow1                      = '18:00';
@@ -13433,35 +13481,35 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 getRideDetails();
                 postRide();
             //alert("returned from post!! " + urlInParsedJson);
-            
+
 
             }
 
             var offershowroutepickerlink = document.getElementById('offershowroutepickerlink');
             offershowroutepickerlink.href = "javascript:void(0);";
-			
+
             offershowroutepickerlink.onclick = function(){
-				
+
                 var startlatlnstr = document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].latln;
-				
+
                 var startseparatorindex = startlatlnstr.indexOf(',');
                 var startlatstr = startlatlnstr.substr(0, startseparatorindex);
                 var startlnstr = startlatlnstr.substr(startseparatorindex+1, startlatlnstr.length-startseparatorindex+1);
-				
+
                 var startlat = parseFloat(startlatstr);
                 var startln = parseFloat(startlnstr);
-				
+
                 var dstlatlnstr = document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].latln;
-				
+
                 var dstseparatorindex = dstlatlnstr.indexOf(',');
                 var dstlatstr = dstlatlnstr.substr(0, dstseparatorindex);
                 var dstlnstr = dstlatlnstr.substr(dstseparatorindex+1, dstlatlnstr.length-dstseparatorindex+1);
-				
+
                 var dstlat = parseFloat(dstlatstr);
                 var dstln = parseFloat(dstlnstr);
-				
+
                 //stop changing screens and give user info, if start equals destination
-                if(startlat==dstlat && startln==dstln){				                   
+                if(startlat==dstlat && startln==dstln){
                     showOverlayDialog('Start and finish may not be identical, please select new!', '', 'OK', '', '', '');
                     return false;
                 }
@@ -13476,36 +13524,36 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     showOverlayDialog('The route could not be loaded! Please try again later.', '', 'OK', '', '', '');
                 });
             }
-			
+
             var searchroutepickerlink = document.getElementById('searchroutepickerlink');
             searchroutepickerlink.href = "javascript:void(0);";
-			
+
             searchroutepickerlink.onclick = function(){
-				
+
                 var startlatlnstr = document.getElementById(searchstartdropdownid)[document.getElementById(searchstartdropdownid).selectedIndex].latln;
-				
+
                 var startseparatorindex = startlatlnstr.indexOf(',');
                 var startlatstr = startlatlnstr.substr(0, startseparatorindex);
                 var startlnstr = startlatlnstr.substr(startseparatorindex+1, startlatlnstr.length-startseparatorindex+1);
-				
+
                 var startlat = parseFloat(startlatstr);
                 var startln = parseFloat(startlnstr);
-				
+
                 var dstlatlnstr = document.getElementById(searchdestdropdownid)[document.getElementById(searchdestdropdownid).selectedIndex].latln;
-				
+
                 var dstseparatorindex = dstlatlnstr.indexOf(',');
                 var dstlatstr = dstlatlnstr.substr(0, dstseparatorindex);
                 var dstlnstr = dstlatlnstr.substr(dstseparatorindex+1, dstlatlnstr.length-dstseparatorindex+1);
-				
+
                 var dstlat = parseFloat(dstlatstr);
                 var dstln = parseFloat(dstlnstr);
-				
+
                 //stop changing screens and give user info, if start equals destination
                 if(startlat==dstlat && startln==dstln){
                     showOverlayDialog('Start and finish may not be identical, please select new!', '', 'OK', '', '', '');
                     return false;
                 }
-					
+
 
                 srvconn.GET('/OpenRideServer-RS/resources/users/'+username+'/routes/new,'+startlat+','+startln+','+dstlat+','+dstln, false, function(routexml){
                     var routeFound = modulemanagermod.parsesimpleroute(routexml);
@@ -13517,17 +13565,17 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     showOverlayDialog('The route could not be loaded! Please try again later.', '', 'OK', '', '', '');
                 });
             }
-			
+
             var offerroutebackbtnlink = document.getElementById('offerroutebackbtnlink');
             offerroutebackbtnlink.href = "javascript:void(0);";
-			
+
             offerroutebackbtnlink.onclick = function(){
                 modulemanagermod.setView('newofferUI');
             }
-			
+
             var searchroutebackbtnlink = document.getElementById('searchroutebackbtnlink');
             searchroutebackbtnlink.href = "javascript:void(0);";
-			
+
             searchroutebackbtnlink.onclick = function(){
                 modulemanagermod.setView('newsearchUI');
             }
@@ -13749,7 +13797,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     newRideRequest.__v = 0;
                     newRideRequest._revision = 0;
                     newRideRequest._id = "";
-        
+
                     newRideRequest.rideRecord           = ""; 		// string: link to the ride record associated with the ride request
 
                     if (readCookie('usermode') == 1)            newRideRequest.mode                 = "commuter";
@@ -13765,9 +13813,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //newRideRequest.capacity          = defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_CAPACITY($('#dropDownCapacityList').find(':selected').text());
                     newRideRequest.capacity             = "1";//document.getElementById('nrplacesselect').selectedIndex+1;//"2";
 
-                    
+
                     /* Now deal with the rest*/
-	 
+
                     newRideRequest.departureCity = document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text;
                     newRideRequest.destinationCity = document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text;
 
@@ -13786,7 +13834,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //                    else if (tempdesCity.length > 1)
                     //                        newRideRequest.departureCity = tempdesCity[tempdesCity.length-2] + " " +tempdesCity[tempdesCity.length-1];
                     //                    else newRideRequest.destinationCity = tempdesCity[tempdesCity.length-1];
-       
+
                     // Figure out datetime for departure based on the input
                     var tempDateLow1                      = searchmod.getStartTime();//'1/11/2013';
                     var tempTimeLow1                      = '18:00';
@@ -13972,7 +14020,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             offerstartselectlink.href = "javascript:void(0);";
 
             var offerstartdropd = document.getElementById('offerstartdropd');
-            
+
             offerstartselectlink.onclick = function(){
                 var clickevent=document.createEvent("MouseEvents");
                 clickevent.initEvent("select", true, true);
@@ -13981,7 +14029,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             }*/
 
             /* ------ configure full-screen gmap-related layout elements start ------ */
-            
+
             //offer start
             var offerstartgmapaddressinput = document.getElementById('offerstartgmapaddressinput');
             offerstartgmapaddressinput.onchange = function(){
@@ -14013,7 +14061,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             offerstartgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-			
+
             //offer destintation
             var offerdestgmapaddressinput = document.getElementById('offerdestgmapaddressinput');
             offerdestgmapaddressinput.onchange = function(){
@@ -14045,7 +14093,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             offerdestgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //search start
             var searchstartgmapaddressinput = document.getElementById('searchstartgmapaddressinput');
             searchstartgmapaddressinput.onchange = function(){
@@ -14109,7 +14157,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             searchdestgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //favorites
             var favoritesgmapaddressinput = document.getElementById('favoritesgmapaddressinput');
             favoritesgmapaddressinput.onchange = function(){
@@ -14140,7 +14188,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             favoritesgmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //simple offer route view
             var offerroutegmapbackbtn = document.getElementById('offerroutegmapbackbtn');
             offerroutegmapbackbtn.onclick = function(){
@@ -14158,7 +14206,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             offerroutegmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //simple search route view
             var searchroutegmapbackbtn = document.getElementById('searchroutegmapbackbtn');
             searchroutegmapbackbtn.onclick = function(){
@@ -14172,7 +14220,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             searchroutegmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             //route with viapoints view
             var viaptroutegmapbackbtn = document.getElementById('viaptroutegmapbackbtn');
             viaptroutegmapbackbtn.onclick = function(){
@@ -14187,10 +14235,10 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             viaptroutegmapzoomoutbtn.onclick = function(){
                 mapmod.zoomOut();
             };
-            
+
             /* ------ configure full-screen gmap-related layout elements end ------ */
-            
-            
+
+
             //old - to be removed after testing new fullscreen version
             /* ------ configure map-related layout elements ------ */
 
@@ -14494,7 +14542,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'A place with this name already exists.')
             } );
         },
-        
+
         addFavFromFullscreenMap : function(){
             var inputaddr = document.getElementById('favoritesgmapaddressinput').value;
             favmod.setAddress(inputaddr);
@@ -14643,7 +14691,7 @@ function fix(id1)
     }
     for (var i=1; i<personal+1; i++)
         document.getElementById(i + riderId + category).src = "../../OpenRideWeb/img/rating_on.gif";
-            
+
     riderId = parseInt(riderId);
     //alert("glob " + riderId +" ["+ submitted_rides[riderId] + "] " + category);
     submitted_rides[riderId][category] = personal;
@@ -14672,7 +14720,7 @@ function submit (rate_array , riderId )
         crossDomain: true,
         username : user,
         password : pass,
-        
+
         beforeSend: function (xhr)
         {
             xhr.setRequestHeader('Authorization' , 'Basic ' + user+':'+pass);
@@ -14704,7 +14752,11 @@ function submit (rate_array , riderId )
                 '"subject_'+(ind++)+'":{"subject_uri" : "' + participants.substring(7,index) + '",'//"smartshare/' + participants.substring(7,index) + '",'
                 +'"quantifier_uri" : "driver"}';
             var array = subparticipants.split(",");
+<<<<<<< HEAD
             
+=======
+
+>>>>>>> a13191b391e1a40922ac0279d302204115c4467e
             for (var i=0; i<array.length;i++)
             {
                 if (subjects != '{' && user != array[i]) subjects = subjects + ',';
@@ -14882,7 +14934,7 @@ function myaccept(num)
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
     }
 //alert( prp);
-                    
+
 
 }
 function myreject(num)
@@ -14996,15 +15048,15 @@ adjustContentDimensions = function() {
 // File version date: June 06, 2010
 //
 // LICENSE INFORMATION
-// Licensed under the Apache License, Version 2.0 (the "License"); 
-// you may not use this file except in compliance with the License. 
-// You may obtain a copy of the License at 
-//        http://www.apache.org/licenses/LICENSE-2.0 
-// Unless required by applicable law or agreed to in writing, 
-// software distributed under the License is distributed on an 
-// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, 
-// either express or implied. See the License for the specific 
-// language governing permissions and limitations under the License. 
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//        http://www.apache.org/licenses/LICENSE-2.0
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+// either express or implied. See the License for the specific
+// language governing permissions and limitations under the License.
 //
 //
 // ABOUT THIS PROJECT
@@ -15012,21 +15064,21 @@ adjustContentDimensions = function() {
 //   Email: anthony.hand@gmail.com
 //   Web Site: http://www.mobileesp.com
 //   Source Files: http://code.google.com/p/mobileesp/
-//   
+//
 //   Versions of this code are available for:
 //      PHP, JavaScript, Java, and ASP.NET (C#)
 //
 //
-// WARNING: 
-//   These JavaScript-based device detection features may ONLY work 
-//   for the newest generation of smartphones, such as the iPhone, 
+// WARNING:
+//   These JavaScript-based device detection features may ONLY work
+//   for the newest generation of smartphones, such as the iPhone,
 //   Android and Palm WebOS devices.
-//   These device detection features may NOT work for older smartphones 
-//   which had poor support for JavaScript, including 
-//   older BlackBerry, PalmOS, and Windows Mobile devices. 
-//   Additionally, because JavaScript support is extremely poor among 
+//   These device detection features may NOT work for older smartphones
+//   which had poor support for JavaScript, including
+//   older BlackBerry, PalmOS, and Windows Mobile devices.
+//   Additionally, because JavaScript support is extremely poor among
 //   'feature phones', these features may not work at all on such devices.
-//   For better results, consider using a server-based version of this code, 
+//   For better results, consider using a server-based version of this code,
 //   such as Java, APS.NET, or PHP.
 //
 // *******************************************
@@ -15034,13 +15086,13 @@ adjustContentDimensions = function() {
 
 //Optional: Store values for quickly accessing same info multiple times.
 //Stores whether the device is an iPhone or iPod Touch.
-var isIphone = false; 
+var isIphone = false;
 //Stores whether is the iPhone tier of devices.
-var isTierIphone = false; 
+var isTierIphone = false;
 //Stores whether the device can probably support Rich CSS, but JavaScript support is not assumed. (e.g., newer BlackBerry, Windows Mobile)
-var isTierRichCss = false; 
+var isTierRichCss = false;
 //Stores whether it is another mobile device, which cannot be assumed to support CSS or JS (eg, older BlackBerry, RAZR)
-var isTierGenericMobile = false; 
+var isTierGenericMobile = false;
 
 //Initialize some initial string variables we'll look for later.
 var engineWebKit = "webkit";
@@ -15231,7 +15283,7 @@ function DetectS60OssBrowser()
 
 //**************************
 // Detects if the current device is any Symbian OS-based device,
-//   including older S60, Series 70, Series 80, Series 90, and UIQ, 
+//   including older S60, Series 70, Series 80, Series 90, and UIQ,
 //   or other browsers running on these devices.
 function DetectSymbianOS()
 {
@@ -15292,7 +15344,7 @@ function DetectBlackBerryTouch()
 
 //**************************
 // Detects if the current browser is a BlackBerry device AND
-//    has a more capable recent browser. 
+//    has a more capable recent browser.
 //    Examples, Storm, Bold, Tour, Curve2
 function DetectBlackBerryHigh()
 {
@@ -15312,7 +15364,7 @@ function DetectBlackBerryHigh()
 
 //**************************
 // Detects if the current browser is a BlackBerry device AND
-//    has an older, less capable browser. 
+//    has an older, less capable browser.
 //    Examples: Pearl, 8800, Curve1.
 function DetectBlackBerryLow()
 {
@@ -15375,7 +15427,7 @@ function DetectGarminNuvifone()
 //**************************
 // Check to see whether the device is a 'smartphone'.
 //   You might wish to send smartphones to a more capable web page
-//   than a dumbed down WAP page. 
+//   than a dumbed down WAP page.
 function DetectSmartphone()
 {
     if (DetectIphoneOrIpod())
@@ -15435,7 +15487,7 @@ function DetectDangerHiptop()
 }
 
 //**************************
-// Detects if the current device is on one of 
+// Detects if the current device is on one of
 // the Maemo-based Nokia Internet Tablets.
 function DetectMaemoTablet()
 {
@@ -15567,7 +15619,7 @@ function DetectMobileQuick()
 
     if (DetectDangerHiptop())
         return true;
-      
+
     if (DetectMaemoTablet())
         return true;
     if (DetectArchos())
@@ -15580,7 +15632,7 @@ function DetectMobileQuick()
 
     if (DetectKindle())
         return true;
-      
+
     return false;
 };
 
@@ -15620,7 +15672,7 @@ function DetectMobileLong()
 
 //**************************
 // The quick way to detect for a tier of devices.
-//   This method detects for devices which can 
+//   This method detects for devices which can
 //   display iPhone-optimized web content.
 //   Includes iPhone, iPod Touch, Android, WebOS, etc.
 function DetectTierIphone()
@@ -15643,8 +15695,8 @@ function DetectTierIphone()
 
 //**************************
 // The quick way to detect for a tier of devices.
-//   This method detects for devices which are likely to be 
-//   capable of viewing CSS content optimized for the iPhone, 
+//   This method detects for devices which are likely to be
+//   capable of viewing CSS content optimized for the iPhone,
 //   but may not necessarily support JavaScript.
 //   Excludes all iPhone Tier devices.
 function DetectTierRichCss()
@@ -15653,7 +15705,7 @@ function DetectTierRichCss()
     {
         if (DetectTierIphone())
             return false;
-          
+
         //The following devices are explicitly ok.
         if (DetectWebkit())
             return true;
@@ -15666,10 +15718,10 @@ function DetectTierRichCss()
 
         if (DetectWindowsMobile())
             return true;
-          
+
         if (uagent.search(engineTelecaQ) > -1)
             return true;
-          
+
         else
             return false;
     }
@@ -15682,7 +15734,7 @@ function DetectTierRichCss()
 //   This method detects for all other types of phones,
 //   but excludes the iPhone and RichCSS Tier devices.
 // NOTE: This method probably won't work due to poor
-//  support for JavaScript among other devices. 
+//  support for JavaScript among other devices.
 function DetectTierOtherPhones()
 {
     if (DetectMobileLong())
@@ -15700,4 +15752,3 @@ function DetectTierOtherPhones()
     else
         return false;
 };
-

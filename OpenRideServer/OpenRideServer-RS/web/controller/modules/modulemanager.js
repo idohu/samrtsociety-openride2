@@ -14,6 +14,7 @@ var parseSearch;
 var FixedStars = [];
 var user;
 var pass;
+var regStatus = 0;
 var DimitrisLocal = "localhost:3000";
 var DimitrisRemote = "168.144.202.152:3000";
 var DimitrisRemotePrefix = "http://";
@@ -642,7 +643,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                     mapmod.setRoutePath(routearr);
                     return true;
-                }else{//no route                    
+                }else{//no route
                     showOverlayDialog('No route found!', '', 'OK', '', '', '');
                     return false;
                 }
@@ -1283,7 +1284,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }else{//no route
                 //return false;
                 }
-                
+
                 //parse viapoint destination coords
                 var viadestptarr = new Array();
                 if(routeResult.list[0].list[2]){
@@ -1293,7 +1294,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                         for(var i=0;i< routeResult.list[0].list[2].Coordinate.length; i++){
                             var entry = routeResult.list[0].list[2].Coordinate[i];
-	
+
                             var coordLat1 = entry.latititude;
                             var coordLon1 = entry.longitude;
 
@@ -2325,7 +2326,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
             }
         },
-       
+
 
         modifyRide : function (rideid) {
             var ride = this.tmpRide;
@@ -2794,7 +2795,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 isSmokerOption = 'profilepersonaldataissmoker-null';
             }
             document.getElementById(isSmokerOption).checked = 'checked';
-                
+
             //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
             if (personalData.carColour) {
                 document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
@@ -3021,6 +3022,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your data could not be stored.')
             //            } );
             //alert(JSON.stringify(userProfile.getProfileRequest()));
+            if (document.getElementById('profilepersonaldatacarcolour').value == '' ||
+                document.getElementById('profilepersonaldatacarbrand').value == '')
+                showOverlayDialog('Fill both Car Color and Car Brand!', '', 'OK', '', '', '')
+            else
             $.ajax({
                 type: "PUT",
                 url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
@@ -3312,7 +3317,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             document.getElementById("ratingssummarymediocre").innerHTML = friend;//entry.ratingsLatestMediocre;
         //document.getElementById("numofratings").innerHTML = numofraters;
         },
- 
+
         parseopenratingslist : function(openratingslistdiv, resultlist){
             //var result = JSON.parse(resultlist);
             var listhtml = '<h3>Write reviews</h3>';
@@ -3434,7 +3439,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
         },
 
-       
+
         parsereceivedratingslist : function(receivedratingslistdiv, resultlist){
             var result = JSON.parse(resultlist);
             var listhtml = '<h3>Ratings received</h3>';
@@ -3581,7 +3586,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                     }
                 });
-                
+
                 // Car details
                 //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
                 //                    if(typeof (result.ProfileResponse) != 'undefined'){
@@ -4359,7 +4364,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 //                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
             }
             else if(viewId == 'ratingsUI'){
-                
+
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
                 //                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
@@ -4425,7 +4430,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var agentID = user.substring(5, user.length);
                 user = readCookie('username');
                 pass = readCookie('password');
-                
+
                 /********* IDENTITY ********/
                 var dummyparseratingssummary = this.parseratingssummary;
                 var dummydiv = this.parseratingssummarydiv;
@@ -4518,7 +4523,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             //alert(JSON.stringify(obj));
             /************** END CHANGE ***************/
-                
+
             }
             else if(viewId == 'openratingsUI'){
                 //alert('viewID == \'openratingsUI\'');
@@ -4786,7 +4791,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
-				
+
                 // Get initialization data
                 srvconn.GET('/OpenRideServer-RS/resources/configuration/init', false, fokus.openride.mobclient.controller.modules.uievents.parseInitData, function(x,s,e){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, the initial data could not be loaded.')
@@ -5038,7 +5043,7 @@ function fix(id1)
 //        submit(submitted_rides[riderId] , riderId);
 //        submitted_rides[riderId]= [-1,-1,-1,-1,-1];
 //    }
-            
+
 }
 function submit (rate_array , riderId )
 {

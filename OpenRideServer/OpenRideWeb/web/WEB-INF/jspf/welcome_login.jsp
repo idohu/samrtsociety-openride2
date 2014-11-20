@@ -84,7 +84,7 @@
     </fieldset>
 
         <script type="text/javascript"
-        src='http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
+        src='https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js'>
 </script>
 
 <script>
@@ -136,10 +136,7 @@
                                             }
                                         },
                                         error: function(jq , textStatus , errorThrown){
-                                        alert('state: ' + jq.readyState);
-                                        alert('status: ' + jq.status);
-                                        alert('response ' + jq.responseText)
-                                        alert('this error is: ' );
+                                        alert('error from server: ' +errorThrown);
                                         }
                                         });
     });
