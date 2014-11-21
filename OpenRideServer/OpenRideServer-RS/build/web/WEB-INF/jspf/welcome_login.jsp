@@ -35,7 +35,7 @@
 
 <form id="loginForm" action="/OpenRideServer-RS/j_security_check" method="post" class="login">
     <h3>Login now and start:</h3>
-    
+
     <c:if test="${param.login_error=='true'}"><p><span class="error">Invalid credentials.</span></p></c:if>
 
     <div>
@@ -58,8 +58,8 @@
     <input type="button" name="submit" id="shown" align="center" value="Login" onclick="login()" />
     <input type="submit" name="submit" id="loginbutton" align="center" value="Login" onclick="createCookie('usermode', usermode, 365); createCookie('username',j_username.value,365); createCookie('password',j_password.value,365);" style="display:none"/>
 </form>
-   
-     
+
+
 <script type="text/javascript">
     document.getElementById('loginForm').style.display = 'block';
 </script>
@@ -127,10 +127,7 @@
                                             }
                                         },
                                         error: function(jq , textStatus , errorThrown){
-                                        alert('state: ' + jq.readyState);
-                                        alert('status: ' + jq.status);
-                                        alert('response ' + jq.responseText)
-                                        alert('this error is: ' +errorThrown);
+                                        alert('error from server: ' +errorThrown);
                                         }
                                         });
     });
@@ -167,5 +164,5 @@
 <noscript>
     <h3>Please activate Javascript in your Browser, before you can login to OpenRide.</h3>
     <meta http-equiv="refresh" content="3" />
-   
+
 </noscript>

@@ -14,6 +14,7 @@ var parseSearch;
 var FixedStars = [];
 var user;
 var pass;
+var regStatus = 0;
 var DimitrisLocal = "localhost:3000";
 var DimitrisRemote = "168.144.202.152:3000";
 var DimitrisRemotePrefix = "http://";
@@ -642,7 +643,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                     mapmod.setRoutePath(routearr);
                     return true;
-                }else{//no route                    
+                }else{//no route
                     showOverlayDialog('No route found!', '', 'OK', '', '', '');
                     return false;
                 }
@@ -720,6 +721,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (hours < 10) hours = '0' + hours;
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
+                var hoursEnd = d1.getHours();
+                if (hoursEnd < 10) hoursEnd = '0' + hoursEnd;
+                var minsEnd = d1.getMinutes();
+                if (minsEnd < 10) minsEnd = '0' + minsEnd;
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
                 var day="";
@@ -748,7 +753,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         break;
                 }
                 var commuters = prp.commuters.toString().replace(",",", ");
-                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
+                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -50px;">Commuters: <strong style="color:black;">'+prp.commuters+'</strong></span> </small></h3>');
@@ -780,6 +786,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
+                var hoursEnd = d1.getHours();
+                if (hoursEnd < 10) hoursEnd = '0' + hoursEnd;
+                var minsEnd = d1.getMinutes();
+                if (minsEnd < 10) minsEnd = '0' + minsEnd;
                 var id = rides.length+i;
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
@@ -808,7 +818,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         day="Saturday";
                         break;
                 }
-                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "
+                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
+                    +'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 //                RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
@@ -895,7 +907,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var mins = d.getMinutes();
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
-                if (hours < 10) hours = '0' + hours;
+                if (hours < 10) hours = '0' + hours;var hoursEnd = d1.getHours();
+                if (hoursEnd < 10) hoursEnd = '0' + hoursEnd;
+                var minsEnd = d1.getMinutes();
+                if (minsEnd < 10) minsEnd = '0' + minsEnd;
+
                 var day="";
                 //alert(d.getDay())
                 switch (d.getDay()){
@@ -924,7 +940,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
+                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
@@ -956,6 +973,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
+                var hoursEnd = d1.getHours();
+                if (hoursEnd < 10) hoursEnd = '0' + hoursEnd;
+                var minsEnd = d1.getMinutes();
+                if (minsEnd < 10) minsEnd = '0' + minsEnd;
                 var id = rides.length+i;
                 var day="";
                 //alert(d.getDay())
@@ -984,7 +1005,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "
+                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
+                    +'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -1135,6 +1158,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
+                var hoursEnd = d1.getHours();
+                if (hoursEnd < 10) hoursEnd = '0' + hoursEnd;
+                var minsEnd = d1.getMinutes();
+                if (minsEnd < 10) minsEnd = '0' + minsEnd;
                 var day="";
                 //alert(d.getDay())
                 switch (d.getDay()){
@@ -1163,7 +1190,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+
+                RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
+                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
@@ -1196,6 +1224,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 if (mins < 10) mins = '0' + mins;
                 var hours = d.getHours();
                 if (hours < 10) hours = '0' + hours;
+                var hoursEnd = d1.getHours();
+                if (hoursEnd < 10) hoursEnd = '0' + hoursEnd;
+                var minsEnd = d1.getMinutes();
+                if (minsEnd < 10) minsEnd = '0' + minsEnd;
                 var id = rides.length+i;
                 var day="";
                 //alert(d.getDay())
@@ -1224,7 +1256,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
-                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
+                RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "
+                    +'<br />Departure: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
+                    +'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
             }
@@ -1283,7 +1317,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }else{//no route
                 //return false;
                 }
-                
+
                 //parse viapoint destination coords
                 var viadestptarr = new Array();
                 if(routeResult.list[0].list[2]){
@@ -1293,7 +1327,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                         for(var i=0;i< routeResult.list[0].list[2].Coordinate.length; i++){
                             var entry = routeResult.list[0].list[2].Coordinate[i];
-	
+
                             var coordLat1 = entry.latititude;
                             var coordLon1 = entry.longitude;
 
@@ -2325,7 +2359,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
             }
         },
-       
+
 
         modifyRide : function (rideid) {
             var ride = this.tmpRide;
@@ -2794,7 +2828,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 isSmokerOption = 'profilepersonaldataissmoker-null';
             }
             document.getElementById(isSmokerOption).checked = 'checked';
-                
+
             //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
             if (personalData.carColour) {
                 document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
@@ -2848,7 +2882,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //    return;
             // }
             // date of birth: not required, but if provided needs valid format
-            var dateOfBirthValue;
+            var dateOfBirthValue = new Date("01/01/1800").toLocaleDateString();
             if (document.getElementById('profilepersonaldatadateofbirth').value != '') {
                 dateOfBirthValue = this.validateDate(document.getElementById('profilepersonaldatadateofbirth').value);
 
@@ -2954,7 +2988,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             /* Build the request */
 
-            var emptyvar;
+            var emptyvar = "";
             var profilemod = fokus.openride.mobclient.controller.modules.profile;
             //alert(JSON.stringify(profilemod.getProfileRequest()));
             //            profilemod.setDateOfBirth(dateOfBirthValue);
@@ -3021,6 +3055,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your data could not be stored.')
             //            } );
             //alert(JSON.stringify(userProfile.getProfileRequest()));
+            if (document.getElementById('profilepersonaldatacarcolour').value == '' ||
+                document.getElementById('profilepersonaldatacarbrand').value == '')
+                showOverlayDialog('Fill both Car Color and Car Brand!', '', 'OK', '', '', '')
+            else
             $.ajax({
                 type: "PUT",
                 url: PeerManagerPrefix + PeerMenager + '/users/'+username+'/profile',//'/api/register/' + user,
@@ -3312,7 +3350,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             document.getElementById("ratingssummarymediocre").innerHTML = friend;//entry.ratingsLatestMediocre;
         //document.getElementById("numofratings").innerHTML = numofraters;
         },
- 
+
         parseopenratingslist : function(openratingslistdiv, resultlist){
             //var result = JSON.parse(resultlist);
             var listhtml = '<h3>Write reviews</h3>';
@@ -3384,23 +3422,46 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         var date_realized = ""+hours + ':' + mins + ' ' + date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
                         //alert(date_realized + ' '+ date.getDay());
                         //alert('creation' +i+''+obj["index"]+''+5);
-                        if (usermode == DRIVERMODE) id = obj.commuters; else id = obj.driver;
-                        listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
-                        + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
-                        + '    <div style="line-height: 140%; padding-left: 75px;">'
-                        + '        Ride with: ' + id + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
-                        + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
-                        // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
-                        + '    </div>'
-                        + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
-                        + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
-                        // + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
-                        + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
-                        // + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
-                        + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
-                        + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
-                        + '    </div>'
-                        + '</div>';
+                        var users = obj.commuters;
+                        if (obj.driver==user){
+//                            for (var ind=0; ind<users.length; ind++){
+//                                listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
+//                                + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
+//                                + '    <div style="line-height: 140%; padding-left: 75px;">'
+//                                + '        Ride with: ' + users[ind] + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
+//                                + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
+//                                // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
+//                                + '    </div>'
+//                                + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
+//                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
+//                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
+//                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
+//                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
+//                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
+//                                + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
+//                                + '    </div>'
+//                                + '</div>';
+//                            }
+                        }
+                        else{
+
+                            listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
+                            + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
+                            + '    <div style="line-height: 140%; padding-left: 75px;">'
+                            + '        Ride with: ' + obj.driver + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
+                            + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
+                            // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
+                            + '    </div>'
+                            + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
+                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
+                            //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
+                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
+                            //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
+                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
+                            + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
+                            + '    </div>'
+                            + '</div>';
+                        }
                     }
                     //alert(listhtml);
                     if (listhtml)
@@ -3434,7 +3495,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
         },
 
-       
+
         parsereceivedratingslist : function(receivedratingslistdiv, resultlist){
             var result = JSON.parse(resultlist);
             var listhtml = '<h3>Ratings received</h3>';
@@ -3581,7 +3642,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                     }
                 });
-                
+
                 // Car details
                 //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
                 //                    if(typeof (result.ProfileResponse) != 'undefined'){
@@ -4359,7 +4420,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 //                this.parsefavoriteslist(this.favoritelistdiv, favoritelist);
             }
             else if(viewId == 'ratingsUI'){
-                
+
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
                 //                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
@@ -4425,7 +4486,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var agentID = user.substring(5, user.length);
                 user = readCookie('username');
                 pass = readCookie('password');
-                
+
                 /********* IDENTITY ********/
                 var dummyparseratingssummary = this.parseratingssummary;
                 var dummydiv = this.parseratingssummarydiv;
@@ -4518,7 +4579,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
             //alert(JSON.stringify(obj));
             /************** END CHANGE ***************/
-                
+
             }
             else if(viewId == 'openratingsUI'){
                 //alert('viewID == \'openratingsUI\'');
@@ -4786,7 +4847,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
-				
+
                 // Get initialization data
                 srvconn.GET('/OpenRideServer-RS/resources/configuration/init', false, fokus.openride.mobclient.controller.modules.uievents.parseInitData, function(x,s,e){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, the initial data could not be loaded.')
@@ -5038,7 +5099,7 @@ function fix(id1)
 //        submit(submitted_rides[riderId] , riderId);
 //        submitted_rides[riderId]= [-1,-1,-1,-1,-1];
 //    }
-            
+
 }
 function submit (rate_array , riderId )
 {
