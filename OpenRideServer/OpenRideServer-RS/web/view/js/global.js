@@ -7988,7 +7988,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 var commuters = prp.commuters.toString().replace(",",", ");
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
-                   +'<br />Departure: '+hours+':'+mins+' - '+hoursEnd+':'+minsEnd+
+                    +'<br />Departure: '+hours+':'+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -50px;">Commuters: <strong style="color:black;">'+prp.commuters+'</strong></span> </small></h3>');
@@ -8014,6 +8014,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
                 var d1 = new Date();
                 d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
+                                alert(d1);
                 if (d1<=(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
@@ -10430,7 +10431,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //profilemod.setCarBuildYear(document.getElementById('profilepersonaldatacarbuildyear').value || emptyvar);
             userProfile.setCarBuildYear(emptyvar);
             // profilemod.setCarPlateNo(document.getElementById('profilepersonaldatacarplateno').value || emptyvar);
-            userProfile.getProfileRequest()._revision = userProfile.getProfileRequest()._revision+1;
 
             // Submit PUT request
             //            srvconn.PUT('/OpenRideServer-RS/resources/users/'+this.username+'/profile', true, profilemod.getProfileRequest(), function() {
@@ -10438,6 +10438,13 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //            }, function(x,s,e) {
             //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your data could not be stored.')
             //            } );
+            if ((document.getElementById('profilepersonaldatacarcolour').value == '' ||
+                document.getElementById('profilepersonaldatacarbrand').value == '')&&!(document.getElementById('profilepersonaldatacarcolour').value == '' &&
+                document.getElementById('profilepersonaldatacarbrand').value == '')){
+                showOverlayDialog('Fill both Car Color and Car Brand!', '', 'OK', '', '', '')
+                return;
+            }
+            userProfile.getProfileRequest()._revision = userProfile.getProfileRequest()._revision+1;
 
             $.ajax({
                 type: "PUT",
@@ -10806,24 +10813,24 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert('creation' +i+''+obj["index"]+''+5);
                         var users = obj.commuters;
                         if (obj.driver==user){
-//                            for (var ind=0; ind<users.length; ind++){
-//                                listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
-//                                + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
-//                                + '    <div style="line-height: 140%; padding-left: 75px;">'
-//                                + '        Ride with: ' + users[ind] + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
-//                                + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
-//                                // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
-//                                + '    </div>'
-//                                + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
-//                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
-//                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
-//                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
-//                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
-//                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
-//                                + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
-//                                + '    </div>'
-//                                + '</div>';
-//                            }
+                        //                            for (var ind=0; ind<users.length; ind++){
+                        //                                listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
+                        //                                + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
+                        //                                + '    <div style="line-height: 140%; padding-left: 75px;">'
+                        //                                + '        Ride with: ' + users[ind] + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
+                        //                                + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
+                        //                                // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
+                        //                                + '    </div>'
+                        //                                + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
+                        //                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
+                        //                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
+                        //                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
+                        //                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
+                        //                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
+                        //                                + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
+                        //                                + '    </div>'
+                        //                                + '</div>';
+                        //                            }
                         }
                         else{
 
@@ -12490,6 +12497,15 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         case 404: // Not found - display custom message, if supplied:
                             textMessage = customMessage || 'The request was rejected by the server as invalid.';
                             break;
+                        case 422:
+                            textMessage = customMessage || 'The request could not be processed by the server.<br />If this problem presists, please contact our support team.';
+                            break;
+                        case 401:
+                            textMessage = customMessage || 'The request could not be processed by the server.<br />Please contact our support team.';
+                            break;
+                        case 403:
+                            textMessage = customMessage || 'The request could not be processed by the server.<br />Please contact our support team.';
+                            break;
                         case 0: // Connection problems - reload
                             location.href="./";
                             break;
@@ -12505,6 +12521,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     break;
                 case 'notmodified':
                     // ok.
+                    textMessage = customMessage;
                     break;
                 case 'validateError':
                     textMessage = customMessage;
