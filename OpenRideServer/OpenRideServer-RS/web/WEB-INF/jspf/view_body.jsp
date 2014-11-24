@@ -614,6 +614,45 @@
             <div id="homeinfo">
                 <h3>Welcome <span id="usernametag"></span>!</h3>
                 <img id="profilepicimg" src="../../OpenRideWeb/img/profile/default.jpg" alt="profilepic" width="125" height="125" />
+                <script type="text/javascript">
+                function tryToGetImg()
+                {
+                    var pass = readCookie('password');
+                    var user = readCookie('username');
+                    var imgElem = document.querySelector('img[id=profilepicimg]');
+                    $.ajax({
+                    type: "GET",
+                    accepts: "application/json",
+                    url: 'http://168.144.202.152:3002/users/'+user+'/profile/picture',
+                    beforeSend : function(xhr) {
+                            xhr.withCredentials = true;
+                            xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
+
+                            xhr.setRequestHeader("APP_KEY", "RIDE-SHARING-CLIENT-APPLICATION");
+                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    dataType: "json",
+                    username: user,
+                    password: pass,
+                    crossDomain: true,
+                    async: false,
+                    success: function (data, textStatus, jqXHR) {
+                            var mem = {};
+                            mem.pic  = data;
+                            mem.type = mem.pic.type;
+                            mem.enc  = "";
+                            mem.file = mem.pic.picture;
+                            imgElem.src = mem.file;
+                            //alert(mem.pic._revision);
+		},
+		error: function (data, textStatus, errorThrown) {
+			alert('Could not retrieve image, setting default picture!');
+                        imgElem.src = "../../OpenRideWeb/img/profile/default.jpg";
+		}});
+                }
+                tryToGetImg();
+                </script>
+
                 <p style="margin-top: -6px;">
                     <span class="statshl" id="homeinfoopenoffers"></span>
                     <a href="#" id="homeActiveOffers" class="homeui_links">Active<span id="homeinfoopenoffers-singular"></span> offer<span id="homeinfoopenoffers-plural">s</span></a>
@@ -1014,7 +1053,7 @@
             </div>
         </form>
         <h3 class="separated">My Picture</h3>
-        <form id="profilepictureform" action="" method="POST" enctype="multipart/form-data" class="profile">
+        <form id="profilepictureform" action="" method="PUT" enctype="multipart/form-data" class="profile"><!--<form id="profilepictureform" action="" method="POST" enctype="multipart/form-data" class="profile">-->
             <p>
                 Save my photo as profile picture:
             </p>
@@ -1026,7 +1065,7 @@
                 <input type="file" id="profilepicturefile" name="profilepicturefile" size="12" />
                 <br/>
             </div>
-            <input type="submit" value="Save profile picture" onclick="if (document.getElementById('profilepicturefile').value != '') {fokus.openride.mobclient.controller.modules.modulemanager.putprofileicture(); showOverlayDialog('The profile picture is now uploaded.', '', 'OK', 'location.reload()', '', '');} else { showOverlayDialog('Please select a new image first.', '', 'OK', '', '', ''); return false; }"/>
+            <input type="button" value="Save profile picture" onclick="if (document.getElementById('profilepicturefile').value != '') {fokus.openride.mobclient.controller.modules.modulemanager.putprofilepicture(); showOverlayDialog('The profile picture is now uploaded.', '', 'OK', 'location.reload()', '', '');} else { showOverlayDialog('Please select a new image first.', '', 'OK', '', '', ''); return false; }"/>
             <script type="text/javascript">
                 if (DetectMobileQuick()) {
                     document.write('<div style="color: #999; margin: -0.5em 0 1em 10px; font-size: 12px;">This feature may not be available on mobile web browsers. Please do not use in this case a web browser on your desktop computer.</div>');
