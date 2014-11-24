@@ -2753,34 +2753,76 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, Favorites could not be saved.')
             });
         },
-        putprofileicture : function(){
-        //alert(document.getElementById('profilepicturefile').value);
-        //            $.ajax({
-        //                type: "PUT",
-        //                url: 'https://' + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
-        //                data: JSON.stringify(userProfile.getProfileRequest()),//"{username="+user+"&password="+pass+"}",
-        //                crossDomain: true,
-        //                contentType:  "application/json; charset=UTF-8",
-        //                accepts: "application/json",
-        //                dataType: "json",
-        //                username: username,
-        //                password: password,
-        //                beforeSend: function (xhr)
-        //                {
-        //                    xhr.withCredentials = true,
-        //                    xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
-        //                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-        //                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-        //                },
-        //                async: false,
-        //                //accepts: "application/json",
-        //                success: function(data, textStatus, jqXHR){
-        //                    showOverlayDialog('Personal data was saved successfully!', '', 'OK', '', '', '')
-        //                },
-        //                error: function(jq , textStatus , errorThrown){
-        //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
-        //                }
-        //            });
+        putprofilepicture : function(){
+        var reader = new FileReader();
+        var pic = {};
+
+        reader.readAsDataURL(document.querySelector('input[type=file]').files[0]);
+
+        reader.onloadend = function (e) {
+        pic.picture = e.target.result;
+        pic.type = document.querySelector('input[type=file]').files[0].type;
+        $.ajax({
+                    type: "GET",
+                    accepts: "application/json",
+                    url: 'http://168.144.202.152:3002/users/'+username+'/profile/picture',
+                    beforeSend : function(xhr) {
+                            xhr.withCredentials = true;
+                            xhr.setRequestHeader("Authorization", "Basic " + username + ":" + password);
+
+                            xhr.setRequestHeader("APP_KEY", "RIDE-SHARING-CLIENT-APPLICATION");
+                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    dataType: "json",
+                    username: username,
+                    password: password,
+                    crossDomain: true,
+                    async: false,
+                    success: function (data, textStatus, jqXHR) {
+                            var mem = {};
+                            mem.pic  = data;
+                            mem.type = mem.pic.type;
+                    pic._revision = mem.pic._revision+1;
+                    pic._id = userProfile.getProfileRequest()._id;
+                    
+                    $.ajax({
+                        type: "PUT",
+                        url: 'http://' + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
+                        data: JSON.stringify(pic),//"{username="+user+"&password="+pass+"}",
+                        crossDomain: true,
+                        contentType:  "application/json; charset=UTF-8",
+                        accepts: "application/json",
+                        dataType: "json",
+                        username: username,
+                        password: password,
+                        processData: false,
+                        beforeSend: function (xhr)
+                        {
+                            xhr.withCredentials = true,
+                            xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                        },
+                        async: false,
+                        success: function(data, textStatus, jqXHR){
+                            showOverlayDialog('Personal data was saved successfully!', '', 'OK', '', '', '')
+                        },
+                        error: function(jq , textStatus , errorThrown){
+                            //alert(JSON.stringify(pic));
+                            //alert(' errors : ' + errorThrown + ' ' + textStatus + ' ' + jq.responseText + ' ' + jq.statusText);
+                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
+                        }
+                    });
+		},
+		error: function (data, textStatus, errorThrown) {
+			alert('Could not retrieve image, setting default picture!');
+		}});
+        
+        }
+        reader.onerror     = function (e) { alert("Error " + e + " occurred! Now what?"); };
+        reader.onabort     = function (e) { alert('File read cancelled'); };
+        //while(i == 0) {}
+       
         },
         parseprofilepersonaldata : function(result){
 
