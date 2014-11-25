@@ -282,7 +282,8 @@
                     c.isArray(i))?i:c.isArray(o)?[]:{};
 
                 a[j]=c.extend(f,i,o)
-            }else if(o!==w)a[j]=o
+            }
+            else if(o!==w)a[j]=o
         }
         return a
     };
@@ -369,7 +370,8 @@
                     d)===false)break
             }else for(;e<j;){
                 if(b.apply(a[e++],d)===false)break
-            }else if(i)for(f in a){
+            }
+            else if(i)for(f in a){
                 if(b.call(a[f],f,a[f])===false)break
             }
             else for(d=a[0];e<j&&b.call(d,e,d)!==false;d=a[++e]);
@@ -3684,7 +3686,8 @@ StringBuilder.prototype.toString = function ()
                 );
             try {
                 $('body').get(0).removeChild(tmp.get(0));
-            }catch(e){}
+            }
+            catch(e){}
             return $.ui.cssCache[name];
         },
 
@@ -7044,6 +7047,12 @@ fokus.openride.mobclient.controller.modules.profile = function(){
 */
 
 
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+
 fokus.openride.mobclient.controller.modules.calendar = function(){
 
     /* ------ private variabeles and methods ------ */
@@ -7118,26 +7127,32 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
 
         increaseYear : function(){
             this.date.setFullYear(this.date.getFullYear()+1);
+            this.endDate.setFullYear(this.endDate.getFullYear()+1);
         },
 
         decreaseYear : function(){
             this.date.setFullYear(this.date.getFullYear()-1);
+            this.endDate.setFullYear(this.endDate.getFullYear()-1);
         },
 
         increaseMonth : function(){
             this.date.setMonth(this.date.getMonth()+1);
+            this.endDate.setMonth(this.endDdate.getMonth()+1);
         },
 
         decreaseMonth : function(){
             this.date.setMonth(this.date.getMonth()-1);
+            this.endDate.setMonth(this.endDate.getMonth()-1);
         },
 
         increaseDay : function(){
             this.date.setDate(this.date.getDate()+1);
+            this.endDate.setDate(this.endDate.getDate()+1);
         },
 
         decreaseDay : function(){
             this.date.setDate(this.date.getDate()-1);
+            this.endDate.setDate(this.endDate.getDate()-1);
         },
 
         increaseHour : function(){
@@ -7159,7 +7174,7 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
                 do {
                     min += 1;
                     rest = (this.date.getMinutes() + min) % 5;
-                }while (rest != 0);
+                } while (rest != 0);
             }
 
             this.date.setMinutes(this.date.getMinutes()+min);
@@ -7176,7 +7191,7 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
                 do {
                     min += 1;
                     rest = (this.date.getMinutes() - min) % 5;
-                }while (rest != 0);
+                } while (rest != 0);
             }
 
             this.date.setMinutes(this.date.getMinutes()-min);
@@ -7227,10 +7242,10 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
             this.date = new Date();
             this.endDate = new Date();
             this.endDate.setHours(endDate.getHours()+1);
+        //alert('reset');
         }
     };
 }();
-
 /*
 * To change this template, choose Tools | Templates
 * and open the template in the editor.
@@ -8014,7 +8029,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 d.setTime(parseInt((prp.depDateTimeWindow.depDateTimeLow) , 10));
                 var d1 = new Date();
                 d1.setTime(parseInt((prp.depDateTimeWindow.depDateTimeHigh) , 10));
-                                alert(d1);
+                //                                alert(d1);
                 if (d1<=(new Date()))
                     continue;
                 var months = d.getMonth() + 1;
@@ -9998,24 +10013,24 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             });
         },
         putprofilepicture : function(){
-        var reader = new FileReader();
-        var pic = {};
+            var reader = new FileReader();
+            var pic = {};
 
-        reader.readAsDataURL(document.querySelector('input[type=file]').files[0]);
+            reader.readAsDataURL(document.querySelector('input[type=file]').files[0]);
 
-        reader.onloadend = function (e) {
-        pic.picture = e.target.result;
-        pic.type = document.querySelector('input[type=file]').files[0].type;
-        $.ajax({
+            reader.onloadend = function (e) {
+                pic.picture = e.target.result;
+                pic.type = document.querySelector('input[type=file]').files[0].type;
+                $.ajax({
                     type: "GET",
                     accepts: "application/json",
                     url: 'http://168.144.202.152:3002/users/'+username+'/profile/picture',
                     beforeSend : function(xhr) {
-                            xhr.withCredentials = true;
-                            xhr.setRequestHeader("Authorization", "Basic " + username + ":" + password);
+                        xhr.withCredentials = true;
+                        xhr.setRequestHeader("Authorization", "Basic " + username + ":" + password);
 
-                            xhr.setRequestHeader("APP_KEY", "RIDE-SHARING-CLIENT-APPLICATION");
-                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                        xhr.setRequestHeader("APP_KEY", "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
                     },
                     dataType: "json",
                     username: username,
@@ -10023,48 +10038,53 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     crossDomain: true,
                     async: false,
                     success: function (data, textStatus, jqXHR) {
-                            var mem = {};
-                            mem.pic  = data;
-                            mem.type = mem.pic.type;
-                    pic._revision = mem.pic._revision+1;
-                    pic._id = userProfile.getProfileRequest()._id;
+                        var mem = {};
+                        mem.pic  = data;
+                        mem.type = mem.pic.type;
+                        pic._revision = mem.pic._revision+1;
+                        pic._id = userProfile.getProfileRequest()._id;
 
-                    $.ajax({
-                        type: "PUT",
-                        url: 'http://' + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
-                        data: JSON.stringify(pic),//"{username="+user+"&password="+pass+"}",
-                        crossDomain: true,
-                        contentType:  "application/json; charset=UTF-8",
-                        accepts: "application/json",
-                        dataType: "json",
-                        username: username,
-                        password: password,
-                        processData: false,
-                        beforeSend: function (xhr)
-                        {
-                            xhr.withCredentials = true,
-                            xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
-                            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                        },
-                        async: false,
-                        success: function(data, textStatus, jqXHR){
-                            showOverlayDialog('Personal data was saved successfully!', '', 'OK', '', '', '')
-                        },
-                        error: function(jq , textStatus , errorThrown){
-                            //alert(JSON.stringify(pic));
-                            //alert(' errors : ' + errorThrown + ' ' + textStatus + ' ' + jq.responseText + ' ' + jq.statusText);
-                            fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
-                        }
-                    });
-		},
-		error: function (data, textStatus, errorThrown) {
-			alert('Could not retrieve image, setting default picture!');
-		}});
+                        $.ajax({
+                            type: "PUT",
+                            url: 'http://' + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
+                            data: JSON.stringify(pic),//"{username="+user+"&password="+pass+"}",
+                            crossDomain: true,
+                            contentType:  "application/json; charset=UTF-8",
+                            accepts: "application/json",
+                            dataType: "json",
+                            username: username,
+                            password: password,
+                            processData: false,
+                            beforeSend: function (xhr)
+                            {
+                                xhr.withCredentials = true,
+                                xhr.setRequestHeader('Authorization' , 'Basic ' + username+':'+password);
+                                xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                                xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                            },
+                            async: false,
+                            success: function(data, textStatus, jqXHR){
+                                showOverlayDialog('Personal data was saved successfully!', '', 'OK', '', '', '')
+                            },
+                            error: function(jq , textStatus , errorThrown){
+                                //alert(JSON.stringify(pic));
+                                //alert(' errors : ' + errorThrown + ' ' + textStatus + ' ' + jq.responseText + ' ' + jq.statusText);
+                                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your data could not be stored.')
+                            }
+                        });
+                    },
+                    error: function (data, textStatus, errorThrown) {
+                        alert('Could not retrieve image, setting default picture!');
+                    }
+                });
 
-        }
-        reader.onerror     = function (e) { alert("Error " + e + " occurred! Now what?"); };
-        reader.onabort     = function (e) { alert('File read cancelled'); };
+            }
+            reader.onerror     = function (e) {
+                alert("Error " + e + " occurred! Now what?");
+            };
+            reader.onabort     = function (e) {
+                alert('File read cancelled');
+            };
         //while(i == 0) {}
 
         },
@@ -13268,12 +13288,12 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             newoffersubmit.onclick = function(){
                 //set start time
 
-                var minute = 1000*60;
+                var minute5 = 1000*60*5;
 
 
                 // Validation
                 // Time & date
-                if ((calendarpicker.getDate().getTime() + minute - new Date().getTime()) < 0) {
+                if ((calendarpicker.getDate().getTime() + minute5 - new Date().getTime()) < 0) {
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'The departure time is in the past.');
                     return;
                 }
@@ -13325,19 +13345,19 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
              */
 
-                var determiningLocation = 'Location...';
-
-                if ((document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text == determiningLocation) ||
-                    (document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].text == determiningLocation)) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Your location could not be determined.');
-                    return;
-                }
-
-                //alert(document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].text);
-                offermod.setStartAddr(document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].text);
-
-                //alert(document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text);
-                offermod.setDestAddr(document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text);
+                //                var determiningLocation = 'Location...';
+                //
+                //                if ((document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text == determiningLocation) ||
+                //                    (document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].text == determiningLocation)) {
+                //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Your location could not be determined.');
+                //                    return;
+                //                }
+                //
+                //                //alert(document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].text);
+                //                offermod.setStartAddr(document.getElementById(offerstartdropdownid)[document.getElementById(offerstartdropdownid).selectedIndex].text);
+                //
+                //                //alert(document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text);
+                //                offermod.setDestAddr(document.getElementById(offerdestdropdownid)[document.getElementById(offerdestdropdownid).selectedIndex].text);
 
                 //set detour
                 //                switch(document.getElementById('offerdetourselect').selectedIndex){
@@ -13471,7 +13491,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 });
 
                 var newRideRequest = {};
-
+                if (calendarpicker.getDate().getTime()>calendarpicker.getDateEnd().getTime()){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
+                    return;
+                }
+                if (document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text==document.getElementById('offerendcombo')[document.getElementById('offerendcombo').selectedIndex].text){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'The source and destination must be different!');
+                    return;
+                }
                 function getRideDetails()
                 {
                     newRideRequest.potentialRidePlans         = [];
@@ -13506,6 +13533,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     /*
                  * Now deal with the rest
                  */
+                    
                     newRideRequest.departureCity = document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text;
                     //                    var depCity  //=offermod.getStartAddr().split(", ");
                     //                    var tempdepCity = depCity[depCity.length-2].split(" ");
@@ -13528,31 +13556,33 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //                    else newRideRequest.destinationCity = tempdesCity[tempdesCity.length-1];
 
                     // Figure out datetime for departure based on the input
-                    var tempDateLow1                      = offermod.getStartTime();//'1/11/2013';
-                    var tempTimeLow1                      = '18:00';
+                    //                    var tempDateLow1                      = offermod.getStartTime();//'1/11/2013';
+                    //                    var tempTimeLow1                      = '18:00';
                     newRideRequest.depDateTimeWindow = {};
-                    newRideRequest.depDateTimeWindow.depDateTimeLow = tempDateLow1;//generateDateObject (tempDateLow1, tempTimeLow1);
-                    //alert(newRideRequest.depDateTimeWindow.depDateTimeLow);
-                    var tempDateHigh1                     = offermod.getStartTime()+5000000;//'2/11/2013';
-                    var tempTimeHigh1                     = '19:00';
-                    newRideRequest.depDateTimeWindow.depDateTimeHigh = tempDateHigh1;//generateDateObject (tempDateHigh1, tempTimeHigh1);
-
-                    // Figure out datetime for destination based on the input
-                    var tempDateLow                                      = offermod.getStartTime()+5000000;//'1/11/2013';
-                    var tempTimeLow                                      = '18:00';
+                    //                    newRideRequest.depDateTimeWindow.depDateTimeLow = tempDateLow1;//generateDateObject (tempDateLow1, tempTimeLow1);
+                    //                    //alert(newRideRequest.depDateTimeWindow.depDateTimeLow);
+                    //                    var tempDateHigh1                     = offermod.getStartTime()+5000000;//'2/11/2013';
+                    //                    var tempTimeHigh1                     = '19:00';
+                    //                    newRideRequest.depDateTimeWindow.depDateTimeHigh = tempDateHigh1;//generateDateObject (tempDateHigh1, tempTimeHigh1);
+                    //
+                    //                    // Figure out datetime for destination based on the input
+                    //                    var tempDateLow                                      = offermod.getStartTime()+5000000;//'1/11/2013';
+                    //                    var tempTimeLow                                      = '18:00';
                     newRideRequest.desDateTimeWindow = {};
-                    newRideRequest.desDateTimeWindow.desDateTimeLow  = tempDateLow;//generateDateObject (tempDateLow, tempTimeLow);
-                    //alert(newRideRequest.desDateTimeWindow.desDateTimeLow);
-                    var tempDateHigh                                     = offermod.getStartTime()+9000000;//'2/11/2013';
-                    var tempTimeHigh                                     = '19:00';
-                    newRideRequest.desDateTimeWindow.desDateTimeHigh = tempDateHigh;//generateDateObject (tempDateHigh, tempTimeHigh);
+                    //                    newRideRequest.desDateTimeWindow.desDateTimeLow  = tempDateLow;//generateDateObject (tempDateLow, tempTimeLow);
+                    //                    //alert(newRideRequest.desDateTimeWindow.desDateTimeLow);
+                    //                    var tempDateHigh                                     = offermod.getStartTime()+9000000;//'2/11/2013';
+                    //                    var tempTimeHigh                                     = '19:00';
+                    //                    newRideRequest.desDateTimeWindow.desDateTimeHigh = tempDateHigh;//generateDateObject (tempDateHigh, tempTimeHigh);
                     //alert(newRideRequest.desDateTimeWindow.desDateTimeHigh);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeLow);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeHigh);
                     //alert(calendarpicker.getDate()+' -> '+calendarpicker.getDateEnd());
+                    
                     newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
                     newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
-
+                    newRideRequest.desDateTimeWindow.desDateTimeLow = calendarpicker.getDate().getTime()+2592000000;//2,592,000,000=1month in milisec
+                    newRideRequest.desDateTimeWindow.desDateTimeHigh = calendarpicker.getDateEnd().getTime()+2592000000;//2,592,000,000=1month in milisec
                     // Figure out route and price
                     newRideRequest.route             = "whatever";
                     newRideRequest.priceBound        = offermod.getPrice();
@@ -13937,7 +13967,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 //                }
 
                 var newRideRequest = {};
-
+                if (calendarpicker.getDate().getTime()>calendarpicker.getDateEnd().getTime()){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
+                    return;
+                }
+                if (document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text==document.getElementById('offerendcombo')[document.getElementById('offerendcombo').selectedIndex].text){
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'The source and destination must be different!');
+                    return;
+                }
                 function getRideDetails1()
                 {
                     newRideRequest.potentialRidePlans         = [];
@@ -13969,7 +14006,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
 
                     /* Now deal with the rest*/
-
+//                    if (document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text == document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text)
+//                    {
+//                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Please enter different addresses for start and finish.');
+//                        return;
+//                    }
                     newRideRequest.departureCity = document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text;
                     newRideRequest.destinationCity = document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text;
 
@@ -13990,27 +14031,34 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //                    else newRideRequest.destinationCity = tempdesCity[tempdesCity.length-1];
 
                     // Figure out datetime for departure based on the input
-                    var tempDateLow1                      = searchmod.getStartTime();//'1/11/2013';
-                    var tempTimeLow1                      = '18:00';
+                    //                    var tempDateLow1                      = searchmod.getStartTime();//'1/11/2013';
+                    //                    var tempTimeLow1                      = '18:00';
                     newRideRequest.depDateTimeWindow = {};
-                    //newRideRequest.depDateTimeWindow.depDateTimeLow = tempDateLow1;//generateDateObject (tempDateLow1, tempTimeLow1);
-                    //alert(newRideRequest.depDateTimeWindow.depDateTimeLow);
-                    var tempDateHigh1                     = searchmod.getStartTime()+5000000;//'2/11/2013';
-                    var tempTimeHigh1                     = '19:00';
-                    //newRideRequest.depDateTimeWindow.depDateTimeHigh = tempDateHigh1;//generateDateObject (tempDateHigh1, tempTimeHigh1);
-
-                    // Figure out datetime for destination based on the input
-                    var tempDateLow                                      = searchmod.getStartTime()+5000000;//'1/11/2013';
-                    var tempTimeLow                                      = '18:00';
-                    newRideRequest.desDateTimeWindow = {};
-                    newRideRequest.desDateTimeWindow.desDateTimeLow  = tempDateLow;//generateDateObject (tempDateLow, tempTimeLow);
-                    //alert(newRideRequest.desDateTimeWindow.desDateTimeLow);
-                    var tempDateHigh                                     = searchmod.getStartTime()+9000000;//'2/11/2013';
-                    var tempTimeHigh                                     = '19:00';
-                    newRideRequest.desDateTimeWindow.desDateTimeHigh = tempDateHigh;//generateDateObject (tempDateHigh, tempTimeHigh);
+                    //                    //newRideRequest.depDateTimeWindow.depDateTimeLow = tempDateLow1;//generateDateObject (tempDateLow1, tempTimeLow1);
+                    //                    //alert(newRideRequest.depDateTimeWindow.depDateTimeLow);
+                    //                    var tempDateHigh1                     = searchmod.getStartTime()+5000000;//'2/11/2013';
+                    //                    var tempTimeHigh1                     = '19:00';
+                    //                    //newRideRequest.depDateTimeWindow.depDateTimeHigh = tempDateHigh1;//generateDateObject (tempDateHigh1, tempTimeHigh1);
                     //
+                    //                    // Figure out datetime for destination based on the input
+                    //                    var tempDateLow                                      = searchmod.getStartTime()+5000000;//'1/11/2013';
+                    //                    var tempTimeLow                                      = '18:00';
+                    newRideRequest.desDateTimeWindow = {};
+                    //                    newRideRequest.desDateTimeWindow.desDateTimeLow  = tempDateLow;//generateDateObject (tempDateLow, tempTimeLow);
+                    //                    //alert(newRideRequest.desDateTimeWindow.desDateTimeLow);
+                    //                    var tempDateHigh                                     = searchmod.getStartTime()+9000000;//'2/11/2013';
+                    //                    var tempTimeHigh                                     = '19:00';
+                    //                    newRideRequest.desDateTimeWindow.desDateTimeHigh = tempDateHigh;//generateDateObject (tempDateHigh, tempTimeHigh);
+                    //                    //
+//                    if ( calendarpicker.getDate().getTime()>calendarpicker.getDateEnd().getTime())
+//                    {
+//                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
+//                        return;
+//                    }
                     newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
                     newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
+                    newRideRequest.desDateTimeWindow.desDateTimeLow = calendarpicker.getDate().getTime()+2592000000;
+                    newRideRequest.desDateTimeWindow.desDateTimeHigh = calendarpicker.getDateEnd().getTime()+2592000000;
                     // Figure out route and price
                     newRideRequest.route             = "whatever";
                     newRideRequest.priceBound        = "20";//9";
@@ -14018,7 +14066,6 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
                     // Write down comments
                     newRideRequest.comments          = searchmod.getComment();
-                    ;
                     // One-time ride request
                     newRideRequest.managedBy     = null;
                 }

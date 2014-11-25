@@ -78,26 +78,32 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
 
         increaseYear : function(){
             this.date.setFullYear(this.date.getFullYear()+1);
+            this.endDate.setFullYear(this.endDate.getFullYear()+1);
         },
 
         decreaseYear : function(){
             this.date.setFullYear(this.date.getFullYear()-1);
+            this.endDate.setFullYear(this.endDate.getFullYear()-1);
         },
 
         increaseMonth : function(){
             this.date.setMonth(this.date.getMonth()+1);
+            this.endDate.setMonth(this.endDdate.getMonth()+1);
         },
 
         decreaseMonth : function(){
             this.date.setMonth(this.date.getMonth()-1);
+            this.endDate.setMonth(this.endDate.getMonth()-1);
         },
 
         increaseDay : function(){
             this.date.setDate(this.date.getDate()+1);
+            this.endDate.setDate(this.endDate.getDate()+1);
         },
 
         decreaseDay : function(){
             this.date.setDate(this.date.getDate()-1);
+            this.endDate.setDate(this.endDate.getDate()-1);
         },
 
         increaseHour : function(){
@@ -187,6 +193,7 @@ fokus.openride.mobclient.controller.modules.calendar = function(){
             this.date = new Date();
             this.endDate = new Date();
             this.endDate.setHours(endDate.getHours()+1);
+            //alert('reset');
         }
     };
 }();
