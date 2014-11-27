@@ -1591,6 +1591,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         {
             var prp;
             var unmatched = false;
+            user = readCookie('username');
+            pass = readCookie('password');
             var RideShareSB = new StringBuilder();
             //alert(prp.agreedDriver + ' ' + user);
             /*for (var t=0; t<rides.length; t++)
