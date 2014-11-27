@@ -615,44 +615,43 @@
                 <h3>Welcome <span id="usernametag"></span>!</h3>
                 <img id="profilepicimg" src="../../OpenRideWeb/img/profile/default.jpg" alt="profilepic" width="125" height="125" />
                 <script type="text/javascript">
-                function tryToGetImg()
-                {
-                    var pass = readCookie('password');
-                    var user = readCookie('username');
-                    var imgElem = document.querySelector('img[id=profilepicimg]');
-                    $.ajax({
-                    type: "GET",
-                    accepts: "application/json",
-                    url: 'http://168.144.202.152:3002/users/'+user+'/profile/picture',
-                    beforeSend : function(xhr) {
-                            xhr.withCredentials = true;
-                            xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
+                    function tryToGetImg()
+                    {
+                        var pass = readCookie('password');
+                        var user = readCookie('username');
+                        var imgElem = document.querySelector('img[id=profilepicimg]');
+                        $.ajax({
+                            type: "GET",
+                            accepts: "application/json",
+                            url: 'http://168.144.202.152:3002/users/'+user+'/profile/picture',
+                            beforeSend : function(xhr) {
+                                xhr.withCredentials = true;
+                                xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
 
-                            xhr.setRequestHeader("APP_KEY", "RIDE-SHARING-CLIENT-APPLICATION");
-                            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                    },
-                    dataType: "json",
-                    username: user,
-                    password: pass,
-                    crossDomain: true,
-                    async: false,
-                    success: function (data, textStatus, jqXHR) {
-                            var mem = {};
-                            mem.pic  = data;
-                            mem.type = mem.pic.type;
-                            mem.enc  = "";
-                            mem.file = mem.pic.picture;
-                            imgElem.src = mem.file;
-                            //alert(mem.pic._revision);
-		},
-		error: function (data, textStatus, errorThrown) {
-			alert('Could not retrieve image, setting default picture!');
-                        imgElem.src = "../../OpenRideWeb/img/profile/default.jpg";
-		}});
-                }
-                tryToGetImg();
+                                xhr.setRequestHeader("APP_KEY", "RIDE-SHARING-CLIENT-APPLICATION");
+                                xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                            },
+                            dataType: "json",
+                            username: user,
+                            password: pass,
+                            crossDomain: true,
+                            async: false,
+                            success: function (data, textStatus, jqXHR) {
+                                var mem = {};
+                                mem.pic  = data;
+                                mem.type = mem.pic.type;
+                                mem.enc  = "";
+                                mem.file = mem.pic.picture;
+                                imgElem.src = mem.file;
+                                //alert(mem.pic._revision);
+                            },
+                            error: function (data, textStatus, errorThrown) {
+                                alert('Could not retrieve image, setting default picture!');
+                                imgElem.src = "../../OpenRideWeb/img/profile/default.jpg";
+                            }});
+                    }
+                    tryToGetImg();
                 </script>
-
                 <p style="margin-top: -6px;">
                     <span class="statshl" id="homeinfoopenoffers"></span>
                     <a href="#" id="homeActiveOffers" class="homeui_links">Active<span id="homeinfoopenoffers-singular"></span> offer<span id="homeinfoopenoffers-plural">s</span></a>
@@ -752,35 +751,35 @@
                     <a id="searchroutepickerlink" href="#"><img src="../img/showrouteicon.png" alt="xyz" /></a>
                 </div>
             </div>
-<!--             <div id="placesnwait" class="pickloc">
-                <div id="searchplacestxt" class="category-txt">Passengers:</div>
-               <div id="searchmaxwaittxt" class="category-txt">Max. Wait:</div>--<br />
-              <!--  <div class="formstyle" id="placesnwaitform">
-                    <select id="nrplacesselect" name="dropd07" onChange="">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                    </select>
-<!--                    <select id="maxwait" name="dropd08" onChange="">
-                        <option>10 min</option>
-                        <option>15 min</option>
-                        <option>20 min</option>
-                        <option>30 min</option>
-                        <option>45 min</option>
-                        <option>1 hour</option>
-                        <option>2 hour</option>
-                        <option>3 hour</option>
-                        <option>4 hour</option>
-                    </select>--
-<!--                </div>--
-                <!--            <div class="picker" id="showriderroutediv"><a id="searchroutepickerlink" href="#"><img src="../img/showrouteicon.png" alt="xyz" /></a></div>--
-            </div>-->
+            <!--             <div id="placesnwait" class="pickloc">
+                            <div id="searchplacestxt" class="category-txt">Passengers:</div>
+                           <div id="searchmaxwaittxt" class="category-txt">Max. Wait:</div>--<br />
+            <!--  <div class="formstyle" id="placesnwaitform">
+                  <select id="nrplacesselect" name="dropd07" onChange="">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                  </select>
+            <!--                    <select id="maxwait" name="dropd08" onChange="">
+                                    <option>10 min</option>
+                                    <option>15 min</option>
+                                    <option>20 min</option>
+                                    <option>30 min</option>
+                                    <option>45 min</option>
+                                    <option>1 hour</option>
+                                    <option>2 hour</option>
+                                    <option>3 hour</option>
+                                    <option>4 hour</option>
+                                </select>--
+            <!--                </div>--
+                            <!--            <div class="picker" id="showriderroutediv"><a id="searchroutepickerlink" href="#"><img src="../img/showrouteicon.png" alt="xyz" /></a></div>--
+                        </div>-->
         </form>
         <div style="margin-top:3px;" class="separator-line">
             <img src="../img/horizline.png" width="306" height="2" alt="xyz" />
@@ -903,11 +902,11 @@
     <div id="favlistUI">
         <p></p>
         <p>SmartSociety is an EU FP7 project.</p>
-    <p>Developed by the <a href="https://sites.google.com/site/hdmbgu/" target="_blank">HDM Lab</a> in <a href="http://in.bgu.ac.il/Pages/default.aspx" target="_blank">BGU.</a></p>
+        <p>Developed by the <a href="https://sites.google.com/site/hdmbgu/" target="_blank">HDM Lab</a> in <a href="http://in.bgu.ac.il/Pages/default.aspx" target="_blank">BGU.</a></p>
 
-    <p>Visit this project at <a href="http://www.smart-society-project.eu/" target="_blank">SmartSociety.</a> </p>
+        <p>Visit this project at <a href="http://www.smart-society-project.eu/" target="_blank">SmartSociety.</a> </p>
 
-    <p>OpenRide is a Project of Fraunhofer Institute for Open Communication Systems (FOKUS).</p>
+        <p>OpenRide is a Project of Fraunhofer Institute for Open Communication Systems (FOKUS).</p>
     </div>
     <div id="profileUI">
         <h3>Personal Data</h3>

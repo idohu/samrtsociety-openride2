@@ -178,7 +178,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
         newfavaddrstring : "",
 
         parseInitData : function(initData){
-            username = initData.InitResponse.nickname;
+            username = readCookie('username');//initData.InitResponse.nickname;
             password = readCookie('password');
             var picsrc="";
             $.ajax({
@@ -239,13 +239,12 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 }
             });
             //alert(JSON.stringify(profile));
-            profilepic = initData.InitResponse.profilpic;
+//            profilepic = initData.InitResponse.profilpic;
 
             modulemanagermod.username = username;
             mapmod.username = username;
             document.getElementById('usernametag').innerHTML = username;
             var profileimg = document.getElementById('profilepicimg');
-            var now = new Date();
             var lMessages =
             ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
             ,'נסיעות קבוצתיות יפחיתו את ההוצאות החודשיות שלך' ,'נסיעות קבוצתיות תורמות לטיפוח החברה' ,'המערכת מיועדת לסטודנטים באוניברסיטת בן-גוריון בלבד'];
@@ -268,37 +267,37 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
 
             // Home tab statistics
-            document.getElementById("homeinfoopenoffers").innerHTML = initData.InitResponse.openoffers;
-            if (initData.InitResponse.openoffers==1) {
+            document.getElementById("homeinfoopenoffers").innerHTML = '0';//initData.InitResponse.openoffers;
+//            if (initData.InitResponse.openoffers==1) {
                 document.getElementById("homeinfoopenoffers-singular").style.display = 'inline';
                 document.getElementById("homeinfoopenoffers-plural").style.display = 'none';
-            }
-            else {
-                document.getElementById("homeinfoopenoffers-singular").style.display = 'none';
-                document.getElementById("homeinfoopenoffers-plural").style.display = 'inline';
-            }
+//            }
+//            else {
+//                document.getElementById("homeinfoopenoffers-singular").style.display = 'none';
+//                document.getElementById("homeinfoopenoffers-plural").style.display = 'inline';
+//            }
 
-            document.getElementById("homeinfoopensearches").innerHTML = initData.InitResponse.opensearches;
-            if (initData.InitResponse.opensearches==1) {
+            document.getElementById("homeinfoopensearches").innerHTML = '0';//initData.InitResponse.opensearches;
+//            if (initData.InitResponse.opensearches==1) {
                 document.getElementById("homeinfoopensearches-singular").style.display = 'inline';
                 document.getElementById("homeinfoopensearches-plural").style.display = 'none';
-            }
-            else {
-                document.getElementById("homeinfoopensearches-singular").style.display = 'none';
-                document.getElementById("homeinfoopensearches-plural").style.display = 'inline';
-            }
+//            }
+//            else {
+//                document.getElementById("homeinfoopensearches-singular").style.display = 'none';
+//                document.getElementById("homeinfoopensearches-plural").style.display = 'inline';
+//            }
 
-            document.getElementById("homeinfoopenratings").innerHTML = initData.InitResponse.openratings;
-            if (initData.InitResponse.openratings==1) {
+            document.getElementById("homeinfoopenratings").innerHTML = '0';//initData.InitResponse.openratings;
+//            if (initData.InitResponse.openratings==1) {
                 document.getElementById("homeinfoopenratings-plural").style.display = 'none';
-            }
-            else {
-                document.getElementById("homeinfoopenratings-plural").style.display = 'inline';
-            }
+//            }
+//            else {
+//                document.getElementById("homeinfoopenratings-plural").style.display = 'inline';
+//            }
 
             // Update notifications
-            modulemanagermod.setriderupdatecount(initData.InitResponse.updatedsearches);
-            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);
+//            modulemanagermod.setriderupdatecount(initData.InitResponse.updatedsearches);
+//            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);
 
             // Profile data - upload form action
             document.getElementById("profilepictureform").action = "../resources/users/"+username+"/profile/picture";
@@ -685,13 +684,13 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
     });*/
                 /************** END OF POST REQUEST **************/
 
-                var minute = 1000*60;
+//               var minute5 = 1000*60*5;
 
 
                 // Validation
                 // Time & date
-                if ((calendarpicker.getDate().getTime() + minute - new Date().getTime()) < 0) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Die Abfahrtszeit liegt in der Vergangenheit.');
+                if ((calendarpicker.getDate().getTime() + minute5 - new Date().getTime()) < 0) {
+                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'The departure time is in the past.');
                     return;
                 }
 
@@ -1332,7 +1331,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
                     return;
                 }
-                if (document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text==document.getElementById('offerendcombo')[document.getElementById('offerendcombo').selectedIndex].text){
+                if (document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text == document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'The source and destination must be different!');
                     return;
                 }

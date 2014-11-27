@@ -10792,9 +10792,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     var obj = JSON.parse(data);
                     var subjectId=obj.subject_id;
                     var events = obj["authored_reports"];
-                    var ratedRides = [];
+                    var ratedRides = [];// built as [rideId,subjectsForRide,RideId,dubjectForRide...]
                     if (events!='undefined'){
-                        //alert('here');
                         for (var report in events)
                         {
                             var object = events[report];
@@ -10802,7 +10801,12 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             //alert(event);
                             var index = event.indexOf("/");
                             var id = event.substring(index+1);
-                            ratedRides.push(parseInt(id));
+                            if (ratedRides.indexOf(parseInt(id))==-1){
+                                ratedRides.push(parseInt(id));
+                                ratedRides.push(object["subjects"]["subject_uri_1"]);
+                            }else{
+                                ratedRides[ratedRides.indexOf(parseInt(id))+1] = ratedRides[ratedRides.indexOf(parseInt(id))+1]+","+object["subjects"]["subject_uri_1"];
+                            }
                         }
                     }
                     for (var i=0; i<rides.length; i++)
@@ -10813,8 +10817,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
 
                         obj = JSON.parse(rides[i]);
-                        if (ratedRides.indexOf(obj["index"])!=-1)
-                            continue;
                         //alert(JSON.stringify(obj) + ' ' + obj["potentiallyAgreedCommuters"].length == 1 + ' ' + obj["potentiallyAgreedCommuters"].length == 0);
                         if (obj["potentiallyAgreedCommuters"].length != 0 && obj["potentiallyAgreedCommuters"] != [""]&& obj["potentiallyAgreedCommuters"] != [])
                         {
@@ -10828,29 +10830,36 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         if (hours < 10) hours = '0' + hours;
                         var mins = date.getMinutes();
                         if (mins < 10) mins = '0' + mins;
-                        var date_realized = ""+hours + ':' + mins + ' ' + date.getDate() + '.' + date.getMonth() + '.' + date.getFullYear();
+                        var date_realized = ""+hours + ':' + mins + ' ' + date.getDate() + '.' + date.getMonth()+1 + '.' + date.getFullYear();
                         //alert(date_realized + ' '+ date.getDay());
                         //alert('creation' +i+''+obj["index"]+''+5);
                         var users = obj.commuters;
                         if (obj.driver==user){
-                        //                            for (var ind=0; ind<users.length; ind++){
-                        //                                listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
-                        //                                + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
-                        //                                + '    <div style="line-height: 140%; padding-left: 75px;">'
-                        //                                + '        Ride with: ' + users[ind] + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
-                        //                                + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
-                        //                                // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
-                        //                                + '    </div>'
-                        //                                + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
-                        //                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
-                        //                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
-                        //                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
-                        //                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
-                        //                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
-                        //                                + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
-                        //                                + '    </div>'
-                        //                                + '</div>';
-                        //                            }
+                            for (var ind=0; ind<users.length; ind++){
+                                //alert('looking for ride ' +obj["index"] +' where subject are '+users);
+                                if (ratedRides.indexOf(obj["index"])!=-1){
+                                    var sub = ratedRides[ratedRides.indexOf(obj["index"])+1].split(",");
+                                    //alert('ride appear! now check for subject ' +sub);
+                                    if (sub.indexOf(users[ind])!=-1)
+                                        continue;
+                                }
+                                listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
+                                + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
+                                + '    <div style="line-height: 140%; padding-left: 75px;">'
+                                + '        Ride with: ' + users[ind] + ' taken on: <div style="color:#96bd0d;"><strong>' + date_realized + '</strong><br>'
+                                + ' ' +obj.departureCity + ' -> ' + obj.destinationCity + '<br><br></div>'
+                                // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
+                                + '    </div>'
+                                + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
+                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i,ind) + '</div>'
+                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
+                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i,ind) + '</div>'
+                                //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
+                                + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i,ind) + '</div>'
+                                + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+'#'+5 + users[ind] + '\');">'+ '</strong></div>'
+                                + '    </div>'
+                                + '</div>';
+                            }
                         }
                         else{
 
@@ -10862,11 +10871,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             // + '        ' + rateeRoleName + ' on ' + dateRealized.getDate() + '.' + (dateRealized.getMonth() + 1) + '.' + dateRealized.getFullYear() + ':'
                             + '    </div>'
                             + '    <div class="open-rating-buttons" style="line-height: 100%;"><br><br>'
-                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i) + '</div>'
+                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Overall: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(0,i,0) + '</div>'
                             //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Price: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(1,i) + '</div>'
-                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i) + '</div>'
+                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i,0) + '</div>'
                             //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
-                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i) + '</div>'
+                            + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i,0) + '</div>'
                             + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
                             + '    </div>'
                             + '</div>';
@@ -11817,7 +11826,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                     }
 
-                })
+                });
                 //parseUnmatchedSearch(0);
                 this.parseactivesearcheslist();
             }
@@ -12386,10 +12395,12 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                     }
                 });
-                // Get initialization data
-                srvconn.GET('/OpenRideServer-RS/resources/configuration/init', false, fokus.openride.mobclient.controller.modules.uievents.parseInitData, function(x,s,e){
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, initial data could not be loaded.')
-                } );
+                fokus.openride.mobclient.controller.modules.uievents.parseInitData(null);
+            // Get initialization data
+            //                srvconn.GET('/OpenRideServer-RS/resources/configuration/init', false, fokus.openride.mobclient.controller.modules.uievents.parseInitData, function(x,s,e){
+            //                    fokus.openride.mobclient.controller.modules.uievents.parseInitData(null);
+            ////                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, initial data could not be loaded.');
+            //                } );
             }
 
             this.currentdisplayedview = viewId;
@@ -12775,7 +12786,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
         newfavaddrstring : "",
 
         parseInitData : function(initData){
-            username = initData.InitResponse.nickname;
+            username = readCookie('username');//initData.InitResponse.nickname;
             password = readCookie('password');
             var picsrc="";
             $.ajax({
@@ -12836,7 +12847,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 }
             });
             //            alert(JSON.stringify(profile));
-            profilepic = initData.InitResponse.profilpic;
+            //profilepic = initData.InitResponse.profilpic;
 
             modulemanagermod.username = username;
             mapmod.username = username;
@@ -12870,39 +12881,39 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 }
 
             // Home tab statistics
-            document.getElementById("homeinfoopenoffers").innerHTML = initData.InitResponse.openoffers;
-            if (initData.InitResponse.openoffers==1) {
-                document.getElementById("homeinfoopenoffers-singular").style.display = 'inline';
-                document.getElementById("homeinfoopenoffers-plural").style.display = 'none';
-            }
-            else {
-                document.getElementById("homeinfoopenoffers-singular").style.display = 'none';
-                document.getElementById("homeinfoopenoffers-plural").style.display = 'inline';
-            }
+            document.getElementById("homeinfoopenoffers").innerHTML = '0';//initData.InitResponse.openoffers;
+            //            if (initData.InitResponse.openoffers==1) {
+            document.getElementById("homeinfoopenoffers-singular").style.display = 'inline';
+            document.getElementById("homeinfoopenoffers-plural").style.display = 'none';
+            //            }
+            //            else {
+            //                document.getElementById("homeinfoopenoffers-singular").style.display = 'none';
+            //                document.getElementById("homeinfoopenoffers-plural").style.display = 'inline';
+            //            }
 
-            document.getElementById("homeinfoopensearches").innerHTML = initData.InitResponse.opensearches;
-            if (initData.InitResponse.opensearches==1) {
-                document.getElementById("homeinfoopensearches-singular").style.display = 'inline';
-                document.getElementById("homeinfoopensearches-plural").style.display = 'none';
-            }
-            else {
-                document.getElementById("homeinfoopensearches-singular").style.display = 'none';
-                document.getElementById("homeinfoopensearches-plural").style.display = 'inline';
-            }
+            document.getElementById("homeinfoopensearches").innerHTML = '0';//initData.InitResponse.opensearches;
+            //            if (initData.InitResponse.opensearches==1) {
+            document.getElementById("homeinfoopensearches-singular").style.display = 'inline';
+            document.getElementById("homeinfoopensearches-plural").style.display = 'none';
+            //            }
+            //            else {
+            //                document.getElementById("homeinfoopensearches-singular").style.display = 'none';
+            //                document.getElementById("homeinfoopensearches-plural").style.display = 'inline';
+            //            }
 
-            document.getElementById("homeinfoopenratings").innerHTML = initData.InitResponse.openratings;
-            if (initData.InitResponse.openratings==1) {
-                document.getElementById("homeinfoopenratings-plural").style.display = 'none';
-            }
-            else {
-                document.getElementById("homeinfoopenratings-plural").style.display = 'inline';
-            }
+            document.getElementById("homeinfoopenratings").innerHTML = '0';//initData.InitResponse.openratings;
+            //            if (initData.InitResponse.openratings==1) {
+            document.getElementById("homeinfoopenratings-plural").style.display = 'none';
+            //            }
+            //            else {
+            //                document.getElementById("homeinfoopenratings-plural").style.display = 'inline';
+            //            }
 
 
 
             // Update notifications
-            modulemanagermod.setriderupdatecount(initData.InitResponse.updatedsearches);
-            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);
+            //            modulemanagermod.setriderupdatecount(initData.InitResponse.updatedsearches);
+            //            modulemanagermod.setdriverupdatecount(initData.InitResponse.updatedoffers);
 
             // Profile data - upload form action
             document.getElementById("profilepictureform").action = "../resources/users/"+username+"/profile/picture";
@@ -13971,10 +13982,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
                     return;
                 }
-                if (document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text==document.getElementById('offerendcombo')[document.getElementById('offerendcombo').selectedIndex].text){
+                if (document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text == document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'The source and destination must be different!');
                     return;
                 }
+
                 function getRideDetails1()
                 {
                     newRideRequest.potentialRidePlans         = [];
@@ -14006,11 +14018,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
 
                     /* Now deal with the rest*/
-//                    if (document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text == document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text)
-//                    {
-//                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Please enter different addresses for start and finish.');
-//                        return;
-//                    }
+                    //                    if (document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text == document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text)
+                    //                    {
+                    //                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'Please enter different addresses for start and finish.');
+                    //                        return;
+                    //                    }
                     newRideRequest.departureCity = document.getElementById('searchstartcombo')[document.getElementById('searchstartcombo').selectedIndex].text;
                     newRideRequest.destinationCity = document.getElementById('searchendcombo')[document.getElementById('searchendcombo').selectedIndex].text;
 
@@ -14050,11 +14062,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //                    var tempTimeHigh                                     = '19:00';
                     //                    newRideRequest.desDateTimeWindow.desDateTimeHigh = tempDateHigh;//generateDateObject (tempDateHigh, tempTimeHigh);
                     //                    //
-//                    if ( calendarpicker.getDate().getTime()>calendarpicker.getDateEnd().getTime())
-//                    {
-//                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
-//                        return;
-//                    }
+                    //                    if ( calendarpicker.getDate().getTime()>calendarpicker.getDateEnd().getTime())
+                    //                    {
+                    //                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(null,'validateError',null,'End time must be later the start time.');
+                    //                        return;
+                    //                    }
                     newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
                     newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
                     newRideRequest.desDateTimeWindow.desDateTimeLow = calendarpicker.getDate().getTime()+2592000000;
@@ -14825,21 +14837,21 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
-function stars(category , riderId)
+function stars(category , riderId,id)
 {
     //alert(category+" -"+riderId);
-    var tmpID = "" + riderId + category;
+    var tmpID = "" + riderId +"#"+ category+"-"+id;
     var ans =
     /*'     <img src="../../OpenRideWeb/img/rating_off.gif" id="1' + tmpID +'" onClick="submit(1,' + riderId + ','+category+')"/>'
                     + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="2' + tmpID +'" onClick="submit(2' + riderId + ','+category+')"/>'
                     + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="3' + tmpID +'" onClick="submit(3' + riderId + ','+category+')"/>'
                     + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="4' + tmpID +'" onClick="submit(4' + riderId + ','+category+')"/>'
                     + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="5' + tmpID +'" onClick="submit(5' + riderId + ','+category+')"/><br><br>';*/
-    '     <img src="../../OpenRideWeb/img/rating_off.gif" id="1' + tmpID +'" onMouseOver="mouseOver(' + 1 + tmpID + ')" onMouseOut="mouseOut(' + 1 + tmpID + ')" onClick="fix(' + 1 + tmpID + ')"/>'
-    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="2' + tmpID +'" onMouseOver="mouseOver(' + 2 + tmpID + ')" onMouseOut="mouseOut(' + 2 + tmpID + ')" onClick="fix(' + 2 + tmpID + ')"/>'
-    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="3' + tmpID +'" onMouseOver="mouseOver(' + 3 + tmpID + ')" onMouseOut="mouseOut(' + 3 + tmpID + ')" onClick="fix(' + 3 + tmpID + ')"/>'
-    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="4' + tmpID +'" onMouseOver="mouseOver(' + 4 + tmpID + ')" onMouseOut="mouseOut(' + 4 + tmpID + ')" onClick="fix(' + 4 + tmpID + ')"/>'
-    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="5' + tmpID +'" onMouseOver="mouseOver(' + 5 + tmpID + ')" onMouseOut="mouseOut(' + 5 + tmpID + ')" onClick="fix(' + 5 + tmpID + ')"/><br><br>';
+    '      <img src="../../OpenRideWeb/img/rating_off.gif" id="1' + tmpID +'" onMouseOver="mouseOver(\'' + 1 + tmpID + '\')" onMouseOut="mouseOut(\'' + 1 + tmpID + '\')" onClick="fix(\'' + 1 + tmpID + '\')"/>'
+    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="2' + tmpID +'" onMouseOver="mouseOver(\'' + 2 + tmpID + '\')" onMouseOut="mouseOut(\'' + 2 + tmpID + '\')" onClick="fix(\'' + 2 + tmpID + '\')"/>'
+    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="3' + tmpID +'" onMouseOver="mouseOver(\'' + 3 + tmpID + '\')" onMouseOut="mouseOut(\'' + 3 + tmpID + '\')" onClick="fix(\'' + 3 + tmpID + '\')"/>'
+    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="4' + tmpID +'" onMouseOver="mouseOver(\'' + 4 + tmpID + '\')" onMouseOut="mouseOut(\'' + 4 + tmpID + '\')" onClick="fix(\'' + 4 + tmpID + '\')"/>'
+    + '    <img src="../../OpenRideWeb/img/rating_off.gif" id="5' + tmpID +'" onMouseOver="mouseOver(\'' + 5 + tmpID + '\')" onMouseOut="mouseOut(\'' + 5 + tmpID + '\')" onClick="fix(\'' + 5 + tmpID + '\')"/><br><br>';
     //alert(ans);
     return ans;
 }
@@ -14848,16 +14860,17 @@ function mouseOver(id1)
     //alert(id1);
     var id = id1.toString();
     var personal = parseInt(id.charAt(0));
-    var riderId = id.substring(1, id.length-1); //charAt(1);
+    var riderId = id.substring(1, id.indexOf("#")); //charAt(1);
     var riderIdInt = parseInt(riderId);
-    var category = id.charAt(id.length-1);
+    var category = id.charAt(id.indexOf("#")+1);
+    var rider = id.substring(id.indexOf("-")+1);
     if (submitted_rides[riderIdInt][category] == -1)
     {
         for (var i=1; i<personal+1; i++)
         {
             //alert(i + riderId + category);
-            if (document.getElementById(i + riderId + category) != null)
-                document.getElementById(i + riderId + category).src = "../../OpenRideWeb/img/rating_on.gif";
+            if (document.getElementById(i + riderId +"#"+ category+"-"+rider) != null)
+                document.getElementById(i + riderId +"#"+ category+"-"+rider).src = "../../OpenRideWeb/img/rating_on.gif";
         }
     }
 }
@@ -14866,16 +14879,17 @@ function mouseOut(id1)
     //alert(id1);
     var id = id1.toString();
     var personal = parseInt(id.charAt(0));
-    var riderId = id.substring(1, id.length-1);//id.charAt(1);
+    var riderId = id.substring(1, id.indexOf("#")); //charAt(1);
     var riderIdInt = parseInt(riderId);
-    var category = id.charAt(id.length-1);
+    var category = id.charAt(id.indexOf("#")+1);
+    var rider = id.substring(id.indexOf("-")+1);
     if (submitted_rides[riderIdInt][category] == -1)
     {
         for (var i=1; i<personal+1; i++)
         {
             //alert(i + riderId + category);
-            if (document.getElementById(i + riderId + category) != null)
-                document.getElementById(i + riderId + category).src = "../../OpenRideWeb/img/rating_off.gif";
+            if (document.getElementById(i + riderId +"#"+ category+"-"+rider) != null)
+                document.getElementById(i + riderId +"#"+ category+"-"+rider).src = "../../OpenRideWeb/img/rating_off.gif";
         }
     }
 }
@@ -14884,14 +14898,15 @@ function fix(id1)
     //alert(id1);
     var id = id1.toString();
     var personal = parseInt(id.charAt(0));
-    var riderId = id.substring(1, id.length-1);//id.charAt(1);
-    var category = id.charAt(id.length-1);
+    var riderId = id.substring(1, id.indexOf("#"));//charAt(1);
+    var category = id.charAt(id.indexOf("#")+1);
+    var rider = id.substring(id.indexOf("-")+1);
     for (var i=1; i<6; i++){
         //alert(i + riderId + category);
-        document.getElementById(i + riderId + category).src = "../../OpenRideWeb/img/rating_off.gif";
+        document.getElementById(i + riderId +"#"+category+"-"+rider).src = "../../OpenRideWeb/img/rating_off.gif";
     }
     for (var i=1; i<personal+1; i++)
-        document.getElementById(i + riderId + category).src = "../../OpenRideWeb/img/rating_on.gif";
+        document.getElementById(i + riderId +"#"+category+"-"+rider).src = "../../OpenRideWeb/img/rating_on.gif";
 
     riderId = parseInt(riderId);
     //alert("glob " + riderId +" ["+ submitted_rides[riderId] + "] " + category);
@@ -14903,7 +14918,7 @@ function fix(id1)
 //    }
 }
 
-function submit (rate_array , riderId )
+function submit (rate_array , riderId , ratedUser)
 {
     var rideIdInt = parseInt(riderId);
     var agent1 = 1 + rideIdInt;
@@ -14912,7 +14927,7 @@ function submit (rate_array , riderId )
     pass = readCookie('password');
     usermode=readCookie('usermode');
 
-    //alert('submit - '+JSON.stringify(rate_array)+' - '+rideIdInt)
+    alert('submit - '+JSON.stringify(rate_array)+' - '+rideIdInt)
     $.ajax
     ({
         type: "GET",
@@ -14963,13 +14978,19 @@ function submit (rate_array , riderId )
                     ind++;
                 }
             }
+            var quantifier = 'driver';
+            if (user==obj["driver"]){
+                quantifier='commuter';
+            }
+            var subject='{"subject_0":{"subject_uri":"'+ratedUser+'", "quantifier_uri" : "'+quantifier+'"}},';
+
             //alert(JSON.stringify(rate_array));
             subjects = subjects + '},';
             var json2 = '{'
             +'"application_uri" : "smartshare",'
             +'"event_uri" : "ride/' + rideIdInt + '",'
             +'"subjects": '
-            + subjects
+            + subject//s
             +'"authors": {"author_0":{'
             +'"author_uri" : "' + user + '",'
             +'"quantifier_uri" : "'+ mode + '"'
@@ -15046,11 +15067,12 @@ function comment(id1)
 {
     //alert(id1);
     var id = id1.toString();
-    var personal = parseInt(id.substring(0,id.indexOf("-")));
-    var riderId = id.substring(id.indexOf("-")+1,id.length-1);//charAt(1);
-    var category = id.charAt(id.length-1);
+    var rideId = parseInt(id.substring(0,id.indexOf("-")));
+    var riderId = id.substring(id.indexOf("-")+1,id.indexOf("#"));//charAt(1);
+    var category = id.charAt(id.indexOf("#")+1);
+    var ratedUser = id.substring(id.indexOf("#")+2);
     //alert("comment - riderId "+riderId);
-
+    alert(ratedUser);
     var x;
     var comment;
     //comment=prompt("Please enter your name","Ride Comment");
@@ -15061,7 +15083,7 @@ function comment(id1)
     if ($.inArray(-1, submitted_rides[riderId]) == -1)
     {
         //alert('ff');
-        submit(submitted_rides[riderId] , personal);
+        submit(submitted_rides[riderId] , rideId, ratedUser);
         submitted_rides[riderId]= [-1,0,-1,0,-1];
     }
 //alert('finish comment');

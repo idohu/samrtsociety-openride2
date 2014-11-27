@@ -190,7 +190,7 @@ function nl2br(text){
 	text = escape(text);
 	if(text.indexOf('%0D%0A') > -1){
 		re_nlchar = /%0D%0A/g ;
-	} 
+	}
 	else if(text.indexOf('%0A') > -1){
 		re_nlchar = /%0A/g ;
 	}
@@ -217,7 +217,8 @@ function getScrollHeight()
            document.documentElement.scrollTop;
 
    return h ? h : 0;
-}/*
+}
+/*
     OpenRide -- Car Sharing 2.0
     Copyright (C) 2010  Fraunhofer Institute for Open Communication Systems (FOKUS)
 

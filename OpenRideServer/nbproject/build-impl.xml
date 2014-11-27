@@ -2,17 +2,14 @@
 <!--
 *** GENERATED FROM project.xml - DO NOT EDIT  ***
 ***         EDIT ../build.xml INSTEAD         ***
-
 For the purpose of easier reading the script
 is divided into following sections:
-
   - initialization
   - compilation
   - dist
   - execution
   - debugging
   - cleanup
-
 -->
 <project xmlns:ear2="http://www.netbeans.org/ns/j2ee-earproject/2" basedir=".." default="default" name="OpenRideServer-impl">
     <import file="ant-deploy.xml"/>
@@ -24,8 +21,8 @@ is divided into following sections:
         </condition>
     </fail>
     <target depends="dist" description="Build whole project." name="default"/>
-    <!-- 
-    INITIALIZATION SECTION 
+    <!--
+    INITIALIZATION SECTION
     -->
     <target name="pre-init">
         <!-- Empty placeholder for easier customization. -->
@@ -136,9 +133,9 @@ is divided into following sections:
     <target name="-init-taskdefs">
         <fail unless="libs.CopyLibs.classpath">
 The libs.CopyLibs.classpath property is not set up.
-This property must point to 
+This property must point to
 org-netbeans-modules-java-j2seproject-copylibstask.jar file which is part
-of NetBeans IDE installation and is usually located at 
+of NetBeans IDE installation and is usually located at
 &lt;netbeans_installation&gt;/java&lt;version&gt;/ant/extra folder.
 Either open the project in the IDE and make sure CopyLibs library
 exists or setup the property manually. For example like this:
