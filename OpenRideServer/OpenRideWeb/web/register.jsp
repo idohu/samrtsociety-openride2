@@ -112,12 +112,12 @@
                     </h:panelGroup>
 
                     <h:panelGroup>
-                        <h:outputLabel for="email" value="E-Mail Address:" styleClass="requiredField" />
+                        <h:outputLabel for="email" value="BGU E-Mail Address:" styleClass="requiredField" />
                         <span class="requiredField">(*)</span>
                     </h:panelGroup>
                     <h:panelGroup>
                         <h:inputText id="email" binding="#{Register_Backing.email}" required="true" validator="#{Register_Backing.validateEmail}" styleClass="wide">
-                            <t:validateEmail summaryMessage="Invalid E-Mail Address."/>
+                            <t:validateEmail summaryMessage="Invalid BGU E-Mail Address."/>
                         </h:inputText>
                         <h:message for="email" styleClass="error" />
                     </h:panelGroup>
@@ -178,13 +178,17 @@
             document.forms[0].elements[1].value;
         var pass =
             document.forms[0].elements[2].value;
+
         if ( ($("#registrationForm\\:firstName").val() != ""))
             $("#registrationForm\\:firstName").val = " ";
         if ($("#registrationForm\\:lastName").val() != "")
             $("#registrationForm\\:lastName").val = " ";
+        
+        if ($("#registrationForm\\:email").val().match(/@post.bgu.ac.il/)!=null ||
+                $("#registrationForm\\:email").val().match(/@bgu.ac.il/)!=null)
         if (document.getElementById('registrationForm:gender:0').checked == true ||
             document.getElementById('registrationForm:gender:1').checked == true)
-            if (($("#registrationForm\\:username").val() != "") &&
+        if (($("#registrationForm\\:username").val() != "") &&
             ($("#registrationForm\\:password").val() != "") &&
             ($("#registrationForm\\:passwordCheck").val() != "") &&
            // ($("#registrationForm\\:firstName").val() != "") &&
@@ -310,8 +314,10 @@
         func.param = ajaxStatus;
         setInterval(function(){if (ajaxStatus == 1) endAjax();}, 500);
         }
+        
         else alert('Not all field are filled!');
         else alert('Not all field are filled!');
+        else alert('Not a valid BGU E-Mail address!');
     }
 
 </script>
