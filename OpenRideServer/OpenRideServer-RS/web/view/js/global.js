@@ -12983,11 +12983,16 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
                 modulemanagermod.changeViewAndUserMode('offers');
             };
-
+            document.getElementById("refreshActiveOffers").onclick = function(){
+                                modulemanagermod.changeViewAndUserMode('offers');
+            };
             var homeActiveSearches = document.getElementById("homeActiveSearches");
 
             homeActiveSearches.onclick = function () {
                 modulemanagermod.changeViewAndUserMode('searches');
+            };
+            document.getElementById("refreshActiveSearches").onclick = function(){
+                                modulemanagermod.changeViewAndUserMode('searches');
             };
 
 

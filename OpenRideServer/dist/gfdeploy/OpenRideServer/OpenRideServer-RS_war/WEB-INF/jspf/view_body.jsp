@@ -588,7 +588,11 @@
         </form>
     </div>
     <div id="activeofferUI">
-        <h3>My offers</h3>
+        <table>
+            <tr>
+                <td>
+            <h3>My offers</h3></td><td align="right"> <a href="#" id="refreshActiveOffers" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
+        </tr></table>
         <ul id="activeofferlist" class="ridelist">
             <!-- list populated through JS -->
         </ul>
@@ -596,7 +600,11 @@
     <div id="activeofferdetailUI">
     </div>
     <div id="activesearchUI">
-        <h3>My Searches</h3>
+        <table>
+            <tr>
+                <td>
+            <h3>My Searches</h3></td><td align="right"> <a href="#" id="refreshActiveSearches" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
+        </tr></table>
         <ul id="activesearchlist" class="ridelist">
             <!-- list populated through JS -->
         </ul>

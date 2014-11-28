@@ -1727,8 +1727,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         +(data.json.total_StarRating/data.json.average_StarRating)+","
                                         +data.json.average_OnTime+","
                                         +data.json.average_Friendly+","
-                                        +personal.ProfileResponse.mobilePhoneNumber+",'"
-                                        +personal.ProfileResponse.carColour+ " " + personal.ProfileResponse.carBrand
+                                        +personal.mobilePhoneNumber+",'"
+                                        +personal.carColour+ " " + personal.carBrand
                                         +"');\" value=\""+counterpart+"\" />");
                                 //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
                                 //                                        +ratingsPopUp
