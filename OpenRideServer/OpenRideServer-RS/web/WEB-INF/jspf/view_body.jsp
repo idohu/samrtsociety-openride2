@@ -1059,7 +1059,7 @@
             </p>
             <div>
                 <label for="">
-                    New picture:
+                    New picture (Up to 1MB):
                 </label>
                 <br/>
                 <input type="file" id="profilepicturefile" name="profilepicturefile" size="12" />
