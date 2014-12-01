@@ -690,7 +690,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
     });*/
                 /************** END OF POST REQUEST **************/
 
-//               var minute5 = 1000*60*5;
+               var minute5 = 1000*60*5;
 
 
                 // Validation

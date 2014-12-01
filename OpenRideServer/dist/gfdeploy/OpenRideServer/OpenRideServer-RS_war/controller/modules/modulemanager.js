@@ -1701,12 +1701,30 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             //alert(JSON.stringify(data.subject_id));
                             //get profile
                             var personal;
-                            srvconn.GET(PeerManagerPrefix+PeerMenager+'/users/'+ counterpart +'/profile', false,function(data){
-                                //alert(JSON.stringify(data));
-                                personal = data;
-                            //alert(personal.ProfileResponse.mobilePhoneNumber);
-                            }, function(x,s,e) {
-                                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
+                            $.ajax({
+                                type: "GET",
+                                url: PeerManagerPrefix + PeerMenager + '/users/'+counterpart+'/profile',//'/api/register/' + user,
+                                data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                                crossDomain: true,
+                                contentType:  "application/json; charset=UTF-8",
+                                accepts: "application/json",
+                                dataType: "json",
+                                username: this.username,
+                                password: this.password,
+                                beforeSend: function (xhr)
+                                {
+                                    xhr.withCredentials = true,
+                                    xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
+                                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                                },
+                                async: false,
+                                success: function(data, textStatus, jqXHR){
+                                    personal = data;
+                                },
+                                error: function(jq , textStatus , errorThrown){
+                                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                                }
                             });
                             $.ajax({//get subject reputation
                                 type:"GET",
@@ -1727,8 +1745,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         +(data.json.total_StarRating/data.json.average_StarRating)+","
                                         +data.json.average_OnTime+","
                                         +data.json.average_Friendly+","
-                                        +personal.ProfileResponse.mobilePhoneNumber+",'"
-                                        +personal.ProfileResponse.carColour+ " " + personal.ProfileResponse.carBrand
+                                        +personal.mobilePhoneNumber+",'"
+                                        +personal.carColour+ " " + personal.carBrand
                                         +"');\" value=\""+counterpart+"\" />");
                                 //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
                                 //                                        +ratingsPopUp

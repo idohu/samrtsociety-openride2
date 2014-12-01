@@ -676,7 +676,7 @@
                 <h3 style="clear: both;"></h3>
             </div>
             <div>
-                <span id="motivationmessage" style="background-color: pink; direction: rtl;"></span>
+                <span id="motivationmessage" style="background-color: pink;" dir="rtl"></span>
             </div>
             <div class="fastoption">
                 <div id="usermodelink">
@@ -1066,7 +1066,7 @@
             </p>
             <div>
                 <label for="">
-                    New picture:
+                    New picture (Up to 1MB):
                 </label>
                 <br/>
                 <input type="file" id="profilepicturefile" name="profilepicturefile" size="12" />

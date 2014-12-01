@@ -361,13 +361,19 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             var homeActiveOffers = document.getElementById("homeActiveOffers");
 
             homeActiveOffers.onclick = function () {
+
                 modulemanagermod.changeViewAndUserMode('offers');
             };
-
+            document.getElementById("refreshActiveOffers").onclick = function(){
+                                modulemanagermod.changeViewAndUserMode('offers');
+            };
             var homeActiveSearches = document.getElementById("homeActiveSearches");
 
             homeActiveSearches.onclick = function () {
                 modulemanagermod.changeViewAndUserMode('searches');
+            };
+            document.getElementById("refreshActiveSearches").onclick = function(){
+                                modulemanagermod.changeViewAndUserMode('searches');
             };
 
 
@@ -684,7 +690,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
     });*/
                 /************** END OF POST REQUEST **************/
 
-//               var minute5 = 1000*60*5;
+               var minute5 = 1000*60*5;
 
 
                 // Validation
