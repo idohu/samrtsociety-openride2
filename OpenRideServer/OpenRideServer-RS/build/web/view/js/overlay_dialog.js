@@ -87,7 +87,7 @@ function showLoadingDialog() {
 }
 
 function showRatingDialog(counterpart,overall,numofraters,rel,friend,phone,car) {
-    //alert('ratingdialog');
+    //alert(phone);
     var carRow='';
     if (car!="undefined undefined")
         carRow='<tr><td>Car:</td><td>'+car+'</td></tr><tr></tr><tr></tr>';

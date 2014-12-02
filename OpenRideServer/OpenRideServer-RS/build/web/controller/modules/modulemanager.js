@@ -1740,14 +1740,24 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 accepts: "application/json",
                                 dataType: "json",
                                 success:function(data, textStatus, jqXHR){
-                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                        +data.json.average_StarRating+","
-                                        +(data.json.total_StarRating/data.json.average_StarRating)+","
-                                        +data.json.average_OnTime+","
-                                        +data.json.average_Friendly+","
-                                        +personal.mobilePhoneNumber+",'"
-                                        +personal.carColour+ " " + personal.carBrand
-                                        +"');\" value=\""+counterpart+"\" />");
+                                    if (usermode == RIDERMODE)
+                                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                            +data.json.average_StarRating+","
+                                            +(data.json.total_StarRating/data.json.average_StarRating)+","
+                                            +data.json.average_OnTime+","
+                                            +data.json.average_Friendly+",'"
+                                            +personal.mobilePhoneNumber+"','"
+                                            +personal.carColour+ " " + personal.carBrand
+                                            +"');\" value=\""+counterpart+"\" />");
+                                    else
+                                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                            +data.json.average_StarRating+","
+                                            +(data.json.total_StarRating/data.json.average_StarRating)+","
+                                            +data.json.average_OnTime+","
+                                            +data.json.average_Friendly+",'"
+                                            +personal.mobilePhoneNumber+"','"
+                                            +"undefined undefined"
+                                            +"');\" value=\""+counterpart+"\" />");
                                 //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
                                 //                                        +ratingsPopUp
                                 //                                        +"', 'X', '', '', '');\" value=\""+counterpart+"\" />");
@@ -5236,7 +5246,7 @@ function submit (rate_array , riderId , ratedUser)
     pass = readCookie('password');
     usermode=readCookie('usermode');
 
-    alert('submit - '+JSON.stringify(rate_array)+' - '+rideIdInt)
+    //alert('submit - '+JSON.stringify(rate_array)+' - '+rideIdInt)
     $.ajax
     ({
         type: "GET",
@@ -5381,7 +5391,7 @@ function comment(id1)
     var category = id.charAt(id.indexOf("#")+1);
     var ratedUser = id.substring(id.indexOf("#")+2);
     //alert("comment - riderId "+riderId);
-    alert(ratedUser);
+    //alert(ratedUser);
     var x;
     var comment;
     //comment=prompt("Please enter your name","Ride Comment");

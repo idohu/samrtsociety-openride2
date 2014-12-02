@@ -330,7 +330,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             if (timer) {
                 fokus.openride.mobclient.controller.modules.calendar.reset();
                 refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
+                refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
                 refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabels);
+                refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
             }
             setTimeout("fokus.openride.mobclient.controller.modules.uievents.refreshTimer()", 10000);
         },
@@ -344,6 +346,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             modulemanagermod.setupTabs();
             this.setUpListeners();
             refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
+            refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
 
             // Restore previous mode from cookie
             if (readCookie('usermode') == 1) // Rider mode -> need to switch from default
@@ -2010,7 +2013,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 fokus.openride.mobclient.controller.modules.uievents.timerStart();
                 calendarpicker.reset();
                 refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
+                refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
                 refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabels);
+                refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
 
                 // delete addresses used for modifying an offer/search
                 modulemanagermod.deleteModAdrFromBox(offerstartdropdownid);
@@ -2053,14 +2058,19 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 if(returnedmode == 0){
                     calendarpicker.reset();
                     refreshSimpleCalendarPickerLabels(dateLabels, timeLabels);
+                    refreshSimpleCalendarPickerLabels(dateLabels, timeLabelsEnd);
                     setLabelFocus(dateLabels, daylabel);
                     setLabelFocus(timeLabels, minutelabel);
+                    setLabelFocus(timeLabelsEnd, minutelabelEnd);
                 }
                 else if(returnedmode == 1){
                     calendarpicker.reset();
                     refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabels);
+                    refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
                     setLabelFocus(searchdateLabels, searchdaylabel);
                     setLabelFocus(searchtimeLabels, searchminutelabel);
+                    setLabelFocus(searchtimeLabelsEnd, searchminutelabelEnd);
+
                 }
             };
 

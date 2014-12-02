@@ -8956,8 +8956,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             +data.json.average_StarRating+","
                                             +(data.json.total_StarRating/data.json.average_StarRating)+","
                                             +data.json.average_OnTime+","
-                                            +data.json.average_Friendly+","
-                                            +personal.mobilePhoneNumber+",'"
+                                            +data.json.average_Friendly+",'"
+                                            +personal.mobilePhoneNumber+"','"
                                             +personal.carColour+ " " + personal.carBrand
                                             +"');\" value=\""+counterpart+"\" />");
                                     else
@@ -8965,8 +8965,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             +data.json.average_StarRating+","
                                             +(data.json.total_StarRating/data.json.average_StarRating)+","
                                             +data.json.average_OnTime+","
-                                            +data.json.average_Friendly+","
-                                            +personal.mobilePhoneNumber+",'"
+                                            +data.json.average_Friendly+",'"
+                                            +personal.mobilePhoneNumber+"','"
                                             +"undefined undefined"
                                             +"');\" value=\""+counterpart+"\" />");
                                 //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
@@ -14708,6 +14708,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
 
                     setLabelFocus(dateLabels, daylabel);
                     setLabelFocus(timeLabels, minutelabel);
+                    setLabelFocus(timeLabelsEnd,minutelabelEnd);
                 }
                 else if(returnedmode == 1){
                     calendarpicker.reset();
@@ -14715,6 +14716,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     refreshSimpleCalendarPickerLabels(searchdateLabels, searchtimeLabelsEnd);
                     setLabelFocus(searchdateLabels, searchdaylabel);
                     setLabelFocus(searchtimeLabels, searchminutelabel);
+                    setLabelFocus(searchtimeLabels, searchminutelabelEnd);
                 }
             };
 
@@ -14932,7 +14934,7 @@ function submit (rate_array , riderId , ratedUser)
     pass = readCookie('password');
     usermode=readCookie('usermode');
 
-    alert('submit - '+JSON.stringify(rate_array)+' - '+rideIdInt)
+    //alert('submit - '+JSON.stringify(rate_array)+' - '+rideIdInt)
     $.ajax
     ({
         type: "GET",
@@ -15077,7 +15079,7 @@ function comment(id1)
     var category = id.charAt(id.indexOf("#")+1);
     var ratedUser = id.substring(id.indexOf("#")+2);
     //alert("comment - riderId "+riderId);
-    alert(ratedUser);
+    //alert(ratedUser);
     var x;
     var comment;
     //comment=prompt("Please enter your name","Ride Comment");
