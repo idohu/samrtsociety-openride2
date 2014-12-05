@@ -32,8 +32,9 @@
         <script src="https://maps.google.com/maps/api/js?v=3&amp;sensor=true&amp;" type="text/javascript">
         </script>
         <!-- key=ABQIAAAAoSWXXJZugJPtUdFu909RAxTD2GVBSqiZP_F5qZEDROiHhhxT8xSZpnmbzCsuDrWT8KbVZVMddEMz8A -->
-        <script src="js/global-min.js" type="text/javascript">
+        <script src="js/global-min.js" type="text/javascript" charset="utf-8">
         </script>
+
         <script>
             function combocitychange(sender){
                 switch (sender.selectedIndex){
@@ -54,3 +55,6 @@
             }
         </script>
     </head>
+    <body>
+    </body>
+</html>

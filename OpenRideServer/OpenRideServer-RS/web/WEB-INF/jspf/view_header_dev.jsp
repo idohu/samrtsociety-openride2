@@ -47,6 +47,10 @@
         </script>
         <script src="js/ui_tabs.js" type="text/javascript">
         </script>
+        <script src="js/global-body-min.js" type="text/javascript">
+        </script>
+        <script src="../../welcome-script-min.js" type="text/javascript">
+        </script>
         <script src="../controller/initcontroller.js" type="text/javascript">
         </script>
         <script src="../controller/serverconnector.js" type="text/javascript">
@@ -73,7 +77,9 @@
         </script>
         <script src="js/mdetect.js" type="text/javascript">
         </script>
+        <script>
+            alert('Im here');
+        </script>
     </head>
-    <body>
-
-    
+    <body></body>
+    </html>
