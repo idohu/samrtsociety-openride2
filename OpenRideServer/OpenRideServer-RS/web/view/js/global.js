@@ -8940,7 +8940,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                                 }
                             });
+<<<<<<< HEAD
                             
+=======
+
+>>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
                             $.ajax({//get subject reputation
                                 type:"GET",
                                 url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
@@ -10199,7 +10203,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 isSmokerOption = 'profilepersonaldataissmoker-null';
             }
             document.getElementById(isSmokerOption).checked = 'checked';
+<<<<<<< HEAD
                 
+=======
+
+>>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
             //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
             if (personalData.carColour) {
                 document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
@@ -13554,7 +13562,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     /*
                  * Now deal with the rest
                  */
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
                     newRideRequest.departureCity = document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text;
                     //                    var depCity  //=offermod.getStartAddr().split(", ");
                     //                    var tempdepCity = depCity[depCity.length-2].split(" ");
@@ -13599,7 +13611,11 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeLow);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeHigh);
                     //alert(calendarpicker.getDate()+' -> '+calendarpicker.getDateEnd());
+<<<<<<< HEAD
                     
+=======
+
+>>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
                     newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
                     newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
                     newRideRequest.desDateTimeWindow.desDateTimeLow = calendarpicker.getDate().getTime()+2592000000;//2,592,000,000=1month in milisec
