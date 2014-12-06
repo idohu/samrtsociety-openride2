@@ -7388,10 +7388,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             isactive : false
         },
         {
-            imgsrc : '../img/tab1receivedratsgreen_wide.png',
-            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
-            contentdivid : 'receivedratingsUI',
+            imgsrc : '../img/tab1greentempl.png',
+            imgactivesrc : '../img/tab1whitetempl.png',
+            contentdivid : 'dummyUI',
             isactive : false
+//            imgsrc : '../img/tab1receivedratsgreen_wide.png',
+//            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
+//            contentdivid : 'receivedratingsUI',
+//            isactive : false
         },
         {
             imgsrc : '../img/tab1greentempl.png',
@@ -8146,7 +8150,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         day="Saturday";
                         break;
                 }
-                var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
+                var driverstr=prp.driver+" ( + you + "+(prp.commuters.length-1)+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
@@ -12860,9 +12864,10 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             document.getElementById('usernametag').innerHTML = username;
             var profileimg = document.getElementById('profilepicimg');
             //var now = new Date();
-            var lMessages =
-            ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
-            ,'נסיעות קבוצתיות יפחיתו את ההוצאות החודשיות שלך' ,'נסיעות קבוצתיות תורמות לטיפוח החברה' ,'המערכת מיועדת לסטודנטים באוניברסיטת בן-גוריון בלבד'];
+            var lMessages =['Ride sharing significantly reduces air pollution','Why ride alone when you can ride together?',
+                'Ride sharing will reduce your monthly expenses','Ride sharing contributes for creating a better society','The system is for BGU students only!'];
+//            ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
+//            ,'נסיעות קבוצתיות יפחיתו את ההוצאות החודשיות שלך' ,'נסיעות קבוצתיות תורמות לטיפוח החברה' ,'המערכת מיועדת לסטודנטים באוניברסיטת בן-גוריון בלבד'];
             //                ['Patience is something you admire in the driver behind you and scorn in the one ahead. ~Mac McCleary'
             //            ,'For every "Drive Safely" sign, shouldn\'t there be a "Resume Normal Driving" sign? ~Robert Brault'
             //            ,'Every time I see an adult on a bicycle, I no longer despair for the future of the human race. ~H.G. Wells'

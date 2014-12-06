@@ -181,10 +181,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             isactive : false
         },
         {
-            imgsrc : '../img/tab1receivedratsgreen_wide.png',
-            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
-            contentdivid : 'receivedratingsUI',
+            imgsrc : '../img/tab1greentempl.png',
+            imgactivesrc : '../img/tab1whitetempl.png',
+            contentdivid : 'dummyUI',
             isactive : false
+//            imgsrc : '../img/tab1receivedratsgreen_wide.png',
+//            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
+//            contentdivid : 'receivedratingsUI',
+//            isactive : false
         },
         {
             imgsrc : '../img/tab1greentempl.png',
@@ -938,7 +942,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         day="Saturday";
                         break;
                 }
-                var driverstr=prp.driver+" ( + "+prp.commuters.length+" commuter)";
+                var driverstr=prp.driver+" ( + you + "+(prp.commuters.length-1)+" commuter)";
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
