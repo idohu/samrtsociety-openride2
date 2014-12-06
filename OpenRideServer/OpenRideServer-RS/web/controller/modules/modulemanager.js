@@ -656,6 +656,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             var RideShareSB = new StringBuilder();
             //var array = JSON.parse(rides);
             var updatecount = 0;
+            user=readCookie('username');
             /*if(typeof (result.list) != 'undefined' && typeof (result.list[0].Offer) != 'undefined'){
                 if(typeof (result.list[0].Offer.length) == 'undefined'){
                     result.list[0].Offer = [result.list[0].Offer];
