@@ -26,19 +26,7 @@ document.write('<div id="overlay">&nbsp;</div><div id="overlay_dialog"><div id="
 function showOverlayDialog(title, content, btn1_label, btn1_action, btn2_label, btn2_action) {
 
     if (document.getElementById) {
-<<<<<<< HEAD
-	
-        var dialog_text = '<p><strong>'+title+'</strong></p><p>'+content+'</p><div id="buttons"><input type="button" value="'+btn1_label+'" class="rounded" id="dialog_btn_ok" onclick="'+btn1_action+'; hideOverlayDialog();" />';
-	
-        if (btn2_label!='')
-            dialog_text = dialog_text + '<input type="button" value="'+btn2_label+'" class="rounded" onclick="'+btn2_action+'; hideOverlayDialog();"/>';
-			
-        dialog_text = dialog_text + '</div>';
-	
-        document.getElementById("dialog_text").innerHTML = dialog_text;
-	
-	
-=======
+
 
         var dialog_text = '<p><strong>'+title+'</strong></p><p>'+content+'</p><div id="buttons"><input type="button" value="'+btn1_label+'" class="rounded" id="dialog_btn_ok" onclick="'+btn1_action+'; hideOverlayDialog();" />';
 
@@ -49,8 +37,6 @@ function showOverlayDialog(title, content, btn1_label, btn1_action, btn2_label, 
 
         document.getElementById("dialog_text").innerHTML = dialog_text;
 
-
->>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
         hideSelects()
 
         var overlayHeight = document.getElementById("content").offsetHeight + 88;
@@ -157,16 +143,7 @@ function showRatingDialog(counterpart,overall,numofraters,rel,friend,phone,car) 
 
     }
 }
-<<<<<<< HEAD
 
-function hideOverlayDialog() {
-	
-    document.getElementById("overlay").style.display = 'none';
-    document.getElementById("overlay_dialog").style.display = 'none';
-	
-    showSelects();
-		
-=======
 
 function hideOverlayDialog() {
 
@@ -175,7 +152,6 @@ function hideOverlayDialog() {
 
     showSelects();
 
->>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
 }
 
 function hideSelects() {

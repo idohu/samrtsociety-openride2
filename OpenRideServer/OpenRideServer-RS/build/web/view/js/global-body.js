@@ -21,22 +21,22 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-document.write('<div id="overlay">&nbsp;</div><div id="overlay_dialog"><div id="dialog_text"></div></div>');	
+document.write('<div id="overlay">&nbsp;</div><div id="overlay_dialog"><div id="dialog_text"></div></div>');
 
 function showOverlayDialog(title, content, btn1_label, btn1_action, btn2_label, btn2_action) {
 
     if (document.getElementById) {
-	
+
+
         var dialog_text = '<p><strong>'+title+'</strong></p><p>'+content+'</p><div id="buttons"><input type="button" value="'+btn1_label+'" class="rounded" id="dialog_btn_ok" onclick="'+btn1_action+'; hideOverlayDialog();" />';
-	
+
         if (btn2_label!='')
             dialog_text = dialog_text + '<input type="button" value="'+btn2_label+'" class="rounded" onclick="'+btn2_action+'; hideOverlayDialog();"/>';
-			
+
         dialog_text = dialog_text + '</div>';
-	
+
         document.getElementById("dialog_text").innerHTML = dialog_text;
-	
-	
+
         hideSelects()
 
         var overlayHeight = document.getElementById("content").offsetHeight + 88;
@@ -144,13 +144,14 @@ function showRatingDialog(counterpart,overall,numofraters,rel,friend,phone,car) 
     }
 }
 
+
 function hideOverlayDialog() {
-	
+
     document.getElementById("overlay").style.display = 'none';
     document.getElementById("overlay_dialog").style.display = 'none';
-	
+
     showSelects();
-		
+
 }
 
 function hideSelects() {

@@ -171,15 +171,15 @@
                 </div>
             </div>
             <div id="seatsnprice" class="pickloc">
-                <div id="offernrseatstxt" class="category-txt">Seats:</div>
+                <div id="offernrseatstxt" class="category-txt">Riders:</div>
                 <div id="offerpricetxt" class="category-txt">Price:</div><br />
                 <div class="formstyle" id="seatsnpriceform">
                     <select id="nrseatsselect" name="dropd03" onChange="">
                         <option>1</option>
                         <option>2</option>
                         <option>3</option>
-                        <option>4</option>
-                        <option selected="true">5</option>
+                        <option selected="true">4</option>
+                        <option>5</option>
                         <option>6</option>
                         <option>7</option>
                         <option>8</option>

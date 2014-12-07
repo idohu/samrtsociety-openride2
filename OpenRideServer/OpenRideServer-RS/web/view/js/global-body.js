@@ -24,7 +24,6 @@
 document.write('<div id="overlay">&nbsp;</div><div id="overlay_dialog"><div id="dialog_text"></div></div>');
 
 function showOverlayDialog(title, content, btn1_label, btn1_action, btn2_label, btn2_action) {
-
 	if (document.getElementById) {
 
 		var dialog_text = '<p><strong>'+title+'</strong></p><p>'+content+'</p><div id="buttons"><input type="button" value="'+btn1_label+'" class="rounded" id="dialog_btn_ok" onclick="'+btn1_action+'; hideOverlayDialog();" />';

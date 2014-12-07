@@ -660,6 +660,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             var RideShareSB = new StringBuilder();
             //var array = JSON.parse(rides);
             var updatecount = 0;
+            user=readCookie('username');
             /*if(typeof (result.list) != 'undefined' && typeof (result.list[0].Offer) != 'undefined'){
                 if(typeof (result.list[0].Offer.length) == 'undefined'){
                     result.list[0].Offer = [result.list[0].Offer];
@@ -2820,7 +2821,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         mem.type = mem.pic.type;
                         pic._revision = mem.pic._revision+1;
                         pic._id = userProfile.getProfileRequest()._id;
-                    
                         $.ajax({
                             type: "PUT",
                             url: 'http://' + PeerMenager + '/users/'+username+'/profile/picture',//'/api/register/' + user,
@@ -2854,7 +2854,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         alert('Could not retrieve image, setting default picture!');
                     }
                 });
-        
+
         }
         reader.onerror     = function (e) {
             alert("Error " + e + " occurred! Now what?");
@@ -2863,7 +2863,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             alert('File read cancelled');
         };
     //while(i == 0) {}
-       
     },
     parseprofilepersonaldata : function(result){
 
@@ -3207,6 +3206,18 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             }
             document.getElementById(isSmokerOption).checked = 'checked';
 
+
+            if (preferencesData.prefIsSmoker == 'y') {
+                isSmokerOption = 'profileprefissmoker-yes';
+            }
+            else if (preferencesData.prefIsSmoker == 'n') {
+                isSmokerOption = 'profileprefissmoker-no';
+            }
+            else {
+                isSmokerOption = 'profileprefissmoker-null';
+            }
+            document.getElementById(isSmokerOption).checked = 'checked';
+
         /*if (preferencesData.prefGender == 'f') {
                     genderOption = 'profileprefgender-f';
                 }
@@ -3303,7 +3314,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
     //            });
 
     },
-
     putprofilepassword : function(){
 
         /* Validation */
@@ -3625,6 +3635,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     }
                 }
 
+
                 var dateRealized = new Date(entry.timestamprealized);
 
                 var comment = '';
@@ -3740,6 +3751,38 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                 }
             });
+
+            // Car details
+            //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
+            //                    if(typeof (result.ProfileResponse) != 'undefined'){
+            //                        var personalData = result.ProfileResponse;
+            //                        if (!personalData.carColour || !personalData.carBrand || !personalData.carPlateNo) {
+            //                            showOverlayDialog('Please complete your car description in your profile before you can set ride offers.', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
+            //                        }
+            //                    }
+            //                }, function(x,s,e) {
+            //                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Error loading profile data (Car model, -modell).')
+            //                });
+
+            if(serviceType == 'modify'){
+                document.getElementById('tabimg11').src = "../img/tab1AngebotAendernActive_wide.png";
+            } else {
+                document.getElementById('tabimg11').src = "../img/tab1NeuesAngebotActive_wide.png";
+            }
+
+            document.getElementById(offerstartselectcurrpos).value = 'Location: not determined!';
+            document.getElementById(offerstartselectcurrpos).latln = 'none';
+            document.getElementById(offerdestselectcurrpos).value = 'Location: not determined!';
+            document.getElementById(offerdestselectcurrpos).latln = 'none';
+
+            try{
+                mapmod.insertRevGeocodedAddr(nativemod.getUserLocation(), offerstartselectcurrpos);
+                mapmod.insertRevGeocodedAddr(nativemod.getUserLocation(), offerdestselectcurrpos);
+            }catch(e){
+
+            }
+
+
 
             // Car details
             //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
@@ -3944,6 +3987,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
                             searchstartsel.add(favoption2,null);
                             searchdestsel.add(favoption21,null);
+
+
+
 
                         }else{
                             for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
@@ -4298,6 +4344,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         }
         else if(viewId == 'activesearchUI'){
 
+
             fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
             fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
 
@@ -4520,7 +4567,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         else if(viewId == 'ratingsUI'){
 
             fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
-            fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
+            fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
             //                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
             //                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
             //                    });
@@ -4682,7 +4729,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         else if(viewId == 'openratingsUI'){
             //alert('viewID == \'openratingsUI\'');
             fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
-            fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
+            fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
 
             srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/ratings/open', "false", this.setOpenRatingsList, function(x,s,e) {
                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your open reviews could not be loaded.')

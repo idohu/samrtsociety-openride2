@@ -71,8 +71,8 @@
             }
             j=c(a.target).closest(f,a.currentTarget);
             n=0;
-            for(r=
-                j.length;n<r;n++)for(k=0;k<u.length;k++){
+            for(r=j.length;n<r;n++)
+                for(k=0;k<u.length;k++){
                 i=u[k];
                 if(j[n].selector===i.selector){
                     o=j[n].elem;
@@ -167,39 +167,40 @@
                 this.length=1;
                 return this
             }
-            if(typeof a==="string")if((d=Ta.exec(a))&&
-                (d[1]||!b))if(d[1]){
-                f=b?b.ownerDocument||b:s;
-                if(a=Xa.exec(a))if(c.isPlainObject(b)){
-                    a=[s.createElement(a[1])];
-                    c.fn.attr.call(a,b,true)
-                }else a=[f.createElement(a[1])];
-                else{
-                    a=sa([d[1]],[f]);
-                    a=(a.cacheable?a.fragment.cloneNode(true):a.fragment).childNodes
+            if(typeof a==="string")
+                if((d=Ta.exec(a))&&(d[1]||!b))
+                    if(d[1]){
+                        f=b?b.ownerDocument||b:s;
+                        if(a=Xa.exec(a))if(c.isPlainObject(b)){
+                            a=[s.createElement(a[1])];
+                            c.fn.attr.call(a,b,true)
+                        }else a=[f.createElement(a[1])];
+                        else{
+                            a=sa([d[1]],[f]);
+                            a=(a.cacheable?a.fragment.cloneNode(true):a.fragment).childNodes
+                        }
+                        return c.merge(this,a)
+                    }else{
+                        if(b=s.getElementById(d[2])){
+                            if(b.id!==d[2])return T.find(a);
+                            this.length=1;
+                            this[0]=b
+                        }
+                        this.context=s;
+                        this.selector=a;
+                        return this
+                    }else if(!b&&/^\w+$/.test(a)){
+                    this.selector=a;
+                    this.context=s;
+                    a=s.getElementsByTagName(a);
+                    return c.merge(this,
+                        a)
                 }
-                return c.merge(this,a)
-            }else{
-                if(b=s.getElementById(d[2])){
-                    if(b.id!==d[2])return T.find(a);
-                    this.length=1;
-                    this[0]=b
-                }
-                this.context=s;
-                this.selector=a;
-                return this
-            }else if(!b&&/^\w+$/.test(a)){
-                this.selector=a;
-                this.context=s;
-                a=s.getElementsByTagName(a);
-                return c.merge(this,
-                    a)
-            }
-            else return!b||b.jquery?(b||T).find(a):c(b).find(a);
+                else return!b||b.jquery?(b||T).find(a):c(b).find(a);
             else if(c.isFunction(a))return T.ready(a);
             if(a.selector!==w){
                 this.selector=a.selector;
-                this.context=a.context
+                this.context=a.context;
             }
             return c.makeArray(a,this)
         },
@@ -1600,7 +1601,8 @@
                                 g[m]=l.nodeName.toLowerCase()===h?l:false
                             }
                         }
-                    }else{
+                    }
+                    else{
                         m=0;
                         for(q=g.length;m<q;m++)if(p=g[m])g[m]=
                             l?p.parentNode:p.parentNode===h;l&&k.filter(h,g,true)
@@ -3305,7 +3307,8 @@
     // Firefox
     if (typeof GearsFactory != 'undefined') {
         factory = new GearsFactory();
-    } else {
+    }
+    else {
         // IE
         try {
         /*
@@ -7392,10 +7395,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             imgactivesrc : '../img/tab1whitetempl.png',
             contentdivid : 'dummyUI',
             isactive : false
-//            imgsrc : '../img/tab1receivedratsgreen_wide.png',
-//            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
-//            contentdivid : 'receivedratingsUI',
-//            isactive : false
+        //            imgsrc : '../img/tab1receivedratsgreen_wide.png',
+        //            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
+        //            contentdivid : 'receivedratingsUI',
+        //            isactive : false
         },
         {
             imgsrc : '../img/tab1greentempl.png',
@@ -7553,10 +7556,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             isactive : false
         },
         {
-            imgsrc : '../img/tab1receivedratsgreen_wide.png',
-            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
-            contentdivid : 'receivedratingsUI',
+            imgsrc : '../img/tab1greentempl.png',
+            imgactivesrc : '../img/tab1whitetempl.png',
+            contentdivid : 'dummyUI',
             isactive : false
+        //            imgsrc : '../img/tab1receivedratsgreen_wide.png',
+        //            imgactivesrc : '../img/tab1receivedratswhite_wide.png',
+        //            contentdivid : 'receivedratingsUI',
+        //            isactive : false
         },
         {
             imgsrc : '../img/tab1greentempl.png',
@@ -8940,11 +8947,6 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                                 }
                             });
-<<<<<<< HEAD
-                            
-=======
-
->>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
                             $.ajax({//get subject reputation
                                 type:"GET",
                                 url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
@@ -10203,11 +10205,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 isSmokerOption = 'profilepersonaldataissmoker-null';
             }
             document.getElementById(isSmokerOption).checked = 'checked';
-<<<<<<< HEAD
-                
-=======
-
->>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
+            
             //document.getElementById('profilepersonaldatalicensedate').value = personalData.licenseDate || '';
             if (personalData.carColour) {
                 document.getElementById('profilepersonaldatacarcolour').value = $("<div />").html(personalData.carColour).text() || '';
@@ -11095,7 +11093,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 try{
                     mapmod.insertRevGeocodedAddr(nativemod.getUserLocation(), offerstartselectcurrpos);
                     mapmod.insertRevGeocodedAddr(nativemod.getUserLocation(), offerdestselectcurrpos);
-                }catch(e){
+                }
+                catch(e){
 
                 }
 
@@ -11855,7 +11854,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             else if(viewId == 'ratingsUI'){
 
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
-                fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
+                fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
                 //            srvconn.GET('OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, this.parseprofilepersonaldata, function(x,s,e) {
                 //                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your profile information could not be loaded.')
                 //            });
@@ -12012,7 +12011,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             else if(viewId == 'openratingsUI'){
                 //alert('viewID == \'openratingsUI\'');
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
-                fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
+                fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg13","tabimg14"));
 
                 srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/ratings/open', "false", this.setOpenRatingsList, function(x,s,e) {
                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your open reviews could not be loaded.')
@@ -12873,9 +12872,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             var profileimg = document.getElementById('profilepicimg');
             //var now = new Date();
             var lMessages =['Ride sharing significantly reduces air pollution','Why ride alone when you can ride together?',
-                'Ride sharing will reduce your monthly expenses','Ride sharing contributes for creating a better society','The system is for BGU students only!'];
-//            ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
-//            ,'נסיעות קבוצתיות יפחיתו את ההוצאות החודשיות שלך' ,'נסיעות קבוצתיות תורמות לטיפוח החברה' ,'המערכת מיועדת לסטודנטים באוניברסיטת בן-גוריון בלבד'];
+            'Ride sharing will reduce your monthly expenses','Ride sharing contributes for creating a better society','The system is for BGU students only!'];
+            //            ['מדוע ליסוע לבד כשאפשר ליסוע יחד?','למה לעמוד בפקק לבד?' ,'נסיעות קבוצתיות מפחיתות באופן משמעותי את זיהום האוויר'
+            //            ,'נסיעות קבוצתיות יפחיתו את ההוצאות החודשיות שלך' ,'נסיעות קבוצתיות תורמות לטיפוח החברה' ,'המערכת מיועדת לסטודנטים באוניברסיטת בן-גוריון בלבד'];
             //                ['Patience is something you admire in the driver behind you and scorn in the one ahead. ~Mac McCleary'
             //            ,'For every "Drive Safely" sign, shouldn\'t there be a "Resume Normal Driving" sign? ~Robert Brault'
             //            ,'Every time I see an adult on a bicycle, I no longer despair for the future of the human race. ~H.G. Wells'
@@ -12997,7 +12996,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 modulemanagermod.changeViewAndUserMode('offers');
             };
             document.getElementById("refreshActiveOffers").onclick = function(){
-                                modulemanagermod.changeViewAndUserMode('offers');
+                modulemanagermod.changeViewAndUserMode('offers');
             };
             var homeActiveSearches = document.getElementById("homeActiveSearches");
 
@@ -13005,7 +13004,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 modulemanagermod.changeViewAndUserMode('searches');
             };
             document.getElementById("refreshActiveSearches").onclick = function(){
-                                modulemanagermod.changeViewAndUserMode('searches');
+                modulemanagermod.changeViewAndUserMode('searches');
             };
 
 
@@ -13562,11 +13561,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     /*
                  * Now deal with the rest
                  */
-<<<<<<< HEAD
-                    
-=======
 
->>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
                     newRideRequest.departureCity = document.getElementById('offerstartcombo')[document.getElementById('offerstartcombo').selectedIndex].text;
                     //                    var depCity  //=offermod.getStartAddr().split(", ");
                     //                    var tempdepCity = depCity[depCity.length-2].split(" ");
@@ -13611,11 +13606,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeLow);
                     //console.log(newRideRequest.desDateTimeWindow.desDateTimeHigh);
                     //alert(calendarpicker.getDate()+' -> '+calendarpicker.getDateEnd());
-<<<<<<< HEAD
-                    
-=======
 
->>>>>>> f23b0d7d80e488d39bca3c4bb8263505738c4a1d
                     newRideRequest.depDateTimeWindow.depDateTimeLow = calendarpicker.getDate().getTime();
                     newRideRequest.depDateTimeWindow.depDateTimeHigh = calendarpicker.getDateEnd().getTime();
                     newRideRequest.desDateTimeWindow.desDateTimeLow = calendarpicker.getDate().getTime()+2592000000;//2,592,000,000=1month in milisec
