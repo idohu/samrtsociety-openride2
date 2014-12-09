@@ -81,7 +81,10 @@
         <div id="newfavoriteAddrInputUI" style="display:none;">
             <a id="newfavoriteconfirm" class="favoriteconfirm" href="#"><img id="newfavoriteconfirmimg" src="../img/confirmAddr.png" width="131" height="30" alt="addresse_suchen" /></a><input id="newfavoriteaddrinput" name="newfavoriteAdrr" type="text" size="9" maxlength="30" />
         </div>
-        Add FAQ Page Here!!
+        <div id="FAQ">
+            <a href="https://drive.google.com/open?id=15W8_BgWJd_xZcxdohdAUaPUsQwnAXAqAxMrYhsCvWMs&authuser=0" target="_blank">Frequently Asked Questions</a><br>
+            <a href="https://drive.google.com/open?id=197yNZ7urzNiSlXUeoFImMqoyqW9vzq_MSTc4ZcHnOKg&authuser=0" target="_blank">Detailed Explanation </a>
+    </div>
     </div>
     <div id="showofferrouteUI">
         <div class="mapRouteDiv">
@@ -662,16 +665,16 @@
                 </script>
                 <p style="margin-top: -6px;">
                     <span class="statshl" id="homeinfoopenoffers"></span>
-                    <a href="#" id="homeActiveOffers" class="homeui_links">Active<span id="homeinfoopenoffers-singular"></span> offer<span id="homeinfoopenoffers-plural">s</span></a>
+                    <a href="#" id="homeActiveOffers" class="homeui_links">Active<span id="homeinfoopenoffers-singular"></span> Offers<span id="homeinfoopenoffers-plural">s</span></a>
                     <br /><span style="padding: 0 0 0 22px; font-size: 12px; line-height: 100%;">(Driver mode)</span>
                     <br/>
                     <span class="statshl" id="homeinfoopensearches"></span>
                     <a href="#" id="homeActiveSearches" class="homeui_links">Active<span id="homeinfoopensearches-singular"></span>
-                        search<span id="homeinfoopensearches-plural">es</span></a>
+                        Searches<span id="homeinfoopensearches-plural">es</span></a>
                     <br /><span style="padding: 0 0 0 22px; font-size: 12px; line-height: 100%;">(Rider mode)</span>
                     <br/>
                     <span class="statshl" id="homeinfoopenratings"></span>
-                    <a href="#" id="homeOpenRatings" class="homeui_links">Write review<span id="homeinfoopenratings-plural">s</span></a>
+                    <a href="#" id="homeOpenRatings" class="homeui_links">Write Reviews<span id="homeinfoopenratings-plural">s</span></a>
                 </p>
                 <h3 style="clear: both;"></h3>
             </div>
@@ -847,17 +850,17 @@
         </div>
     </div>
     <div id="ratingsUI">
-        <h3>Profile: </h3>
+        <h3 style="display:none">Profile: </h3>
 
-        <div class="ratingstatsrow">
+        <div class="ratingstatsrow" style="display:none">
             <span class="txttabsmall">Username: </span>
             <span class="statshl" id="ratingsUserName"></span>
         </div>
-        <div class="ratingstatsrow">
+        <div class="ratingstatsrow" style="display:none">
             <span class="txttabsmall">Gender: </span>
             <span class="statshl" id="ratingsUserGender"></span>
         </div>
-        <div class="ratingstatsrow">
+        <div class="ratingstatsrow" style="display:none">
             <span class="txttabsmall">Location: </span>
             <span class="statshl" id="ratingsUserLocation"></span>
         </div>

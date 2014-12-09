@@ -73,17 +73,17 @@
             n=0;
             for(r=j.length;n<r;n++)
                 for(k=0;k<u.length;k++){
-                i=u[k];
-                if(j[n].selector===i.selector){
-                    o=j[n].elem;
-                    f=null;
-                    if(i.preType==="mouseenter"||i.preType==="mouseleave")f=c(a.relatedTarget).closest(i.selector)[0];
-                    if(!f||f!==o)d.push({
-                        elem:o,
-                        handleObj:i
-                    })
+                    i=u[k];
+                    if(j[n].selector===i.selector){
+                        o=j[n].elem;
+                        f=null;
+                        if(i.preType==="mouseenter"||i.preType==="mouseleave")f=c(a.relatedTarget).closest(i.selector)[0];
+                        if(!f||f!==o)d.push({
+                            elem:o,
+                            handleObj:i
+                        })
+                    }
                 }
-            }
             n=0;
             for(r=d.length;n<r;n++){
                 j=d[n];
@@ -321,7 +321,8 @@
                     var a=false;
                     try{
                         a=A.frameElement==null
-                    }catch(b){}
+                    }
+                    catch(b){}
                     s.documentElement.doScroll&&a&&ma()
                 }
             }
@@ -1325,7 +1326,8 @@
                     if(i==="focus"||i==="blur"){
                         d.push(Ga[i]+k);
                         i+=k
-                    }else i=(Ga[i]||i)+k;
+                    }
+                    else i=(Ga[i]||i)+k;
                     b==="live"?u.each(function(){
                         c.event.add(this,pa(i,r),{
                             data:f,
@@ -1334,525 +1336,525 @@
                             origType:i,
                             origHandler:e,
                             preType:n
-                        })
-                    }):u.unbind(pa(i,r),e)
-                }
-            }
-            return this
-        }
-    });
-    c.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error".split(" "),
-        function(a,b){
-            c.fn[b]=function(d){
-                return d?this.bind(b,d):this.trigger(b)
-            };
+                            })
+                        }):u.unbind(pa(i,r),e)
+                    }
+                    }
+                    return this
+                    }
+                    });
+                c.each("blur focus focusin focusout load resize scroll unload click dblclick mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave change select submit keydown keypress keyup error".split(" "),
+                    function(a,b){
+                    c.fn[b]=function(d){
+                    return d?this.bind(b,d):this.trigger(b)
+                    };
 
-            if(c.attrFn)c.attrFn[b]=true
-        });
-    A.attachEvent&&!A.addEventListener&&A.attachEvent("onunload",function(){
-        for(var a in c.cache)if(c.cache[a].handle)try{
-            c.event.remove(c.cache[a].handle.elem)
-        }catch(b){}
-    });
-    (function(){
-        function a(g){
-            for(var h="",l,m=0;g[m];m++){
-                l=g[m];
-                if(l.nodeType===3||l.nodeType===4)h+=l.nodeValue;
-                else if(l.nodeType!==8)h+=a(l.childNodes)
-            }
-            return h
+                    if(c.attrFn)c.attrFn[b]=true
+                    });
+                A.attachEvent&&!A.addEventListener&&A.attachEvent("onunload",function(){
+                    for(var a in c.cache)if(c.cache[a].handle)try{
+                    c.event.remove(c.cache[a].handle.elem)
+                    }catch(b){}
+                    });
+                (function(){
+                    function a(g){
+                    for(var h="",l,m=0;g[m];m++){
+                    l=g[m];
+                    if(l.nodeType===3||l.nodeType===4)h+=l.nodeValue;
+                    else if(l.nodeType!==8)h+=a(l.childNodes)
         }
-        function b(g,h,l,m,q,p){
-            q=0;
-            for(var v=m.length;q<v;q++){
-                var t=m[q];
-                if(t){
-                    t=t[g];
-                    for(var y=false;t;){
-                        if(t.sizcache===l){
-                            y=m[t.sizset];
-                            break
-                        }
-                        if(t.nodeType===1&&!p){
+    return h
+    }
+    function b(g,h,l,m,q,p){
+        q=0;
+        for(var v=m.length;q<v;q++){
+            var t=m[q];
+            if(t){
+                t=t[g];
+                for(var y=false;t;){
+                    if(t.sizcache===l){
+                        y=m[t.sizset];
+                        break
+                    }
+                    if(t.nodeType===1&&!p){
+                        t.sizcache=l;
+                        t.sizset=q
+                    }
+                    if(t.nodeName.toLowerCase()===h){
+                        y=t;
+                        break
+                    }
+                    t=t[g]
+                }
+                m[q]=y
+            }
+        }
+    }
+    function d(g,h,l,m,q,p){
+        q=0;
+        for(var v=m.length;q<v;q++){
+            var t=m[q];
+            if(t){
+                t=t[g];
+                for(var y=false;t;){
+                    if(t.sizcache===l){
+                        y=m[t.sizset];
+                        break
+                    }
+                    if(t.nodeType===1){
+                        if(!p){
                             t.sizcache=l;
                             t.sizset=q
                         }
-                        if(t.nodeName.toLowerCase()===h){
+                        if(typeof h!=="string"){
+                            if(t===h){
+                                y=true;
+                                break
+                            }
+                        }else if(k.filter(h,[t]).length>0){
                             y=t;
                             break
                         }
-                        t=t[g]
                     }
-                    m[q]=y
+                    t=t[g]
                 }
+                m[q]=y
             }
         }
-        function d(g,h,l,m,q,p){
-            q=0;
-            for(var v=m.length;q<v;q++){
-                var t=m[q];
-                if(t){
-                    t=t[g];
-                    for(var y=false;t;){
-                        if(t.sizcache===l){
-                            y=m[t.sizset];
-                            break
-                        }
-                        if(t.nodeType===1){
-                            if(!p){
-                                t.sizcache=l;
-                                t.sizset=q
-                            }
-                            if(typeof h!=="string"){
-                                if(t===h){
-                                    y=true;
-                                    break
-                                }
-                            }else if(k.filter(h,[t]).length>0){
-                                y=t;
-                                break
-                            }
-                        }
-                        t=t[g]
-                    }
-                    m[q]=y
-                }
+    }
+    var f=/((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
+    e=0,j=Object.prototype.toString,i=false,o=true;
+    [0,0].sort(function(){
+        o=false;
+        return 0
+    });
+    var k=function(g,h,l,m){
+        l=l||[];
+        var q=h=h||s;
+        if(h.nodeType!==1&&h.nodeType!==9)return[];
+        if(!g||typeof g!=="string")return l;
+        for(var p=[],v,t,y,S,H=true,M=x(h),I=g;(f.exec(""),v=f.exec(I))!==null;){
+            I=v[3];
+            p.push(v[1]);
+            if(v[2]){
+                S=v[3];
+                break
             }
         }
-        var f=/((?:\((?:\([^()]+\)|[^()]+)+\)|\[(?:\[[^[\]]*\]|['"][^'"]*['"]|[^[\]'"]+)+\]|\\.|[^ >+~,(\[\\]+)+|[>+~])(\s*,\s*)?((?:.|\r|\n)*)/g,
-        e=0,j=Object.prototype.toString,i=false,o=true;
-        [0,0].sort(function(){
-            o=false;
-            return 0
-        });
-        var k=function(g,h,l,m){
-            l=l||[];
-            var q=h=h||s;
-            if(h.nodeType!==1&&h.nodeType!==9)return[];
-            if(!g||typeof g!=="string")return l;
-            for(var p=[],v,t,y,S,H=true,M=x(h),I=g;(f.exec(""),v=f.exec(I))!==null;){
-                I=v[3];
-                p.push(v[1]);
-                if(v[2]){
-                    S=v[3];
-                    break
-                }
+        if(p.length>1&&r.exec(g))if(p.length===2&&n.relative[p[0]])t=ga(p[0]+p[1],h);else for(t=n.relative[p[0]]?[h]:k(p.shift(),h);p.length;){
+            g=p.shift();
+            if(n.relative[g])g+=p.shift();
+            t=ga(g,t)
+        }else{
+            if(!m&&p.length>1&&h.nodeType===9&&!M&&n.match.ID.test(p[0])&&!n.match.ID.test(p[p.length-1])){
+                v=k.find(p.shift(),h,M);
+                h=v.expr?k.filter(v.expr,v.set)[0]:v.set[0]
             }
-            if(p.length>1&&r.exec(g))if(p.length===2&&n.relative[p[0]])t=ga(p[0]+p[1],h);else for(t=n.relative[p[0]]?[h]:k(p.shift(),h);p.length;){
-                g=p.shift();
-                if(n.relative[g])g+=p.shift();
-                t=ga(g,t)
-            }else{
-                if(!m&&p.length>1&&h.nodeType===9&&!M&&n.match.ID.test(p[0])&&!n.match.ID.test(p[p.length-1])){
-                    v=k.find(p.shift(),h,M);
-                    h=v.expr?k.filter(v.expr,v.set)[0]:v.set[0]
-                }
-                if(h){
-                    v=m?{
-                        expr:p.pop(),
-                        set:z(m)
-                    }:k.find(p.pop(),p.length===1&&(p[0]==="~"||p[0]==="+")&&h.parentNode?h.parentNode:h,M);
-                    t=v.expr?k.filter(v.expr,v.set):v.set;
-                    if(p.length>0)y=z(t);else H=false;
-                    for(;p.length;){
-                        var D=p.pop();
-                        v=D;
-                        if(n.relative[D])v=p.pop();else D="";
-                        if(v==null)v=h;
-                        n.relative[D](y,v,M)
-                    }
-                }else y=[]
-            }
-            y||(y=t);
-            y||k.error(D||
-                g);
-            if(j.call(y)==="[object Array]")if(H)if(h&&h.nodeType===1)for(g=0;y[g]!=null;g++){
-                if(y[g]&&(y[g]===true||y[g].nodeType===1&&E(h,y[g])))l.push(t[g])
-            }
-            else for(g=0;y[g]!=null;g++)y[g]&&y[g].nodeType===1&&l.push(t[g]);else l.push.apply(l,y);else z(y,l);
-            if(S){
-                k(S,q,l,m);
-                k.uniqueSort(l)
-            }
-            return l
-        };
-
-        k.uniqueSort=function(g){
-            if(B){
-                i=o;
-                g.sort(B);
-                if(i)for(var h=1;h<g.length;h++)g[h]===g[h-1]&&g.splice(h--,1)
-            }
-            return g
-        };
-
-        k.matches=function(g,h){
-            return k(g,null,null,h)
-        };
-
-        k.find=function(g,h,l){
-            var m,q;
-            if(!g)return[];
-            for(var p=0,v=n.order.length;p<v;p++){
-                var t=n.order[p];
-                if(q=n.leftMatch[t].exec(g)){
-                    var y=q[1];
-                    q.splice(1,1);
-                    if(y.substr(y.length-1)!=="\\"){
-                        q[1]=(q[1]||"").replace(/\\/g,"");
-                        m=n.find[t](q,h,l);
-                        if(m!=null){
-                            g=g.replace(n.match[t],"");
-                            break
-                        }
-                    }
-                }
-            }
-            m||(m=h.getElementsByTagName("*"));
-            return{
-                set:m,
-                expr:g
-            }
-        };
-
-        k.filter=function(g,h,l,m){
-            for(var q=g,p=[],v=h,t,y,S=h&&h[0]&&x(h[0]);g&&h.length;){
-                for(var H in n.filter)if((t=n.leftMatch[H].exec(g))!=null&&t[2]){
-                    var M=n.filter[H],I,D;
-                    D=t[1];
-                    y=false;
-                    t.splice(1,1);
-                    if(D.substr(D.length-
-                        1)!=="\\"){
-                        if(v===p)p=[];
-                        if(n.preFilter[H])if(t=n.preFilter[H](t,v,l,p,m,S)){
-                            if(t===true)continue
-                        }else y=I=true;
-                        if(t)for(var U=0;(D=v[U])!=null;U++)if(D){
-                            I=M(D,t,U,v);
-                            var Ha=m^!!I;
-                            if(l&&I!=null)if(Ha)y=true;else v[U]=false;
-                            else if(Ha){
-                                p.push(D);
-                                y=true
-                            }
-                        }
-                        if(I!==w){
-                            l||(v=p);
-                            g=g.replace(n.match[H],"");
-                            if(!y)return[];
-                            break
-                        }
-                    }
-                }
-                if(g===q)if(y==null)k.error(g);else break;
-                q=g
-            }
-            return v
-        };
-
-        k.error=function(g){
-            throw"Syntax error, unrecognized expression: "+g;
-        };
-
-        var n=k.selectors={
-            order:["ID","NAME","TAG"],
-            match:{
-                ID:/#((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
-                CLASS:/\.((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
-                NAME:/\[name=['"]*((?:[\w\u00c0-\uFFFF-]|\\.)+)['"]*\]/,
-                ATTR:/\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
-                TAG:/^((?:[\w\u00c0-\uFFFF\*-]|\\.)+)/,
-                CHILD:/:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
-                POS:/:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
-                PSEUDO:/:((?:[\w\u00c0-\uFFFF-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
-            },
-            leftMatch:{},
-            attrMap:{
-                "class":"className",
-                "for":"htmlFor"
-            },
-            attrHandle:{
-                href:function(g){
-                    return g.getAttribute("href")
-                }
-            },
-            relative:{
-                "+":function(g,h){
-                    var l=typeof h==="string",m=l&&!/\W/.test(h);
-                    l=l&&!m;
-                    if(m)h=h.toLowerCase();
-                    m=0;
-                    for(var q=g.length,p;m<q;m++)if(p=g[m]){
-                        for(;(p=p.previousSibling)&&p.nodeType!==1;);
-                        g[m]=l||p&&p.nodeName.toLowerCase()===h?p||false:p===h
-                    }
-                    l&&k.filter(h,g,true)
-                },
-                ">":function(g,h){
-                    var l=typeof h==="string";
-                    if(l&&!/\W/.test(h)){
-                        h=h.toLowerCase();
-                        for(var m=0,q=g.length;m<q;m++){
-                            var p=g[m];
-                            if(p){
-                                l=p.parentNode;
-                                g[m]=l.nodeName.toLowerCase()===h?l:false
-                            }
-                        }
-                    }
-                    else{
-                        m=0;
-                        for(q=g.length;m<q;m++)if(p=g[m])g[m]=
-                            l?p.parentNode:p.parentNode===h;l&&k.filter(h,g,true)
-                    }
-                },
-                "":function(g,h,l){
-                    var m=e++,q=d;
-                    if(typeof h==="string"&&!/\W/.test(h)){
-                        var p=h=h.toLowerCase();
-                        q=b
-                    }
-                    q("parentNode",h,m,g,p,l)
-                },
-                "~":function(g,h,l){
-                    var m=e++,q=d;
-                    if(typeof h==="string"&&!/\W/.test(h)){
-                        var p=h=h.toLowerCase();
-                        q=b
-                    }
-                    q("previousSibling",h,m,g,p,l)
-                }
-            },
-            find:{
-                ID:function(g,h,l){
-                    if(typeof h.getElementById!=="undefined"&&!l)return(g=h.getElementById(g[1]))?[g]:[]
-                },
-                NAME:function(g,h){
-                    if(typeof h.getElementsByName!=="undefined"){
-                        var l=[];
-                        h=h.getElementsByName(g[1]);
-                        for(var m=0,q=h.length;m<q;m++)h[m].getAttribute("name")===g[1]&&l.push(h[m]);
-                        return l.length===0?null:l
-                    }
-                },
-                TAG:function(g,h){
-                    return h.getElementsByTagName(g[1])
-                }
-            },
-            preFilter:{
-                CLASS:function(g,h,l,m,q,p){
-                    g=" "+g[1].replace(/\\/g,"")+" ";
-                    if(p)return g;
-                    p=0;
-                    for(var v;(v=h[p])!=null;p++)if(v)if(q^(v.className&&(" "+v.className+" ").replace(/[\t\n]/g," ").indexOf(g)>=0))l||m.push(v);
-                        else if(l)h[p]=false;return false
-                },
-                ID:function(g){
-                    return g[1].replace(/\\/g,"")
-                },
-                TAG:function(g){
-                    return g[1].toLowerCase()
-                },
-                CHILD:function(g){
-                    if(g[1]==="nth"){
-                        var h=/(-?)(\d*)n((?:\+|-)?\d*)/.exec(g[2]==="even"&&"2n"||g[2]==="odd"&&"2n+1"||!/\D/.test(g[2])&&"0n+"+g[2]||g[2]);
-                        g[2]=h[1]+(h[2]||1)-0;
-                        g[3]=h[3]-0
-                    }
-                    g[0]=e++;
-                    return g
-                },
-                ATTR:function(g,h,l,m,q,p){
-                    h=g[1].replace(/\\/g,"");
-                    if(!p&&n.attrMap[h])g[1]=n.attrMap[h];
-                    if(g[2]==="~=")g[4]=" "+g[4]+" ";
-                    return g
-                },
-                PSEUDO:function(g,h,l,m,q){
-                    if(g[1]==="not")if((f.exec(g[3])||"").length>1||/^\w/.test(g[3]))g[3]=k(g[3],null,null,h);
-                        else{
-                            g=k.filter(g[3],h,l,true^q);
-                            l||m.push.apply(m,
-                                g);
-                            return false
-                        }else if(n.match.POS.test(g[0])||n.match.CHILD.test(g[0]))return true;
-                    return g
-                },
-                POS:function(g){
-                    g.unshift(true);
-                    return g
-                }
-            },
-            filters:{
-                enabled:function(g){
-                    return g.disabled===false&&g.type!=="hidden"
-                },
-                disabled:function(g){
-                    return g.disabled===true
-                },
-                checked:function(g){
-                    return g.checked===true
-                },
-                selected:function(g){
-                    return g.selected===true
-                },
-                parent:function(g){
-                    return!!g.firstChild
-                },
-                empty:function(g){
-                    return!g.firstChild
-                },
-                has:function(g,h,l){
-                    return!!k(l[3],g).length
-                },
-                header:function(g){
-                    return/h\d/i.test(g.nodeName)
-                },
-                text:function(g){
-                    return"text"===g.type
-                },
-                radio:function(g){
-                    return"radio"===g.type
-                },
-                checkbox:function(g){
-                    return"checkbox"===g.type
-                },
-                file:function(g){
-                    return"file"===g.type
-                },
-                password:function(g){
-                    return"password"===g.type
-                },
-                submit:function(g){
-                    return"submit"===g.type
-                },
-                image:function(g){
-                    return"image"===g.type
-                },
-                reset:function(g){
-                    return"reset"===g.type
-                },
-                button:function(g){
-                    return"button"===g.type||g.nodeName.toLowerCase()==="button"
-                },
-                input:function(g){
-                    return/input|select|textarea|button/i.test(g.nodeName)
-                }
-            },
-            setFilters:{
-                first:function(g,h){
-                    return h===0
-                },
-                last:function(g,h,l,m){
-                    return h===m.length-1
-                },
-                even:function(g,h){
-                    return h%2===0
-                },
-                odd:function(g,h){
-                    return h%2===1
-                },
-                lt:function(g,h,l){
-                    return h<l[3]-0
-                },
-                gt:function(g,h,l){
-                    return h>l[3]-0
-                },
-                nth:function(g,h,l){
-                    return l[3]-0===h
-                },
-                eq:function(g,h,l){
-                    return l[3]-0===h
-                }
-            },
-            filter:{
-                PSEUDO:function(g,h,l,m){
-                    var q=h[1],p=n.filters[q];
-                    if(p)return p(g,l,h,m);
-                    else if(q==="contains")return(g.textContent||g.innerText||a([g])||"").indexOf(h[3])>=0;
-                    else if(q==="not"){
-                        h=
-                        h[3];
-                        l=0;
-                        for(m=h.length;l<m;l++)if(h[l]===g)return false;return true
-                    }else k.error("Syntax error, unrecognized expression: "+q)
-                },
-                CHILD:function(g,h){
-                    var l=h[1],m=g;
-                    switch(l){
-                        case "only":case "first":
-                            for(;m=m.previousSibling;)if(m.nodeType===1)return false;if(l==="first")return true;
-                            m=g;
-                        case "last":
-                            for(;m=m.nextSibling;)if(m.nodeType===1)return false;return true;
-                        case "nth":
-                            l=h[2];
-                            var q=h[3];
-                            if(l===1&&q===0)return true;
-                            h=h[0];
-                            var p=g.parentNode;
-                            if(p&&(p.sizcache!==h||!g.nodeIndex)){
-                                var v=0;
-                                for(m=p.firstChild;m;m=
-                                    m.nextSibling)if(m.nodeType===1)m.nodeIndex=++v;p.sizcache=h
-                            }
-                            g=g.nodeIndex-q;
-                            return l===0?g===0:g%l===0&&g/l>=0
-                    }
-                },
-                ID:function(g,h){
-                    return g.nodeType===1&&g.getAttribute("id")===h
-                },
-                TAG:function(g,h){
-                    return h==="*"&&g.nodeType===1||g.nodeName.toLowerCase()===h
-                },
-                CLASS:function(g,h){
-                    return(" "+(g.className||g.getAttribute("class"))+" ").indexOf(h)>-1
-                },
-                ATTR:function(g,h){
-                    var l=h[1];
-                    g=n.attrHandle[l]?n.attrHandle[l](g):g[l]!=null?g[l]:g.getAttribute(l);
-                    l=g+"";
-                    var m=h[2];
-                    h=h[4];
-                    return g==null?m==="!=":m===
-                    "="?l===h:m==="*="?l.indexOf(h)>=0:m==="~="?(" "+l+" ").indexOf(h)>=0:!h?l&&g!==false:m==="!="?l!==h:m==="^="?l.indexOf(h)===0:m==="$="?l.substr(l.length-h.length)===h:m==="|="?l===h||l.substr(0,h.length+1)===h+"-":false
-                },
-                POS:function(g,h,l,m){
-                    var q=n.setFilters[h[2]];
-                    if(q)return q(g,l,h,m)
-                }
-            }
-        },r=n.match.POS;
-        for(var u in n.match){
-            n.match[u]=new RegExp(n.match[u].source+/(?![^\[]*\])(?![^\(]*\))/.source);
-            n.leftMatch[u]=new RegExp(/(^(?:.|\r|\n)*?)/.source+n.match[u].source.replace(/\\(\d+)/g,function(g,
-                h){
-                return"\\"+(h-0+1)
-            }))
-        }
-        var z=function(g,h){
-            g=Array.prototype.slice.call(g,0);
             if(h){
-                h.push.apply(h,g);
-                return h
-            }
-            return g
-        };
+                v=m?{
+                    expr:p.pop(),
+                    set:z(m)
+                }:k.find(p.pop(),p.length===1&&(p[0]==="~"||p[0]==="+")&&h.parentNode?h.parentNode:h,M);
+                t=v.expr?k.filter(v.expr,v.set):v.set;
+                if(p.length>0)y=z(t);else H=false;
+                for(;p.length;){
+                    var D=p.pop();
+                    v=D;
+                    if(n.relative[D])v=p.pop();else D="";
+                    if(v==null)v=h;
+                    n.relative[D](y,v,M)
+                }
+            }else y=[]
+        }
+        y||(y=t);
+        y||k.error(D||
+            g);
+        if(j.call(y)==="[object Array]")if(H)if(h&&h.nodeType===1)for(g=0;y[g]!=null;g++){
+            if(y[g]&&(y[g]===true||y[g].nodeType===1&&E(h,y[g])))l.push(t[g])
+        }
+        else for(g=0;y[g]!=null;g++)y[g]&&y[g].nodeType===1&&l.push(t[g]);else l.push.apply(l,y);else z(y,l);
+        if(S){
+            k(S,q,l,m);
+            k.uniqueSort(l)
+        }
+        return l
+    };
 
-        try{
-            Array.prototype.slice.call(s.documentElement.childNodes,0)
+    k.uniqueSort=function(g){
+        if(B){
+            i=o;
+            g.sort(B);
+            if(i)for(var h=1;h<g.length;h++)g[h]===g[h-1]&&g.splice(h--,1)
         }
-        catch(C){
-            z=function(g,h){
-                h=h||[];
-                if(j.call(g)==="[object Array]")Array.prototype.push.apply(h,g);
-                else if(typeof g.length==="number")for(var l=0,m=g.length;l<m;l++)h.push(g[l]);else for(l=0;g[l];l++)h.push(g[l]);
-                return h
+        return g
+    };
+
+    k.matches=function(g,h){
+        return k(g,null,null,h)
+    };
+
+    k.find=function(g,h,l){
+        var m,q;
+        if(!g)return[];
+        for(var p=0,v=n.order.length;p<v;p++){
+            var t=n.order[p];
+            if(q=n.leftMatch[t].exec(g)){
+                var y=q[1];
+                q.splice(1,1);
+                if(y.substr(y.length-1)!=="\\"){
+                    q[1]=(q[1]||"").replace(/\\/g,"");
+                    m=n.find[t](q,h,l);
+                    if(m!=null){
+                        g=g.replace(n.match[t],"");
+                        break
+                    }
+                }
             }
         }
+        m||(m=h.getElementsByTagName("*"));
+        return{
+            set:m,
+            expr:g
+        }
+    };
+
+    k.filter=function(g,h,l,m){
+        for(var q=g,p=[],v=h,t,y,S=h&&h[0]&&x(h[0]);g&&h.length;){
+            for(var H in n.filter)if((t=n.leftMatch[H].exec(g))!=null&&t[2]){
+                var M=n.filter[H],I,D;
+                D=t[1];
+                y=false;
+                t.splice(1,1);
+                if(D.substr(D.length-
+                    1)!=="\\"){
+                    if(v===p)p=[];
+                    if(n.preFilter[H])if(t=n.preFilter[H](t,v,l,p,m,S)){
+                        if(t===true)continue
+                    }else y=I=true;
+                    if(t)for(var U=0;(D=v[U])!=null;U++)if(D){
+                        I=M(D,t,U,v);
+                        var Ha=m^!!I;
+                        if(l&&I!=null)if(Ha)y=true;else v[U]=false;
+                        else if(Ha){
+                            p.push(D);
+                            y=true
+                        }
+                    }
+                    if(I!==w){
+                        l||(v=p);
+                        g=g.replace(n.match[H],"");
+                        if(!y)return[];
+                        break
+                    }
+                }
+            }
+            if(g===q)if(y==null)k.error(g);else break;
+            q=g
+        }
+        return v
+    };
+
+    k.error=function(g){
+        throw"Syntax error, unrecognized expression: "+g;
+    };
+
+    var n=k.selectors={
+        order:["ID","NAME","TAG"],
+        match:{
+            ID:/#((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
+            CLASS:/\.((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
+            NAME:/\[name=['"]*((?:[\w\u00c0-\uFFFF-]|\\.)+)['"]*\]/,
+            ATTR:/\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
+            TAG:/^((?:[\w\u00c0-\uFFFF\*-]|\\.)+)/,
+            CHILD:/:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
+            POS:/:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
+            PSEUDO:/:((?:[\w\u00c0-\uFFFF-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
+        },
+        leftMatch:{},
+        attrMap:{
+            "class":"className",
+            "for":"htmlFor"
+        },
+        attrHandle:{
+            href:function(g){
+                return g.getAttribute("href")
+            }
+        },
+        relative:{
+            "+":function(g,h){
+                var l=typeof h==="string",m=l&&!/\W/.test(h);
+                l=l&&!m;
+                if(m)h=h.toLowerCase();
+                m=0;
+                for(var q=g.length,p;m<q;m++)if(p=g[m]){
+                    for(;(p=p.previousSibling)&&p.nodeType!==1;);
+                    g[m]=l||p&&p.nodeName.toLowerCase()===h?p||false:p===h
+                }
+                l&&k.filter(h,g,true)
+            },
+            ">":function(g,h){
+                var l=typeof h==="string";
+                if(l&&!/\W/.test(h)){
+                    h=h.toLowerCase();
+                    for(var m=0,q=g.length;m<q;m++){
+                        var p=g[m];
+                        if(p){
+                            l=p.parentNode;
+                            g[m]=l.nodeName.toLowerCase()===h?l:false
+                        }
+                    }
+                }
+                else{
+                    m=0;
+                    for(q=g.length;m<q;m++)if(p=g[m])g[m]=
+                        l?p.parentNode:p.parentNode===h;l&&k.filter(h,g,true)
+                }
+            },
+            "":function(g,h,l){
+                var m=e++,q=d;
+                if(typeof h==="string"&&!/\W/.test(h)){
+                    var p=h=h.toLowerCase();
+                    q=b
+                }
+                q("parentNode",h,m,g,p,l)
+            },
+            "~":function(g,h,l){
+                var m=e++,q=d;
+                if(typeof h==="string"&&!/\W/.test(h)){
+                    var p=h=h.toLowerCase();
+                    q=b
+                }
+                q("previousSibling",h,m,g,p,l)
+            }
+        },
+        find:{
+            ID:function(g,h,l){
+                if(typeof h.getElementById!=="undefined"&&!l)return(g=h.getElementById(g[1]))?[g]:[]
+            },
+            NAME:function(g,h){
+                if(typeof h.getElementsByName!=="undefined"){
+                    var l=[];
+                    h=h.getElementsByName(g[1]);
+                    for(var m=0,q=h.length;m<q;m++)h[m].getAttribute("name")===g[1]&&l.push(h[m]);
+                    return l.length===0?null:l
+                }
+            },
+            TAG:function(g,h){
+                return h.getElementsByTagName(g[1])
+            }
+        },
+        preFilter:{
+            CLASS:function(g,h,l,m,q,p){
+                g=" "+g[1].replace(/\\/g,"")+" ";
+                if(p)return g;
+                p=0;
+                for(var v;(v=h[p])!=null;p++)if(v)if(q^(v.className&&(" "+v.className+" ").replace(/[\t\n]/g," ").indexOf(g)>=0))l||m.push(v);
+                    else if(l)h[p]=false;return false
+            },
+            ID:function(g){
+                return g[1].replace(/\\/g,"")
+            },
+            TAG:function(g){
+                return g[1].toLowerCase()
+            },
+            CHILD:function(g){
+                if(g[1]==="nth"){
+                    var h=/(-?)(\d*)n((?:\+|-)?\d*)/.exec(g[2]==="even"&&"2n"||g[2]==="odd"&&"2n+1"||!/\D/.test(g[2])&&"0n+"+g[2]||g[2]);
+                    g[2]=h[1]+(h[2]||1)-0;
+                    g[3]=h[3]-0
+                }
+                g[0]=e++;
+                return g
+            },
+            ATTR:function(g,h,l,m,q,p){
+                h=g[1].replace(/\\/g,"");
+                if(!p&&n.attrMap[h])g[1]=n.attrMap[h];
+                if(g[2]==="~=")g[4]=" "+g[4]+" ";
+                return g
+            },
+            PSEUDO:function(g,h,l,m,q){
+                if(g[1]==="not")if((f.exec(g[3])||"").length>1||/^\w/.test(g[3]))g[3]=k(g[3],null,null,h);
+                    else{
+                        g=k.filter(g[3],h,l,true^q);
+                        l||m.push.apply(m,
+                            g);
+                        return false
+                    }else if(n.match.POS.test(g[0])||n.match.CHILD.test(g[0]))return true;
+                return g
+            },
+            POS:function(g){
+                g.unshift(true);
+                return g
+            }
+        },
+        filters:{
+            enabled:function(g){
+                return g.disabled===false&&g.type!=="hidden"
+            },
+            disabled:function(g){
+                return g.disabled===true
+            },
+            checked:function(g){
+                return g.checked===true
+            },
+            selected:function(g){
+                return g.selected===true
+            },
+            parent:function(g){
+                return!!g.firstChild
+            },
+            empty:function(g){
+                return!g.firstChild
+            },
+            has:function(g,h,l){
+                return!!k(l[3],g).length
+            },
+            header:function(g){
+                return/h\d/i.test(g.nodeName)
+            },
+            text:function(g){
+                return"text"===g.type
+            },
+            radio:function(g){
+                return"radio"===g.type
+            },
+            checkbox:function(g){
+                return"checkbox"===g.type
+            },
+            file:function(g){
+                return"file"===g.type
+            },
+            password:function(g){
+                return"password"===g.type
+            },
+            submit:function(g){
+                return"submit"===g.type
+            },
+            image:function(g){
+                return"image"===g.type
+            },
+            reset:function(g){
+                return"reset"===g.type
+            },
+            button:function(g){
+                return"button"===g.type||g.nodeName.toLowerCase()==="button"
+            },
+            input:function(g){
+                return/input|select|textarea|button/i.test(g.nodeName)
+            }
+        },
+        setFilters:{
+            first:function(g,h){
+                return h===0
+            },
+            last:function(g,h,l,m){
+                return h===m.length-1
+            },
+            even:function(g,h){
+                return h%2===0
+            },
+            odd:function(g,h){
+                return h%2===1
+            },
+            lt:function(g,h,l){
+                return h<l[3]-0
+            },
+            gt:function(g,h,l){
+                return h>l[3]-0
+            },
+            nth:function(g,h,l){
+                return l[3]-0===h
+            },
+            eq:function(g,h,l){
+                return l[3]-0===h
+            }
+        },
+        filter:{
+            PSEUDO:function(g,h,l,m){
+                var q=h[1],p=n.filters[q];
+                if(p)return p(g,l,h,m);
+                else if(q==="contains")return(g.textContent||g.innerText||a([g])||"").indexOf(h[3])>=0;
+                else if(q==="not"){
+                    h=
+                    h[3];
+                    l=0;
+                    for(m=h.length;l<m;l++)if(h[l]===g)return false;return true
+                }else k.error("Syntax error, unrecognized expression: "+q)
+            },
+            CHILD:function(g,h){
+                var l=h[1],m=g;
+                switch(l){
+                    case "only":case "first":
+                        for(;m=m.previousSibling;)if(m.nodeType===1)return false;if(l==="first")return true;
+                        m=g;
+                    case "last":
+                        for(;m=m.nextSibling;)if(m.nodeType===1)return false;return true;
+                    case "nth":
+                        l=h[2];
+                        var q=h[3];
+                        if(l===1&&q===0)return true;
+                        h=h[0];
+                        var p=g.parentNode;
+                        if(p&&(p.sizcache!==h||!g.nodeIndex)){
+                            var v=0;
+                            for(m=p.firstChild;m;m=
+                                m.nextSibling)if(m.nodeType===1)m.nodeIndex=++v;p.sizcache=h
+                        }
+                        g=g.nodeIndex-q;
+                        return l===0?g===0:g%l===0&&g/l>=0
+                }
+            },
+            ID:function(g,h){
+                return g.nodeType===1&&g.getAttribute("id")===h
+            },
+            TAG:function(g,h){
+                return h==="*"&&g.nodeType===1||g.nodeName.toLowerCase()===h
+            },
+            CLASS:function(g,h){
+                return(" "+(g.className||g.getAttribute("class"))+" ").indexOf(h)>-1
+            },
+            ATTR:function(g,h){
+                var l=h[1];
+                g=n.attrHandle[l]?n.attrHandle[l](g):g[l]!=null?g[l]:g.getAttribute(l);
+                l=g+"";
+                var m=h[2];
+                h=h[4];
+                return g==null?m==="!=":m===
+                "="?l===h:m==="*="?l.indexOf(h)>=0:m==="~="?(" "+l+" ").indexOf(h)>=0:!h?l&&g!==false:m==="!="?l!==h:m==="^="?l.indexOf(h)===0:m==="$="?l.substr(l.length-h.length)===h:m==="|="?l===h||l.substr(0,h.length+1)===h+"-":false
+            },
+            POS:function(g,h,l,m){
+                var q=n.setFilters[h[2]];
+                if(q)return q(g,l,h,m)
+            }
+        }
+    },r=n.match.POS;
+    for(var u in n.match){
+        n.match[u]=new RegExp(n.match[u].source+/(?![^\[]*\])(?![^\(]*\))/.source);
+        n.leftMatch[u]=new RegExp(/(^(?:.|\r|\n)*?)/.source+n.match[u].source.replace(/\\(\d+)/g,function(g,
+            h){
+            return"\\"+(h-0+1)
+        }))
+    }
+    var z=function(g,h){
+        g=Array.prototype.slice.call(g,0);
+        if(h){
+            h.push.apply(h,g);
+            return h
+        }
+        return g
+    };
+
+    try{
+        Array.prototype.slice.call(s.documentElement.childNodes,0)
+    }
+    catch(C){
+        z=function(g,h){
+            h=h||[];
+            if(j.call(g)==="[object Array]")Array.prototype.push.apply(h,g);
+            else if(typeof g.length==="number")for(var l=0,m=g.length;l<m;l++)h.push(g[l]);else for(l=0;g[l];l++)h.push(g[l]);
+            return h
+        }
+    }
         var B;
         if(s.documentElement.compareDocumentPosition)B=function(g,h){
             if(!g.compareDocumentPosition||
@@ -2724,7 +2726,8 @@
                     }
                     r||x.setRequestHeader("X-Requested-With","XMLHttpRequest");
                     x.setRequestHeader("Accept",e.dataType&&e.accepts[e.dataType]?e.accepts[e.dataType]+", */*":e.accepts._default)
-                }catch(ga){}
+                }
+                catch(ga){}
                 if(e.beforeSend&&e.beforeSend.call(k,x,e)===false){
                     e.global&&!--c.active&&c.event.trigger("ajaxStop");
                     x.abort();
@@ -3042,7 +3045,8 @@
                         e,this.options.orig[e]);this.options.complete.call(this.elem)
                 }
                 return false
-            }else{
+            }
+            else{
                 e=b-this.startTime;
                 this.state=e/this.options.duration;
                 a=this.options.easing||(c.easing.swing?"swing":"linear");
@@ -5373,7 +5377,8 @@ fokus.openride.mobclient.controller.modules.nativemodule = function(){
                         enableHighAccuracy: true,
                         gearsRequestAddress: true
                     });
-                }catch (e) {
+                }
+                catch (e) {
                     return null;
                 }
             }else{
@@ -7725,7 +7730,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     document.getElementById(tabimgslvl_1[j]).src = nodes[i].leafs[j].imgsrc;
                             }
                         }
-                    }else
+                    }
+                    else
                         document.getElementById(tabimgslvl_0[i]).src = nodes[i].imgsrc;
                 }
             }
@@ -8896,7 +8902,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var counterpart = counterpartlist[i];
                 //alert(counterpart);
                 if (counterpart=="none"){
-                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                    RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     continue;
                 }
                 $.ajax({//get subject id
@@ -8914,39 +8920,57 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     dataType: "json",
                     success:function(data, textStatus, jqXHR){
                         //alert('success1 '+JSON.stringify(data));
+                        
+                        //alert(JSON.stringify(data.subject_id));
+                        //get profile
+                        var personal;
+                        $.ajax({
+                            type: "GET",
+                            url: PeerManagerPrefix + PeerMenager + '/users/'+counterpart+'/profile',//'/api/register/' + user,
+                            data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                            crossDomain: true,
+                            contentType:  "application/json; charset=UTF-8",
+                            accepts: "application/json",
+                            dataType: "json",
+                            username: this.username,
+                            password: this.password,
+                            beforeSend: function (xhr)
+                            {
+                                xhr.withCredentials = true,
+                                xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
+                                xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                                xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                            },
+                            async: false,
+                            success: function(data, textStatus, jqXHR){
+                                personal = data;
+                            },
+                            error: function(jq , textStatus , errorThrown){
+                                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                            }
+                        });
                         if ( typeof(data["currentReputationReport"])=='undefined' || (typeof(data["versionInfo"])=='undefined' || data["versionInfo"]["previousVersion"]=="none")){
-                            RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', 'No Rating Avialble', 'X', '', '', '');\" value=\""+counterpart+"\" />");
-
+                            //RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', 'No Rating Avialble', 'X', '', '', '');\" value=\""+counterpart+"\" />");
+                            if (usermode == RIDERMODE)
+                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +personal.mobilePhoneNumber+"','"
+                                    +personal.carColour+ " " + personal.carBrand
+                                    +"');\" value=\""+counterpart+"\" />");
+                            else
+                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +personal.mobilePhoneNumber+"','"
+                                    +"undefined undefined"
+                                    +"');\" value=\""+counterpart+"\" />");
                         }
                         else{
-                            //alert(JSON.stringify(data.subject_id));
-                            //get profile
-                            var personal;
-                            $.ajax({
-                                type: "GET",
-                                url: PeerManagerPrefix + PeerMenager + '/users/'+counterpart+'/profile',//'/api/register/' + user,
-                                data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
-                                crossDomain: true,
-                                contentType:  "application/json; charset=UTF-8",
-                                accepts: "application/json",
-                                dataType: "json",
-                                username: this.username,
-                                password: this.password,
-                                beforeSend: function (xhr)
-                                {
-                                    xhr.withCredentials = true,
-                                    xhr.setRequestHeader('Authorization' , 'Basic ' + this.username+':'+pass);
-                                    xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
-                                    xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
-                                },
-                                async: false,
-                                success: function(data, textStatus, jqXHR){
-                                    personal = data;
-                                },
-                                error: function(jq , textStatus , errorThrown){
-                                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
-                                }
-                            });
                             $.ajax({//get subject reputation
                                 type:"GET",
                                 url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
@@ -8986,7 +9010,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 },
                                 error:function(jq,textStatus,errorThrown){
                                     //alert('fail');
-                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                                    RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
 
                                 }
                             });
@@ -8995,7 +9019,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     error:function(jq,textStatus,errorThrown){
                         //alert('fail1');
                         //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
-                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                        RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     }
                 });
             }
@@ -9114,10 +9138,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Smoking:</td>');
             RideShareSB.append('<td valign="top">'+prp.smoking+'</td>');
             RideShareSB.append('</tr>');
-            RideShareSB.append('<tr>');
-            RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Pets:</td>');
-            RideShareSB.append('<td valign="top">'+prp.pets+'</td>');
-            RideShareSB.append('</tr>');
+//            RideShareSB.append('<tr>');
+//            RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Pets:</td>');
+//            RideShareSB.append('<td valign="top">'+prp.pets+'</td>');
+//            RideShareSB.append('</tr>');
             RideShareSB.append('</table></small>');
             RideShareSB.append('  </div>');
             //RideShareSB.append('    <input type="button" class="rounded compact" value="Accept" onclick="" style="width: 72px;" />');
@@ -9582,14 +9606,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         },
 
         receiveUpdates : function(){
-            srvconn.GET('/OpenRideServer-RS/resources/configuration/updates',
-                false, function(updateData) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.setriderupdatecount(updateData.UpdateResponse.updatedsearches);
-                    fokus.openride.mobclient.controller.modules.modulemanager.setdriverupdatecount(updateData.UpdateResponse.updatedoffers);
-                }, function(x,s,e) {
-                    clearInterval(updateCountRefreshTimer);
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Error receiving update data.')
-                });
+//            srvconn.GET('/OpenRideServer-RS/resources/configuration/updates',
+//                false, function(updateData) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.setriderupdatecount(updateData.UpdateResponse.updatedsearches);
+//                    fokus.openride.mobclient.controller.modules.modulemanager.setdriverupdatecount(updateData.UpdateResponse.updatedoffers);
+//                }, function(x,s,e) {
+//                    clearInterval(updateCountRefreshTimer);
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Error receiving update data.')
+//                });
         },
 
         getServiceType : function() {
@@ -10840,7 +10864,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         if (hours < 10) hours = '0' + hours;
                         var mins = date.getMinutes();
                         if (mins < 10) mins = '0' + mins;
-                        var date_realized = ""+hours + ':' + mins + ' ' + date.getDate() + '.' + date.getMonth()+1 + '.' + date.getFullYear();
+                        var date_realized = ""+hours + ':' + mins + ' ' + date.getDate() + '.' + (date.getMonth()+1) + '.' + date.getFullYear();
                         //alert(date_realized + ' '+ date.getDay());
                         //alert('creation' +i+''+obj["index"]+''+5);
                         var users = obj.commuters;
@@ -10872,7 +10896,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             }
                         }
                         else{
-
+                            if (ratedRides.indexOf(obj["index"])!=-1)
+                                continue;
                             listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
                             + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
                             + '    <div style="line-height: 140%; padding-left: 75px;">'
@@ -10886,7 +10911,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Reliability: </strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;' + stars(2,i,0) + '</div>'
                             //+ '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Communication: </strong>' + stars(3,i) + '</div>'
                             + '<div style="color=#96bd0d; font-family: Arial, sans-serif;"><strong>Friendliness: </strong>&nbsp;&nbsp;&nbsp;&nbsp;' + stars(4,i,0) + '</div>'
-                            + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+''+5  + '\');">'+ '</strong></div>'
+                            + '<div align="center" style="color=#96bd0d; font-family: Arial, sans-serif;"><strong><input vertical-align:middle; horizontal-align:middle;  type="button" class="rounded compact" value="Submit" onClick="comment(\'' +obj["index"]+'-'+i+'#'+5  +obj.driver+ '\');">'+ '</strong></div>'
                             + '    </div>'
                             + '</div>';
                         }
@@ -11132,59 +11157,59 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                     }
 
-                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
-                        var offerstartsel = document.getElementById(offerstartdropdownid);
-                        var offerdestsel = document.getElementById(offerdestdropdownid);
-
-                        var result = data;
-
-                        if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
-                            if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
-                                var favorite = result.list[0].FavoritePointResponse;
-
-                                var name = favorite.favptDisplayName;
-                                var address = favorite.favptAddress;
-                                var favptGeoCoords = favorite.favptGeoCoords;
-                                var id = favorite.favptId;
-
-                                var favoption0 = document.createElement('option');
-                                var favoption01 = document.createElement('option');
-                                favoption0.innerHTML = name + ': ' +  address;
-                                favoption0.latln = favptGeoCoords;
-                                /*favoption0.latln = */
-
-                                favoption01.innerHTML = name + ': ' +  address;
-                                favoption01.latln = favptGeoCoords;
-
-                                offerstartsel.add(favoption0,null);
-                                offerdestsel.add(favoption01,null);
-
-                            }else{
-                                for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
-                                    var entry = result.list[0].FavoritePointResponse[j];
-
-                                    var favname0 = entry.favptDisplayName;
-                                    var favaddress0 = entry.favptAddress;
-                                    var favptGeoCoords0 = entry.favptGeoCoords;
-                                    var favid0 = entry.favptId;
-
-                                    var favoption1 = document.createElement('option');
-                                    var favoption11 = document.createElement('option');
-                                    favoption1.innerHTML = favname0 + ': ' +  favaddress0;
-                                    favoption1.latln = favptGeoCoords0;
-                                    /*favoption0.latln = */
-
-                                    favoption11.innerHTML = favname0 + ': ' +  favaddress0;
-                                    favoption11.latln = favptGeoCoords0;
-
-                                    offerdestsel.add(favoption11,null);
-                                }
-                            }
-                        }else{
-                    }
-                    }, function(x,s,e) {
-                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your favorites could not be loaded.')
-                    } );
+//                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
+//                        var offerstartsel = document.getElementById(offerstartdropdownid);
+//                        var offerdestsel = document.getElementById(offerdestdropdownid);
+//
+//                        var result = data;
+//
+//                        if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
+//                            if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
+//                                var favorite = result.list[0].FavoritePointResponse;
+//
+//                                var name = favorite.favptDisplayName;
+//                                var address = favorite.favptAddress;
+//                                var favptGeoCoords = favorite.favptGeoCoords;
+//                                var id = favorite.favptId;
+//
+//                                var favoption0 = document.createElement('option');
+//                                var favoption01 = document.createElement('option');
+//                                favoption0.innerHTML = name + ': ' +  address;
+//                                favoption0.latln = favptGeoCoords;
+//                                /*favoption0.latln = */
+//
+//                                favoption01.innerHTML = name + ': ' +  address;
+//                                favoption01.latln = favptGeoCoords;
+//
+//                                offerstartsel.add(favoption0,null);
+//                                offerdestsel.add(favoption01,null);
+//
+//                            }else{
+//                                for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
+//                                    var entry = result.list[0].FavoritePointResponse[j];
+//
+//                                    var favname0 = entry.favptDisplayName;
+//                                    var favaddress0 = entry.favptAddress;
+//                                    var favptGeoCoords0 = entry.favptGeoCoords;
+//                                    var favid0 = entry.favptId;
+//
+//                                    var favoption1 = document.createElement('option');
+//                                    var favoption11 = document.createElement('option');
+//                                    favoption1.innerHTML = favname0 + ': ' +  favaddress0;
+//                                    favoption1.latln = favptGeoCoords0;
+//                                    /*favoption0.latln = */
+//
+//                                    favoption11.innerHTML = favname0 + ': ' +  favaddress0;
+//                                    favoption11.latln = favptGeoCoords0;
+//
+//                                    offerdestsel.add(favoption11,null);
+//                                }
+//                            }
+//                        }else{
+//                    }
+//                    }, function(x,s,e) {
+//                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your favorites could not be loaded.')
+//                    } );
                     this.offerfavsset = true;
                 }
             }
@@ -11244,60 +11269,60 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         }
                     }
 
-                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
-                        var searchstartsel = document.getElementById(searchstartdropdownid);
-                        var searchdestsel = document.getElementById(searchdestdropdownid);
-
-                        var result = data;
-
-                        if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
-                            if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
-                                var favorite = result.list[0].FavoritePointResponse;
-
-                                var name1 = favorite.favptDisplayName;
-                                var address1 = favorite.favptAddress;
-                                var geocoords = favorite.favptGeoCoords;
-                                var id1 = favorite.favptId;
-
-                                var favoption2 = document.createElement('option');
-                                var favoption21 = document.createElement('option');
-                                favoption2.innerHTML = name1 + ': ' +  address1;
-                                favoption2.latln = geocoords;
-                                /*favoption0.latln = */
-
-                                favoption21.innerHTML = name1 + ': ' +  address1;
-                                favoption21.latln = geocoords;
-
-                                searchstartsel.add(favoption2,null);
-                                searchdestsel.add(favoption21,null);
-
-                            }else{
-                                for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
-                                    var entry = result.list[0].FavoritePointResponse[j];
-
-                                    var favname1 = entry.favptDisplayName;
-                                    var favaddress1 = entry.favptAddress;
-                                    var geocoords1 = entry.favptGeoCoords;
-                                    var favid1 = entry.favptId;
-
-                                    var favoption3 = document.createElement('option');
-                                    var favoption31 = document.createElement('option');
-                                    favoption3.innerHTML = favname1 + ': ' +  favaddress1;
-                                    favoption3.latln = geocoords1;
-                                    /*favoption0.latln = */
-
-                                    favoption31.innerHTML = favname1 + ': ' +  favaddress1;
-                                    favoption31.latln = geocoords1;
-
-                                    searchstartsel.add(favoption3,null);
-                                    searchdestsel.add(favoption31,null);
-                                }
-                            }
-                        }else{
-                    }
-                    }, function(x,s,e) {
-                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your favorites could not be loaded.')
-                    });
+//                    srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
+//                        var searchstartsel = document.getElementById(searchstartdropdownid);
+//                        var searchdestsel = document.getElementById(searchdestdropdownid);
+//
+//                        var result = data;
+//
+//                        if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
+//                            if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
+//                                var favorite = result.list[0].FavoritePointResponse;
+//
+//                                var name1 = favorite.favptDisplayName;
+//                                var address1 = favorite.favptAddress;
+//                                var geocoords = favorite.favptGeoCoords;
+//                                var id1 = favorite.favptId;
+//
+//                                var favoption2 = document.createElement('option');
+//                                var favoption21 = document.createElement('option');
+//                                favoption2.innerHTML = name1 + ': ' +  address1;
+//                                favoption2.latln = geocoords;
+//                                /*favoption0.latln = */
+//
+//                                favoption21.innerHTML = name1 + ': ' +  address1;
+//                                favoption21.latln = geocoords;
+//
+//                                searchstartsel.add(favoption2,null);
+//                                searchdestsel.add(favoption21,null);
+//
+//                            }else{
+//                                for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
+//                                    var entry = result.list[0].FavoritePointResponse[j];
+//
+//                                    var favname1 = entry.favptDisplayName;
+//                                    var favaddress1 = entry.favptAddress;
+//                                    var geocoords1 = entry.favptGeoCoords;
+//                                    var favid1 = entry.favptId;
+//
+//                                    var favoption3 = document.createElement('option');
+//                                    var favoption31 = document.createElement('option');
+//                                    favoption3.innerHTML = favname1 + ': ' +  favaddress1;
+//                                    favoption3.latln = geocoords1;
+//                                    /*favoption0.latln = */
+//
+//                                    favoption31.innerHTML = favname1 + ': ' +  favaddress1;
+//                                    favoption31.latln = geocoords1;
+//
+//                                    searchstartsel.add(favoption3,null);
+//                                    searchdestsel.add(favoption31,null);
+//                                }
+//                            }
+//                        }else{
+//                    }
+//                    }, function(x,s,e) {
+//                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your favorites could not be loaded.')
+//                    });
                     this.searchfavsset = true;
                 }
             }
@@ -12893,7 +12918,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 }
 
             // Home tab statistics
-            document.getElementById("homeinfoopenoffers").innerHTML = '0';//initData.InitResponse.openoffers;
+            document.getElementById("homeinfoopenoffers").innerHTML = '*';//initData.InitResponse.openoffers;
             //            if (initData.InitResponse.openoffers==1) {
             document.getElementById("homeinfoopenoffers-singular").style.display = 'inline';
             document.getElementById("homeinfoopenoffers-plural").style.display = 'none';
@@ -12903,7 +12928,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             //                document.getElementById("homeinfoopenoffers-plural").style.display = 'inline';
             //            }
 
-            document.getElementById("homeinfoopensearches").innerHTML = '0';//initData.InitResponse.opensearches;
+            document.getElementById("homeinfoopensearches").innerHTML = '*';//initData.InitResponse.opensearches;
             //            if (initData.InitResponse.opensearches==1) {
             document.getElementById("homeinfoopensearches-singular").style.display = 'inline';
             document.getElementById("homeinfoopensearches-plural").style.display = 'none';
@@ -12913,7 +12938,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             //                document.getElementById("homeinfoopensearches-plural").style.display = 'inline';
             //            }
 
-            document.getElementById("homeinfoopenratings").innerHTML = '0';//initData.InitResponse.openratings;
+            document.getElementById("homeinfoopenratings").innerHTML = '*';//initData.InitResponse.openratings;
             //            if (initData.InitResponse.openratings==1) {
             document.getElementById("homeinfoopenratings-plural").style.display = 'none';
             //            }
@@ -14767,12 +14792,12 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
             var coords = mapmod.getCenterPosition();
             favmod.setGeoCoords(coords.lat(), coords.lng());
 
-            srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
-                fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
-                showOverlayDialog('New favorite location successfully saved!', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setView(\'favlistUI\');', '', '')
-            }, function(x,s,e) {
-                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'A place with this name already exists.')
-            } );
+//            srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
+//                fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
+//                showOverlayDialog('New favorite location successfully saved!', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setView(\'favlistUI\');', '', '')
+//            }, function(x,s,e) {
+//                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'A place with this name already exists.')
+//            } );
         },
 
         addFavFromFullscreenMap : function(){
@@ -14787,14 +14812,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){ //found in ev
                 var coords = mapmod.getCenterPosition();
                 favmod.setGeoCoords(coords.lat(), coords.lng());
 
-                srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
-                    fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
-                    fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(3, 1);
-                    showOverlayDialog('New favorite location saved successfully!', '', 'OK', '', '', '')
-                }, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'A place with this name already exists.')
-                    return false;
-                } );
+//                srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
+//                    fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(3, 1);
+//                    showOverlayDialog('New favorite location saved successfully!', '', 'OK', '', '', '')
+//                }, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'A place with this name already exists.')
+//                    return false;
+//                } );
             } else {
                 showOverlayDialog('The name of the bookmark can be up to 18 characters long.', '', 'OK', '', '', '');
                 return false;
@@ -14986,15 +15011,17 @@ function submit (rate_array , riderId , ratedUser)
                 subjects = subjects +
                 '"subject_'+(ind++)+'":{"subject_uri" : "' + participants.substring(7,index) + '",'//"smartshare/' + participants.substring(7,index) + '",'
                 +'"quantifier_uri" : "driver"}';
-            var array = subparticipants.split(",");
-            for (var i=0; i<array.length;i++)
-            {
-                if (subjects != '{' && user != array[i]) subjects = subjects + ',';
-                if (user != array[i]){
-                    subjects = subjects +
-                    '"subject_'+ind+'":{"subject_uri" : "' + array[i] + '",'//"smartshare/' + array[i] + '",'
-                    +'"quantifier_uri" : "commuter"}';
-                    ind++;
+            else{
+                var array = subparticipants.split(",");
+                for (var i=0; i<array.length;i++)
+                {
+                    if (subjects != '{' && user != array[i]) subjects = subjects + ',';
+                    if (user != array[i]){
+                        subjects = subjects +
+                        '"subject_'+ind+'":{"subject_uri" : "' + array[i] + '",'//"smartshare/' + array[i] + '",'
+                        +'"quantifier_uri" : "commuter"}';
+                        ind++;
+                    }
                 }
             }
             var quantifier = 'driver';
@@ -15187,7 +15214,7 @@ function myreject(num)
         prp.rejectedDriver = me;
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false, user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
 
@@ -15199,7 +15226,7 @@ function myreject(num)
         (prp.rejectedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false , user , pass );
 
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
         fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
@@ -15212,7 +15239,10 @@ function fail(jq , status ,errorThrown)
     //    alert('status: ' + jq.status);
     //    alert('response ' + jq.responseText)
     //    alert('this error is: ' + errorThrown );
-    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+    if (jq.responseText == "Forbidden")
+        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, You cannot do that.');
+    else
+        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 }
 
 function ajaxcall(op , add , info , asynch ,usr , pass)
@@ -15229,6 +15259,8 @@ function ajaxcall(op , add , info , asynch ,usr , pass)
         {
             xhr.setRequestHeader('Authorization' , 'Basic ' + usr+':'+pass);
             xhr.withCredentials = true;
+            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
         },
         headers:
         {
@@ -15240,9 +15272,7 @@ function ajaxcall(op , add , info , asynch ,usr , pass)
         contentType:  "application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
         //"application/json; charset=UTF-8",
         success: function(data , textStatus) {
-        //  alert('success in ajax call!! ' + data);
-        //   alert('this is the data: ' + data
-        //  + ' and the text ' + JSON.parse(data));
+            alert('success '+data);
         },
         error: function(jq , textStatus , errorThrown){
             fail(jq , textStatus , errorThrown)

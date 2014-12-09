@@ -759,7 +759,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
                 var commuters = prp.commuters.toString().replace(",",", ");
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
-                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
+                    +'<br />Departure: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -50px;">Commuters: <strong style="color:black;">'+prp.commuters+'</strong></span> </small></h3>');
@@ -824,7 +824,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         break;
                 }
                 RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "
-                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
+                    +'<br />Departure: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
                     +'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 //                RideShareSB.append('<small><style="color: black">'+d.getDate() +"."+months+"."+d.getFullYear()+", "+hours+":"+mins+' Hour</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
@@ -947,7 +947,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
-                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
+                    +'<br />Departure: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
@@ -1012,7 +1012,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 RideShareSB.append('<li><a name="u'+id+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="u'+id+'" style="border: 2px '+ color + ';">');
                 RideShareSB.append('<small><style="color: black">'+day+', '+d.getDate() +"."+months+"."+d.getFullYear()+", "
-                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
+                    +'<br />Departure: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd
                     +'</small><br /><small style="display: block; margin-left: 34px;"><span style="margin-left: -34px;">Start:</span> '+prp.departureCity+'<br /><span style="margin-left: -34px;">End:</span> '+prp.destinationCity+'</small></h3>');
                 RideShareSB.append('<div class="slide_0"></div>');
                 RideShareSB.append('</li>');
@@ -1197,7 +1197,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 RideShareSB.append('<li><a name="r'+i+'"></a>');
                 RideShareSB.append('<h3 class="linkslide_0" id="r'+i+'" style="border: 2px '+ color + ';">');
                 RideShareSB.append(day+", "+d.getDate() +"."+months+"."+d.getFullYear()+", "
-                    +'<br />Deaprture: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
+                    +'<br />Departure: '+hours+":"+mins+' - '+hoursEnd+':'+minsEnd+
                     '<br /><small style="display: block; margin-left: 50px;"><span style="margin-left: -50px;">Start:</span> '+
                     prp.departureCity+'<br /><span style="margin-left: -50px;">End:</span> '+prp.destinationCity+'<br />'+
                     '<span style="margin-left: -60px;">Driver: </span>&nbsp;&nbsp;&nbsp;&nbsp;'+driverstr+' </small></h3>');
@@ -1680,7 +1680,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var counterpart = counterpartlist[i];
                 //alert(counterpart);
                 if (counterpart=="none"){
-                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                    RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     continue;
                 }
                 $.ajax({//get subject id
@@ -1698,11 +1698,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     dataType: "json",
                     success:function(data, textStatus, jqXHR){
                         //alert('success1 '+JSON.stringify(data));
-                        if (data["versionInfo"]["previousVersion"]=="none" || typeof(data["currentReputationReport"])=='undefined'){
-                            RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', 'No Rating Avialble', 'X', '', '', '');\" value=\""+counterpart+"\" />");
-
-                        }
-                        else{
+                        
                             //alert(JSON.stringify(data.subject_id));
                             //get profile
                             var personal;
@@ -1731,6 +1727,28 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                     fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                                 }
                             });
+                            if (data["versionInfo"]["previousVersion"]=="none" || typeof(data["currentReputationReport"])=='undefined'){
+                            //RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', 'No Rating Avialble', 'X', '', '', '');\" value=\""+counterpart+"\" />");
+                            if (usermode == RIDERMODE)
+                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +personal.mobilePhoneNumber+"','"
+                                    +personal.carColour+ " " + personal.carBrand
+                                    +"');\" value=\""+counterpart+"\" />");
+                            else
+                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +"N/A,"
+                                    +personal.mobilePhoneNumber+"','"
+                                    +"undefined undefined"
+                                    +"');\" value=\""+counterpart+"\" />");
+                        }
+                        else{
                             $.ajax({//get subject reputation
                                 type:"GET",
                                 url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
@@ -1770,7 +1788,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 },
                                 error:function(jq,textStatus,errorThrown){
                                     //alert('fail');
-                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                                    RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
 
                                 }
                             });
@@ -1778,70 +1796,11 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     },
                     error:function(jq,textStatus,errorThrown){
                         //alert('fail1');
-                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                        RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
                     }
                 });
             }
-            //            }
-            //            else{
-            //                $.ajax({//get subject id
-            //                    type:"GET",
-            //                    url:"http://"+DimitrisRemote+"/subject/byURI/"+counterparts,
-            //                    async:false,
-            //                    crossDomain:true,
-            //                    username:user,
-            //                    password:pass,
-            //                    beforeSend : function(xhr) {
-            //                        xhr.withCredentials = true;
-            //                        xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
-            //                    },
-            //                    accepts: "application/json",
-            //                    dataType: "json",
-            //                    success:function(data, textStatus, jqXHR){
-            //                        //alert('success1 '+JSON.stringify(data));
-            //
-            //                        //alert(JSON.stringify(data.subject_id));
-            //                        $.ajax({//get subject reputation
-            //                            type:"GET",
-            //                            url:"http://"+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
-            //                            async:false,
-            //                            crossDomain:true,
-            //                            username:user,
-            //                            password:pass,
-            //                            beforeSend : function(xhr) {
-            //                                xhr.withCredentials = true;
-            //                                xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
-            //                            },
-            //                            accepts: "application/json",
-            //                            dataType: "json",
-            //                            success:function(data, textStatus, jqXHR){
-            //                                //alert('success ' + JSON.stringify(data));
-            //                                ratingsPopUp='<table><tr><td ><b>Overall Rating:</b></td><td> '+data.json.average_StarRating+'</td></tr><tr><td></td></tr><tr><td></td></tr>'
-            //                                +'<tr><td > <b>Detailed Rating:</b></td><tr>'
-            //                                +'<tr><td>Price:</td><td>5</td></tr>'
-            //                                +'<tr><td>Reliability: </td><td>'+data.json.average_OnTime+'</td></tr>'
-            //                                +'<tr><td>Communication:</td><td> 5</td></tr>'
-            //                                +'<tr><td>Friendliness:</td><td>'+data.json.average_Friendly+'</td></tr></table>    ';
-            //
-            //                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterparts+"', '"+ratingsPopUp+"', 'X', '', '', '');\" value=\""+counterparts+"\" />");
-            //
-            //                            },
-            //                            error:function(jq,textStatus,errorThrown){
-            //                                //alert('fail');
-            //                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterparts+"\" />");
-            //
-            //                            }
-            //                        });
-            //                    },
-            //                    error:function(jq,textStatus,errorThrown){
-            //                    //alert('fail1');
-            //                    }
-            //                });
-            //            }
-            //RideShareSB.append('<dialog id="myDialog">this is dialog</dialog>');
-            //RideShareSB.append('<script> function myFunction() {alert("0");var x = document.getElementById("myDialog");alert("1");x.open = true;}</script>');
-            //RideShareSB.append('    <small>Estimated drving time: ' + ohours + ':' + omin + ' Hour, driving distance: '+sharedDistanceKm+' km, Detour: '+detourKm+' km, Best offer: ' + round(entry.matchPriceCents/100,2) + ' &euro;, Anz. Pers.: ' + entry.noOfPassengers);
-
+            
             RideShareSB.append('</small><small><table>');
             if (usermode==DRIVERMODE){
                 RideShareSB.append('<tr>');
@@ -1897,10 +1856,10 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Smoking:</td>');
             RideShareSB.append('<td valign="top">'+prp.smoking+'</td>');
             RideShareSB.append('</tr>');
-            RideShareSB.append('<tr>');
-            RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Pets:</td>');
-            RideShareSB.append('<td valign="top">'+prp.pets+'</td>');
-            RideShareSB.append('</tr>');
+//            RideShareSB.append('<tr>');
+//            RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Pets:</td>');
+//            RideShareSB.append('<td valign="top">'+prp.pets+'</td>');
+//            RideShareSB.append('</tr>');
             RideShareSB.append('</table></small>');
             RideShareSB.append('  </div>');
             //RideShareSB.append('    <input type="button" class="rounded compact" value="Accept" onclick="" style="width: 72px;" />');
@@ -2364,14 +2323,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         },
 
         receiveUpdates : function(){
-            srvconn.GET('/OpenRideServer-RS/resources/configuration/updates',
-                false, function(updateData) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.setriderupdatecount(updateData.UpdateResponse.updatedsearches);
-                    fokus.openride.mobclient.controller.modules.modulemanager.setdriverupdatecount(updateData.UpdateResponse.updatedoffers);
-                }, function(x,s,e) {
-                    clearInterval(updateCountRefreshTimer);
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Error receiving the update data.')
-                });
+//            srvconn.GET('/OpenRideServer-RS/resources/configuration/updates',
+//                false, function(updateData) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.setriderupdatecount(updateData.UpdateResponse.updatedsearches);
+//                    fokus.openride.mobclient.controller.modules.modulemanager.setdriverupdatecount(updateData.UpdateResponse.updatedoffers);
+//                }, function(x,s,e) {
+//                    clearInterval(updateCountRefreshTimer);
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Error receiving the update data.')
+//                });
         },
 
         getServiceType : function() {
@@ -3552,7 +3511,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                             }
                         }
                         else{
-
+if (ratedRides.indexOf(obj["index"])!=-1)
+                                continue;
                             listhtml += '<div class="open-rating-row" style="border-bottom: 1px solid #ccc; padding: 5px; min-height: 60px; clear: both;" id="openrating' + subjectId + '">'
                             + '    <div class="profile-info-short" style="float: left; margin: 0 15px 0 0; text-align: right;"><img src="../../OpenRideWeb/img/icon.png" style="width: 60px; height: 60px; display: block; background: #ddd;" /><br> </div>'
                             + '    <div style="line-height: 140%; padding-left: 75px;">'
@@ -3848,60 +3808,60 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     }
                 }
 
-                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
-                    var offerstartsel = document.getElementById(offerstartdropdownid);
-                    var offerdestsel = document.getElementById(offerdestdropdownid);
-
-                    var result = data;
-
-                    if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
-                        if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
-                            var favorite = result.list[0].FavoritePointResponse;
-
-                            var name = favorite.favptDisplayName;
-                            var address = favorite.favptAddress;
-                            var favptGeoCoords = favorite.favptGeoCoords;
-                            var id = favorite.favptId;
-
-                            var favoption0 = document.createElement('option');
-                            var favoption01 = document.createElement('option');
-                            favoption0.innerHTML = name + ': ' +  address;
-                            favoption0.latln = favptGeoCoords;
-                            /*favoption0.latln = */
-
-                            favoption01.innerHTML = name + ': ' +  address;
-                            favoption01.latln = favptGeoCoords;
-
-                            offerstartsel.add(favoption0,null);
-                            offerdestsel.add(favoption01,null);
-
-                        }else{
-                            for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
-                                var entry = result.list[0].FavoritePointResponse[j];
-
-                                var favname0 = entry.favptDisplayName;
-                                var favaddress0 = entry.favptAddress;
-                                var favptGeoCoords0 = entry.favptGeoCoords;
-                                var favid0 = entry.favptId;
-
-                                var favoption1 = document.createElement('option');
-                                var favoption11 = document.createElement('option');
-                                favoption1.innerHTML = favname0 + ': ' +  favaddress0;
-                                favoption1.latln = favptGeoCoords0;
-                                /*favoption0.latln = */
-
-                                favoption11.innerHTML = favname0 + ': ' +  favaddress0;
-                                favoption11.latln = favptGeoCoords0;
-
-                                offerstartsel.add(favoption1,null);
-                                offerdestsel.add(favoption11,null);
-                            }
-                        }
-                    }else{
-                }
-                }, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
-                } );
+//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
+//                    var offerstartsel = document.getElementById(offerstartdropdownid);
+//                    var offerdestsel = document.getElementById(offerdestdropdownid);
+//
+//                    var result = data;
+//
+//                    if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
+//                        if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
+//                            var favorite = result.list[0].FavoritePointResponse;
+//
+//                            var name = favorite.favptDisplayName;
+//                            var address = favorite.favptAddress;
+//                            var favptGeoCoords = favorite.favptGeoCoords;
+//                            var id = favorite.favptId;
+//
+//                            var favoption0 = document.createElement('option');
+//                            var favoption01 = document.createElement('option');
+//                            favoption0.innerHTML = name + ': ' +  address;
+//                            favoption0.latln = favptGeoCoords;
+//                            /*favoption0.latln = */
+//
+//                            favoption01.innerHTML = name + ': ' +  address;
+//                            favoption01.latln = favptGeoCoords;
+//
+//                            offerstartsel.add(favoption0,null);
+//                            offerdestsel.add(favoption01,null);
+//
+//                        }else{
+//                            for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
+//                                var entry = result.list[0].FavoritePointResponse[j];
+//
+//                                var favname0 = entry.favptDisplayName;
+//                                var favaddress0 = entry.favptAddress;
+//                                var favptGeoCoords0 = entry.favptGeoCoords;
+//                                var favid0 = entry.favptId;
+//
+//                                var favoption1 = document.createElement('option');
+//                                var favoption11 = document.createElement('option');
+//                                favoption1.innerHTML = favname0 + ': ' +  favaddress0;
+//                                favoption1.latln = favptGeoCoords0;
+//                                /*favoption0.latln = */
+//
+//                                favoption11.innerHTML = favname0 + ': ' +  favaddress0;
+//                                favoption11.latln = favptGeoCoords0;
+//
+//                                offerstartsel.add(favoption1,null);
+//                                offerdestsel.add(favoption11,null);
+//                            }
+//                        }
+//                    }else{
+//                }
+//                }, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
+//                } );
                 this.offerfavsset = true;
             }
         }
@@ -3961,64 +3921,64 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     }
                 }
 
-                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
-                    var searchstartsel = document.getElementById(searchstartdropdownid);
-                    var searchdestsel = document.getElementById(searchdestdropdownid);
-
-                    var result = data;
-
-                    if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
-                        if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
-                            var favorite = result.list[0].FavoritePointResponse;
-
-                            var name1 = favorite.favptDisplayName;
-                            var address1 = favorite.favptAddress;
-                            var geocoords = favorite.favptGeoCoords;
-                            var id1 = favorite.favptId;
-
-                            var favoption2 = document.createElement('option');
-                            var favoption21 = document.createElement('option');
-                            favoption2.innerHTML = name1 + ': ' +  address1;
-                            favoption2.latln = geocoords;
-                            /*favoption0.latln = */
-
-                            favoption21.innerHTML = name1 + ': ' +  address1;
-                            favoption21.latln = geocoords;
-
-                            searchstartsel.add(favoption2,null);
-                            searchdestsel.add(favoption21,null);
-
-
-
-
-                        }else{
-                            for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
-                                var entry = result.list[0].FavoritePointResponse[j];
-
-                                var favname1 = entry.favptDisplayName;
-                                var favaddress1 = entry.favptAddress;
-                                var geocoords1 = entry.favptGeoCoords;
-                                var favid1 = entry.favptId;
-
-                                var favoption3 = document.createElement('option');
-                                var favoption31 = document.createElement('option');
-                                favoption3.innerHTML = favname1 + ': ' +  favaddress1;
-                                favoption3.latln = geocoords1;
-                                /*favoption0.latln = */
-
-                                favoption31.innerHTML = favname1 + ': ' +  favaddress1;
-                                favoption31.latln = geocoords1;
-
-                                searchstartsel.add(favoption3,null);
-                                searchdestsel.add(favoption31,null);
-                            }
-                        }
-                    }
-                    else{
-                }
-                }, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
-                });
+//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/favoritepoints', false, function(data){
+//                    var searchstartsel = document.getElementById(searchstartdropdownid);
+//                    var searchdestsel = document.getElementById(searchdestdropdownid);
+//
+//                    var result = data;
+//
+//                    if(typeof (result.list[0].FavoritePointResponse) != 'undefined'){
+//                        if(typeof (result.list[0].FavoritePointResponse.length) == 'undefined'){
+//                            var favorite = result.list[0].FavoritePointResponse;
+//
+//                            var name1 = favorite.favptDisplayName;
+//                            var address1 = favorite.favptAddress;
+//                            var geocoords = favorite.favptGeoCoords;
+//                            var id1 = favorite.favptId;
+//
+//                            var favoption2 = document.createElement('option');
+//                            var favoption21 = document.createElement('option');
+//                            favoption2.innerHTML = name1 + ': ' +  address1;
+//                            favoption2.latln = geocoords;
+//                            /*favoption0.latln = */
+//
+//                            favoption21.innerHTML = name1 + ': ' +  address1;
+//                            favoption21.latln = geocoords;
+//
+//                            searchstartsel.add(favoption2,null);
+//                            searchdestsel.add(favoption21,null);
+//
+//
+//
+//
+//                        }else{
+//                            for(var j=0;j< result.list[0].FavoritePointResponse.length; j++){
+//                                var entry = result.list[0].FavoritePointResponse[j];
+//
+//                                var favname1 = entry.favptDisplayName;
+//                                var favaddress1 = entry.favptAddress;
+//                                var geocoords1 = entry.favptGeoCoords;
+//                                var favid1 = entry.favptId;
+//
+//                                var favoption3 = document.createElement('option');
+//                                var favoption31 = document.createElement('option');
+//                                favoption3.innerHTML = favname1 + ': ' +  favaddress1;
+//                                favoption3.latln = geocoords1;
+//                                /*favoption0.latln = */
+//
+//                                favoption31.innerHTML = favname1 + ': ' +  favaddress1;
+//                                favoption31.latln = geocoords1;
+//
+//                                searchstartsel.add(favoption3,null);
+//                                searchdestsel.add(favoption31,null);
+//                            }
+//                        }
+//                    }
+//                    else{
+//                }
+//                }, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately your favorites could not be loaded.')
+//                });
                 this.searchfavsset = true;
             }
         }
@@ -5537,7 +5497,7 @@ function myreject(num)
         prp.rejectedDriver = me;
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false", user , pass);
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false, user , pass);
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
 
     }
@@ -5548,7 +5508,7 @@ function myreject(num)
         (prp.rejectedCommuters).push(user);
         revision = parseInt(prp._revision);
         prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , "false" , user , pass );
+        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false , user , pass );
         //i = i + 1;
         //}
         fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
@@ -5557,11 +5517,14 @@ function myreject(num)
 
 function fail(jq , status ,errorThrown)
 {
-    //    alert('state: ' + jq.readyState);
-    //    alert('status: ' + jq.status);
-    //    alert('response ' + jq.responseText)
-    //    alert('this error is: ' + errorThrown );
-    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+//    alert('state: ' + jq.readyState);
+//    alert('status: ' + jq.status);
+//    alert('response ' + jq.responseText)
+//    alert('this error is: ' + errorThrown );
+    if (jq.responseText == "Forbidden")
+        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, You cannot do that.');
+    else
+        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,status,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
 }
 
 function ajaxcall(op , addr , info ,asynch , usr , pass )

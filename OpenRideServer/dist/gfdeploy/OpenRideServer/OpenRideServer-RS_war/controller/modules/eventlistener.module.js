@@ -269,7 +269,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
 
             // Home tab statistics
-            document.getElementById("homeinfoopenoffers").innerHTML = '0';//initData.InitResponse.openoffers;
+            document.getElementById("homeinfoopenoffers").innerHTML = '*';//initData.InitResponse.openoffers;
 //            if (initData.InitResponse.openoffers==1) {
                 document.getElementById("homeinfoopenoffers-singular").style.display = 'inline';
                 document.getElementById("homeinfoopenoffers-plural").style.display = 'none';
@@ -279,7 +279,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 //                document.getElementById("homeinfoopenoffers-plural").style.display = 'inline';
 //            }
 
-            document.getElementById("homeinfoopensearches").innerHTML = '0';//initData.InitResponse.opensearches;
+            document.getElementById("homeinfoopensearches").innerHTML = '*';//initData.InitResponse.opensearches;
 //            if (initData.InitResponse.opensearches==1) {
                 document.getElementById("homeinfoopensearches-singular").style.display = 'inline';
                 document.getElementById("homeinfoopensearches-plural").style.display = 'none';
@@ -289,7 +289,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 //                document.getElementById("homeinfoopensearches-plural").style.display = 'inline';
 //            }
 
-            document.getElementById("homeinfoopenratings").innerHTML = '0';//initData.InitResponse.openratings;
+            document.getElementById("homeinfoopenratings").innerHTML = '*';//initData.InitResponse.openratings;
 //            if (initData.InitResponse.openratings==1) {
                 document.getElementById("homeinfoopenratings-plural").style.display = 'none';
 //            }
@@ -2111,12 +2111,12 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
             var coords = mapmod.getCenterPosition();
             favmod.setGeoCoords(coords.lat(), coords.lng());
 
-            srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
-                fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
-                showOverlayDialog('Neuer Ort erfolgreich gespeichert!', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setView(\'favlistUI\');', '', '')
-            }, function(x,s,e) {
-                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Ein Ort mit diesem Namen existiert bereits.')
-            } );
+//            srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
+//                fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
+//                showOverlayDialog('Neuer Ort erfolgreich gespeichert!', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setView(\'favlistUI\');', '', '')
+//            }, function(x,s,e) {
+//                fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Ein Ort mit diesem Namen existiert bereits.')
+//            } );
         },
 
         addFavFromFullscreenMap : function(){
@@ -2131,14 +2131,14 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
                 var coords = mapmod.getCenterPosition();
                 favmod.setGeoCoords(coords.lat(), coords.lng());
 
-                srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
-                    fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
-                    fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(3, 1);
-                    showOverlayDialog('Neuer Ort erfolgreich gespeichert!', '', 'OK', '', '', '')
-                }, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Ein Ort mit diesem Namen existiert bereits.')
-                    return false;
-                } );
+//                srvconn.POST('/OpenRideServer-RS/resources/users/'+username+'/favoritepoints', false, favmod.getFavPt(), function() {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.returnFromFullscreenMapView();
+//                    fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(3, 1);
+//                    showOverlayDialog('Neuer Ort erfolgreich gespeichert!', '', 'OK', '', '', '')
+//                }, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Ein Ort mit diesem Namen existiert bereits.')
+//                    return false;
+//                } );
             } else {
                 showOverlayDialog('Der Name des Favoriten darf bis zu 18 Zeichen lang sein.', '', 'OK', '', '', '');
                 return false;
