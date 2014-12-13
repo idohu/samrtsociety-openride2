@@ -10740,7 +10740,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
         },
 
-        parseratingssummary : function(ratingssummarydiv, obj){
+        parseratingssummary : function(ratingssummarydiv, obj,raters){
             //var result = JSON.parse(resultlist);
             //alert('ratings summery');
             var price = 0;
@@ -10777,7 +10777,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 addressString+=", "+personalDetails.city;
             document.getElementById("ratingsUserLocation").innerHTML =addressString;
 
-            document.getElementById("ratingssummarytotal").innerHTML = avg+" (From "+numofraters+" people)";//entry.ratingsTotal;
+            document.getElementById("ratingssummarytotal").innerHTML = avg+" (From "+raters+" people)";//entry.ratingsTotal;
             //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
             document.getElementById("ratingssummarypositive").innerHTML = price;//entry.ratingsLatestPositive;
             document.getElementById("ratingssummarydecent").innerHTML = rel//entry.ratingsLatestDecent;
@@ -11973,7 +11973,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert("summery " +data);
                         var obj = JSON.parse(data);
                         if (obj["versionInfo"]["previousVersion"]=="none" || typeof(obj["currentReputationReport"])=='undefined'){//no rating
-                            dummyparseratingssummary(dummydiv, /*ratingssummary*/ null);
+                            dummyparseratingssummary(dummydiv, /*ratingssummary*/ null,"0");
                         }
                         else{
                             //alert('1'+data);
@@ -12007,9 +12007,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         var rep = JSON.parse(data);
                                         //alert('2'+data);
 
-                                        dummyparseratingssummary(dummydiv, /*ratingssummary*/ rep["json"]);
+                                        dummyparseratingssummary(dummydiv, /*ratingssummary*/ rep["json"],obj["feedback"].length);
                                     }
-                                    else dummyparseratingssummary(dummydiv, /*ratingssummary*/ null);
+                                    else dummyparseratingssummary(dummydiv, /*ratingssummary*/ null,"0");
                                 },
                                 error: function(jq , textStatus , errorThrown){
                                     //                                    alert('state: ' + jq.readyState);
