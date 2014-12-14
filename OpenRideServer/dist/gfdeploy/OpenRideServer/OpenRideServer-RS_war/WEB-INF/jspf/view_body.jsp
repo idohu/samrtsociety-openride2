@@ -84,7 +84,7 @@
         <div id="FAQ">
             <a href="https://drive.google.com/open?id=15W8_BgWJd_xZcxdohdAUaPUsQwnAXAqAxMrYhsCvWMs&authuser=0" target="_blank">Frequently Asked Questions</a><br>
             <a href="https://drive.google.com/open?id=197yNZ7urzNiSlXUeoFImMqoyqW9vzq_MSTc4ZcHnOKg&authuser=0" target="_blank">Detailed Explanation </a>
-    </div>
+        </div>
     </div>
     <div id="showofferrouteUI">
         <div class="mapRouteDiv">
@@ -135,12 +135,28 @@
             </div>
             <div class="pickloc">
                 <select id="offerstartcombo" name="dropd03" onChange="">
-                    <option>Tel Aviv</option>
+                    <option>Ashdod</option>
+                    <option>Ashkelon</option>
+                    <option>Bat Yam</option>
                     <option>Beer Sheva</option>
-                    <option>Jerusalem</option>
+                    <option>Eilat</option>
                     <option>Haifa</option>
-                    <option>Shoham</option>
+                    <option>Hertzelia</option>
+                    <option>Holon</option>
+                    <option>Jeruslem</option>
+                    <option>Kiryat Gat</option>
+                    <option>Kiryat Shmona</option>
+                    <option>Mazkeret Batya</option>
+                    <option>Modiin</option>
+                    <option>Nahariya</option>
+                    <option>Netania</option>
+                    <option>Petah Tikva</option>
+                    <option>Raanana</option>
                     <option>Rishon Lezion</option>
+                    <option>Shoham</option>
+                    <option selected="true">Tel Aviv</option>
+                    <option>Yavne</option>
+                    <option>Zichron Yaakov</option>
                 </select>
             </div>
             <div class="category-txt">
@@ -159,12 +175,28 @@
             </div>
             <div class="pickloc">
                 <select id="offerendcombo" name="dropd03" onChange="combocitychange(this)">
-                    <option>Tel Aviv</option>
-                    <option>Beer Sheva</option>
-                    <option>Jerusalem</option>
+                    <option>Ashdod</option>
+                    <option>Ashkelon</option>
+                    <option>Bat Yam</option>
+                    <option selected="true">Beer Sheva</option>
+                    <option>Eilat</option>
                     <option>Haifa</option>
-                    <option>Shoham</option>
+                    <option>Hertzelia</option>
+                    <option>Holon</option>
+                    <option>Jeruslem</option>
+                    <option>Kiryat Gat</option>
+                    <option>Kiryat Shmona</option>
+                    <option>Mazkeret Batya</option>
+                    <option>Modiin</option>
+                    <option>Nahariya</option>
+                    <option>Netania</option>
+                    <option>Petah Tikva</option>
+                    <option>Raanana</option>
                     <option>Rishon Lezion</option>
+                    <option>Shoham</option>
+                    <option>Tel Aviv</option>
+                    <option>Yavne</option>
+                    <option>Zichron Yaakov</option>
                 </select>
             </div>
             <div class="detaillinkdiv" style="display:none">
@@ -594,8 +626,8 @@
         <table>
             <tr>
                 <td>
-            <h3>My offers</h3></td><td align="right"> <a href="#" id="refreshActiveOffers" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
-        </tr></table>
+                    <h3>My offers</h3></td><td align="right"> <a href="#" id="refreshActiveOffers" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
+            </tr></table>
         <ul id="activeofferlist" class="ridelist">
             <!-- list populated through JS -->
         </ul>
@@ -606,8 +638,8 @@
         <table>
             <tr>
                 <td>
-            <h3>My Searches</h3></td><td align="right"> <a href="#" id="refreshActiveSearches" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
-        </tr></table>
+                    <h3>My Searches</h3></td><td align="right"> <a href="#" id="refreshActiveSearches" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
+            </tr></table>
         <ul id="activesearchlist" class="ridelist">
             <!-- list populated through JS -->
         </ul>
@@ -723,12 +755,28 @@
             </div>
             <div class="pickloc">
                 <select id="searchstartcombo" name="dropd03" onChange="">
-                    <option>Tel Aviv</option>
+                    <option>Ashdod</option>
+                    <option>Ashkelon</option>
+                    <option>Bat Yam</option>
                     <option>Beer Sheva</option>
-                    <option>Jerusalem</option>
+                    <option>Eilat</option>
                     <option>Haifa</option>
-                    <option>Shoham</option>
+                    <option>Hertzelia</option>
+                    <option>Holon</option>
+                    <option>Jeruslem</option>
+                    <option>Kiryat Gat</option>
+                    <option>Kiryat Shmona</option>
+                    <option>Mazkeret Batya</option>
+                    <option>Modiin</option>
+                    <option>Nahariya</option>
+                    <option>Netania</option>
+                    <option>Petah Tikva</option>
+                    <option>Raanana</option>
                     <option>Rishon Lezion</option>
+                    <option>Shoham</option>
+                    <option selected="true">Tel Aviv</option>
+                    <option>Yavne</option>
+                    <option>Zichron Yaakov</option>
                 </select>
             </div>
             <div class="category-txt">
@@ -747,12 +795,28 @@
             </div>
             <div class="pickloc">
                 <select id="searchendcombo" name="dropd03" onChange="">
-                    <option>Tel Aviv</option>
-                    <option>Beer Sheva</option>
-                    <option>Jerusalem</option>
+                    <option>Ashdod</option>
+                    <option>Ashkelon</option>
+                    <option>Bat Yam</option>
+                    <option selected="true">Beer Sheva</option>
+                    <option>Eilat</option>
                     <option>Haifa</option>
-                    <option>Shoham</option>
+                    <option>Hertzelia</option>
+                    <option>Holon</option>
+                    <option>Jeruslem</option>
+                    <option>Kiryat Gat</option>
+                    <option>Kiryat Shmona</option>
+                    <option>Mazkeret Batya</option>
+                    <option>Modiin</option>
+                    <option>Nahariya</option>
+                    <option>Netania</option>
+                    <option>Petah Tikva</option>
+                    <option>Raanana</option>
                     <option>Rishon Lezion</option>
+                    <option>Shoham</option>
+                    <option>Tel Aviv</option>
+                    <option>Yavne</option>
+                    <option>Zichron Yaakov</option>
                 </select>
             </div>
             <br/>
