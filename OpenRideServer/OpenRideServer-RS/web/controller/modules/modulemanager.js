@@ -3441,37 +3441,22 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             var addressString="";
             if (obj != null)
             {
-                //price = obj["average_ride_Price"] ;
-                rel = obj["average_OnTime"] ;
-                //comm = obj["average_individual_Communication"] ;
-                friend = obj["average_Friendly"] ;
-                avg = obj["average_StarRating"];
-                numofraters = obj["total_StarRating"]/obj["average_StarRating"];
+
+                document.getElementById("ratingssummarytotal").innerHTML = obj["average_StarRating"].toFixed(2)+" (From "+raters+" people)";//entry.ratingsTotal;
+                //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
+                document.getElementById("ratingssummarypositive").innerHTML = price.toFixed(2);//entry.ratingsLatestPositive;
+                document.getElementById("ratingssummarydecent").innerHTML = obj["average_OnTime"].toFixed(2);//entry.ratingsLatestDecent;
+                document.getElementById("ratingssummaryneutral").innerHTML = comm.toFixed(2);//entry.ratingsLatestNeutral;
+                document.getElementById("ratingssummarymediocre").innerHTML = obj["average_Friendly"].toFixed(2);//entry.ratingsLatestMediocre;
             }
             else{
-                price="N/A";
-                rel = "N/A" ;
-                comm = "N/A";
-                friend = "N/A" ;
-                avg = "N/A";
+                document.getElementById("ratingssummarytotal").innerHTML = "N/A"+" (From "+"N/A"+" people)";//entry.ratingsTotal;
+                //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
+                document.getElementById("ratingssummarypositive").innerHTML = "N/A";//entry.ratingsLatestPositive;
+                document.getElementById("ratingssummarydecent").innerHTML = "N/A";//entry.ratingsLatestDecent;
+                document.getElementById("ratingssummaryneutral").innerHTML = "N/A";//entry.ratingsLatestNeutral;
+                document.getElementById("ratingssummarymediocre").innerHTML = "N/A";//entry.ratingsLatestMediocre;
             }
-            if (personalDetails.gender=='f')
-                genderString="Female";
-            document.getElementById("ratingsUserName").innerHTML = user;
-            document.getElementById("ratingsUserGender").innerHTML =genderString;
-            if (personalDetails.streetAddress!='undefined' && personalDetails.streetAddress!="")
-                addressString += personalDetails.streetAddress;
-            if (personalDetails.city!='undefined' && personalDetails.city!="")
-                addressString+=", "+personalDetails.city;
-            document.getElementById("ratingsUserLocation").innerHTML =addressString;
-
-            document.getElementById("ratingssummarytotal").innerHTML = avg+" (From "+raters+" people)";//entry.ratingsTotal;
-            //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
-            document.getElementById("ratingssummarypositive").innerHTML = price;//entry.ratingsLatestPositive;
-            document.getElementById("ratingssummarydecent").innerHTML = rel//entry.ratingsLatestDecent;
-            document.getElementById("ratingssummaryneutral").innerHTML = comm;//entry.ratingsLatestNeutral;
-            document.getElementById("ratingssummarymediocre").innerHTML = friend;//entry.ratingsLatestMediocre;
-        //document.getElementById("numofratings").innerHTML = numofraters;
         },
 
         parseopenratingslist : function(openratingslistdiv, resultlist){
