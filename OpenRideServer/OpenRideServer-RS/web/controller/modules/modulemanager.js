@@ -889,6 +889,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             var updatecount = 0;
             //alert('rides.length='+rides.length);
             //RIDESHARE
+            user=readCookie('username');
             for (var i=0; i<rides.length; i++)
             {
                 // if (!rides.hasOwnProperty(i))
