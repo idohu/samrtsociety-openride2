@@ -1753,9 +1753,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         else{
                             var raters = 0;
 
-                                        $.each(data.feedback, function(i,n) {
-                                            raters++;
-                                        });
+                            $.each(data.feedback, function(i,n) {
+                                raters++;
+                            });
                             $.ajax({//get subject reputation
                                 type:"GET",
                                 url:DimitrisRemotePrefix+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
@@ -3429,7 +3429,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
         },
 
-        parseratingssummary : function(ratingssummarydiv, obj, raters){
+        parseratingssummary : function(ratingssummarydiv, obj, raters,motivation){
             //var result = JSON.parse(resultlist);
             var price = 0;
             var rel = 0;
@@ -3441,37 +3441,31 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             var addressString="";
             if (obj != null)
             {
-                //price = obj["average_ride_Price"] ;
-                rel = obj["average_OnTime"] ;
-                //comm = obj["average_individual_Communication"] ;
-                friend = obj["average_Friendly"] ;
-                avg = obj["average_StarRating"];
-                numofraters = obj["total_StarRating"]/obj["average_StarRating"];
+
+                document.getElementById("ratingssummarytotal").innerHTML = obj["average_StarRating"].toFixed(2)+" (From "+raters+" people)";//entry.ratingsTotal;
+                //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
+                document.getElementById("ratingssummarypositive").innerHTML = price.toFixed(2);//entry.ratingsLatestPositive;
+                document.getElementById("ratingssummarydecent").innerHTML = obj["average_OnTime"].toFixed(2);//entry.ratingsLatestDecent;
+                document.getElementById("ratingssummaryneutral").innerHTML = comm.toFixed(2);//entry.ratingsLatestNeutral;
+                document.getElementById("ratingssummarymediocre").innerHTML = obj["average_Friendly"].toFixed(2);//entry.ratingsLatestMediocre;
             }
             else{
-                price="N/A";
-                rel = "N/A" ;
-                comm = "N/A";
-                friend = "N/A" ;
-                avg = "N/A";
+                document.getElementById("ratingssummarytotal").innerHTML = "N/A"+" (From "+"N/A"+" people)";//entry.ratingsTotal;
+                //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
+                document.getElementById("ratingssummarypositive").innerHTML = "N/A";//entry.ratingsLatestPositive;
+                document.getElementById("ratingssummarydecent").innerHTML = "N/A";//entry.ratingsLatestDecent;
+                document.getElementById("ratingssummaryneutral").innerHTML = "N/A";//entry.ratingsLatestNeutral;
+                document.getElementById("ratingssummarymediocre").innerHTML = "N/A";//entry.ratingsLatestMediocre;
             }
-            if (personalDetails.gender=='f')
-                genderString="Female";
-            document.getElementById("ratingsUserName").innerHTML = user;
-            document.getElementById("ratingsUserGender").innerHTML =genderString;
-            if (personalDetails.streetAddress!='undefined' && personalDetails.streetAddress!="")
-                addressString += personalDetails.streetAddress;
-            if (personalDetails.city!='undefined' && personalDetails.city!="")
-                addressString+=", "+personalDetails.city;
-            document.getElementById("ratingsUserLocation").innerHTML =addressString;
-
-            document.getElementById("ratingssummarytotal").innerHTML = avg+" (From "+raters+" people)";//entry.ratingsTotal;
-            //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
-            document.getElementById("ratingssummarypositive").innerHTML = price;//entry.ratingsLatestPositive;
-            document.getElementById("ratingssummarydecent").innerHTML = rel//entry.ratingsLatestDecent;
-            document.getElementById("ratingssummaryneutral").innerHTML = comm;//entry.ratingsLatestNeutral;
-            document.getElementById("ratingssummarymediocre").innerHTML = friend;//entry.ratingsLatestMediocre;
-        //document.getElementById("numofratings").innerHTML = numofraters;
+            var lMessages =['Ride sharing significantly reduces air pollution','Why ride alone when you can ride together?',
+            'Ride sharing will reduce your monthly expenses','Ride sharing contributes for creating a better society','The system is for BGU students only!'];
+            //Motivation Message
+            if (motivation)
+            {
+                var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
+                //alert(randMessage);
+                document.getElementById("ratingmotivationmessage").innerHTML ='<hr>'+ randMessage+'<hr>';
+            }
         },
 
         parseopenratingslist : function(openratingslistdiv, resultlist){
@@ -3750,6 +3744,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
                 var pass = readCookie('password');
+                var motivation=false;
                 $.ajax({
                     type: "GET",
                     url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
@@ -3770,6 +3765,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     async: false,
                     success: function(data, textStatus, jqXHR){
                         userProfile.setAllData(data);
+                        if (typeof(data.motivation)!='undefined' && data.motivation=="1")
+                            motivation=true;
                         if (!userProfile.getCarColour() || !userProfile.getCarBrand() ) {//|| !userProfile.carPlateNo
                             showOverlayDialog('Please complete your car description in your profile before you can set ride offers.', '', 'OK', 'fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(0, 1);', '', '');
                         }
@@ -3778,7 +3775,15 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                     }
                 });
-
+                var lMessages =['Ride sharing significantly reduces air pollution','Why ride alone when you can ride together?',
+                'Ride sharing will reduce your monthly expenses','Ride sharing contributes for creating a better society','The system is for BGU students only!'];
+                //Motivation Message
+                if (motivation)
+                {
+                    var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
+                    //alert(randMessage);
+                    document.getElementById("offermotivationmessage").innerHTML +='<hr>'+ randMessage+'<hr>';
+                }
                 // Car details
                 //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
                 //                    if(typeof (result.ProfileResponse) != 'undefined'){
@@ -3955,7 +3960,48 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 } catch (e) {
 
                 }
+                user=readCookie('username');
+                pass=readCookie('password');
+                var motivation = false;
+                $.ajax({
+                    type: "GET",
+                    url: PeerManagerPrefix + PeerMenager + '/users/'+user+'/profile',//'/api/register/' + user,
+                    data:"",// JSON.stringify(parsed),//"{username="+user+"&password="+pass+"}",
+                    crossDomain: true,
+                    contentType:  "application/json; charset=UTF-8",
+                    accepts: "application/json",
+                    dataType: "json",
+                    username: user,
+                    password: pass,
+                    beforeSend: function (xhr)
+                    {
+                        xhr.withCredentials = true,
+                        xhr.setRequestHeader('Authorization' , 'Basic ' + user+':'+pass);
+                        xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+                        xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+                    },
+                    async: false,
+                    accepts: "application/json",
+                    success: function(data, textStatus, jqXHR){
+                        userProfile.setAllData(data);
+                        if (typeof(data.motivation)!="undefined" && data.motivation=="1")
+                            motivation=true;
+                    //fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
+                    },
+                    error: function(jq , textStatus , errorThrown){
+                    //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
+                    }
+                });
 
+                var lMessages =['Ride sharing significantly reduces air pollution','Why ride alone when you can ride together?',
+                'Ride sharing will reduce your monthly expenses','Ride sharing contributes for creating a better society','The system is for BGU students only!'];
+                //Motivation Message
+                if (motivation)
+                {
+                    var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
+                    //alert(randMessage);
+                    document.getElementById("searchmotivationmessage").innerHTML +='<hr>'+ randMessage+'<hr>';
+                }
                 /*var searchlatln = nativemod.getUserLocation();
 
                 if(offerlatln == 'undefined'){
@@ -4602,6 +4648,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 //                        fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Oops, your settings could not be loaded.')
                 //                    });
                 var pass = readCookie('password');
+                var motivation = false;
                 $.ajax({
                     type: "GET",
                     url: PeerManagerPrefix + PeerMenager + '/users/'+this.username+'/profile',//'/api/register/' + user,
@@ -4623,6 +4670,8 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                     accepts: "application/json",
                     success: function(data, textStatus, jqXHR){
                         userProfile.setAllData(data);
+                        if (typeof(data.motivation)!="undefined" && data.motivation=="1")
+                            motivation=true;
                         fokus.openride.mobclient.controller.modules.modulemanager.parseprofilepersonaldata('fff');
                     },
                     error: function(jq , textStatus , errorThrown){
@@ -4689,7 +4738,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                         //alert(data);
                         var obj = JSON.parse(data);
                         if (obj["versionInfo"]["previousVersion"]=="none" || typeof(obj["currentReputationReport"])=='undefined'){//no rating
-                            dummyparseratingssummary(dummydiv, /*ratingssummary*/ null,"0");
+                            dummyparseratingssummary(dummydiv, /*ratingssummary*/ null,"0",motivation);
                         }
                         else{
                             //alert('1'+data);
@@ -4726,9 +4775,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         $.each(obj.feedback, function(i,n) {
                                             count++;
                                         });
-                                        dummyparseratingssummary(dummydiv, /*ratingssummary*/ rep["json"],count);
+                                        dummyparseratingssummary(dummydiv, /*ratingssummary*/ rep["json"],count,motivation);
                                     }
-                                    else dummyparseratingssummary(dummydiv, /*ratingssummary*/ null,"0");
+                                    else dummyparseratingssummary(dummydiv, /*ratingssummary*/ null,"0",motivation);
                                 },
                                 error: function(jq , textStatus , errorThrown){
                                     //                                    alert('state: ' + jq.readyState);

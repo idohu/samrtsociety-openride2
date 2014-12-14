@@ -118,6 +118,9 @@
         </div>
     </div>
     <div id="newofferUI">
+        <div>
+                <span id="offermotivationmessage" style="background-color: pink; font-weight:bold; font-size:125%;"></span>
+        </div>
         <div class="category-txt">
             From:
         </div>
@@ -711,7 +714,7 @@
                 <h3 style="clear: both;"></h3>
             </div>
             <div>
-                <span id="motivationmessage" style="background-color: pink;"></span>
+                <span id="motivationmessage" style="background-color: pink; font-weight:bold; font-size:125%;"></span>
             </div>
             <div class="fastoption">
                 <div id="usermodelink">
@@ -738,6 +741,9 @@
     <div id="activesearchdetailUI">
     </div>
     <div id="newsearchUI">
+        <div>
+            <span id="searchmotivationmessage" style="background-color: pink; font-weight:bold; font-size:125%;"></span>
+        </div>
         <div class="category-txt">
             From:
         </div>
@@ -912,6 +918,7 @@
         <div id="detsearchopts">
             <a id="newsearchsubmit" href="#"><img class="submitBtn" id="newsearchsubmitbtn" src="../img/confirmSend.png" alt="xyz" /></a>
         </div>
+
     </div>
     <div id="ratingsUI">
         <h3 style="display:none">Profile: </h3>
@@ -966,6 +973,9 @@
                 <span class="statshl" id="ratingssummarynegative"></span>
                 <span class="statshl" id="ratingssummaryratio"></span>
             </div--%>
+        </div>
+        <div>
+            <span id="ratingmotivationmessage" style="background-color: pink; font-weight:bold; font-size:125%;"></span>
         </div>
     </div>
     <div id="openratingsUI">
