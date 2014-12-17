@@ -1370,9 +1370,9 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
                     if (profilemod.getPrefIsSmoker() == 'y') newRideRequest.smoking              = "Yes";
                     else                                     newRideRequest.smoking              = "No";
-                    newRideRequest.rideQualityThreshold = "5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
+                    newRideRequest.rideQualityThreshold = "0";//"5"; //defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_RQT      (myData.values.ridePreferences.rideQualityThreshold);
                     //newRideRequest.capacity          = defs.SS_DEFS.STATIC_PREFERENCE_LINK_BASED_ON_TEXT_CAPACITY($('#dropDownCapacityList').find(':selected').text());
-                    newRideRequest.capacity             = "2";
+                    newRideRequest.capacity             = "1";
 
                     /*
 	 * Now deal with the rest

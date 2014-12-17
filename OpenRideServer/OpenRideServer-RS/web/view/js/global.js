@@ -1550,284 +1550,284 @@
                     }
                 }
                 if(g===q)if(y==null)k.error(g);else break;
-                q=g
-            }
-            return v
-        };
+                    q=g
+                    }
+                    return v
+                    };
 
-        k.error=function(g){
-            throw"Syntax error, unrecognized expression: "+g;
-        };
+                    k.error=function(g){
+                    throw"Syntax error, unrecognized expression: "+g;
+                    };
 
-        var n=k.selectors={
-            order:["ID","NAME","TAG"],
-            match:{
-                ID:/#((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
-                CLASS:/\.((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
-                NAME:/\[name=['"]*((?:[\w\u00c0-\uFFFF-]|\\.)+)['"]*\]/,
-                ATTR:/\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
-                TAG:/^((?:[\w\u00c0-\uFFFF\*-]|\\.)+)/,
-                CHILD:/:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
-                POS:/:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
-                PSEUDO:/:((?:[\w\u00c0-\uFFFF-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
-            },
-            leftMatch:{},
-            attrMap:{
-                "class":"className",
-                "for":"htmlFor"
-            },
-            attrHandle:{
-                href:function(g){
+                    var n=k.selectors={
+                    order:["ID","NAME","TAG"],
+                    match:{
+                    ID:/#((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
+                    CLASS:/\.((?:[\w\u00c0-\uFFFF-]|\\.)+)/,
+                    NAME:/\[name=['"]*((?:[\w\u00c0-\uFFFF-]|\\.)+)['"]*\]/,
+                    ATTR:/\[\s*((?:[\w\u00c0-\uFFFF-]|\\.)+)\s*(?:(\S?=)\s*(['"]*)(.*?)\3|)\s*\]/,
+                    TAG:/^((?:[\w\u00c0-\uFFFF\*-]|\\.)+)/,
+                    CHILD:/:(only|nth|last|first)-child(?:\((even|odd|[\dn+-]*)\))?/,
+                    POS:/:(nth|eq|gt|lt|first|last|even|odd)(?:\((\d*)\))?(?=[^-]|$)/,
+                    PSEUDO:/:((?:[\w\u00c0-\uFFFF-]|\\.)+)(?:\((['"]?)((?:\([^\)]+\)|[^\(\)]*)+)\2\))?/
+                    },
+                    leftMatch:{},
+                    attrMap:{
+                    "class":"className",
+                    "for":"htmlFor"
+                    },
+                    attrHandle:{
+                    href:function(g){
                     return g.getAttribute("href")
-                }
-            },
-            relative:{
-                "+":function(g,h){
+                    }
+                    },
+                    relative:{
+                    "+":function(g,h){
                     var l=typeof h==="string",m=l&&!/\W/.test(h);
                     l=l&&!m;
                     if(m)h=h.toLowerCase();
                     m=0;
                     for(var q=g.length,p;m<q;m++)if(p=g[m]){
-                        for(;(p=p.previousSibling)&&p.nodeType!==1;);
-                        g[m]=l||p&&p.nodeName.toLowerCase()===h?p||false:p===h
+                    for(;(p=p.previousSibling)&&p.nodeType!==1;);
+                    g[m]=l||p&&p.nodeName.toLowerCase()===h?p||false:p===h
                     }
                     l&&k.filter(h,g,true)
-                },
-                ">":function(g,h){
+                    },
+                    ">":function(g,h){
                     var l=typeof h==="string";
                     if(l&&!/\W/.test(h)){
-                        h=h.toLowerCase();
-                        for(var m=0,q=g.length;m<q;m++){
-                            var p=g[m];
-                            if(p){
-                                l=p.parentNode;
-                                g[m]=l.nodeName.toLowerCase()===h?l:false
-                            }
-                        }
+                    h=h.toLowerCase();
+                    for(var m=0,q=g.length;m<q;m++){
+                    var p=g[m];
+                    if(p){
+                    l=p.parentNode;
+                    g[m]=l.nodeName.toLowerCase()===h?l:false
+                    }
+                    }
                     }
                     else{
-                        m=0;
-                        for(q=g.length;m<q;m++)if(p=g[m])g[m]=
-                            l?p.parentNode:p.parentNode===h;l&&k.filter(h,g,true)
-                    }
-                },
-                "":function(g,h,l){
-                    var m=e++,q=d;
-                    if(typeof h==="string"&&!/\W/.test(h)){
-                        var p=h=h.toLowerCase();
-                        q=b
-                    }
-                    q("parentNode",h,m,g,p,l)
-                },
-                "~":function(g,h,l){
-                    var m=e++,q=d;
-                    if(typeof h==="string"&&!/\W/.test(h)){
-                        var p=h=h.toLowerCase();
-                        q=b
-                    }
-                    q("previousSibling",h,m,g,p,l)
-                }
-            },
-            find:{
-                ID:function(g,h,l){
-                    if(typeof h.getElementById!=="undefined"&&!l)return(g=h.getElementById(g[1]))?[g]:[]
-                },
-                NAME:function(g,h){
-                    if(typeof h.getElementsByName!=="undefined"){
-                        var l=[];
-                        h=h.getElementsByName(g[1]);
-                        for(var m=0,q=h.length;m<q;m++)h[m].getAttribute("name")===g[1]&&l.push(h[m]);
-                        return l.length===0?null:l
-                    }
-                },
-                TAG:function(g,h){
-                    return h.getElementsByTagName(g[1])
-                }
-            },
-            preFilter:{
-                CLASS:function(g,h,l,m,q,p){
-                    g=" "+g[1].replace(/\\/g,"")+" ";
-                    if(p)return g;
-                    p=0;
-                    for(var v;(v=h[p])!=null;p++)if(v)if(q^(v.className&&(" "+v.className+" ").replace(/[\t\n]/g," ").indexOf(g)>=0))l||m.push(v);
-                        else if(l)h[p]=false;return false
-                },
-                ID:function(g){
-                    return g[1].replace(/\\/g,"")
-                },
-                TAG:function(g){
-                    return g[1].toLowerCase()
-                },
-                CHILD:function(g){
-                    if(g[1]==="nth"){
-                        var h=/(-?)(\d*)n((?:\+|-)?\d*)/.exec(g[2]==="even"&&"2n"||g[2]==="odd"&&"2n+1"||!/\D/.test(g[2])&&"0n+"+g[2]||g[2]);
-                        g[2]=h[1]+(h[2]||1)-0;
-                        g[3]=h[3]-0
-                    }
-                    g[0]=e++;
-                    return g
-                },
-                ATTR:function(g,h,l,m,q,p){
-                    h=g[1].replace(/\\/g,"");
-                    if(!p&&n.attrMap[h])g[1]=n.attrMap[h];
-                    if(g[2]==="~=")g[4]=" "+g[4]+" ";
-                    return g
-                },
-                PSEUDO:function(g,h,l,m,q){
-                    if(g[1]==="not")if((f.exec(g[3])||"").length>1||/^\w/.test(g[3]))g[3]=k(g[3],null,null,h);
-                        else{
-                            g=k.filter(g[3],h,l,true^q);
-                            l||m.push.apply(m,
-                                g);
-                            return false
-                        }else if(n.match.POS.test(g[0])||n.match.CHILD.test(g[0]))return true;
-                    return g
-                },
-                POS:function(g){
-                    g.unshift(true);
-                    return g
-                }
-            },
-            filters:{
-                enabled:function(g){
-                    return g.disabled===false&&g.type!=="hidden"
-                },
-                disabled:function(g){
-                    return g.disabled===true
-                },
-                checked:function(g){
-                    return g.checked===true
-                },
-                selected:function(g){
-                    return g.selected===true
-                },
-                parent:function(g){
-                    return!!g.firstChild
-                },
-                empty:function(g){
-                    return!g.firstChild
-                },
-                has:function(g,h,l){
-                    return!!k(l[3],g).length
-                },
-                header:function(g){
-                    return/h\d/i.test(g.nodeName)
-                },
-                text:function(g){
-                    return"text"===g.type
-                },
-                radio:function(g){
-                    return"radio"===g.type
-                },
-                checkbox:function(g){
-                    return"checkbox"===g.type
-                },
-                file:function(g){
-                    return"file"===g.type
-                },
-                password:function(g){
-                    return"password"===g.type
-                },
-                submit:function(g){
-                    return"submit"===g.type
-                },
-                image:function(g){
-                    return"image"===g.type
-                },
-                reset:function(g){
-                    return"reset"===g.type
-                },
-                button:function(g){
-                    return"button"===g.type||g.nodeName.toLowerCase()==="button"
-                },
-                input:function(g){
-                    return/input|select|textarea|button/i.test(g.nodeName)
-                }
-            },
-            setFilters:{
-                first:function(g,h){
-                    return h===0
-                },
-                last:function(g,h,l,m){
-                    return h===m.length-1
-                },
-                even:function(g,h){
-                    return h%2===0
-                },
-                odd:function(g,h){
-                    return h%2===1
-                },
-                lt:function(g,h,l){
-                    return h<l[3]-0
-                },
-                gt:function(g,h,l){
-                    return h>l[3]-0
-                },
-                nth:function(g,h,l){
-                    return l[3]-0===h
-                },
-                eq:function(g,h,l){
-                    return l[3]-0===h
-                }
-            },
-            filter:{
-                PSEUDO:function(g,h,l,m){
-                    var q=h[1],p=n.filters[q];
-                    if(p)return p(g,l,h,m);
-                    else if(q==="contains")return(g.textContent||g.innerText||a([g])||"").indexOf(h[3])>=0;
-                    else if(q==="not"){
-                        h=
-                        h[3];
-                        l=0;
-                        for(m=h.length;l<m;l++)if(h[l]===g)return false;return true
-                    }else k.error("Syntax error, unrecognized expression: "+q)
-                },
-                CHILD:function(g,h){
-                    var l=h[1],m=g;
-                    switch(l){
-                        case "only":case "first":
-                            for(;m=m.previousSibling;)if(m.nodeType===1)return false;if(l==="first")return true;
-                            m=g;
-                        case "last":
-                            for(;m=m.nextSibling;)if(m.nodeType===1)return false;return true;
-                        case "nth":
-                            l=h[2];
-                            var q=h[3];
-                            if(l===1&&q===0)return true;
-                            h=h[0];
-                            var p=g.parentNode;
-                            if(p&&(p.sizcache!==h||!g.nodeIndex)){
-                                var v=0;
-                                for(m=p.firstChild;m;m=
-                                    m.nextSibling)if(m.nodeType===1)m.nodeIndex=++v;p.sizcache=h
-                            }
-                            g=g.nodeIndex-q;
-                            return l===0?g===0:g%l===0&&g/l>=0
-                    }
-                },
-                ID:function(g,h){
-                    return g.nodeType===1&&g.getAttribute("id")===h
-                },
-                TAG:function(g,h){
-                    return h==="*"&&g.nodeType===1||g.nodeName.toLowerCase()===h
-                },
-                CLASS:function(g,h){
-                    return(" "+(g.className||g.getAttribute("class"))+" ").indexOf(h)>-1
-                },
-                ATTR:function(g,h){
-                    var l=h[1];
-                    g=n.attrHandle[l]?n.attrHandle[l](g):g[l]!=null?g[l]:g.getAttribute(l);
-                    l=g+"";
-                    var m=h[2];
-                    h=h[4];
-                    return g==null?m==="!=":m===
-                    "="?l===h:m==="*="?l.indexOf(h)>=0:m==="~="?(" "+l+" ").indexOf(h)>=0:!h?l&&g!==false:m==="!="?l!==h:m==="^="?l.indexOf(h)===0:m==="$="?l.substr(l.length-h.length)===h:m==="|="?l===h||l.substr(0,h.length+1)===h+"-":false
-                },
-                POS:function(g,h,l,m){
-                    var q=n.setFilters[h[2]];
-                    if(q)return q(g,l,h,m)
-                }
+            m=0;
+            for(q=g.length;m<q;m++)if(p=g[m])g[m]=
+                l?p.parentNode:p.parentNode===h;l&&k.filter(h,g,true)
+        }
+        },
+        "":function(g,h,l){
+            var m=e++,q=d;
+            if(typeof h==="string"&&!/\W/.test(h)){
+                var p=h=h.toLowerCase();
+                q=b
             }
+            q("parentNode",h,m,g,p,l)
+        },
+        "~":function(g,h,l){
+            var m=e++,q=d;
+            if(typeof h==="string"&&!/\W/.test(h)){
+                var p=h=h.toLowerCase();
+                q=b
+            }
+            q("previousSibling",h,m,g,p,l)
+        }
+        },
+        find:{
+            ID:function(g,h,l){
+                if(typeof h.getElementById!=="undefined"&&!l)return(g=h.getElementById(g[1]))?[g]:[]
+            },
+            NAME:function(g,h){
+                if(typeof h.getElementsByName!=="undefined"){
+                    var l=[];
+                    h=h.getElementsByName(g[1]);
+                    for(var m=0,q=h.length;m<q;m++)h[m].getAttribute("name")===g[1]&&l.push(h[m]);
+                    return l.length===0?null:l
+                }
+            },
+            TAG:function(g,h){
+                return h.getElementsByTagName(g[1])
+            }
+        },
+        preFilter:{
+            CLASS:function(g,h,l,m,q,p){
+                g=" "+g[1].replace(/\\/g,"")+" ";
+                if(p)return g;
+                p=0;
+                for(var v;(v=h[p])!=null;p++)if(v)if(q^(v.className&&(" "+v.className+" ").replace(/[\t\n]/g," ").indexOf(g)>=0))l||m.push(v);
+                    else if(l)h[p]=false;return false
+            },
+            ID:function(g){
+                return g[1].replace(/\\/g,"")
+            },
+            TAG:function(g){
+                return g[1].toLowerCase()
+            },
+            CHILD:function(g){
+                if(g[1]==="nth"){
+                    var h=/(-?)(\d*)n((?:\+|-)?\d*)/.exec(g[2]==="even"&&"2n"||g[2]==="odd"&&"2n+1"||!/\D/.test(g[2])&&"0n+"+g[2]||g[2]);
+                    g[2]=h[1]+(h[2]||1)-0;
+                    g[3]=h[3]-0
+                }
+                g[0]=e++;
+                return g
+            },
+            ATTR:function(g,h,l,m,q,p){
+                h=g[1].replace(/\\/g,"");
+                if(!p&&n.attrMap[h])g[1]=n.attrMap[h];
+                if(g[2]==="~=")g[4]=" "+g[4]+" ";
+                return g
+            },
+            PSEUDO:function(g,h,l,m,q){
+                if(g[1]==="not")if((f.exec(g[3])||"").length>1||/^\w/.test(g[3]))g[3]=k(g[3],null,null,h);
+                    else{
+                        g=k.filter(g[3],h,l,true^q);
+                        l||m.push.apply(m,
+                            g);
+                        return false
+                    }else if(n.match.POS.test(g[0])||n.match.CHILD.test(g[0]))return true;
+                return g
+            },
+            POS:function(g){
+                g.unshift(true);
+                return g
+            }
+        },
+        filters:{
+            enabled:function(g){
+                return g.disabled===false&&g.type!=="hidden"
+            },
+            disabled:function(g){
+                return g.disabled===true
+            },
+            checked:function(g){
+                return g.checked===true
+            },
+            selected:function(g){
+                return g.selected===true
+            },
+            parent:function(g){
+                return!!g.firstChild
+            },
+            empty:function(g){
+                return!g.firstChild
+            },
+            has:function(g,h,l){
+                return!!k(l[3],g).length
+            },
+            header:function(g){
+                return/h\d/i.test(g.nodeName)
+            },
+            text:function(g){
+                return"text"===g.type
+            },
+            radio:function(g){
+                return"radio"===g.type
+            },
+            checkbox:function(g){
+                return"checkbox"===g.type
+            },
+            file:function(g){
+                return"file"===g.type
+            },
+            password:function(g){
+                return"password"===g.type
+            },
+            submit:function(g){
+                return"submit"===g.type
+            },
+            image:function(g){
+                return"image"===g.type
+            },
+            reset:function(g){
+                return"reset"===g.type
+            },
+            button:function(g){
+                return"button"===g.type||g.nodeName.toLowerCase()==="button"
+            },
+            input:function(g){
+                return/input|select|textarea|button/i.test(g.nodeName)
+            }
+        },
+        setFilters:{
+            first:function(g,h){
+                return h===0
+            },
+            last:function(g,h,l,m){
+                return h===m.length-1
+            },
+            even:function(g,h){
+                return h%2===0
+            },
+            odd:function(g,h){
+                return h%2===1
+            },
+            lt:function(g,h,l){
+                return h<l[3]-0
+            },
+            gt:function(g,h,l){
+                return h>l[3]-0
+            },
+            nth:function(g,h,l){
+                return l[3]-0===h
+            },
+            eq:function(g,h,l){
+                return l[3]-0===h
+            }
+        },
+        filter:{
+            PSEUDO:function(g,h,l,m){
+                var q=h[1],p=n.filters[q];
+                if(p)return p(g,l,h,m);
+                else if(q==="contains")return(g.textContent||g.innerText||a([g])||"").indexOf(h[3])>=0;
+                else if(q==="not"){
+                    h=
+                    h[3];
+                    l=0;
+                    for(m=h.length;l<m;l++)if(h[l]===g)return false;return true
+                }else k.error("Syntax error, unrecognized expression: "+q)
+            },
+            CHILD:function(g,h){
+                var l=h[1],m=g;
+                switch(l){
+                    case "only":case "first":
+                        for(;m=m.previousSibling;)if(m.nodeType===1)return false;if(l==="first")return true;
+                        m=g;
+                    case "last":
+                        for(;m=m.nextSibling;)if(m.nodeType===1)return false;return true;
+                    case "nth":
+                        l=h[2];
+                        var q=h[3];
+                        if(l===1&&q===0)return true;
+                        h=h[0];
+                        var p=g.parentNode;
+                        if(p&&(p.sizcache!==h||!g.nodeIndex)){
+                            var v=0;
+                            for(m=p.firstChild;m;m=
+                                m.nextSibling)if(m.nodeType===1)m.nodeIndex=++v;p.sizcache=h
+                        }
+                        g=g.nodeIndex-q;
+                        return l===0?g===0:g%l===0&&g/l>=0
+                }
+            },
+            ID:function(g,h){
+                return g.nodeType===1&&g.getAttribute("id")===h
+            },
+            TAG:function(g,h){
+                return h==="*"&&g.nodeType===1||g.nodeName.toLowerCase()===h
+            },
+            CLASS:function(g,h){
+                return(" "+(g.className||g.getAttribute("class"))+" ").indexOf(h)>-1
+            },
+            ATTR:function(g,h){
+                var l=h[1];
+                g=n.attrHandle[l]?n.attrHandle[l](g):g[l]!=null?g[l]:g.getAttribute(l);
+                l=g+"";
+                var m=h[2];
+                h=h[4];
+                return g==null?m==="!=":m===
+                "="?l===h:m==="*="?l.indexOf(h)>=0:m==="~="?(" "+l+" ").indexOf(h)>=0:!h?l&&g!==false:m==="!="?l!==h:m==="^="?l.indexOf(h)===0:m==="$="?l.substr(l.length-h.length)===h:m==="|="?l===h||l.substr(0,h.length+1)===h+"-":false
+            },
+            POS:function(g,h,l,m){
+                var q=n.setFilters[h[2]];
+                if(q)return q(g,l,h,m)
+            }
+        }
         },r=n.match.POS;
         for(var u in n.match){
             n.match[u]=new RegExp(n.match[u].source+/(?![^\[]*\])(?![^\(]*\))/.source);
@@ -2877,36 +2877,36 @@
             if(c.isFunction(a)&&c.isFunction(b))this._toggle.apply(this,arguments);else a==null||d?this.each(function(){
                 var f=d?a:c(this).is(":hidden");
                 c(this)[f?"show":"hide"]()
-                }):this.animate(K("toggle",3),a,b);
+            }):this.animate(K("toggle",3),a,b);
             return this
-            },
-            fadeTo:function(a,b,d){
+        },
+        fadeTo:function(a,b,d){
             return this.filter(":hidden").css("opacity",0).show().end().animate({
                 opacity:b
-                },a,d)
-            },
-            animate:function(a,b,d,f){
+            },a,d)
+        },
+        animate:function(a,b,d,f){
             var e=c.speed(b,d,f);
             if(c.isEmptyObject(a))return this.each(e.complete);
             return this[e.queue===false?"each":"queue"](function(){
                 var j=c.extend({},e),i,o=this.nodeType===1&&c(this).is(":hidden"),k=this;
                 for(i in a){
-                var n=i.replace(ia,ja);
-                if(i!==n){
-                a[n]=a[i];
-                delete a[i];
-                i=n
-                }
-                if(a[i]==="hide"&&o||a[i]==="show"&&!o)return j.complete.call(this);
-                if((i==="height"||i==="width")&&this.style){
-                j.display=c.css(this,"display");
-                j.overflow=this.style.overflow
-                }
-                if(c.isArray(a[i])){
-                (j.specialEasing=
-                    j.specialEasing||{})[i]=a[i][1];
-                a[i]=a[i][0]
-                }
+                    var n=i.replace(ia,ja);
+                    if(i!==n){
+                        a[n]=a[i];
+                        delete a[i];
+                        i=n
+                    }
+                    if(a[i]==="hide"&&o||a[i]==="show"&&!o)return j.complete.call(this);
+                    if((i==="height"||i==="width")&&this.style){
+                        j.display=c.css(this,"display");
+                        j.overflow=this.style.overflow
+                    }
+                    if(c.isArray(a[i])){
+                        (j.specialEasing=
+                            j.specialEasing||{})[i]=a[i][1];
+                        a[i]=a[i][0]
+                    }
                 }
                 if(j.overflow!=null)this.style.overflow="hidden";
                 j.curAnim=c.extend({},a);
@@ -2914,22 +2914,22 @@
                     var z=new c.fx(k,j,r);
                     if(Ab.test(u))z[u==="toggle"?o?"show":"hide":u](a);
                     else{
-                    var C=Bb.exec(u),B=z.cur(true)||0;
-                    if(C){
-                        u=parseFloat(C[2]);
-                        var E=C[3]||"px";
-                        if(E!=="px"){
-                            k.style[r]=(u||1)+E;
-                            B=(u||1)/z.cur(true)*B;
-                            k.style[r]=B+E
-                        }
-                        if(C[1])u=(C[1]==="-="?-1:1)*u+B;
-                        z.custom(B,u,E)
-                    }else z.custom(B,u,"")
-                }
+                        var C=Bb.exec(u),B=z.cur(true)||0;
+                        if(C){
+                            u=parseFloat(C[2]);
+                            var E=C[3]||"px";
+                            if(E!=="px"){
+                                k.style[r]=(u||1)+E;
+                                B=(u||1)/z.cur(true)*B;
+                                k.style[r]=B+E
+                            }
+                            if(C[1])u=(C[1]==="-="?-1:1)*u+B;
+                            z.custom(B,u,E)
+                        }else z.custom(B,u,"")
+                    }
                 });
                 return true
-                })
+            })
         },
         stop:function(a,b){
             var d=c.timers;
@@ -6576,7 +6576,8 @@ fokus.openride.mobclient.controller.modules.search = function(){
             if(latlnstr.indexOf(',') != -1){
                 newsearch.Search[0].ridestartPtLat = parseFloat(latlnstr.substr(0, latlnstr.indexOf(',')));
                 newsearch.Search[0].ridestartPtLon = parseFloat(latlnstr.substr(latlnstr.indexOf(',')+1, latlnstr.length-(latlnstr.indexOf(',')+1)));
-            }else{
+            }
+            else{
                 newsearch.Search[0].ridestartPtLat = 52.525798;
                 newsearch.Search[0].ridestartPtLon = 13.314266;
             }
@@ -8958,23 +8959,23 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, your profile information could not be loaded.');
                             }
                         });
-                        if ((data["versionInfo"]&&data["versionInfo"]["previousVersion"]=="none") || typeof(data["currentReputationReport"])=='undefined'){
+                        if (typeof(data["versionInfo"])=='undefined' || (data["versionInfo"]&&data["versionInfo"]["previousVersion"]=="none") || typeof(data["currentReputationReport"])=='undefined'){
                             //RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', 'No Rating Avialble', 'X', '', '', '');\" value=\""+counterpart+"\" />");
                             if (usermode == RIDERMODE)
                                 RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                    +"N/A,"
-                                    +"N/A,"
-                                    +"N/A,"
-                                    +"N/A,'"
+                                    +"'N/A',"
+                                    +"'N/A',"
+                                    +"'N/A',"
+                                    +"'N/A','"
                                     +personal.mobilePhoneNumber+"','"
                                     +personal.carColour+ " " + personal.carBrand
                                     +"');\" value=\""+counterpart+"\" />");
                             else
                                 RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                    +"N/A,"
-                                    +"N/A,"
-                                    +"N/A,"
-                                    +"N/A,'"
+                                    +"'N/A',"
+                                    +"'N/A',"
+                                    +"'N/A',"
+                                    +"'N/A','"
                                     +personal.mobilePhoneNumber+"','"
                                     +"undefined undefined"
                                     +"');\" value=\""+counterpart+"\" />");
@@ -9009,120 +9010,120 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             +personal.carColour+ " " + personal.carBrand
                                             +"');\" value=\""+counterpart+"\" />");
                                     else
-                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                        +data.json.average_StarRating.toFixed(2)+","
-                                        +raters+","
-                                        +data.json.average_OnTime.toFixed(2)+","
-                                        +data.json.average_Friendly.toFixed(2)+",'"
-                                        +personal.mobilePhoneNumber+"','"
-                                        +"undefined undefined"
-                                        +"');\" value=\""+counterpart+"\" />");
-                                    //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
-                                    //                                        +ratingsPopUp
-                                    //                                        +"', 'X', '', '', '');\" value=\""+counterpart+"\" />");
+                                        RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
+                                            +data.json.average_StarRating.toFixed(2)+","
+                                            +raters+","
+                                            +data.json.average_OnTime.toFixed(2)+","
+                                            +data.json.average_Friendly.toFixed(2)+",'"
+                                            +personal.mobilePhoneNumber+"','"
+                                            +"undefined undefined"
+                                            +"');\" value=\""+counterpart+"\" />");
+                                //                                    RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterpart+"', '"
+                                //                                        +ratingsPopUp
+                                //                                        +"', 'X', '', '', '');\" value=\""+counterpart+"\" />");
 
-                                    },
-                                    error:function(jq,textStatus,errorThrown){
+                                },
+                                error:function(jq,textStatus,errorThrown){
                                     //alert('fail');
                                     RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
 
-                                    }
-                                    });
                                 }
-                                },
-                                error:function(jq,textStatus,errorThrown){
-                                //alert('fail1');
-                                //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
-                                RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
-                                }
-                                });
-                            }
-                            //            }
-                            //            else{
-                            //                $.ajax({//get subject id
-                            //                    type:"GET",
-                            //                    url:"http://"+DimitrisRemote+"/subject/byURI/"+counterparts,
-                            //                    async:false,
-                            //                    crossDomain:true,
-                            //                    username:user,
-                            //                    password:pass,
-                            //                    beforeSend : function(xhr) {
-                            //                        xhr.withCredentials = true;
-                            //                        xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
-                            //                    },
-                            //                    accepts: "application/json",
-                            //                    dataType: "json",
-                            //                    success:function(data, textStatus, jqXHR){
-                            //                        //alert('success1 '+JSON.stringify(data));
-                            //
-                            //                        //alert(JSON.stringify(data.subject_id));
-                            //                        $.ajax({//get subject reputation
-                            //                            type:"GET",
-                            //                            url:"http://"+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
-                            //                            async:false,
-                            //                            crossDomain:true,
-                            //                            username:user,
-                            //                            password:pass,
-                            //                            beforeSend : function(xhr) {
-                            //                                xhr.withCredentials = true;
-                            //                                xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
-                            //                            },
-                            //                            accepts: "application/json",
-                            //                            dataType: "json",
-                            //                            success:function(data, textStatus, jqXHR){
-                            //                                //alert('success ' + JSON.stringify(data));
-                            //                                ratingsPopUp='<table><tr><td ><b>Overall Rating:</b></td><td> '+data.json.average_StarRating+'</td></tr><tr><td></td></tr><tr><td></td></tr>'
-                            //                                +'<tr><td > <b>Detailed Rating:</b></td><tr>'
-                            //                                +'<tr><td>Price:</td><td>5</td></tr>'
-                            //                                +'<tr><td>Reliability: </td><td>'+data.json.average_OnTime+'</td></tr>'
-                            //                                +'<tr><td>Communication:</td><td> 5</td></tr>'
-                            //                                +'<tr><td>Friendliness:</td><td>'+data.json.average_Friendly+'</td></tr></table>    ';
-                            //
-                            //                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterparts+"', '"+ratingsPopUp+"', 'X', '', '', '');\" value=\""+counterparts+"\" />");
-                            //
-                            //                            },
-                            //                            error:function(jq,textStatus,errorThrown){
-                            //                                //alert('fail');
-                            //                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterparts+"\" />");
-                            //
-                            //                            }
-                            //                        });
-                            //                    },
-                            //                    error:function(jq,textStatus,errorThrown){
-                            //                    //alert('fail1');
-                            //                    }
-                            //                });
-                            //            }
-                            //RideShareSB.append('<dialog id="myDialog">this is dialog</dialog>');
-                            //RideShareSB.append('<script> function myFunction() {alert("0");var x = document.getElementById("myDialog");alert("1");x.open = true;}</script>');
-                            //RideShareSB.append('    <small>Estimated drving time: ' + ohours + ':' + omin + ' Hour, driving distance: '+sharedDistanceKm+' km, Detour: '+detourKm+' km, Best offer: ' + round(entry.matchPriceCents/100,2) + ' &euro;, Anz. Pers.: ' + entry.noOfPassengers);
+                            });
+                        }
+                    },
+                    error:function(jq,textStatus,errorThrown){
+                        //alert('fail1');
+                        //fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
+                        RideShareSB.append(counterpart);//"<input type=\"button\" class=\"rounded compact\" value=\""+counterpart+"\" />");
+                    }
+                });
+            }
+            //            }
+            //            else{
+            //                $.ajax({//get subject id
+            //                    type:"GET",
+            //                    url:"http://"+DimitrisRemote+"/subject/byURI/"+counterparts,
+            //                    async:false,
+            //                    crossDomain:true,
+            //                    username:user,
+            //                    password:pass,
+            //                    beforeSend : function(xhr) {
+            //                        xhr.withCredentials = true;
+            //                        xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
+            //                    },
+            //                    accepts: "application/json",
+            //                    dataType: "json",
+            //                    success:function(data, textStatus, jqXHR){
+            //                        //alert('success1 '+JSON.stringify(data));
+            //
+            //                        //alert(JSON.stringify(data.subject_id));
+            //                        $.ajax({//get subject reputation
+            //                            type:"GET",
+            //                            url:"http://"+DimitrisRemote+"/"+data["currentReputationReport"]["uri"],
+            //                            async:false,
+            //                            crossDomain:true,
+            //                            username:user,
+            //                            password:pass,
+            //                            beforeSend : function(xhr) {
+            //                                xhr.withCredentials = true;
+            //                                xhr.setRequestHeader("Authorization", "Basic " + user + ":" + pass);
+            //                            },
+            //                            accepts: "application/json",
+            //                            dataType: "json",
+            //                            success:function(data, textStatus, jqXHR){
+            //                                //alert('success ' + JSON.stringify(data));
+            //                                ratingsPopUp='<table><tr><td ><b>Overall Rating:</b></td><td> '+data.json.average_StarRating+'</td></tr><tr><td></td></tr><tr><td></td></tr>'
+            //                                +'<tr><td > <b>Detailed Rating:</b></td><tr>'
+            //                                +'<tr><td>Price:</td><td>5</td></tr>'
+            //                                +'<tr><td>Reliability: </td><td>'+data.json.average_OnTime+'</td></tr>'
+            //                                +'<tr><td>Communication:</td><td> 5</td></tr>'
+            //                                +'<tr><td>Friendliness:</td><td>'+data.json.average_Friendly+'</td></tr></table>    ';
+            //
+            //                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showOverlayDialog('Rating For "+counterparts+"', '"+ratingsPopUp+"', 'X', '', '', '');\" value=\""+counterparts+"\" />");
+            //
+            //                            },
+            //                            error:function(jq,textStatus,errorThrown){
+            //                                //alert('fail');
+            //                                RideShareSB.append("<input type=\"button\" class=\"rounded compact\" value=\""+counterparts+"\" />");
+            //
+            //                            }
+            //                        });
+            //                    },
+            //                    error:function(jq,textStatus,errorThrown){
+            //                    //alert('fail1');
+            //                    }
+            //                });
+            //            }
+            //RideShareSB.append('<dialog id="myDialog">this is dialog</dialog>');
+            //RideShareSB.append('<script> function myFunction() {alert("0");var x = document.getElementById("myDialog");alert("1");x.open = true;}</script>');
+            //RideShareSB.append('    <small>Estimated drving time: ' + ohours + ':' + omin + ' Hour, driving distance: '+sharedDistanceKm+' km, Detour: '+detourKm+' km, Best offer: ' + round(entry.matchPriceCents/100,2) + ' &euro;, Anz. Pers.: ' + entry.noOfPassengers);
 
-                            RideShareSB.append('</small><small><table>');
-                                if (usermode==DRIVERMODE){
-                                RideShareSB.append('<tr>');
-                                RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Price:</td>');
-                                //                switch(prp.currency){
-                                //                    case 'Shekel':
-                                //                        currency='&#8362;';
-                                //                        break;
-                                //                    case 'Euro':
-                                //                        currency='&#128;';
-                                //                        break;
-                                //                    case 'Dollar':
-                                //                        currency='$';
-                                //                        break;
-                                //                    case 'Pound':
-                                //                        currency='&#163;';
-                                //                        break;
-                                //                }
-                                if (typeof (prp.priceBound) == 'undefined')
-                                RideShareSB.append('<td valign="top">'+prp.priceRange[0]+' &#8362;</td>');
-                                else
-                RideShareSB.append('<td valign="top">'+prp.priceBound+' &#8362;</td>');
+            RideShareSB.append('</small><small><table>');
+            if (usermode==DRIVERMODE){
+                RideShareSB.append('<tr>');
+                RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Price:</td>');
+                //                switch(prp.currency){
+                //                    case 'Shekel':
+                //                        currency='&#8362;';
+                //                        break;
+                //                    case 'Euro':
+                //                        currency='&#128;';
+                //                        break;
+                //                    case 'Dollar':
+                //                        currency='$';
+                //                        break;
+                //                    case 'Pound':
+                //                        currency='&#163;';
+                //                        break;
+                //                }
+                if (typeof (prp.priceBound) == 'undefined')
+                    RideShareSB.append('<td valign="top">'+prp.priceRange[0]+' &#8362;</td>');
+                else
+                    RideShareSB.append('<td valign="top">'+prp.priceBound+' &#8362;</td>');
 
                 RideShareSB.append('</tr>');
-                }
-                else if(usermode == RIDERMODE && (!unmatched)){
+            }
+            else if(usermode == RIDERMODE && (!unmatched)){
                 RideShareSB.append('<tr>');
                 RideShareSB.append('<td valign="top" align="right" style="color:#666666;">Price:</td>');
                 //                switch(prp.currency){
@@ -10768,7 +10769,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             if (obj != null)
             {
 
-                document.getElementById("ratingssummarytotal").innerHTML = obj["average_StarRating"].toFixed(2)+" (From "+raters+" people)";//entry.ratingsTotal;
+                document.getElementById("ratingssummarytotal").innerHTML = obj["average_StarRating"].toFixed(2)+" (From "+raters+" feedbacks)";//entry.ratingsTotal;
                 //document.getElementById("ratingssummaryratio").innerHTML = entry.ratingsRatioPercent + "%";
                 document.getElementById("ratingssummarypositive").innerHTML = price.toFixed(2);//entry.ratingsLatestPositive;
                 document.getElementById("ratingssummarydecent").innerHTML = obj["average_OnTime"].toFixed(2);//entry.ratingsLatestDecent;
@@ -11108,7 +11109,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 {
                     var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
                     //alert(randMessage);
-                    document.getElementById("offermotivationmessage").innerHTML +='<hr>'+ randMessage+'<hr>';
+                    document.getElementById("offermotivationmessage").innerHTML ='<hr>'+ randMessage+'<hr>';
                 }
                 // Car details
                 //                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/profile', false, function(result) {
@@ -11294,7 +11295,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 {
                     var randMessage = lMessages[Math.floor(Math.random()*lMessages.length)];
                     //alert(randMessage);
-                    document.getElementById("searchmotivationmessage").innerHTML +='<hr>'+ randMessage+'<hr>';
+                    document.getElementById("searchmotivationmessage").innerHTML ='<hr>'+ randMessage+'<hr>';
                 }
                 /*var searchlatln = nativemod.getUserLocation();
 
@@ -15243,28 +15244,60 @@ function myaccept(num)
     pass = readCookie('password');
     var revision = 0;
     var prp = JSON.parse(rides[num]);
-    if (usermode == DRIVERMODE && prp.agreedDriver == "")
-    {
-        var me = prp.potentiallyAgreedDriver;
-        prp.agreedDriver = me;
-        prp.potentiallyAgreedDriver = "";
-        revision = parseInt(prp._revision);
-        prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false, user , pass);
-        fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
-        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
-    }
-    else if (usermode == RIDERMODE && prp.agreedDriver != "")
-    {
-        var index = $.inArray(user, prp.potentiallyAgreedCommuters);
-        if (index>=0) prp.potentiallyAgreedCommuters.splice(index, 1);
-        (prp.agreedCommuters).push(user);
-        revision = parseInt(prp._revision);
-        prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false ,user, pass );
-        fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
-        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
-    }
+    $.ajax
+    ({
+        type: "GET",
+        url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index,
+        data: "",
+        crossDomain: true,
+        username : user,
+        password : pass,
+        beforeSend: function (xhr)
+        {
+            xhr.setRequestHeader('Authorization' , 'Basic ' + user+':'+pass);
+            xhr.withCredentials = true;
+            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+        },
+        headers:
+        {
+            "X-Requested-With": "XMLHttpRequest",
+            "Origin" : "http://localhost:8080"
+        },
+        dataType : "json" ,
+        async: false,
+        contentType:  "application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
+        //"application/json; charset=UTF-8",
+        success: function(data , textStatus) {
+            prp=data;
+            if (usermode == DRIVERMODE && prp.agreedDriver == "")
+            {
+                var me = prp.potentiallyAgreedDriver;
+                prp.agreedDriver = me;
+                prp.potentiallyAgreedDriver = "";
+                revision = parseInt(prp._revision);
+                prp._revision = revision + 1;
+                ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false, user , pass);
+                fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
+                fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
+            }
+            else if (usermode == RIDERMODE && prp.agreedDriver != "")
+            {
+                var index = $.inArray(user, prp.potentiallyAgreedCommuters);
+                if (index>=0) prp.potentiallyAgreedCommuters.splice(index, 1);
+                (prp.agreedCommuters).push(user);
+                revision = parseInt(prp._revision);
+                prp._revision = revision + 1;
+                ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp ,false ,user, pass );
+                fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
+                fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
+            }
+        },
+        error: function(jq , textStatus , errorThrown){
+            fail(jq , textStatus , errorThrown)
+        }
+    });
+    
 //alert( prp);
 
 
@@ -15274,31 +15307,62 @@ function myreject(num)
     user = readCookie('username');
     pass = readCookie('password');
     var prp = JSON.parse(rides[num]);
-    var revision = 0;
-    if (usermode == DRIVERMODE)
-    {
-        var me = prp.potentiallyAgreedDriver;
-        prp.potentiallyAgreedDriver = "";
-        prp.rejectedDriver = me;
-        revision = parseInt(prp._revision);
-        prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false, user , pass);
-        fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
-        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
+    $.ajax
+    ({
+        type: "GET",
+        url: DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index,
+        data: "",
+        crossDomain: true,
+        username : user,
+        password : pass,
+        beforeSend: function (xhr)
+        {
+            xhr.setRequestHeader('Authorization' , 'Basic ' + user+':'+pass);
+            xhr.withCredentials = true;
+            xhr.setRequestHeader("APP_KEY" , "RIDE-SHARING-CLIENT-APPLICATION");
+            xhr.setRequestHeader("APP_SECRET", "508e8d50-ab80-11e3-a5e2-0800200c9a66");
+        },
+        headers:
+        {
+            "X-Requested-With": "XMLHttpRequest",
+            "Origin" : "http://localhost:8080"
+        },
+        dataType : "json" ,
+        async: false,
+        contentType:  "application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
+        //"application/json; charset=UTF-8",
+        success: function(data , textStatus) {
+            prp=data;
+            var revision = 0;
+            if (usermode == DRIVERMODE)
+            {
+                var me = prp.potentiallyAgreedDriver;
+                prp.potentiallyAgreedDriver = "";
+                prp.rejectedDriver = me;
+                revision = parseInt(prp._revision);
+                prp._revision = revision + 1;
+                ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false, user , pass);
+                fokus.openride.mobclient.controller.modules.modulemanager.setView('activeofferUI');
+                fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
 
-    }
-    else if (usermode == RIDERMODE)
-    {
-        var index = $.inArray(user, prp.potentiallyAgreedCommuters);
-        if (index>=0) prp.potentiallyAgreedCommuters.splice(index, 1);
-        (prp.rejectedCommuters).push(user);
-        revision = parseInt(prp._revision);
-        prp._revision = revision + 1;
-        ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false , user , pass );
+            }
+            else if (usermode == RIDERMODE)
+            {
+                var index = $.inArray(user, prp.potentiallyAgreedCommuters);
+                if (index>=0) prp.potentiallyAgreedCommuters.splice(index, 1);
+                (prp.rejectedCommuters).push(user);
+                revision = parseInt(prp._revision);
+                prp._revision = revision + 1;
+                ajaxcall("PUT" , DimitrisRemotePrefix+DimitrisRemote+"/ridePlans/" + prp.index, prp , false , user , pass );
 
-        fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
-        fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
-    }
+                fokus.openride.mobclient.controller.modules.modulemanager.setView('activesearchUI');
+                fokus.openride.mobclient.controller.modules.modulemanager.setTabContent(1, 1);
+            }
+        },
+        error: function(jq , textStatus , errorThrown){
+            fail(jq , textStatus , errorThrown)
+        }
+    });
 }
 
 function fail(jq , status ,errorThrown)
@@ -15340,12 +15404,12 @@ function ajaxcall(op , add , info , asynch ,usr , pass)
         contentType:  "application/x-www-form-urlencoded; charset=UTF-8", //for data1 which is actualnested strings
         //"application/json; charset=UTF-8",
         success: function(data , textStatus) {
-            alert('success '+data);
+        // alert('success '+data);
         },
         error: function(jq , textStatus , errorThrown){
             fail(jq , textStatus , errorThrown)
         }
-    })
+    });
 }
 
 window.onload = function(){
@@ -15755,101 +15819,101 @@ function DetectGarminNuvifone()
     if (uagent.search(deviceNuvifone) > -1)
         return true;
     else
-        return false;
-}
+    return false;
+    }
 
 
-//**************************
-// Check to see whether the device is a 'smartphone'.
-//   You might wish to send smartphones to a more capable web page
-//   than a dumbed down WAP page.
-function DetectSmartphone()
-{
+    //**************************
+    // Check to see whether the device is a 'smartphone'.
+    //   You might wish to send smartphones to a more capable web page
+    //   than a dumbed down WAP page.
+    function DetectSmartphone()
+    {
     if (DetectIphoneOrIpod())
-        return true;
+    return true;
     if (DetectS60OssBrowser())
-        return true;
+    return true;
     if (DetectSymbianOS())
-        return true;
+    return true;
     if (DetectWindowsMobile())
-        return true;
+    return true;
     if (DetectAndroid())
-        return true;
+    return true;
     if (DetectBlackBerry())
-        return true;
+    return true;
     if (DetectPalmWebOS())
-        return true;
+    return true;
     if (DetectPalmOS())
-        return true;
+    return true;
     if (DetectGarminNuvifone())
-        return true;
+    return true;
 
     //Otherwise, return false.
     return false;
-};
+    };
 
-//**************************
-// Detects if the current device is an Archos media player/Internet tablet.
-function DetectArchos()
-{
+    //**************************
+    // Detects if the current device is an Archos media player/Internet tablet.
+    function DetectArchos()
+    {
     if (uagent.search(deviceArchos) > -1)
-        return true;
+    return true;
     else
-        return false;
-}
+    return false;
+    }
 
 
 
-//**************************
-// Detects whether the device is a Brew-powered device.
-function DetectBrewDevice()
-{
+    //**************************
+    // Detects whether the device is a Brew-powered device.
+    function DetectBrewDevice()
+    {
     if (uagent.search(deviceBrew) > -1)
-        return true;
+    return true;
     else
-        return false;
-}
+    return false;
+    }
 
-//**************************
-// Detects the Danger Hiptop device.
-function DetectDangerHiptop()
-{
+    //**************************
+    // Detects the Danger Hiptop device.
+    function DetectDangerHiptop()
+    {
     if (uagent.search(deviceDanger) > -1 ||
         uagent.search(deviceHiptop) > -1)
-        return true;
+    return true;
     else
-        return false;
-}
+    return false;
+    }
 
-//**************************
-// Detects if the current device is on one of
-// the Maemo-based Nokia Internet Tablets.
-function DetectMaemoTablet()
-{
+    //**************************
+    // Detects if the current device is on one of
+    // the Maemo-based Nokia Internet Tablets.
+    function DetectMaemoTablet()
+    {
     if (uagent.search(maemo) > -1)
-        return true;
+    return true;
     //Must be Linux + Tablet, or else it could be something else.
     if (uagent.search(maemoTablet) > -1 &&
         uagent.search(linux))
-        return true;
+    return true;
     else
-        return false;
-}
+    return false;
+    }
 
-//**************************
-// Detects if the current browser is a Sony Mylo device.
-function DetectSonyMylo()
-{
+    //**************************
+    // Detects if the current browser is a Sony Mylo device.
+    function DetectSonyMylo()
+    {
     if (uagent.search(manuSony) > -1)
     {
-        if (uagent.search(qtembedded) > -1 ||
-            uagent.search(mylocom2) > -1)
-            return true;
-        else
-            return false;
+    if (uagent.search(qtembedded) > -1 ||
+        uagent.search(mylocom2) > -1)
+    return true;
+    else
+    return false;
     }
     else
-        return false;
+return false;
 }
 
 //**************************
@@ -15858,14 +15922,14 @@ function DetectOperaMobile()
 {
     if (uagent.search(engineOpera) > -1)
     {
-        if (uagent.search(mini) > -1 ||
-            uagent.search(mobi) > -1)
-            return true;
-        else
-            return false;
+    if (uagent.search(mini) > -1 ||
+        uagent.search(mobi) > -1)
+    return true;
+    else
+    return false;
     }
     else
-        return false;
+return false;
 }
 
 //**************************
@@ -15873,195 +15937,195 @@ function DetectOperaMobile()
 function DetectSonyPlaystation()
 {
     if (uagent.search(devicePlaystation))
-        return true;
+    return true;
     else
-        return false;
-};
+    return false;
+    };
 
-//**************************
-// Detects if the current device is a Nintendo game device.
-function DetectNintendo()
-{
+    //**************************
+    // Detects if the current device is a Nintendo game device.
+    function DetectNintendo()
+    {
     if (uagent.search(deviceNintendo) > -1   ||
         uagent.search(deviceWii) > -1 ||
         uagent.search(deviceNintendoDs) > -1)
-        return true;
+    return true;
     else
-        return false;
-};
+    return false;
+    };
 
-//**************************
-// Detects if the current device is a Microsoft Xbox.
-function DetectXbox()
-{
+    //**************************
+    // Detects if the current device is a Microsoft Xbox.
+    function DetectXbox()
+    {
     if (uagent.search(deviceXbox))
-        return true;
+    return true;
     else
-        return false;
-};
+    return false;
+    };
 
-//**************************
-// Detects if the current device is an Internet-capable game console.
-function DetectGameConsole()
-{
+    //**************************
+    // Detects if the current device is an Internet-capable game console.
+    function DetectGameConsole()
+    {
     if (DetectSonyPlaystation())
-        return true;
+    return true;
     if (DetectNintendo())
-        return true;
+    return true;
     if (DetectXbox())
-        return true;
+    return true;
     else
-        return false;
-};
+    return false;
+    };
 
-//**************************
-// Detects if the current device is a Kindle.
-function DetectKindle()
-{
+    //**************************
+    // Detects if the current device is a Kindle.
+    function DetectKindle()
+    {
     if (uagent.search(deviceKindle) > -1)
-        return true;
+    return true;
     else
-        return false;
-}
+    return false;
+    }
 
-//**************************
-// Detects if the current device is a mobile device.
-//  This method catches most of the popular modern devices.
-//  Excludes Apple iPads.
-function DetectMobileQuick()
-{
+    //**************************
+    // Detects if the current device is a mobile device.
+    //  This method catches most of the popular modern devices.
+    //  Excludes Apple iPads.
+    function DetectMobileQuick()
+    {
     //Let's say no if it's an iPad, which contains 'mobile' in its user agent.
     if (DetectIpad())
-        return false;
+    return false;
 
     //Most mobile browsing is done on smartphones
     if (DetectSmartphone())
-        return true;
+    return true;
 
     if (uagent.search(deviceMidp) > -1 ||
         DetectBrewDevice())
-        return true;
+    return true;
 
     if (DetectOperaMobile())
-        return true;
+    return true;
 
     if (uagent.search(engineNetfront) > -1)
-        return true;
+    return true;
     if (uagent.search(engineUpBrowser) > -1)
-        return true;
+    return true;
     if (uagent.search(engineOpenWeb) > -1)
-        return true;
+    return true;
 
     if (DetectDangerHiptop())
-        return true;
+    return true;
 
     if (DetectMaemoTablet())
-        return true;
+    return true;
     if (DetectArchos())
-        return true;
+    return true;
 
     if (uagent.search(devicePda) > -1)
-        return true;
+    return true;
     if (uagent.search(mobile) > -1)
-        return true;
+    return true;
 
     if (DetectKindle())
-        return true;
+    return true;
 
     return false;
-};
+    };
 
 
-//**************************
-// Detects in a more comprehensive way if the current device is a mobile device.
-function DetectMobileLong()
-{
+    //**************************
+    // Detects in a more comprehensive way if the current device is a mobile device.
+    function DetectMobileLong()
+    {
     if (DetectMobileQuick())
-        return true;
+    return true;
     if (DetectGameConsole())
-        return true;
+    return true;
     if (DetectSonyMylo())
-        return true;
+    return true;
 
     //Detect for certain very old devices with stupid useragent strings.
     if (uagent.search(manuSamsung1) > -1 ||
         uagent.search(manuSonyEricsson) > -1 ||
         uagent.search(manuericsson) > -1)
-        return true;
+    return true;
 
     if (uagent.search(svcDocomo) > -1)
-        return true;
+    return true;
     if (uagent.search(svcKddi) > -1)
-        return true;
+    return true;
     if (uagent.search(svcVodafone) > -1)
-        return true;
+    return true;
 
 
     return false;
-};
+    };
 
 
-//*****************************
-// For Mobile Web Site Design
-//*****************************
+    //*****************************
+    // For Mobile Web Site Design
+    //*****************************
 
-//**************************
-// The quick way to detect for a tier of devices.
-//   This method detects for devices which can
-//   display iPhone-optimized web content.
-//   Includes iPhone, iPod Touch, Android, WebOS, etc.
-function DetectTierIphone()
-{
+    //**************************
+    // The quick way to detect for a tier of devices.
+    //   This method detects for devices which can
+    //   display iPhone-optimized web content.
+    //   Includes iPhone, iPod Touch, Android, WebOS, etc.
+    function DetectTierIphone()
+    {
     if (DetectIphoneOrIpod())
-        return true;
+    return true;
     if (DetectAndroid())
-        return true;
+    return true;
     if (DetectAndroidWebKit())
-        return true;
+    return true;
     if (DetectPalmWebOS())
-        return true;
+    return true;
     if (DetectGarminNuvifone())
-        return true;
+    return true;
     if (DetectMaemoTablet())
-        return true;
+    return true;
     else
-        return false;
-};
+    return false;
+    };
 
-//**************************
-// The quick way to detect for a tier of devices.
-//   This method detects for devices which are likely to be
-//   capable of viewing CSS content optimized for the iPhone,
-//   but may not necessarily support JavaScript.
-//   Excludes all iPhone Tier devices.
-function DetectTierRichCss()
-{
+    //**************************
+    // The quick way to detect for a tier of devices.
+    //   This method detects for devices which are likely to be
+    //   capable of viewing CSS content optimized for the iPhone,
+    //   but may not necessarily support JavaScript.
+    //   Excludes all iPhone Tier devices.
+    function DetectTierRichCss()
+    {
     if (DetectMobileQuick())
     {
-        if (DetectTierIphone())
-            return false;
+    if (DetectTierIphone())
+    return false;
 
-        //The following devices are explicitly ok.
-        if (DetectWebkit())
-            return true;
-        if (DetectS60OssBrowser())
-            return true;
+    //The following devices are explicitly ok.
+    if (DetectWebkit())
+    return true;
+    if (DetectS60OssBrowser())
+    return true;
 
-        //Note: 'High' BlackBerry devices ONLY
-        if (DetectBlackBerryHigh())
-            return true;
+    //Note: 'High' BlackBerry devices ONLY
+    if (DetectBlackBerryHigh())
+    return true;
 
-        if (DetectWindowsMobile())
-            return true;
+    if (DetectWindowsMobile())
+    return true;
 
-        if (uagent.search(engineTelecaQ) > -1)
-            return true;
+    if (uagent.search(engineTelecaQ) > -1)
+    return true;
 
-        else
-            return false;
+    else
+    return false;
     }
     else
-        return false;
+return false;
 };
 
 //**************************
@@ -16074,16 +16138,16 @@ function DetectTierOtherPhones()
 {
     if (DetectMobileLong())
     {
-        //Exclude devices in the other 2 categories
-        if (DetectTierIphone())
-            return false;
-        if (DetectTierRichCss())
-            return false;
+    //Exclude devices in the other 2 categories
+    if (DetectTierIphone())
+    return false;
+    if (DetectTierRichCss())
+    return false;
 
-        //Otherwise, it's a YES
-        else
-            return true;
+    //Otherwise, it's a YES
+    else
+    return true;
     }
     else
-        return false;
+return false;
 };

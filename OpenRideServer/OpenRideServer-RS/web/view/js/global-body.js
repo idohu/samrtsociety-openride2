@@ -55,60 +55,62 @@ function showOverlayDialog(title, content, btn1_label, btn1_action, btn2_label, 
 }
 
 function showRatingDialog(counterpart,overall,numofraters,rel,friend,phone,car) {
-
+    //alert(phone);
+    var carRow='';
+    if (car!="undefined undefined")
+        carRow='<tr><td>Car:</td><td>'+car+'</td></tr><tr></tr><tr></tr>';
     if (document.getElementById) {
-	var overallStars='';
+        var overallStars='';
         var relStars='';
         var friendStars='';
-                for (var p=0;p<5;p++){
-                                        if (p<overall)
-                                            overallStars+='<img src="../../OpenRideWeb/img/rating_on.gif" />';
-                                        else
-                                            overallStars+='<img src="../../OpenRideWeb/img/rating_off.gif" />';
-                                        if (p<rel)
-                                            relStars+='<img src="../../OpenRideWeb/img/rating_on.gif" />';
-                                        else
-                                            relStars+='<img src="../../OpenRideWeb/img/rating_off.gif" />';
-                                        if (p<friend)
-                                            friendStars+='<img src="../../OpenRideWeb/img/rating_on.gif" />';
-                                        else
-                                            friendStars+='<img src="../../OpenRideWeb/img/rating_off.gif" />';
-                                    }
-		var dialog_text = '<p style="text-align: center"><strong>'+counterpart+'</strong></p><p>'
-                    +'<table><tr><td>Phone Number:</td><td>'+phone+'</td></tr>'+
-                    '<tr><td>Car:</td><td>'+car+'</td></tr><tr></tr><tr></tr>'+
-                    '<tr><td ><b>Overall Rating:</b></td><td>'+overallStars+'</td></tr>'+
-                    '<tr><td colspan="2"><small>Rating calculated from '+numofraters+' people.</small></td></tr>'+
-                    '<tr><td colsapn="2">Detailed Rating:</td></tr>'+
-                    '<tr><td><span class="txttabsmall">Reliability: </span></td><td><span class="statshl">'+relStars+'</span></td></tr>'+
-                    '<tr><td><span class="txttabsmall">Friendliness: </span></td><td><span class="statshl">'+friendStars+'</span></td></tr></table>'+
-                    '</p><div id="buttons"><input type="button" value="OK" class="rounded" id="dialog_btn_ok" onclick=" hideOverlayDialog();" />';
+        for (var p=0;p<5;p++){
+            if (p<overall)
+                overallStars+='<img src="../../OpenRideWeb/img/rating_on.gif" />';
+            else
+                overallStars+='<img src="../../OpenRideWeb/img/rating_off.gif" />';
+            if (p<rel)
+                relStars+='<img src="../../OpenRideWeb/img/rating_on.gif" />';
+            else
+                relStars+='<img src="../../OpenRideWeb/img/rating_off.gif" />';
+            if (p<friend)
+                friendStars+='<img src="../../OpenRideWeb/img/rating_on.gif" />';
+            else
+                friendStars+='<img src="../../OpenRideWeb/img/rating_off.gif" />';
+        }
+        var dialog_text = '<p style="text-align: center"><strong>'+counterpart+'</strong></p><p>'
+        +'<table><tr><td>Phone Number:</td><td>'+phone+'</td></tr>'+
+        carRow+// '<tr><td>Car:</td><td>'+car+'</td></tr><tr></tr><tr></tr>'+
+        '<tr><td ><b>Overall Rating:</b></td><td>'+overallStars+'</td></tr>'+
+        '<tr><td colspan="2"><small>Rating calculated from '+numofraters+' feedbacks.</small></td></tr>'+
+        '<tr><td colsapn="2">Detailed Rating:</td></tr>'+
+        '<tr><td><span class="txttabsmall">Reliability: </span></td><td><span class="statshl">'+relStars+'</span></td></tr>'+
+        '<tr><td><span class="txttabsmall">Friendliness: </span></td><td><span class="statshl">'+friendStars+'</span></td></tr></table>'+
+        '</p><div id="buttons"><input type="button" value="OK" class="rounded" id="dialog_btn_ok" onclick=" hideOverlayDialog();" />';
 
-//		if (btn2_label!='')
-//			dialog_text = dialog_text + '<input type="button" value="'+btn2_label+'" class="rounded" onclick="'+btn2_action+'; hideOverlayDialog();"/>';
+        //		if (btn2_label!='')
+        //			dialog_text = dialog_text + '<input type="button" value="'+btn2_label+'" class="rounded" onclick="'+btn2_action+'; hideOverlayDialog();"/>';
 
-		dialog_text = dialog_text + '</div>';
+        dialog_text = dialog_text + '</div>';
 
-		document.getElementById("dialog_text").innerHTML = dialog_text;
+        document.getElementById("dialog_text").innerHTML = dialog_text;
 
 
-		hideSelects()
+        hideSelects()
 
-                var overlayHeight = document.getElementById("content").offsetHeight + 88;
-                if (overlayHeight == 88) {
-                    // we don't have a visible content div, so use a default value
-                    overlayHeight = window.innerHeight;
-                }
+        var overlayHeight = document.getElementById("content").offsetHeight + 88;
+        if (overlayHeight == 88) {
+            // we don't have a visible content div, so use a default value
+            overlayHeight = window.innerHeight;
+        }
 
-                document.getElementById("overlay").style.height = overlayHeight + "px";
-                document.getElementById("overlay_dialog").style.top = getScrollHeight() + "px";
+        document.getElementById("overlay").style.height = overlayHeight + "px";
+        document.getElementById("overlay_dialog").style.top = getScrollHeight() + "px";
 
-		document.getElementById("overlay").style.display = 'block';
-		document.getElementById("overlay_dialog").style.display = 'block';
+        document.getElementById("overlay").style.display = 'block';
+        document.getElementById("overlay_dialog").style.display = 'block';
 
-	}
+    }
 }
-
 function showLoadingDialog() {
     if (document.getElementById) {
 
