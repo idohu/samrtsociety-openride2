@@ -149,10 +149,13 @@
                     <option>Jeruslem</option>
                     <option>Kiryat Gat</option>
                     <option>Kiryat Shmona</option>
+                    <option>Lehavim</option>
                     <option>Mazkeret Batya</option>
+                    <option>Meitar</option>
                     <option>Modiin</option>
                     <option>Nahariya</option>
                     <option>Netania</option>
+                    <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
                     <option>Rishon Lezion</option>
@@ -181,7 +184,7 @@
                     <option>Ashdod</option>
                     <option>Ashkelon</option>
                     <option>Bat Yam</option>
-                    <option selected="true">Beer Sheva</option>
+                    <option>Beer Sheva</option>
                     <option>Eilat</option>
                     <option>Haifa</option>
                     <option>Hertzelia</option>
@@ -189,15 +192,18 @@
                     <option>Jeruslem</option>
                     <option>Kiryat Gat</option>
                     <option>Kiryat Shmona</option>
+                    <option>Lehavim</option>
                     <option>Mazkeret Batya</option>
+                    <option>Meitar</option>
                     <option>Modiin</option>
                     <option>Nahariya</option>
                     <option>Netania</option>
+                    <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
                     <option>Rishon Lezion</option>
                     <option>Shoham</option>
-                    <option>Tel Aviv</option>
+                    <option selected="true">Tel Aviv</option>
                     <option>Yavne</option>
                     <option>Zichron Yaakov</option>
                 </select>
@@ -629,8 +635,13 @@
         <table>
             <tr>
                 <td>
-                    <h3>My offers</h3></td><td align="right"> <a href="#" id="refreshActiveOffers" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
-            </tr></table>
+                    <h3>My offers</h3>
+                </td>
+                <td align="right">
+                    <a href="#" id="refreshActiveOffers" class="homeui_links"><img src="../img/arrow_refresh.png"/></a>
+                </td>
+            </tr>
+        </table>
         <ul id="activeofferlist" class="ridelist">
             <!-- list populated through JS -->
         </ul>
@@ -641,8 +652,13 @@
         <table>
             <tr>
                 <td>
-                    <h3>My Searches</h3></td><td align="right"> <a href="#" id="refreshActiveSearches" class="homeui_links"><img src="../img/arrow_refresh.png"/></a></td>
-            </tr></table>
+                    <h3>My Searches</h3>
+                </td>
+                <td align="right">
+                    <a href="#" id="refreshActiveSearches" class="homeui_links"><img alt="refresh"  src="../img/arrow_refresh.png"/></a>
+                </td>
+            </tr>
+        </table>
         <ul id="activesearchlist" class="ridelist">
             <!-- list populated through JS -->
         </ul>
@@ -772,10 +788,13 @@
                     <option>Jeruslem</option>
                     <option>Kiryat Gat</option>
                     <option>Kiryat Shmona</option>
+                    <option>Lehavim</option>
                     <option>Mazkeret Batya</option>
+                    <option>Meitar</option>
                     <option>Modiin</option>
                     <option>Nahariya</option>
                     <option>Netania</option>
+                    <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
                     <option>Rishon Lezion</option>
@@ -804,7 +823,7 @@
                     <option>Ashdod</option>
                     <option>Ashkelon</option>
                     <option>Bat Yam</option>
-                    <option selected="true">Beer Sheva</option>
+                    <option>Beer Sheva</option>
                     <option>Eilat</option>
                     <option>Haifa</option>
                     <option>Hertzelia</option>
@@ -812,15 +831,18 @@
                     <option>Jeruslem</option>
                     <option>Kiryat Gat</option>
                     <option>Kiryat Shmona</option>
+                    <option>Lehavim</option>
                     <option>Mazkeret Batya</option>
+                    <option>Meitar</option>
                     <option>Modiin</option>
                     <option>Nahariya</option>
                     <option>Netania</option>
+                    <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
                     <option>Rishon Lezion</option>
                     <option>Shoham</option>
-                    <option>Tel Aviv</option>
+                    <option selected="true">Tel Aviv</option>
                     <option>Yavne</option>
                     <option>Zichron Yaakov</option>
                 </select>

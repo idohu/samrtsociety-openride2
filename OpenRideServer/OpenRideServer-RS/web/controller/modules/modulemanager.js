@@ -883,7 +883,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
         },
 
         parseactivesearcheslist : function(){
-            var result = JSON.parse(activesearchlist);
+            //var result = JSON.parse(activesearchlist);
             var sb = new StringBuilder();
             var RideShareSB = new StringBuilder();
             var updatecount = 0;
@@ -1770,21 +1770,22 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 accepts: "application/json",
                                 dataType: "json",
                                 success:function(data, textStatus, jqXHR){
+                                    var rep=JSON.parse(data.json);
                                     if (usermode == RIDERMODE)
                                         RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                            +data.json.average_StarRating.toFixed(2)+","
+                                            +rep.average_StarRating.toFixed(2)+","
                                             +raters+","
-                                            +data.json.average_OnTime.toFixed(2)+","
-                                            +data.json.average_Friendly.toFixed(2)+",'"
+                                            +rep.average_OnTime.toFixed(2)+","
+                                            +rep.average_Friendly.toFixed(2)+",'"
                                             +personal.mobilePhoneNumber+"','"
                                             +personal.carColour+ " " + personal.carBrand
                                             +"');\" value=\""+counterpart+"\" />");
                                     else
                                         RideShareSB.append("<input type=\"button\" class=\"rounded compact\" onclick=\"showRatingDialog('"+counterpart+"',"
-                                            +data.json.average_StarRating.toFixed(2)+","
+                                            +rep.average_StarRating.toFixed(2)+","
                                             +raters+","
-                                            +data.json.average_OnTime.toFixed(2)+","
-                                            +data.json.average_Friendly.toFixed(2)+",'"
+                                            +rep.average_OnTime.toFixed(2)+","
+                                            +rep.average_Friendly.toFixed(2)+",'"
                                             +personal.mobilePhoneNumber+"','"
                                             +"undefined undefined"
                                             +"');\" value=\""+counterpart+"\" />");
@@ -4187,9 +4188,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 var start = new Date().getTime();
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
-                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/rides/offers', false, this.setActiveOfferList, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your listings could not be loaded.')
-                });
+//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/rides/offers', false, this.setActiveOfferList, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your listings could not be loaded.')
+//                });
 
                 rides.length = 0;
                 parseOffer  = this.parseactiveofferlist;
@@ -4421,9 +4422,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 fokus.openride.mobclient.controller.modules.uievents.unhideAllTabs();
                 fokus.openride.mobclient.controller.modules.uievents.hideUnusedTabs(new Array("tabimg14"));
 
-                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/rides/searches', false, this.setActiveSearchList, function(x,s,e) {
-                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your application could not be loaded.')
-                });
+//                srvconn.GET('/OpenRideServer-RS/resources/users/'+ this.username +'/rides/searches', false, this.setActiveSearchList, function(x,s,e) {
+//                    fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(x,s,e,'Unfortunately, your application could not be loaded.')
+//                });
                 rides.length = 0;
                 parseSearch = this.parseactivesearcheslist;
                 parseUnmatchedSearch = this.parseUnmatchedRideRequest;
@@ -4529,7 +4530,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                                 "url"  : rideSet.data[g].doc.potentialRidePlans[i],
                                                 "ETag" : "",
                                                 "doc"  : {}
-                                            })
+                                            });
                                         }
                                     }
                                     if (rideSet.data[g].doc.potentiallyAgreedRidePlans.length!=0){
@@ -4540,7 +4541,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                                 "url"  : rideSet.data[g].doc.potentiallyAgreedRidePlans[i],
                                                 "ETag" : "",
                                                 "doc"  : {}
-                                            })
+                                            });
                                         }
                                     }
                                     if (rideSet.data[g].doc.driverAgreedRidePlans.length!=0){
@@ -4551,7 +4552,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                                 "url"  : rideSet.data[g].doc.driverAgreedRidePlans[i],
                                                 "ETag" : "",
                                                 "doc"  : {}
-                                            })
+                                            });
                                         }
                                     }
                                     if (JSON.stringify(rideSet.data[g].doc.agreedRidePlan)!=""){
@@ -4561,7 +4562,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                             "url"  : rideSet.data[g].doc.agreedRidePlan,
                                             "ETag" : "",
                                             "doc"  : {}
-                                        })
+                                        });
                                     }
                                     if (flag){
                                 //alert('flag=true ' +g);
@@ -4601,7 +4602,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                         //                                        alert('this error is: ' + errorThrown );
                                         fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                                     }
-                                })
+                                });
                                 //alert(rideRequests.length);
                                 parseSearch();
                             },
@@ -4612,7 +4613,7 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                                 //                                alert('this error is: ' + errorThrown );
                                 fokus.openride.mobclient.controller.modules.modulemanager.alertajaxerror(jq,textStatus,errorThrown,'Unfortunately, Something went wrong. Please try again later.');
                             }
-                        })
+                        });
 
                     },
                     error: function(jq , textStatus , errorThrown){

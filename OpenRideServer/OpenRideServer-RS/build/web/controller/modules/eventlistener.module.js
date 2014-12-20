@@ -1436,7 +1436,7 @@ fokus.openride.mobclient.controller.modules.uievents = function(){
 
                     // Figure out route and price
                     newRideRequest.route             = "whatever";
-                    newRideRequest.priceBound        = "20";//"9";
+                    newRideRequest.priceBound        = "50";//"20";//"9";
                     //alert("Type of priceBound: " + typeof newRideRequest.priceBound);
 
                     // Write down comments
