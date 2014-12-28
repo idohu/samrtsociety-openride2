@@ -20,21 +20,47 @@
     You should have received a copy of the GNU Affero General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 --%>
-
+<link type="text/css" rel="stylesheet" href="css/waitMe.css">
+<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script-->
+<script type="text/javascript" src="js/waitMe.js">
+        
+</script>
 <div id="tabmenu">
     <div id="tablevel0">
         <a id="tab01link" href="#"><img id="tabimg01" name="tab01" src="../img/tab0home_inact_wide.png" alt="neu" /></a><a id="tab02link" href="#"><img id="tabimg02" name="tab02" src="../img/tab0driver_inact_wide.png" alt="fahrten" /></a><a id="tab03link" href="#"><img id="tabimg03" name="tab03" src="../img/tab0thumb_inact_wide.png" alt="favs" /></a><a id="tab04link" href="#"><img id="tabimg04" name="tab04" src="../img/tab0star_inact_wide.png" alt="profile" /></a>
     </div>
     <div id="tablevel1">
-        <a id="tab11link" href="#"><img id="tabimg11" name="tab11" src="../img/home1green_wide.png" alt="neue fahrt" /></a><a id="tab12link" href="#"><img id="tabimg12" name="tab12" src="../img/tab1profilegreen_wide.png" alt="aktive fahrten" /></a><a id="tab13link" href="#"><img id="tabimg13" name="tab13" src="../img/tab1greentempl.png" alt="abc" /></a><a id="tab14link" href="#"><img id="tabimg14" name="tab14" src="../img/tab1greentempl.png" alt="xyz" /></a>
+        <a id="tab11link" href="#"><img id="tabimg11" name="tab11" src="../img/home1green_wide.png" alt="neue fahrt"/></a><a id="tab12link" href="#" ><img id="tabimg12" name="tab12" src="../img/tab1profilegreen_wide.png" alt="aktive fahrten"/></a><a id="tab13link" href="#"><img id="tabimg13" name="tab13" src="../img/tab1greentempl.png" alt="abc" /></a><a id="tab14link" href="#"><img id="tabimg14" name="tab14" src="../img/tab1greentempl.png" alt="xyz" /></a>
     </div>
-
     <div id="riderupdatecount2" style="display: none; background: red; color: #fff; border: 0px solid #fff; -moz-border-radius: 8px; border-radius: 8px; font-size: 12px; line-height: 18px; text-align: center; font-weight: bold; width: auto; padding: 0 6px; position: absolute; top: 2px; right: 164px;"></div>
     <div id="driverupdatecount2" style="display: none; background: red; color: #fff; border: 0px solid #fff; -moz-border-radius: 8px; border-radius: 8px; font-size: 12px; line-height: 18px; text-align: center; font-weight: bold; width: auto; padding: 0 6px; position: absolute; top: 2px; right: 164px;"></div>
 
     <div id="riderupdatecount3" style="display: none; background: red; color: #fff; border: 0px solid #fff; -moz-border-radius: 8px; border-radius: 8px; font-size: 12px; line-height: 18px; text-align: center; font-weight: bold; width: auto; padding: 0 6px; position: absolute; top: 43px; right: 159px;"></div>
     <div id="driverupdatecount3" style="display: none; background: red; color: #fff; border: 0px solid #fff; -moz-border-radius: 8px; border-radius: 8px; font-size: 12px; line-height: 18px; text-align: center; font-weight: bold; width: auto; padding: 0 6px; position: absolute; top: 43px; right: 159px;"></div>
+    <script>
+        /*function clicked()
+        {
+        $('#content').waitMe({
+            //none, rotateplane, stretch, orbit, roundBounce, win8, win8_linear, ios, facebook, rotation, timer, pulse.
+            effect: 'bounce',
 
+            //place text under the effect (string).
+            text: '',
+
+            //background for container (string).
+            bg: 'rgba(255,255,255,0.7)',
+
+            //color for background animation and text (string).
+            color: '#000',
+
+            //change width for elem animation (string).
+            sizeW: '',
+
+            //change height for elem animation (string).
+            sizeH: ''
+            });
+        }*/
+    </script>
 </div>
 <div id="content">
     <div id="offerstartpickerUI">
@@ -1002,6 +1028,7 @@
     </div>
     <div id="openratingsUI">
         <!-- list populated through JS -->
+        
     </div>
     <div id="receivedratingsUI">
         <!-- list populated through JS -->
@@ -1476,3 +1503,4 @@
         </div>
     </div>
 </div><!-- ### full screen map views html end ### -->
+<script type="text/javascript" src="js/waitMe.js"></script>

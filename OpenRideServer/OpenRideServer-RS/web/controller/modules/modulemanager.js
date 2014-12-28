@@ -521,20 +521,40 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
 
         setTabContent: function(acticvenodeindex, activeleafindex){
 
-            //select tab tree depending on usermode
-            var nodes;
+        $('#content').waitMe({
+            //none, rotateplane, stretch, orbit, roundBounce, win8, win8_linear, ios, facebook, rotation, timer, pulse.
+            effect: 'stretch',
+
+            //place text under the effect (string).
+            text: 'Please Wait...',
+
+            //background for container (string).
+            bg: 'rgba(255,255,255,0.7)',
+
+            //color for background animation and text (string).
+            color: '#000',
+
+            //change width for elem animation (string).
+            sizeW: '200',
+
+            //change height for elem animation (string).
+            sizeH: '200'
+            });
+            var dummyTHIS = this;
+        setTimeout(function(){
+               var nodes;
             if(usermode==DRIVERMODE){
                 nodes = drivernodes;
             }else if(usermode==RIDERMODE){
                 nodes = ridernodes;
             }
 
-            if(this.currentactivenodeindex==acticvenodeindex){
-                if(this.currentactiveleafindex!=activeleafindex){
+            if(dummyTHIS.currentactivenodeindex==acticvenodeindex){
+                if(dummyTHIS.currentactiveleafindex!=activeleafindex){
                     //set current leaf tab inactive
-                    nodes[this.currentactivenodeindex].leafs[this.currentactiveleafindex].isactive = false;
+                    nodes[dummyTHIS.currentactivenodeindex].leafs[dummyTHIS.currentactiveleafindex].isactive = false;
                     //set current leaf tab image inactive
-                    document.getElementById(tabimgslvl_1[this.currentactiveleafindex]).src = nodes[this.currentactivenodeindex].leafs[this.currentactiveleafindex].imgsrc;
+                    document.getElementById(tabimgslvl_1[dummyTHIS.currentactiveleafindex]).src = nodes[dummyTHIS.currentactivenodeindex].leafs[dummyTHIS.currentactiveleafindex].imgsrc;
 
                     //set new leaf tab active
                     nodes[acticvenodeindex].leafs[activeleafindex].isactive = true;
@@ -543,9 +563,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 }
             }else {
                 //set current node tab inactive
-                nodes[this.currentactivenodeindex].isactive = false;
+                nodes[dummyTHIS.currentactivenodeindex].isactive = false;
                 //set current node tab image inactive
-                document.getElementById(tabimgslvl_0[this.currentactivenodeindex]).src = nodes[this.currentactivenodeindex].imgsrc;
+                document.getElementById(tabimgslvl_0[dummyTHIS.currentactivenodeindex]).src = nodes[dummyTHIS.currentactivenodeindex].imgsrc;
 
                 //set new node tab active
                 nodes[acticvenodeindex].isactive = true;
@@ -553,9 +573,9 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
                 document.getElementById(tabimgslvl_0[acticvenodeindex]).src = nodes[acticvenodeindex].imgactivesrc;
 
                 //set current leaf tab inactive
-                nodes[this.currentactivenodeindex].leafs[this.currentactiveleafindex].isactive = false;
+                nodes[dummyTHIS.currentactivenodeindex].leafs[dummyTHIS.currentactiveleafindex].isactive = false;
                 //set current leaf tab image inactive
-                document.getElementById(tabimgslvl_1[this.currentactiveleafindex]).src = nodes[this.currentactivenodeindex].leafs[this.currentactiveleafindex].imgsrc;
+                document.getElementById(tabimgslvl_1[dummyTHIS.currentactiveleafindex]).src = nodes[dummyTHIS.currentactivenodeindex].leafs[dummyTHIS.currentactiveleafindex].imgsrc;
 
                 //set new leaf tab active
                 nodes[acticvenodeindex].leafs[activeleafindex].isactive = true;
@@ -575,9 +595,14 @@ fokus.openride.mobclient.controller.modules.modulemanager = function(){
             //                this.setTabContent(3,1);
             //                return false;
             //            }
-            this.setView(nodes[acticvenodeindex].leafs[activeleafindex].contentdivid);
-            this.currentactivenodeindex = acticvenodeindex;
-            this.currentactiveleafindex = activeleafindex;
+            dummyTHIS.setView(nodes[acticvenodeindex].leafs[activeleafindex].contentdivid);
+            dummyTHIS.currentactivenodeindex = acticvenodeindex;
+            dummyTHIS.currentactiveleafindex = activeleafindex;
+        },0);
+            setTimeout(function(){ 
+                $('#content').waitMe('hide'); },
+            3000);
+            
         },
 
         setActiveOfferList : function(list){
