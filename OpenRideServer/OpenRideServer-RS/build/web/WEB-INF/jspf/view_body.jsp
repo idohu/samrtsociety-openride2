@@ -158,6 +158,7 @@
                     <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
+                    <option>Rehovot</option>
                     <option>Rishon Lezion</option>
                     <option>Shoham</option>
                     <option selected="true">Tel Aviv</option>
@@ -201,6 +202,7 @@
                     <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
+                    <option>Rehovot</option>
                     <option>Rishon Lezion</option>
                     <option>Shoham</option>
                     <option selected="true">Tel Aviv</option>
@@ -797,6 +799,7 @@
                     <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
+                    <option>Rehovot</option>
                     <option>Rishon Lezion</option>
                     <option>Shoham</option>
                     <option selected="true">Tel Aviv</option>
@@ -840,6 +843,7 @@
                     <option>Omer</option>
                     <option>Petah Tikva</option>
                     <option>Raanana</option>
+                    <option>Rehovot</option>
                     <option>Rishon Lezion</option>
                     <option>Shoham</option>
                     <option selected="true">Tel Aviv</option>
